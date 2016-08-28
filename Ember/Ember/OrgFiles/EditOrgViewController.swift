@@ -158,7 +158,7 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.campDesc.text = snapshot.value!["orgDesc"] as! String
             
             let profileUrl = NSURL(string: snapshot.value!["smallImageLink"] as! String)
-            let coverUrl = NSURL(string: snapshot.value!["smallImageLink"] as! String)
+            let coverUrl = NSURL(string: snapshot.value!["largeImageLink"] as! String)
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let profileData = NSData(contentsOfURL: profileUrl!) //make sure your image in this url does exist, otherwise unwrap in a if let check
