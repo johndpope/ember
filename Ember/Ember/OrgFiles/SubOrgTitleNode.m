@@ -163,8 +163,15 @@ static const CGFloat kInnerPadding = 10.0f;
 }
 
 - (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:20.0f];
     
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f];
+    }
+     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
     style.alignment = NSTextAlignmentCenter;

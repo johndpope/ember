@@ -35,6 +35,7 @@
     ASTextNode *_dateTextNode;
     ASTextNode *_fireCount;
     ASTextNode *_eventDesc;
+    ASTextNode *_noInterestedBelow;
     
     
 }
@@ -52,6 +53,7 @@
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
     _noInterested = [[ASTextNode alloc] init];
+    _noInterestedBelow = [ASTextNode new];
     _eventName  = [ASTextNode new];
     
     _snapShot = snap;
@@ -60,9 +62,11 @@
     
 //    NSLog(@"details: %@", details);
     
-    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Interested", details[@"fireCount"]] attributes:[self textStyle]];
     
-    NSDictionary *eventDetails = [snap getPostDetails];
+    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
+    _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
+    
+    NSDictionary *eventDetails = [snap getData];
     _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
     
     _dateTextNode = [[ASTextNode alloc] init];
@@ -83,11 +87,13 @@
     
     FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
-    FIRDatabaseQuery *recentPostsQuery = [[[ref child:@"Events"] child:eventDetails[@"eventID"]] child:@"eventDesc"];
+    _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventDesc"]
+                                                                  attributes:[self textStyleDesc]];
+    
+    FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:eventDetails[@"homeFeedMediaKey"]] child:@"fireCount"];
     [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
-                                                                      attributes:[self textStyleDesc]];
+        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", snapShot.value] attributes:[self textStyle]];
         
     }];
     
@@ -137,6 +143,7 @@
     [self addSubnode:_dateTextNode];
     [self addSubnode:_eventDesc];
     [self addSubnode:_fireCount];
+    [self addSubnode:_noInterestedBelow];
     
 
     // hairline cell separator
@@ -191,8 +198,14 @@
 
 - (NSDictionary *)textStyleFireUnselected{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -265,9 +278,14 @@
 }
 
 - (NSDictionary *)textStyle{
-
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
-
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -281,8 +299,15 @@
 
 - (NSDictionary *)textStyleDesc{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightLight];
     
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightLight];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightLight];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -296,8 +321,14 @@
 
 - (NSDictionary *)textStyleFire{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -309,8 +340,14 @@
 
 - (NSDictionary *)textStyleFireLit{
     
-    UIFont *font = [UIFont systemFontOfSize:10.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:8.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:10.0f weight:UIFontWeightRegular];
+    }
+ 
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -321,7 +358,14 @@
 }
 
 - (NSDictionary *)textStyleLeft{
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightSemibold];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightSemibold];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightSemibold];
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -343,7 +387,11 @@
     horizontalSpacer.flexGrow = YES;
 
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
-    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 50, 0, 0) child:_noInterested];
+    
+    ASStackLayoutSpec *vertInterested = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_noInterested, _noInterestedBelow]];
+    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 50, 0, 0) child:vertInterested];
+    
+    
     ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[newSpec,horizontalSpacer]];
     
     ASStackLayoutSpec *fireStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[ _fire,_fireCount]];

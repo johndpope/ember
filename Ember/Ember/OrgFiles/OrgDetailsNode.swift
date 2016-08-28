@@ -174,7 +174,13 @@ class OrgDetailsNode : ASCellNode {
 
     func textStyle() -> [String : NSObject]{
         
-        let font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+            font = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+        }else{
+            font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        }
+
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center
@@ -190,7 +196,13 @@ class OrgDetailsNode : ASCellNode {
     
     func textStyleCreateEvent() -> [String : NSObject]{
         
-        let font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+            font = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+        }else{
+            font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        }
+ 
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center
@@ -223,12 +235,9 @@ class OrgDetailsNode : ASCellNode {
         
         let insetsFollowers = UIEdgeInsetsMake(0, kInsetFollowersLeft, 0, 10)
         let followingInset = ASInsetLayoutSpec(insets: insetsFollowers, child: hori)
-        
-        
-        
+ 
         let vert = ASStackLayoutSpec(direction: .Horizontal, spacing: 1.0, justifyContent: .Center, alignItems: .Stretch, children: [horizontalSpacer, followingInset, horizontalSpacer])
-        
-        
+
         
         let hori_events = ASStackLayoutSpec(direction: .Vertical, spacing: 1.0, justifyContent: .Center, alignItems: .Center, children: [noEvents, noEventsBelow])
         

@@ -235,7 +235,15 @@
 }
 
 - (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:10.0f];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:8.0f];
+    }else{
+        font = [UIFont systemFontOfSize:10.0f];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;

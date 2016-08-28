@@ -39,6 +39,17 @@
     return self;
 }
 
+-(instancetype)initWithEventsSnapShot:(FIRDataSnapshot*)snapShot{
+    if (!(self = [super init]))
+        return nil;
+    
+    _snap = snapShot;
+    _values = snapShot.value;
+    self.key = snapShot.key;
+    
+    return self;
+}
+
 -(instancetype)init{
     if (!(self = [super init]))
         return nil;
@@ -275,8 +286,6 @@
 -(NSDictionary*)getMediaInfo{
     
     if(_eventDetails[@"mediaInfo"] != nil){
-        
-        
         return _eventDetails[@"mediaInfo"];
     }
     return nil;

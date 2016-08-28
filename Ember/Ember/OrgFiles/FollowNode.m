@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FollowNode.h"
+#import "Iphone5Test.h"
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 #import <AsyncDisplayKit/ASDisplayNode+Beta.h>
 #import <AsyncDisplayKit/ASStackLayoutSpec.h>
@@ -36,7 +37,7 @@
 
 -(instancetype)initWithSnapShot:(EmberSnapShot*)snapShot{
     self = [super init];
-
+    
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _user = [FIRAuth auth].currentUser;
     _orgs = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -115,7 +116,14 @@
 }
 
 - (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:30.0f];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:28.0f];
+    }else{
+        font = [UIFont systemFontOfSize:30.0f];
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
