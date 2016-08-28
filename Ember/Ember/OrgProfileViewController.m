@@ -9,7 +9,7 @@
 #import "OrgProfileViewController.h"
 #import "EventViewController.h"
 
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 #import "SubOrgTitleNode.h"
 #import "FinalOrgTitleNode.h"
@@ -22,7 +22,7 @@
 #import "EmberVideoNode.h"
 #import <AsyncDisplayKit/ASDisplayNode+Beta.h>
 #import "EmberNode.h"
-#import "bounceapp-Swift.h"
+
 
 
 @import Firebase;

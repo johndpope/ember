@@ -13,7 +13,7 @@
 #import <AsyncDisplayKit/ASStackLayoutSpec.h>
 #import <AsyncDisplayKit/ASInsetLayoutSpec.h>
 
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 #import <AsyncDisplayKit/ASButtonNode.h>
 

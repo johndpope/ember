@@ -9,7 +9,7 @@
 #import "ImageViewController.h"
 #import "ViewUtils.h"
 #import "UIImage+Crop.h"
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
 
 

@@ -19,7 +19,7 @@
 #import "MyEventsNode.h"
 #import "MyEventsPostDetailsNode.h"
 
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 
 @import Firebase;

@@ -11,7 +11,7 @@
 #import "EmberOrgNode.h"
 #import "EmberSnapShot.h"
 
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 
 @import Firebase;

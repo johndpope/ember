@@ -11,7 +11,7 @@
 #import "Video.h"
 #import "OrgNode.h"
 #import "EventTitleNode.h"
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>

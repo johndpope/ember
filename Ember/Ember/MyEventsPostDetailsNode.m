@@ -10,7 +10,7 @@
 #import "MyEventsPostDetailsNode.h"
 #import "Video.h"
 
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 #import <AsyncDisplayKit/ASDisplayNode+Beta.h>

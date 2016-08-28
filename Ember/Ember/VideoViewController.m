@@ -8,7 +8,7 @@
 
 #import "VideoViewController.h"
 #import "SDAVAssetExportSession.h"
-#import "bounceapp-Swift.h"
+#import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
 @import AVFoundation;
 @import AssetsLibrary;
