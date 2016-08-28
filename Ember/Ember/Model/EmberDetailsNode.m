@@ -391,7 +391,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightRegular];
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
     }else{
         font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
     }
@@ -410,7 +410,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightRegular];
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
     }else{
         font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
     }
@@ -615,7 +615,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -633,7 +633,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 - (NSDictionary *)textStyleInterested{
     UIFont *font = nil;
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -652,7 +652,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -671,7 +671,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     UIFont *font = nil;
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:8.0f];
+        font = [UIFont systemFontOfSize:10.0f];
     }else{
         font = [UIFont systemFontOfSize:12.0f];
     }
@@ -690,7 +690,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 - (NSDictionary *)textStyleItalic{
     UIFont *font = nil;
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }

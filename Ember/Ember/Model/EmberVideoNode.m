@@ -108,7 +108,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -128,7 +128,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:8.0f];
+        font = [UIFont systemFontOfSize:10.0f];
     }else{
         font = [UIFont systemFontOfSize:12.0f];
     }
@@ -319,7 +319,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -339,7 +339,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }
@@ -360,7 +360,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:10.0f];
+        font = [UIFont systemFontOfSize:12.0f];
     }else{
         font = [UIFont systemFontOfSize:14.0f];
     }

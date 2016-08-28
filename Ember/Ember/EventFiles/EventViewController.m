@@ -110,41 +110,31 @@
 -(void)fetchData{
 //    NSLog(@"eventID: %@", self.eventNode.getPostDetails);
     
-    NSString *homefeedKey = self.eventNode.key;
+   [_snapShots addObject:self.eventNode];
     
-    FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseHomefeed]] child:homefeedKey];
+    NSString *eventID = self.eventNode.getPostDetails[@"eventID"];
+    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
     [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         
-        EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snapShot];
-        
-        [_snapShots addObject:newSnap];
-        
-        NSString *eventID = self.eventNode.getPostDetails[@"eventID"];
-        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
-        [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        for(FIRDataSnapshot* child in snapShot.children){
             
-            for(FIRDataSnapshot* child in snapShot.children){
-                
-                
-                EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:child];
-                
-                // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
-                // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
-                
-                if(![snap isEventPoster]){
-                    [self.snapShots addObject:snap];
-                }
-                
+            
+            EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:child];
+            
+            // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
+            // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
+            
+            if(![snap isEventPoster]){
+                [self.snapShots addObject:snap];
             }
             
-            // TODO : reloading is causing jitter
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_tableNode.view reloadData];
-            });
-        }];
+        }
         
-        
+        // TODO : reloading is causing jitter
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tableNode.view reloadData];
+        });
     }];
     
     
@@ -214,7 +204,15 @@
 }
 
 - (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:10.0f];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:8.0f];
+    }else{
+        font = [UIFont systemFontOfSize:10.0f];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -356,12 +354,12 @@
     
     if ([_titleNodeIndexPath compare:indexPath] == NSOrderedSame) {
         EmberSnapShot* snapShot = _snapShots[indexPath.row];
-        NSDictionary *eventDetails = [snapShot getPostDetails];
+        NSDictionary *eventDetails = [snapShot getData];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot];
             _orgID = eventDetails[@"orgID"];
-            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventPosterLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventImageLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
             return bounceNode;
         };
         

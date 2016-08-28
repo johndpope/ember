@@ -174,7 +174,13 @@ class OrgDetailsNode : ASCellNode {
 
     func textStyle() -> [String : NSObject]{
         
-        let font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+            font = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+        }else{
+            font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        }
+
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center
@@ -190,7 +196,13 @@ class OrgDetailsNode : ASCellNode {
     
     func textStyleCreateEvent() -> [String : NSObject]{
         
-        let font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+            font = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+        }else{
+            font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+        }
+ 
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center

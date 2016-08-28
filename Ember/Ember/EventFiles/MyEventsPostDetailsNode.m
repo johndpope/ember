@@ -213,8 +213,15 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 - (NSDictionary *)textStyleItalic{
-    UIFont *font = [UIFont systemFontOfSize:14.0f];
     
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:12.0f];
+    }else{
+        font = [UIFont systemFontOfSize:14.0f];
+    }
+
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
     style.hyphenationFactor = 1.0;
@@ -258,7 +265,15 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 - (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:14.0f];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:12.0f];
+    }else{
+        font = [UIFont systemFontOfSize:14.0f];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;

@@ -37,9 +37,15 @@ class NoPostsNode: ASCellNode {
     
     func textStyle() -> [String : NSObject]{
         
-        let font = UIFont(name: "Palatino-Italic", size: 16)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+            font = UIFont(name: "Palatino-Italic", size: 14)!
+        }else{
+            font = UIFont(name: "Palatino-Italic", size: 16)!
+        }
+
         let style = NSMutableParagraphStyle()
-        style.paragraphSpacing = 0.5 * font!.lineHeight
+        style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center
         
         var multipleAttributes = [String : NSObject]()

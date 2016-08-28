@@ -40,7 +40,12 @@ import AsyncDisplayKit
     
     func textStyle() -> [String : NSObject]{
         
-        let font = UIFont.systemFontOfSize(14.0)
+        var font = UIFont()
+        if(Iphone5Test.isIphone5()){
+           font = UIFont.systemFontOfSize(12.0)
+        }else{
+            font = UIFont.systemFontOfSize(14.0)
+        }
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Left

@@ -62,7 +62,7 @@
     
     _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Interested", details[@"fireCount"]] attributes:[self textStyle]];
     
-    NSDictionary *eventDetails = [snap getPostDetails];
+    NSDictionary *eventDetails = [snap getData];
     _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
     
     _dateTextNode = [[ASTextNode alloc] init];
@@ -83,13 +83,16 @@
     
     FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
-    FIRDatabaseQuery *recentPostsQuery = [[[ref child:@"Events"] child:eventDetails[@"eventID"]] child:@"eventDesc"];
-    [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-//        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
-                                                                      attributes:[self textStyleDesc]];
-        
-    }];
+    _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventDesc"]
+                                                                  attributes:[self textStyleDesc]];
+    
+//    FIRDatabaseQuery *recentPostsQuery = [[[ref child:@"Events"] child:eventDetails[@"eventID"]] child:@"eventDesc"];
+//    [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+////        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+//        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
+//                                                                      attributes:[self textStyleDesc]];
+//        
+//    }];
     
     
     _line = [[ASDisplayNode alloc] init];
@@ -191,8 +194,14 @@
 
 - (NSDictionary *)textStyleFireUnselected{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -265,9 +274,14 @@
 }
 
 - (NSDictionary *)textStyle{
-
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
-
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -281,8 +295,15 @@
 
 - (NSDictionary *)textStyleDesc{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightLight];
     
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightLight];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightLight];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -296,8 +317,14 @@
 
 - (NSDictionary *)textStyleFire{
     
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -309,8 +336,14 @@
 
 - (NSDictionary *)textStyleFireLit{
     
-    UIFont *font = [UIFont systemFontOfSize:10.0f weight:UIFontWeightRegular];
+    UIFont *font = nil;
     
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:8.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:10.0f weight:UIFontWeightRegular];
+    }
+ 
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -321,7 +354,14 @@
 }
 
 - (NSDictionary *)textStyleLeft{
-    UIFont *font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightSemibold];
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightSemibold];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightSemibold];
+    }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;

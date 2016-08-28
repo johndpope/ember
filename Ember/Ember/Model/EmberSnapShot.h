@@ -22,6 +22,8 @@
 -(void)addSnapShot:(FIRDataSnapshot*)snap;
 -(void)addSnapShotToEnd:(FIRDataSnapshot *)snap;
 
+-(instancetype)initWithEventsSnapShot:(FIRDataSnapshot*)snapShot;
+
 -(instancetype)initWithOrgsSnapShot:(FIRDataSnapshot*)snapShot;
 -(BOOL)addOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user;
 
