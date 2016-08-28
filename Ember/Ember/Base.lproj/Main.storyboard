@@ -259,7 +259,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MyOrgsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyOrgsTableViewCell" id="Hea-jo-kCE" customClass="MyOrgsTableViewCell" customModule="bounceapp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MyOrgsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyOrgsTableViewCell" id="Hea-jo-kCE" customClass="MyOrgsTableViewCell" customModule="Ember">
                                 <rect key="frame" x="0.0" y="28" width="600" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hea-jo-kCE" id="Va1-p7-fVt">
@@ -272,13 +272,6 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="groups_filled" translatesAutoresizingMaskIntoConstraints="NO" id="nae-DF-3vV">
-                                            <rect key="frame" x="98" y="38" width="30" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="Iov-QI-EPI"/>
-                                                <constraint firstAttribute="height" constant="25" id="xVl-uq-CEV"/>
-                                            </constraints>
-                                        </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VIP-Oy-XIy">
                                             <rect key="frame" x="20" y="11" width="55" height="55"/>
                                         </imageView>
@@ -294,6 +287,13 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="groups_filled" translatesAutoresizingMaskIntoConstraints="NO" id="nae-DF-3vV">
+                                            <rect key="frame" x="98" y="39" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="Iov-QI-EPI"/>
+                                                <constraint firstAttribute="height" constant="25" id="xVl-uq-CEV"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6PT-ho-hgf" firstAttribute="top" secondItem="duU-vp-tvE" secondAttribute="bottom" constant="8" id="8Ic-ZV-HKZ"/>

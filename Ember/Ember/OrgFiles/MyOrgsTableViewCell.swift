@@ -28,8 +28,7 @@ class MyOrgsTableViewCell: UITableViewCell {
         self.adminLabel.layer.borderWidth = 1.0
         self.adminLabel.layer.borderColor = UIColor(red:250.0/255.0, green: 0/255.0, blue: 7.0/255.0, alpha: 1.0).CGColor
         self.adminLabel.layer.cornerRadius = 6
-//        self.profImage.layer.borderWidth = 3.0;  
-//        self.profImage.layer.borderColor = UIColor(red:90.0/255.0, green: 187.0/255.0, blue: 181.0/255.0, alpha: 1.0).CGColor
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
