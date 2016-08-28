@@ -92,10 +92,15 @@ class SearchEventsViewController : UITableViewController{
             snap = events[indexPath.row]
         }
         
-        let controller = EventViewController()
-        let bounceSnap = EmberSnapShot(eventsSnapShot: snap)
-        controller.eventNode = bounceSnap
-        self.navigationController?.pushViewController(controller, animated: true)
+        self.ref.child(BounceConstants.firebaseHomefeed()).child((snap.value?.valueForKey("homeFeedMediaKey"))! as! String).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
+            
+            let controller = EventViewController()
+            let bounceSnap = EmberSnapShot(snapShot: snapshot)
+            controller.eventNode = bounceSnap
+            self.navigationController?.pushViewController(controller, animated: true)
+            
+        })
+        
         
     }
     

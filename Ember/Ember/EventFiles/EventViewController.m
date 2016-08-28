@@ -226,7 +226,7 @@
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId node:(FinalEventTitleNode*) node{
     
     FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:@"Organizations"] child:orgId]  queryLimitedToFirst:100];
-    [[recentPostsQuery queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+    [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary * event = snapShot.value;
 //        NSLog(@"%@", event[@"smallImageLink"]);
@@ -354,12 +354,12 @@
     
     if ([_titleNodeIndexPath compare:indexPath] == NSOrderedSame) {
         EmberSnapShot* snapShot = _snapShots[indexPath.row];
-        NSDictionary *eventDetails = [snapShot getData];
+        NSDictionary *eventDetails = [snapShot getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot];
             _orgID = eventDetails[@"orgID"];
-            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventImageLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventPosterLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
             return bounceNode;
         };
         
