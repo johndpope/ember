@@ -143,10 +143,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _mediaItemsCount = 0;
     
-    if(IS_IPHONE_5){
-        NSLog(@"is iphone 5");
-    }
-    
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _snapShot = snapShot;
