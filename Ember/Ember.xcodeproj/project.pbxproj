@@ -7,66 +7,274 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C7BDECA11D7253050078E4B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDECA01D7253050078E4B4 /* AppDelegate.swift */; };
-		C7BDECA31D7253050078E4B4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDECA21D7253050078E4B4 /* FirstViewController.swift */; };
-		C7BDECA51D7253050078E4B4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDECA41D7253050078E4B4 /* SecondViewController.swift */; };
-		C7BDECA81D7253050078E4B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7BDECA61D7253050078E4B4 /* Main.storyboard */; };
-		C7BDECAA1D7253050078E4B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7BDECA91D7253050078E4B4 /* Assets.xcassets */; };
-		C7BDECAD1D7253050078E4B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7BDECAB1D7253050078E4B4 /* LaunchScreen.storyboard */; };
-		C7BDECB81D7253050078E4B4 /* EmberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDECB71D7253050078E4B4 /* EmberTests.swift */; };
-		C7BDECC31D7253050078E4B4 /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDECC21D7253050078E4B4 /* EmberUITests.swift */; };
+		C7119E301D72A80B0047A5CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */; };
+		C7119E381D72A8980047A5CD /* MyEventsPostDetailsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E321D72A8980047A5CD /* MyEventsPostDetailsNode.m */; };
+		C7119E391D72A8980047A5CD /* MyEventsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E351D72A8980047A5CD /* MyEventsNode.m */; };
+		C7119E3A1D72A8980047A5CD /* MyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E371D72A8980047A5CD /* MyEventsViewController.m */; };
+		C7119E411D72A8E40047A5CD /* OrgPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E3C1D72A8E40047A5CD /* OrgPreferencesViewController.swift */; };
+		C7119E421D72A8E40047A5CD /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E3D1D72A8E40047A5CD /* DiscoverViewController.swift */; };
+		C7119E431D72A8E40047A5CD /* TagListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E3E1D72A8E40047A5CD /* TagListViewController.swift */; };
+		C7119E441D72A8E40047A5CD /* EventPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E3F1D72A8E40047A5CD /* EventPreferencesViewController.swift */; };
+		C7119E451D72A8E40047A5CD /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E401D72A8E40047A5CD /* TagListView.swift */; };
+		C7119E501D72A9070047A5CD /* EventTitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E471D72A9070047A5CD /* EventTitleNode.m */; };
+		C7119E511D72A9070047A5CD /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E481D72A9070047A5CD /* CreateEventViewController.swift */; };
+		C7119E521D72A9070047A5CD /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E491D72A9070047A5CD /* EventViewController.m */; };
+		C7119E531D72A9070047A5CD /* FinalEventTitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E4A1D72A9070047A5CD /* FinalEventTitleNode.m */; };
+		C7119E541D72A9070047A5CD /* OrgNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E4B1D72A9070047A5CD /* OrgNode.m */; };
+		C7119E5B1D72A92D0047A5CD /* SearchEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E561D72A92D0047A5CD /* SearchEventsViewController.swift */; };
+		C7119E5C1D72A92D0047A5CD /* SearchOrgsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E571D72A92D0047A5CD /* SearchOrgsViewController.swift */; };
+		C7119E5D1D72A92D0047A5CD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E581D72A92D0047A5CD /* SearchViewController.swift */; };
+		C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E591D72A92D0047A5CD /* cell.xib */; };
+		C7119E5F1D72A92D0047A5CD /* last.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E5A1D72A92D0047A5CD /* last.xib */; };
+		C7119E641D72A95D0047A5CD /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E611D72A95D0047A5CD /* CameraViewController.m */; };
+		C7119E651D72A95D0047A5CD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E631D72A95D0047A5CD /* PhotoViewController.swift */; };
+		C7119E691D72A97A0047A5CD /* EventVideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E671D72A97A0047A5CD /* EventVideoTableViewController.swift */; };
+		C7119E6A1D72A97A0047A5CD /* EventPickerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E681D72A97A0047A5CD /* EventPickerTableViewController.swift */; };
+		C7119E721D72A9B80047A5CD /* UIImage+Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E6D1D72A9B80047A5CD /* UIImage+Crop.m */; };
+		C7119E731D72A9B80047A5CD /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E6F1D72A9B80047A5CD /* UIImage+Resize.m */; };
+		C7119E741D72A9B80047A5CD /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E711D72A9B80047A5CD /* ViewUtils.m */; };
+		C7119E7A1D72A9D70047A5CD /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E761D72A9D70047A5CD /* ImageViewController.m */; };
+		C7119E7B1D72A9D70047A5CD /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E771D72A9D70047A5CD /* VideoViewController.m */; };
+		C7119E831D72AA030047A5CD /* LLSimpleCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E7D1D72AA030047A5CD /* LLSimpleCamera.m */; };
+		C7119E841D72AA030047A5CD /* LLSimpleCamera+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E801D72AA030047A5CD /* LLSimpleCamera+Helper.m */; };
+		C7119E851D72AA030047A5CD /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E821D72AA030047A5CD /* UIImage+FixOrientation.m */; };
+		C7119E891D72AA190047A5CD /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E881D72AA190047A5CD /* SDAVAssetExportSession.m */; };
+		C7119E8D1D72AA310047A5CD /* SDRecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E8B1D72AA310047A5CD /* SDRecordButton.m */; };
+		C7119EA01D72AA6F0047A5CD /* EditOrgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E8F1D72AA6F0047A5CD /* EditOrgViewController.swift */; };
+		C7119EA11D72AA6F0047A5CD /* OrgProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E901D72AA6F0047A5CD /* OrgProfileViewController.m */; };
+		C7119EA21D72AA6F0047A5CD /* CreateOrgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E911D72AA6F0047A5CD /* CreateOrgViewController.swift */; };
+		C7119EA31D72AA6F0047A5CD /* OrgDetailsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E921D72AA6F0047A5CD /* OrgDetailsNode.swift */; };
+		C7119EA41D72AA6F0047A5CD /* SubOrgTitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E931D72AA6F0047A5CD /* SubOrgTitleNode.m */; };
+		C7119EA51D72AA6F0047A5CD /* MyOrgsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E941D72AA6F0047A5CD /* MyOrgsTableViewController.swift */; };
+		C7119EA61D72AA6F0047A5CD /* FinalOrgTitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E951D72AA6F0047A5CD /* FinalOrgTitleNode.m */; };
+		C7119EA71D72AA6F0047A5CD /* FollowNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E961D72AA6F0047A5CD /* FollowNode.m */; };
+		C7119EA81D72AA6F0047A5CD /* OrgsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E991D72AA6F0047A5CD /* OrgsViewController.m */; };
+		C7119EA91D72AA6F0047A5CD /* EmberOrgNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C7119E9B1D72AA6F0047A5CD /* EmberOrgNode.m */; };
+		C7119EAA1D72AA6F0047A5CD /* MyOrgsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E9F1D72AA6F0047A5CD /* MyOrgsTableViewCell.swift */; };
+		C7119EAD1D72AACE0047A5CD /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EAC1D72AACE0047A5CD /* ImageProvider.swift */; };
+		C7119EB31D72AB510047A5CD /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EAF1D72AB510047A5CD /* NewProfileViewController.swift */; };
+		C7119EB41D72AB510047A5CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EB01D72AB510047A5CD /* ProfileViewController.swift */; };
+		C7119EB51D72AB510047A5CD /* NoPostsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EB11D72AB510047A5CD /* NoPostsNode.swift */; };
+		C7119EB61D72AB510047A5CD /* YourProfileFirstNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EB21D72AB510047A5CD /* YourProfileFirstNode.swift */; };
+		C7119EB91D72AB760047A5CD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EB81D72AB760047A5CD /* TabBarController.swift */; };
+		C7119EBF1D72AB960047A5CD /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBB1D72AB960047A5CD /* LocalNotifications.swift */; };
+		C7119EC01D72AB960047A5CD /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBC1D72AB960047A5CD /* NotificationsTableViewController.swift */; };
+		C7119EC11D72AB960047A5CD /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBD1D72AB960047A5CD /* NotificationItem.swift */; };
+		C7119EC21D72AB960047A5CD /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBE1D72AB960047A5CD /* NotificationsTableViewCell.swift */; };
+		C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */ = {isa = PBXBuildFile; fileRef = C7119EF51D72ACB60047A5CD /* FSCalendar */; };
+		C7119EF91D72ACD50047A5CD /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EF71D72ACD50047A5CD /* CalendarViewController.swift */; };
+		C7119EFA1D72ACD50047A5CD /* CalendarDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EF81D72ACD50047A5CD /* CalendarDetailsTableViewCell.swift */; };
+		C7119EFC1D72ACF30047A5CD /* BounceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */; };
+		C7119F011D72AD090047A5CD /* Ember-83b1034663b1.json in Resources */ = {isa = PBXBuildFile; fileRef = C7119EFD1D72AD090047A5CD /* Ember-83b1034663b1.json */; };
+		C7119F021D72AD090047A5CD /* EmberUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EFE1D72AD090047A5CD /* EmberUser.swift */; };
+		C7119F031D72AD090047A5CD /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EFF1D72AD090047A5CD /* HomeFeedViewController.swift */; };
+		C7119F041D72AD090047A5CD /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7119F001D72AD090047A5CD /* iTunesArtwork@2x.png */; };
+		C7119F0B1D72ADF00047A5CD /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F071D72ADF00047A5CD /* CGPoint.swift */; };
+		C7119F0C1D72ADF00047A5CD /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F081D72ADF00047A5CD /* CGSize.swift */; };
+		C7119F0D1D72ADF00047A5CD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F091D72ADF00047A5CD /* UIView.swift */; };
+		C7119F0E1D72ADF00047A5CD /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F0A1D72ADF00047A5CD /* UIViewController.swift */; };
+		C7119F141D72AE240047A5CD /* GalleryImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F111D72AE240047A5CD /* GalleryImageViewController.swift */; };
+		C7119F151D72AE240047A5CD /* ImageViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F121D72AE240047A5CD /* ImageViewControllerDelegate.swift */; };
+		C7119F161D72AE240047A5CD /* ImageViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F131D72AE240047A5CD /* ImageViewControllerFactory.swift */; };
+		C7119F1D1D72AE900047A5CD /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */; };
+		C7119F211D72AEA60047A5CD /* GalleryCloseTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F1E1D72AEA60047A5CD /* GalleryCloseTransition.swift */; };
+		C7119F221D72AEA60047A5CD /* GalleryPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F1F1D72AEA60047A5CD /* GalleryPresentTransition.swift */; };
+		C7119F231D72AEA60047A5CD /* GallerySwipeToDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F201D72AEA60047A5CD /* GallerySwipeToDismissTransition.swift */; };
+		C7119F251D72AEC20047A5CD /* HeaderFooterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F241D72AEC20047A5CD /* HeaderFooterLayout.swift */; };
+		C7119F281D72AED90047A5CD /* GalleryViewControllerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F261D72AED90047A5CD /* GalleryViewControllerDatasource.swift */; };
+		C7119F291D72AED90047A5CD /* ImageFadeInHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F271D72AED90047A5CD /* ImageFadeInHandler.swift */; };
+		C7119F2B1D72AEEC0047A5CD /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F2A1D72AEEC0047A5CD /* GalleryViewController.swift */; };
+		C7119F2D1D72AF0F0047A5CD /* GalleryConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F2C1D72AF0F0047A5CD /* GalleryConfiguration.swift */; };
+		C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F2E1D72B1D00047A5CD /* Main.storyboard */; };
+		C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F311D72B2720047A5CD /* Walkthrough.storyboard */; };
+		C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDC91D72A657008CEB9A /* AppDelegate.swift */; };
+		C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDD21D72A657008CEB9A /* Assets.xcassets */; };
+		C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */; };
+		C76CDDE11D72A657008CEB9A /* EmberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDE01D72A657008CEB9A /* EmberTests.swift */; };
+		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
+		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
+		C76CDE051D72A6F6008CEB9A /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDFB1D72A6F6008CEB9A /* BWWalkthroughViewController.swift */; };
+		C76CDE061D72A6F6008CEB9A /* fTagsLanding.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDFC1D72A6F6008CEB9A /* fTagsLanding.png */; };
+		C76CDE071D72A6F6008CEB9A /* eventsLanding.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDFD1D72A6F6008CEB9A /* eventsLanding.png */; };
+		C76CDE081D72A6F6008CEB9A /* studentsLanding.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDFE1D72A6F6008CEB9A /* studentsLanding.png */; };
+		C76CDE091D72A6F6008CEB9A /* calLanding.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDFF1D72A6F6008CEB9A /* calLanding.png */; };
+		C76CDE0A1D72A6F6008CEB9A /* VideoSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDE001D72A6F6008CEB9A /* VideoSplashViewController.swift */; };
+		C76CDE0B1D72A6F6008CEB9A /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDE011D72A6F6008CEB9A /* BWWalkthroughPageViewController.swift */; };
+		C76CDE0C1D72A6F6008CEB9A /* orgsLanding.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CDE021D72A6F6008CEB9A /* orgsLanding.png */; };
+		C76CDE0D1D72A6F6008CEB9A /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDE031D72A6F6008CEB9A /* OnBoardingViewController.swift */; };
+		C76CDE0E1D72A6F6008CEB9A /* BackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C76CDE041D72A6F6008CEB9A /* BackgroundVideo.mp4 */; };
+		C76CDE1F1D72A78D008CEB9A /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDE1E1D72A78D008CEB9A /* CAPSPageMenu.swift */; };
+		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C7BDECB41D7253050078E4B4 /* PBXContainerItemProxy */ = {
+		C76CDDDD1D72A657008CEB9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C7BDEC951D7253050078E4B4 /* Project object */;
+			containerPortal = C76CDDBE1D72A657008CEB9A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C7BDEC9C1D7253050078E4B4;
+			remoteGlobalIDString = C76CDDC51D72A657008CEB9A;
 			remoteInfo = Ember;
 		};
-		C7BDECBF1D7253050078E4B4 /* PBXContainerItemProxy */ = {
+		C76CDDE81D72A657008CEB9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C7BDEC951D7253050078E4B4 /* Project object */;
+			containerPortal = C76CDDBE1D72A657008CEB9A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C7BDEC9C1D7253050078E4B4;
+			remoteGlobalIDString = C76CDDC51D72A657008CEB9A;
 			remoteInfo = Ember;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C7BDEC9D1D7253050078E4B4 /* Ember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ember.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7BDECA01D7253050078E4B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C7BDECA21D7253050078E4B4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		C7BDECA41D7253050078E4B4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		C7BDECA71D7253050078E4B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C7BDECA91D7253050078E4B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C7BDECAC1D7253050078E4B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C7BDECAE1D7253050078E4B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7BDECB31D7253050078E4B4 /* EmberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7BDECB71D7253050078E4B4 /* EmberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberTests.swift; sourceTree = "<group>"; };
-		C7BDECB91D7253050078E4B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7BDECBE1D7253050078E4B4 /* EmberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7BDECC21D7253050078E4B4 /* EmberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberUITests.swift; sourceTree = "<group>"; };
-		C7BDECC41D7253050078E4B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.release.xcconfig"; sourceTree = "<group>"; };
+		972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.debug.xcconfig"; sourceTree = "<group>"; };
+		C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ember-Bridging-Header.h"; sourceTree = "<group>"; };
+		C7119E321D72A8980047A5CD /* MyEventsPostDetailsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventsPostDetailsNode.m; sourceTree = "<group>"; };
+		C7119E331D72A8980047A5CD /* MyEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventsViewController.h; sourceTree = "<group>"; };
+		C7119E341D72A8980047A5CD /* MyEventsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventsNode.h; sourceTree = "<group>"; };
+		C7119E351D72A8980047A5CD /* MyEventsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventsNode.m; sourceTree = "<group>"; };
+		C7119E361D72A8980047A5CD /* MyEventsPostDetailsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEventsPostDetailsNode.h; sourceTree = "<group>"; };
+		C7119E371D72A8980047A5CD /* MyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEventsViewController.m; sourceTree = "<group>"; };
+		C7119E3C1D72A8E40047A5CD /* OrgPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgPreferencesViewController.swift; sourceTree = "<group>"; };
+		C7119E3D1D72A8E40047A5CD /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		C7119E3E1D72A8E40047A5CD /* TagListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewController.swift; sourceTree = "<group>"; };
+		C7119E3F1D72A8E40047A5CD /* EventPreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPreferencesViewController.swift; sourceTree = "<group>"; };
+		C7119E401D72A8E40047A5CD /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
+		C7119E471D72A9070047A5CD /* EventTitleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTitleNode.m; sourceTree = "<group>"; };
+		C7119E481D72A9070047A5CD /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		C7119E491D72A9070047A5CD /* EventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewController.m; sourceTree = "<group>"; };
+		C7119E4A1D72A9070047A5CD /* FinalEventTitleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalEventTitleNode.m; sourceTree = "<group>"; };
+		C7119E4B1D72A9070047A5CD /* OrgNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgNode.m; sourceTree = "<group>"; };
+		C7119E4C1D72A9070047A5CD /* EventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewController.h; sourceTree = "<group>"; };
+		C7119E4D1D72A9070047A5CD /* EventTitleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTitleNode.h; sourceTree = "<group>"; };
+		C7119E4E1D72A9070047A5CD /* FinalEventTitleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalEventTitleNode.h; sourceTree = "<group>"; };
+		C7119E4F1D72A9070047A5CD /* OrgNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgNode.h; sourceTree = "<group>"; };
+		C7119E561D72A92D0047A5CD /* SearchEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventsViewController.swift; sourceTree = "<group>"; };
+		C7119E571D72A92D0047A5CD /* SearchOrgsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchOrgsViewController.swift; sourceTree = "<group>"; };
+		C7119E581D72A92D0047A5CD /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C7119E591D72A92D0047A5CD /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
+		C7119E5A1D72A92D0047A5CD /* last.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = last.xib; sourceTree = "<group>"; };
+		C7119E611D72A95D0047A5CD /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		C7119E621D72A95D0047A5CD /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		C7119E631D72A95D0047A5CD /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		C7119E671D72A97A0047A5CD /* EventVideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventVideoTableViewController.swift; sourceTree = "<group>"; };
+		C7119E681D72A97A0047A5CD /* EventPickerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPickerTableViewController.swift; sourceTree = "<group>"; };
+		C7119E6C1D72A9B80047A5CD /* UIImage+Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Crop.h"; sourceTree = "<group>"; };
+		C7119E6D1D72A9B80047A5CD /* UIImage+Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Crop.m"; sourceTree = "<group>"; };
+		C7119E6E1D72A9B80047A5CD /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		C7119E6F1D72A9B80047A5CD /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		C7119E701D72A9B80047A5CD /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
+		C7119E711D72A9B80047A5CD /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
+		C7119E761D72A9D70047A5CD /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		C7119E771D72A9D70047A5CD /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		C7119E781D72A9D70047A5CD /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		C7119E791D72A9D70047A5CD /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		C7119E7D1D72AA030047A5CD /* LLSimpleCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSimpleCamera.m; sourceTree = "<group>"; };
+		C7119E7E1D72AA030047A5CD /* LLSimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSimpleCamera.h; sourceTree = "<group>"; };
+		C7119E7F1D72AA030047A5CD /* LLSimpleCamera+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LLSimpleCamera+Helper.h"; sourceTree = "<group>"; };
+		C7119E801D72AA030047A5CD /* LLSimpleCamera+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LLSimpleCamera+Helper.m"; sourceTree = "<group>"; };
+		C7119E811D72AA030047A5CD /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		C7119E821D72AA030047A5CD /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
+		C7119E871D72AA190047A5CD /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		C7119E881D72AA190047A5CD /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
+		C7119E8B1D72AA310047A5CD /* SDRecordButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRecordButton.m; sourceTree = "<group>"; };
+		C7119E8C1D72AA310047A5CD /* SDRecordButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRecordButton.h; sourceTree = "<group>"; };
+		C7119E8F1D72AA6F0047A5CD /* EditOrgViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOrgViewController.swift; sourceTree = "<group>"; };
+		C7119E901D72AA6F0047A5CD /* OrgProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgProfileViewController.m; sourceTree = "<group>"; };
+		C7119E911D72AA6F0047A5CD /* CreateOrgViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOrgViewController.swift; sourceTree = "<group>"; };
+		C7119E921D72AA6F0047A5CD /* OrgDetailsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgDetailsNode.swift; sourceTree = "<group>"; };
+		C7119E931D72AA6F0047A5CD /* SubOrgTitleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubOrgTitleNode.m; sourceTree = "<group>"; };
+		C7119E941D72AA6F0047A5CD /* MyOrgsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrgsTableViewController.swift; sourceTree = "<group>"; };
+		C7119E951D72AA6F0047A5CD /* FinalOrgTitleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalOrgTitleNode.m; sourceTree = "<group>"; };
+		C7119E961D72AA6F0047A5CD /* FollowNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowNode.m; sourceTree = "<group>"; };
+		C7119E971D72AA6F0047A5CD /* OrgProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgProfileViewController.h; sourceTree = "<group>"; };
+		C7119E981D72AA6F0047A5CD /* OrgsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgsViewController.h; sourceTree = "<group>"; };
+		C7119E991D72AA6F0047A5CD /* OrgsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgsViewController.m; sourceTree = "<group>"; };
+		C7119E9A1D72AA6F0047A5CD /* EmberOrgNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmberOrgNode.h; sourceTree = "<group>"; };
+		C7119E9B1D72AA6F0047A5CD /* EmberOrgNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmberOrgNode.m; sourceTree = "<group>"; };
+		C7119E9C1D72AA6F0047A5CD /* FollowNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowNode.h; sourceTree = "<group>"; };
+		C7119E9D1D72AA6F0047A5CD /* FinalOrgTitleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalOrgTitleNode.h; sourceTree = "<group>"; };
+		C7119E9E1D72AA6F0047A5CD /* SubOrgTitleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubOrgTitleNode.h; sourceTree = "<group>"; };
+		C7119E9F1D72AA6F0047A5CD /* MyOrgsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrgsTableViewCell.swift; sourceTree = "<group>"; };
+		C7119EAC1D72AACE0047A5CD /* ImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		C7119EAF1D72AB510047A5CD /* NewProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
+		C7119EB01D72AB510047A5CD /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C7119EB11D72AB510047A5CD /* NoPostsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoPostsNode.swift; sourceTree = "<group>"; };
+		C7119EB21D72AB510047A5CD /* YourProfileFirstNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourProfileFirstNode.swift; sourceTree = "<group>"; };
+		C7119EB81D72AB760047A5CD /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C7119EBB1D72AB960047A5CD /* LocalNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
+		C7119EBC1D72AB960047A5CD /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
+		C7119EBD1D72AB960047A5CD /* NotificationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
+		C7119EBE1D72AB960047A5CD /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
+		C7119EF51D72ACB60047A5CD /* FSCalendar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FSCalendar; sourceTree = "<group>"; };
+		C7119EF71D72ACD50047A5CD /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		C7119EF81D72ACD50047A5CD /* CalendarDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceConstants.swift; sourceTree = "<group>"; };
+		C7119EFD1D72AD090047A5CD /* Ember-83b1034663b1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Ember-83b1034663b1.json"; sourceTree = "<group>"; };
+		C7119EFE1D72AD090047A5CD /* EmberUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmberUser.swift; sourceTree = "<group>"; };
+		C7119EFF1D72AD090047A5CD /* HomeFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
+		C7119F001D72AD090047A5CD /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		C7119F071D72ADF00047A5CD /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		C7119F081D72ADF00047A5CD /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		C7119F091D72ADF00047A5CD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		C7119F0A1D72ADF00047A5CD /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		C7119F111D72AE240047A5CD /* GalleryImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImageViewController.swift; sourceTree = "<group>"; };
+		C7119F121D72AE240047A5CD /* ImageViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewControllerDelegate.swift; sourceTree = "<group>"; };
+		C7119F131D72AE240047A5CD /* ImageViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewControllerFactory.swift; sourceTree = "<group>"; };
+		C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		C7119F1E1D72AEA60047A5CD /* GalleryCloseTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCloseTransition.swift; sourceTree = "<group>"; };
+		C7119F1F1D72AEA60047A5CD /* GalleryPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPresentTransition.swift; sourceTree = "<group>"; };
+		C7119F201D72AEA60047A5CD /* GallerySwipeToDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySwipeToDismissTransition.swift; sourceTree = "<group>"; };
+		C7119F241D72AEC20047A5CD /* HeaderFooterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterLayout.swift; sourceTree = "<group>"; };
+		C7119F261D72AED90047A5CD /* GalleryViewControllerDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewControllerDatasource.swift; sourceTree = "<group>"; };
+		C7119F271D72AED90047A5CD /* ImageFadeInHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFadeInHandler.swift; sourceTree = "<group>"; };
+		C7119F2A1D72AEEC0047A5CD /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		C7119F2C1D72AF0F0047A5CD /* GalleryConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryConfiguration.swift; sourceTree = "<group>"; };
+		C7119F2F1D72B1D00047A5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C7119F311D72B2720047A5CD /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
+		C76CDDC61D72A657008CEB9A /* Ember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ember.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CDDC91D72A657008CEB9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C76CDDD21D72A657008CEB9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C76CDDD51D72A657008CEB9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C76CDDD71D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C76CDDDC1D72A657008CEB9A /* EmberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CDDE01D72A657008CEB9A /* EmberTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberTests.swift; sourceTree = "<group>"; };
+		C76CDDE21D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C76CDDE71D72A657008CEB9A /* EmberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberUITests.swift; sourceTree = "<group>"; };
+		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
+		C76CDDFB1D72A6F6008CEB9A /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
+		C76CDDFC1D72A6F6008CEB9A /* fTagsLanding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fTagsLanding.png; sourceTree = "<group>"; };
+		C76CDDFD1D72A6F6008CEB9A /* eventsLanding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eventsLanding.png; sourceTree = "<group>"; };
+		C76CDDFE1D72A6F6008CEB9A /* studentsLanding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentsLanding.png; sourceTree = "<group>"; };
+		C76CDDFF1D72A6F6008CEB9A /* calLanding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calLanding.png; sourceTree = "<group>"; };
+		C76CDE001D72A6F6008CEB9A /* VideoSplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSplashViewController.swift; sourceTree = "<group>"; };
+		C76CDE011D72A6F6008CEB9A /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		C76CDE021D72A6F6008CEB9A /* orgsLanding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgsLanding.png; sourceTree = "<group>"; };
+		C76CDE031D72A6F6008CEB9A /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		C76CDE041D72A6F6008CEB9A /* BackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundVideo.mp4; sourceTree = "<group>"; };
+		C76CDE1E1D72A78D008CEB9A /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CAPSPageMenu.swift; path = ../../../Ember/ember/Ember/Ember/CAPSPageMenu/CAPSPageMenu.swift; sourceTree = "<group>"; };
+		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C7BDEC9A1D7253050078E4B4 /* Frameworks */ = {
+		C76CDDC31D72A657008CEB9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C76CDDD91D72A657008CEB9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7BDECB01D7253050078E4B4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7BDECBB1D7253050078E4B4 /* Frameworks */ = {
+		C76CDDE41D72A657008CEB9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,68 +284,428 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C7BDEC941D7253050078E4B4 = {
+		5A2E52973FC311925CA9B616 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C7BDEC9F1D7253050078E4B4 /* Ember */,
-				C7BDECB61D7253050078E4B4 /* EmberTests */,
-				C7BDECC11D7253050078E4B4 /* EmberUITests */,
-				C7BDEC9E1D7253050078E4B4 /* Products */,
+				DBD6D85F519588C85EEC384E /* Pods_Ember.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		787C6115FF706DABBC3B51DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */,
+				1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C7119E3B1D72A8BA0047A5CD /* MyEventsFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E321D72A8980047A5CD /* MyEventsPostDetailsNode.m */,
+				C7119E331D72A8980047A5CD /* MyEventsViewController.h */,
+				C7119E341D72A8980047A5CD /* MyEventsNode.h */,
+				C7119E351D72A8980047A5CD /* MyEventsNode.m */,
+				C7119E361D72A8980047A5CD /* MyEventsPostDetailsNode.h */,
+				C7119E371D72A8980047A5CD /* MyEventsViewController.m */,
+			);
+			name = MyEventsFiles;
+			sourceTree = "<group>";
+		};
+		C7119E461D72A8E80047A5CD /* PreferencePageFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E3C1D72A8E40047A5CD /* OrgPreferencesViewController.swift */,
+				C7119E3D1D72A8E40047A5CD /* DiscoverViewController.swift */,
+				C7119E3E1D72A8E40047A5CD /* TagListViewController.swift */,
+				C7119E3F1D72A8E40047A5CD /* EventPreferencesViewController.swift */,
+				C7119E401D72A8E40047A5CD /* TagListView.swift */,
+			);
+			name = PreferencePageFiles;
+			sourceTree = "<group>";
+		};
+		C7119E551D72A9110047A5CD /* EventPageFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E471D72A9070047A5CD /* EventTitleNode.m */,
+				C7119E481D72A9070047A5CD /* CreateEventViewController.swift */,
+				C7119E491D72A9070047A5CD /* EventViewController.m */,
+				C7119E4A1D72A9070047A5CD /* FinalEventTitleNode.m */,
+				C7119E4B1D72A9070047A5CD /* OrgNode.m */,
+				C7119E4C1D72A9070047A5CD /* EventViewController.h */,
+				C7119E4D1D72A9070047A5CD /* EventTitleNode.h */,
+				C7119E4E1D72A9070047A5CD /* FinalEventTitleNode.h */,
+				C7119E4F1D72A9070047A5CD /* OrgNode.h */,
+			);
+			name = EventPageFiles;
+			sourceTree = "<group>";
+		};
+		C7119E601D72A9340047A5CD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E561D72A92D0047A5CD /* SearchEventsViewController.swift */,
+				C7119E571D72A92D0047A5CD /* SearchOrgsViewController.swift */,
+				C7119E581D72A92D0047A5CD /* SearchViewController.swift */,
+				C7119E591D72A92D0047A5CD /* cell.xib */,
+				C7119E5A1D72A92D0047A5CD /* last.xib */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		C7119E661D72A9650047A5CD /* CameraFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E8E1D72AA350047A5CD /* RecordButton */,
+				C7119E8A1D72AA1D0047A5CD /* videoCompression */,
+				C7119E861D72AA080047A5CD /* camera */,
+				C7119E7C1D72A9E00047A5CD /* CameraControllers */,
+				C7119E751D72A9BE0047A5CD /* CameraUtility */,
+				C7119E6B1D72A9830047A5CD /* EventPickerFilesAfterCamera */,
+				C7119E611D72A95D0047A5CD /* CameraViewController.m */,
+				C7119E621D72A95D0047A5CD /* CameraViewController.h */,
+				C7119E631D72A95D0047A5CD /* PhotoViewController.swift */,
+			);
+			name = CameraFiles;
+			sourceTree = "<group>";
+		};
+		C7119E6B1D72A9830047A5CD /* EventPickerFilesAfterCamera */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E671D72A97A0047A5CD /* EventVideoTableViewController.swift */,
+				C7119E681D72A97A0047A5CD /* EventPickerTableViewController.swift */,
+			);
+			name = EventPickerFilesAfterCamera;
+			sourceTree = "<group>";
+		};
+		C7119E751D72A9BE0047A5CD /* CameraUtility */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E6C1D72A9B80047A5CD /* UIImage+Crop.h */,
+				C7119E6D1D72A9B80047A5CD /* UIImage+Crop.m */,
+				C7119E6E1D72A9B80047A5CD /* UIImage+Resize.h */,
+				C7119E6F1D72A9B80047A5CD /* UIImage+Resize.m */,
+				C7119E701D72A9B80047A5CD /* ViewUtils.h */,
+				C7119E711D72A9B80047A5CD /* ViewUtils.m */,
+			);
+			name = CameraUtility;
+			sourceTree = "<group>";
+		};
+		C7119E7C1D72A9E00047A5CD /* CameraControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E761D72A9D70047A5CD /* ImageViewController.m */,
+				C7119E771D72A9D70047A5CD /* VideoViewController.m */,
+				C7119E781D72A9D70047A5CD /* ImageViewController.h */,
+				C7119E791D72A9D70047A5CD /* VideoViewController.h */,
+			);
+			name = CameraControllers;
+			sourceTree = "<group>";
+		};
+		C7119E861D72AA080047A5CD /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E7D1D72AA030047A5CD /* LLSimpleCamera.m */,
+				C7119E7E1D72AA030047A5CD /* LLSimpleCamera.h */,
+				C7119E7F1D72AA030047A5CD /* LLSimpleCamera+Helper.h */,
+				C7119E801D72AA030047A5CD /* LLSimpleCamera+Helper.m */,
+				C7119E811D72AA030047A5CD /* UIImage+FixOrientation.h */,
+				C7119E821D72AA030047A5CD /* UIImage+FixOrientation.m */,
+			);
+			name = camera;
+			sourceTree = "<group>";
+		};
+		C7119E8A1D72AA1D0047A5CD /* videoCompression */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E871D72AA190047A5CD /* SDAVAssetExportSession.h */,
+				C7119E881D72AA190047A5CD /* SDAVAssetExportSession.m */,
+			);
+			name = videoCompression;
+			sourceTree = "<group>";
+		};
+		C7119E8E1D72AA350047A5CD /* RecordButton */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E8B1D72AA310047A5CD /* SDRecordButton.m */,
+				C7119E8C1D72AA310047A5CD /* SDRecordButton.h */,
+			);
+			name = RecordButton;
+			sourceTree = "<group>";
+		};
+		C7119EAB1D72AA780047A5CD /* OrgFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119E8F1D72AA6F0047A5CD /* EditOrgViewController.swift */,
+				C7119E901D72AA6F0047A5CD /* OrgProfileViewController.m */,
+				C7119E911D72AA6F0047A5CD /* CreateOrgViewController.swift */,
+				C7119E921D72AA6F0047A5CD /* OrgDetailsNode.swift */,
+				C7119E931D72AA6F0047A5CD /* SubOrgTitleNode.m */,
+				C7119E941D72AA6F0047A5CD /* MyOrgsTableViewController.swift */,
+				C7119E951D72AA6F0047A5CD /* FinalOrgTitleNode.m */,
+				C7119E961D72AA6F0047A5CD /* FollowNode.m */,
+				C7119E971D72AA6F0047A5CD /* OrgProfileViewController.h */,
+				C7119E981D72AA6F0047A5CD /* OrgsViewController.h */,
+				C7119E991D72AA6F0047A5CD /* OrgsViewController.m */,
+				C7119E9A1D72AA6F0047A5CD /* EmberOrgNode.h */,
+				C7119E9B1D72AA6F0047A5CD /* EmberOrgNode.m */,
+				C7119E9C1D72AA6F0047A5CD /* FollowNode.h */,
+				C7119E9D1D72AA6F0047A5CD /* FinalOrgTitleNode.h */,
+				C7119E9E1D72AA6F0047A5CD /* SubOrgTitleNode.h */,
+				C7119E9F1D72AA6F0047A5CD /* MyOrgsTableViewCell.swift */,
+			);
+			name = OrgFiles;
+			sourceTree = "<group>";
+		};
+		C7119EAE1D72AAD60047A5CD /* GalleryViewFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F061D72ADB30047A5CD /* Gallery */,
+				C7119F051D72AD9E0047A5CD /* Extensions */,
+				C7119EAC1D72AACE0047A5CD /* ImageProvider.swift */,
+			);
+			name = GalleryViewFiles;
+			sourceTree = "<group>";
+		};
+		C7119EB71D72AB5A0047A5CD /* IndividualProfileFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119EAF1D72AB510047A5CD /* NewProfileViewController.swift */,
+				C7119EB01D72AB510047A5CD /* ProfileViewController.swift */,
+				C7119EB11D72AB510047A5CD /* NoPostsNode.swift */,
+				C7119EB21D72AB510047A5CD /* YourProfileFirstNode.swift */,
+			);
+			name = IndividualProfileFiles;
+			sourceTree = "<group>";
+		};
+		C7119EBA1D72AB7A0047A5CD /* GeneralFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119EB81D72AB760047A5CD /* TabBarController.swift */,
+			);
+			name = GeneralFiles;
+			sourceTree = "<group>";
+		};
+		C7119EC31D72AB9F0047A5CD /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				C7119EBB1D72AB960047A5CD /* LocalNotifications.swift */,
+				C7119EBC1D72AB960047A5CD /* NotificationsTableViewController.swift */,
+				C7119EBD1D72AB960047A5CD /* NotificationItem.swift */,
+				C7119EBE1D72AB960047A5CD /* NotificationsTableViewCell.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
+		C7119EF41D72AC870047A5CD /* CalendarFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C7119EF71D72ACD50047A5CD /* CalendarViewController.swift */,
+				C7119EF81D72ACD50047A5CD /* CalendarDetailsTableViewCell.swift */,
+				C7119EF51D72ACB60047A5CD /* FSCalendar */,
+			);
+			name = CalendarFiles;
+			sourceTree = "<group>";
+		};
+		C7119F051D72AD9E0047A5CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F071D72ADF00047A5CD /* CGPoint.swift */,
+				C7119F081D72ADF00047A5CD /* CGSize.swift */,
+				C7119F091D72ADF00047A5CD /* UIView.swift */,
+				C7119F0A1D72ADF00047A5CD /* UIViewController.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		C7119F061D72ADB30047A5CD /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F101D72AE050047A5CD /* PageController */,
+				C7119F0F1D72ADFA0047A5CD /* ImageController */,
+			);
+			name = Gallery;
+			sourceTree = "<group>";
+		};
+		C7119F0F1D72ADFA0047A5CD /* ImageController */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F111D72AE240047A5CD /* GalleryImageViewController.swift */,
+				C7119F121D72AE240047A5CD /* ImageViewControllerDelegate.swift */,
+				C7119F131D72AE240047A5CD /* ImageViewControllerFactory.swift */,
+			);
+			name = ImageController;
+			sourceTree = "<group>";
+		};
+		C7119F101D72AE050047A5CD /* PageController */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */,
+				C7119F1B1D72AE7D0047A5CD /* Transitions */,
+				C7119F1A1D72AE700047A5CD /* Layout */,
+				C7119F191D72AE660047A5CD /* Delegates */,
+				C7119F181D72AE5F0047A5CD /* Controller */,
+				C7119F171D72AE4E0047A5CD /* Configuration */,
+			);
+			name = PageController;
+			sourceTree = "<group>";
+		};
+		C7119F171D72AE4E0047A5CD /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F2C1D72AF0F0047A5CD /* GalleryConfiguration.swift */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		C7119F181D72AE5F0047A5CD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F2A1D72AEEC0047A5CD /* GalleryViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		C7119F191D72AE660047A5CD /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F261D72AED90047A5CD /* GalleryViewControllerDatasource.swift */,
+				C7119F271D72AED90047A5CD /* ImageFadeInHandler.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		C7119F1A1D72AE700047A5CD /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F241D72AEC20047A5CD /* HeaderFooterLayout.swift */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		C7119F1B1D72AE7D0047A5CD /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				C7119F1E1D72AEA60047A5CD /* GalleryCloseTransition.swift */,
+				C7119F1F1D72AEA60047A5CD /* GalleryPresentTransition.swift */,
+				C7119F201D72AEA60047A5CD /* GallerySwipeToDismissTransition.swift */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
+		C76CDDBD1D72A657008CEB9A = {
+			isa = PBXGroup;
+			children = (
+				C76CDDC81D72A657008CEB9A /* Ember */,
+				C76CDDDF1D72A657008CEB9A /* EmberTests */,
+				C76CDDEA1D72A657008CEB9A /* EmberUITests */,
+				C76CDDC71D72A657008CEB9A /* Products */,
+				787C6115FF706DABBC3B51DA /* Pods */,
+				5A2E52973FC311925CA9B616 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		C7BDEC9E1D7253050078E4B4 /* Products */ = {
+		C76CDDC71D72A657008CEB9A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7BDEC9D1D7253050078E4B4 /* Ember.app */,
-				C7BDECB31D7253050078E4B4 /* EmberTests.xctest */,
-				C7BDECBE1D7253050078E4B4 /* EmberUITests.xctest */,
+				C76CDDC61D72A657008CEB9A /* Ember.app */,
+				C76CDDDC1D72A657008CEB9A /* EmberTests.xctest */,
+				C76CDDE71D72A657008CEB9A /* EmberUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C7BDEC9F1D7253050078E4B4 /* Ember */ = {
+		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
-				C7BDECA01D7253050078E4B4 /* AppDelegate.swift */,
-				C7BDECA21D7253050078E4B4 /* FirstViewController.swift */,
-				C7BDECA41D7253050078E4B4 /* SecondViewController.swift */,
-				C7BDECA61D7253050078E4B4 /* Main.storyboard */,
-				C7BDECA91D7253050078E4B4 /* Assets.xcassets */,
-				C7BDECAB1D7253050078E4B4 /* LaunchScreen.storyboard */,
-				C7BDECAE1D7253050078E4B4 /* Info.plist */,
+				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
+				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
+				C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */,
+				C76CDDC91D72A657008CEB9A /* AppDelegate.swift */,
+				C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */,
+				C7119EFF1D72AD090047A5CD /* HomeFeedViewController.swift */,
+				C7119EF41D72AC870047A5CD /* CalendarFiles */,
+				C7119EC31D72AB9F0047A5CD /* Notifications */,
+				C7119EBA1D72AB7A0047A5CD /* GeneralFiles */,
+				C7119EB71D72AB5A0047A5CD /* IndividualProfileFiles */,
+				C7119EAE1D72AAD60047A5CD /* GalleryViewFiles */,
+				C7119EAB1D72AA780047A5CD /* OrgFiles */,
+				C7119E661D72A9650047A5CD /* CameraFiles */,
+				C7119E601D72A9340047A5CD /* Search */,
+				C7119E551D72A9110047A5CD /* EventPageFiles */,
+				C7119E461D72A8E80047A5CD /* PreferencePageFiles */,
+				C7119E3B1D72A8BA0047A5CD /* MyEventsFiles */,
+				C76CDE201D72A791008CEB9A /* CAPSPageMenu */,
+				C76CDE0F1D72A6FF008CEB9A /* OnBoarding */,
+				C76CDDF91D72A689008CEB9A /* Util */,
+				C7119EFD1D72AD090047A5CD /* Ember-83b1034663b1.json */,
+				C7119EFE1D72AD090047A5CD /* EmberUser.swift */,
+				C7119F001D72AD090047A5CD /* iTunesArtwork@2x.png */,
+				C76CDDD21D72A657008CEB9A /* Assets.xcassets */,
+				C76CDDD71D72A657008CEB9A /* Info.plist */,
+				C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */,
+				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
 			path = Ember;
 			sourceTree = "<group>";
 		};
-		C7BDECB61D7253050078E4B4 /* EmberTests */ = {
+		C76CDDDF1D72A657008CEB9A /* EmberTests */ = {
 			isa = PBXGroup;
 			children = (
-				C7BDECB71D7253050078E4B4 /* EmberTests.swift */,
-				C7BDECB91D7253050078E4B4 /* Info.plist */,
+				C76CDDE01D72A657008CEB9A /* EmberTests.swift */,
+				C76CDDE21D72A657008CEB9A /* Info.plist */,
 			);
 			path = EmberTests;
 			sourceTree = "<group>";
 		};
-		C7BDECC11D7253050078E4B4 /* EmberUITests */ = {
+		C76CDDEA1D72A657008CEB9A /* EmberUITests */ = {
 			isa = PBXGroup;
 			children = (
-				C7BDECC21D7253050078E4B4 /* EmberUITests.swift */,
-				C7BDECC41D7253050078E4B4 /* Info.plist */,
+				C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */,
+				C76CDDED1D72A657008CEB9A /* Info.plist */,
 			);
 			path = EmberUITests;
+			sourceTree = "<group>";
+		};
+		C76CDE0F1D72A6FF008CEB9A /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				C76CDDFB1D72A6F6008CEB9A /* BWWalkthroughViewController.swift */,
+				C76CDDFC1D72A6F6008CEB9A /* fTagsLanding.png */,
+				C76CDDFD1D72A6F6008CEB9A /* eventsLanding.png */,
+				C76CDDFE1D72A6F6008CEB9A /* studentsLanding.png */,
+				C76CDDFF1D72A6F6008CEB9A /* calLanding.png */,
+				C76CDE001D72A6F6008CEB9A /* VideoSplashViewController.swift */,
+				C76CDE011D72A6F6008CEB9A /* BWWalkthroughPageViewController.swift */,
+				C76CDE021D72A6F6008CEB9A /* orgsLanding.png */,
+				C76CDE031D72A6F6008CEB9A /* OnBoardingViewController.swift */,
+				C76CDE041D72A6F6008CEB9A /* BackgroundVideo.mp4 */,
+			);
+			name = OnBoarding;
+			sourceTree = "<group>";
+		};
+		C76CDE201D72A791008CEB9A /* CAPSPageMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C76CDE1E1D72A78D008CEB9A /* CAPSPageMenu.swift */,
+			);
+			name = CAPSPageMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C7BDEC9C1D7253050078E4B4 /* Ember */ = {
+		C76CDDC51D72A657008CEB9A /* Ember */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7BDECC71D7253050078E4B4 /* Build configuration list for PBXNativeTarget "Ember" */;
+			buildConfigurationList = C76CDDF01D72A657008CEB9A /* Build configuration list for PBXNativeTarget "Ember" */;
 			buildPhases = (
-				C7BDEC991D7253050078E4B4 /* Sources */,
-				C7BDEC9A1D7253050078E4B4 /* Frameworks */,
-				C7BDEC9B1D7253050078E4B4 /* Resources */,
+				5979F3E75DC1145F8FEBB2F2 /* Check Pods Manifest.lock */,
+				C76CDDC21D72A657008CEB9A /* Sources */,
+				C76CDDC31D72A657008CEB9A /* Frameworks */,
+				C76CDDC41D72A657008CEB9A /* Resources */,
+				95815F167D75123FCDA691C0 /* Embed Pods Frameworks */,
+				18160DAA4ABACFC33524BDDC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,69 +713,69 @@
 			);
 			name = Ember;
 			productName = Ember;
-			productReference = C7BDEC9D1D7253050078E4B4 /* Ember.app */;
+			productReference = C76CDDC61D72A657008CEB9A /* Ember.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C7BDECB21D7253050078E4B4 /* EmberTests */ = {
+		C76CDDDB1D72A657008CEB9A /* EmberTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7BDECCA1D7253050078E4B4 /* Build configuration list for PBXNativeTarget "EmberTests" */;
+			buildConfigurationList = C76CDDF31D72A657008CEB9A /* Build configuration list for PBXNativeTarget "EmberTests" */;
 			buildPhases = (
-				C7BDECAF1D7253050078E4B4 /* Sources */,
-				C7BDECB01D7253050078E4B4 /* Frameworks */,
-				C7BDECB11D7253050078E4B4 /* Resources */,
+				C76CDDD81D72A657008CEB9A /* Sources */,
+				C76CDDD91D72A657008CEB9A /* Frameworks */,
+				C76CDDDA1D72A657008CEB9A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C7BDECB51D7253050078E4B4 /* PBXTargetDependency */,
+				C76CDDDE1D72A657008CEB9A /* PBXTargetDependency */,
 			);
 			name = EmberTests;
 			productName = EmberTests;
-			productReference = C7BDECB31D7253050078E4B4 /* EmberTests.xctest */;
+			productReference = C76CDDDC1D72A657008CEB9A /* EmberTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C7BDECBD1D7253050078E4B4 /* EmberUITests */ = {
+		C76CDDE61D72A657008CEB9A /* EmberUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7BDECCD1D7253050078E4B4 /* Build configuration list for PBXNativeTarget "EmberUITests" */;
+			buildConfigurationList = C76CDDF61D72A657008CEB9A /* Build configuration list for PBXNativeTarget "EmberUITests" */;
 			buildPhases = (
-				C7BDECBA1D7253050078E4B4 /* Sources */,
-				C7BDECBB1D7253050078E4B4 /* Frameworks */,
-				C7BDECBC1D7253050078E4B4 /* Resources */,
+				C76CDDE31D72A657008CEB9A /* Sources */,
+				C76CDDE41D72A657008CEB9A /* Frameworks */,
+				C76CDDE51D72A657008CEB9A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C7BDECC01D7253050078E4B4 /* PBXTargetDependency */,
+				C76CDDE91D72A657008CEB9A /* PBXTargetDependency */,
 			);
 			name = EmberUITests;
 			productName = EmberUITests;
-			productReference = C7BDECBE1D7253050078E4B4 /* EmberUITests.xctest */;
+			productReference = C76CDDE71D72A657008CEB9A /* EmberUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C7BDEC951D7253050078E4B4 /* Project object */ = {
+		C76CDDBE1D72A657008CEB9A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Anthony Wamunyu Maina";
 				TargetAttributes = {
-					C7BDEC9C1D7253050078E4B4 = {
+					C76CDDC51D72A657008CEB9A = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
-					C7BDECB21D7253050078E4B4 = {
+					C76CDDDB1D72A657008CEB9A = {
 						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = C7BDEC9C1D7253050078E4B4;
+						TestTargetID = C76CDDC51D72A657008CEB9A;
 					};
-					C7BDECBD1D7253050078E4B4 = {
+					C76CDDE61D72A657008CEB9A = {
 						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = C7BDEC9C1D7253050078E4B4;
+						TestTargetID = C76CDDC51D72A657008CEB9A;
 					};
 				};
 			};
-			buildConfigurationList = C7BDEC981D7253050078E4B4 /* Build configuration list for PBXProject "Ember" */;
+			buildConfigurationList = C76CDDC11D72A657008CEB9A /* Build configuration list for PBXProject "Ember" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -215,37 +783,51 @@
 				en,
 				Base,
 			);
-			mainGroup = C7BDEC941D7253050078E4B4;
-			productRefGroup = C7BDEC9E1D7253050078E4B4 /* Products */;
+			mainGroup = C76CDDBD1D72A657008CEB9A;
+			productRefGroup = C76CDDC71D72A657008CEB9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C7BDEC9C1D7253050078E4B4 /* Ember */,
-				C7BDECB21D7253050078E4B4 /* EmberTests */,
-				C7BDECBD1D7253050078E4B4 /* EmberUITests */,
+				C76CDDC51D72A657008CEB9A /* Ember */,
+				C76CDDDB1D72A657008CEB9A /* EmberTests */,
+				C76CDDE61D72A657008CEB9A /* EmberUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C7BDEC9B1D7253050078E4B4 /* Resources */ = {
+		C76CDDC41D72A657008CEB9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7BDECAD1D7253050078E4B4 /* LaunchScreen.storyboard in Resources */,
-				C7BDECAA1D7253050078E4B4 /* Assets.xcassets in Resources */,
-				C7BDECA81D7253050078E4B4 /* Main.storyboard in Resources */,
+				C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */,
+				C76CDE081D72A6F6008CEB9A /* studentsLanding.png in Resources */,
+				C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */,
+				C7119F011D72AD090047A5CD /* Ember-83b1034663b1.json in Resources */,
+				C7119F041D72AD090047A5CD /* iTunesArtwork@2x.png in Resources */,
+				C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */,
+				C76CDE071D72A6F6008CEB9A /* eventsLanding.png in Resources */,
+				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
+				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
+				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,
+				C7119E301D72A80B0047A5CD /* GoogleService-Info.plist in Resources */,
+				C76CDE091D72A6F6008CEB9A /* calLanding.png in Resources */,
+				C76CDE0C1D72A6F6008CEB9A /* orgsLanding.png in Resources */,
+				C7119E5F1D72A92D0047A5CD /* last.xib in Resources */,
+				C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */,
+				C76CDE061D72A6F6008CEB9A /* fTagsLanding.png in Resources */,
+				C76CDE0E1D72A6F6008CEB9A /* BackgroundVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7BDECB11D7253050078E4B4 /* Resources */ = {
+		C76CDDDA1D72A657008CEB9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7BDECBC1D7253050078E4B4 /* Resources */ = {
+		C76CDDE51D72A657008CEB9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -254,61 +836,184 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		18160DAA4ABACFC33524BDDC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ember/Pods-Ember-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5979F3E75DC1145F8FEBB2F2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		95815F167D75123FCDA691C0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ember/Pods-Ember-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		C7BDEC991D7253050078E4B4 /* Sources */ = {
+		C76CDDC21D72A657008CEB9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7BDECA51D7253050078E4B4 /* SecondViewController.swift in Sources */,
-				C7BDECA11D7253050078E4B4 /* AppDelegate.swift in Sources */,
-				C7BDECA31D7253050078E4B4 /* FirstViewController.swift in Sources */,
+				C7119EF91D72ACD50047A5CD /* CalendarViewController.swift in Sources */,
+				C7119F021D72AD090047A5CD /* EmberUser.swift in Sources */,
+				C76CDE051D72A6F6008CEB9A /* BWWalkthroughViewController.swift in Sources */,
+				C7119E7B1D72A9D70047A5CD /* VideoViewController.m in Sources */,
+				C7119E6A1D72A97A0047A5CD /* EventPickerTableViewController.swift in Sources */,
+				C7119E411D72A8E40047A5CD /* OrgPreferencesViewController.swift in Sources */,
+				C7119EB31D72AB510047A5CD /* NewProfileViewController.swift in Sources */,
+				C7119F141D72AE240047A5CD /* GalleryImageViewController.swift in Sources */,
+				C7119EA61D72AA6F0047A5CD /* FinalOrgTitleNode.m in Sources */,
+				C7119E5C1D72A92D0047A5CD /* SearchOrgsViewController.swift in Sources */,
+				C7119EBF1D72AB960047A5CD /* LocalNotifications.swift in Sources */,
+				C7119E831D72AA030047A5CD /* LLSimpleCamera.m in Sources */,
+				C7119EB61D72AB510047A5CD /* YourProfileFirstNode.swift in Sources */,
+				C7119EC21D72AB960047A5CD /* NotificationsTableViewCell.swift in Sources */,
+				C7119EA81D72AA6F0047A5CD /* OrgsViewController.m in Sources */,
+				C7119EB41D72AB510047A5CD /* ProfileViewController.swift in Sources */,
+				C7119E721D72A9B80047A5CD /* UIImage+Crop.m in Sources */,
+				C7119EFA1D72ACD50047A5CD /* CalendarDetailsTableViewCell.swift in Sources */,
+				C7119EB91D72AB760047A5CD /* TabBarController.swift in Sources */,
+				C7119EC11D72AB960047A5CD /* NotificationItem.swift in Sources */,
+				C7119F221D72AEA60047A5CD /* GalleryPresentTransition.swift in Sources */,
+				C7119F211D72AEA60047A5CD /* GalleryCloseTransition.swift in Sources */,
+				C7119E391D72A8980047A5CD /* MyEventsNode.m in Sources */,
+				C7119E3A1D72A8980047A5CD /* MyEventsViewController.m in Sources */,
+				C7119F0C1D72ADF00047A5CD /* CGSize.swift in Sources */,
+				C7119EA51D72AA6F0047A5CD /* MyOrgsTableViewController.swift in Sources */,
+				C7119E851D72AA030047A5CD /* UIImage+FixOrientation.m in Sources */,
+				C7119E841D72AA030047A5CD /* LLSimpleCamera+Helper.m in Sources */,
+				C7119F0D1D72ADF00047A5CD /* UIView.swift in Sources */,
+				C7119E541D72A9070047A5CD /* OrgNode.m in Sources */,
+				C7119EFC1D72ACF30047A5CD /* BounceConstants.swift in Sources */,
+				C7119EA11D72AA6F0047A5CD /* OrgProfileViewController.m in Sources */,
+				C7119E431D72A8E40047A5CD /* TagListViewController.swift in Sources */,
+				C7119EA91D72AA6F0047A5CD /* EmberOrgNode.m in Sources */,
+				C7119F2B1D72AEEC0047A5CD /* GalleryViewController.swift in Sources */,
+				C7119E441D72A8E40047A5CD /* EventPreferencesViewController.swift in Sources */,
+				C7119E5B1D72A92D0047A5CD /* SearchEventsViewController.swift in Sources */,
+				C7119EA01D72AA6F0047A5CD /* EditOrgViewController.swift in Sources */,
+				C7119F0B1D72ADF00047A5CD /* CGPoint.swift in Sources */,
+				C7119EA21D72AA6F0047A5CD /* CreateOrgViewController.swift in Sources */,
+				C7119EA41D72AA6F0047A5CD /* SubOrgTitleNode.m in Sources */,
+				C7119E421D72A8E40047A5CD /* DiscoverViewController.swift in Sources */,
+				C76CDE0D1D72A6F6008CEB9A /* OnBoardingViewController.swift in Sources */,
+				C7119E891D72AA190047A5CD /* SDAVAssetExportSession.m in Sources */,
+				C7119F2D1D72AF0F0047A5CD /* GalleryConfiguration.swift in Sources */,
+				C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */,
+				C7119F251D72AEC20047A5CD /* HeaderFooterLayout.swift in Sources */,
+				C7119F0E1D72ADF00047A5CD /* UIViewController.swift in Sources */,
+				C76CDE0B1D72A6F6008CEB9A /* BWWalkthroughPageViewController.swift in Sources */,
+				C7119E501D72A9070047A5CD /* EventTitleNode.m in Sources */,
+				C7119EB51D72AB510047A5CD /* NoPostsNode.swift in Sources */,
+				C7119E641D72A95D0047A5CD /* CameraViewController.m in Sources */,
+				C7119E7A1D72A9D70047A5CD /* ImageViewController.m in Sources */,
+				C7119E531D72A9070047A5CD /* FinalEventTitleNode.m in Sources */,
+				C7119F281D72AED90047A5CD /* GalleryViewControllerDatasource.swift in Sources */,
+				C7119E8D1D72AA310047A5CD /* SDRecordButton.m in Sources */,
+				C7119F291D72AED90047A5CD /* ImageFadeInHandler.swift in Sources */,
+				C7119E691D72A97A0047A5CD /* EventVideoTableViewController.swift in Sources */,
+				C7119EC01D72AB960047A5CD /* NotificationsTableViewController.swift in Sources */,
+				C7119E741D72A9B80047A5CD /* ViewUtils.m in Sources */,
+				C7119F1D1D72AE900047A5CD /* UtilityFunctions.swift in Sources */,
+				C76CDE0A1D72A6F6008CEB9A /* VideoSplashViewController.swift in Sources */,
+				C7119F151D72AE240047A5CD /* ImageViewControllerDelegate.swift in Sources */,
+				C7119E521D72A9070047A5CD /* EventViewController.m in Sources */,
+				C7119F031D72AD090047A5CD /* HomeFeedViewController.swift in Sources */,
+				C7119EA31D72AA6F0047A5CD /* OrgDetailsNode.swift in Sources */,
+				C7119F231D72AEA60047A5CD /* GallerySwipeToDismissTransition.swift in Sources */,
+				C7119E5D1D72A92D0047A5CD /* SearchViewController.swift in Sources */,
+				C7119EAD1D72AACE0047A5CD /* ImageProvider.swift in Sources */,
+				C7119EA71D72AA6F0047A5CD /* FollowNode.m in Sources */,
+				C76CDE1F1D72A78D008CEB9A /* CAPSPageMenu.swift in Sources */,
+				C7119F161D72AE240047A5CD /* ImageViewControllerFactory.swift in Sources */,
+				C7119EAA1D72AA6F0047A5CD /* MyOrgsTableViewCell.swift in Sources */,
+				C7119E381D72A8980047A5CD /* MyEventsPostDetailsNode.m in Sources */,
+				C7119E451D72A8E40047A5CD /* TagListView.swift in Sources */,
+				C7119E511D72A9070047A5CD /* CreateEventViewController.swift in Sources */,
+				C7119E651D72A95D0047A5CD /* PhotoViewController.swift in Sources */,
+				C7119E731D72A9B80047A5CD /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7BDECAF1D7253050078E4B4 /* Sources */ = {
+		C76CDDD81D72A657008CEB9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7BDECB81D7253050078E4B4 /* EmberTests.swift in Sources */,
+				C76CDDE11D72A657008CEB9A /* EmberTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7BDECBA1D7253050078E4B4 /* Sources */ = {
+		C76CDDE31D72A657008CEB9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7BDECC31D7253050078E4B4 /* EmberUITests.swift in Sources */,
+				C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C7BDECB51D7253050078E4B4 /* PBXTargetDependency */ = {
+		C76CDDDE1D72A657008CEB9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C7BDEC9C1D7253050078E4B4 /* Ember */;
-			targetProxy = C7BDECB41D7253050078E4B4 /* PBXContainerItemProxy */;
+			target = C76CDDC51D72A657008CEB9A /* Ember */;
+			targetProxy = C76CDDDD1D72A657008CEB9A /* PBXContainerItemProxy */;
 		};
-		C7BDECC01D7253050078E4B4 /* PBXTargetDependency */ = {
+		C76CDDE91D72A657008CEB9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C7BDEC9C1D7253050078E4B4 /* Ember */;
-			targetProxy = C7BDECBF1D7253050078E4B4 /* PBXContainerItemProxy */;
+			target = C76CDDC51D72A657008CEB9A /* Ember */;
+			targetProxy = C76CDDE81D72A657008CEB9A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C7BDECA61D7253050078E4B4 /* Main.storyboard */ = {
+		C7119F2E1D72B1D00047A5CD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C7BDECA71D7253050078E4B4 /* Base */,
+				C7119F2F1D72B1D00047A5CD /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		C7BDECAB1D7253050078E4B4 /* LaunchScreen.storyboard */ = {
+		C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C7BDECAC1D7253050078E4B4 /* Base */,
+				C76CDDD51D72A657008CEB9A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -316,7 +1021,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C7BDECC51D7253050078E4B4 /* Debug */ = {
+		C76CDDEE1D72A657008CEB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -361,7 +1066,7 @@
 			};
 			name = Debug;
 		};
-		C7BDECC61D7253050078E4B4 /* Release */ = {
+		C76CDDEF1D72A657008CEB9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -399,29 +1104,36 @@
 			};
 			name = Release;
 		};
-		C7BDECC81D7253050078E4B4 /* Debug */ = {
+		C76CDDF11D72A657008CEB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = awm.Ember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		C7BDECC91D7253050078E4B4 /* Release */ = {
+		C76CDDF21D72A657008CEB9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = awm.Ember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
 			};
 			name = Release;
 		};
-		C7BDECCB1D7253050078E4B4 /* Debug */ = {
+		C76CDDF41D72A657008CEB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -433,7 +1145,7 @@
 			};
 			name = Debug;
 		};
-		C7BDECCC1D7253050078E4B4 /* Release */ = {
+		C76CDDF51D72A657008CEB9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -445,7 +1157,7 @@
 			};
 			name = Release;
 		};
-		C7BDECCE1D7253050078E4B4 /* Debug */ = {
+		C76CDDF71D72A657008CEB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = EmberUITests/Info.plist;
@@ -456,7 +1168,7 @@
 			};
 			name = Debug;
 		};
-		C7BDECCF1D7253050078E4B4 /* Release */ = {
+		C76CDDF81D72A657008CEB9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = EmberUITests/Info.plist;
@@ -470,40 +1182,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C7BDEC981D7253050078E4B4 /* Build configuration list for PBXProject "Ember" */ = {
+		C76CDDC11D72A657008CEB9A /* Build configuration list for PBXProject "Ember" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C7BDECC51D7253050078E4B4 /* Debug */,
-				C7BDECC61D7253050078E4B4 /* Release */,
+				C76CDDEE1D72A657008CEB9A /* Debug */,
+				C76CDDEF1D72A657008CEB9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7BDECC71D7253050078E4B4 /* Build configuration list for PBXNativeTarget "Ember" */ = {
+		C76CDDF01D72A657008CEB9A /* Build configuration list for PBXNativeTarget "Ember" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C7BDECC81D7253050078E4B4 /* Debug */,
-				C7BDECC91D7253050078E4B4 /* Release */,
+				C76CDDF11D72A657008CEB9A /* Debug */,
+				C76CDDF21D72A657008CEB9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		C7BDECCA1D7253050078E4B4 /* Build configuration list for PBXNativeTarget "EmberTests" */ = {
+		C76CDDF31D72A657008CEB9A /* Build configuration list for PBXNativeTarget "EmberTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C7BDECCB1D7253050078E4B4 /* Debug */,
-				C7BDECCC1D7253050078E4B4 /* Release */,
+				C76CDDF41D72A657008CEB9A /* Debug */,
+				C76CDDF51D72A657008CEB9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		C7BDECCD1D7253050078E4B4 /* Build configuration list for PBXNativeTarget "EmberUITests" */ = {
+		C76CDDF61D72A657008CEB9A /* Build configuration list for PBXNativeTarget "EmberUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C7BDECCE1D7253050078E4B4 /* Debug */,
-				C7BDECCF1D7253050078E4B4 /* Release */,
+				C76CDDF71D72A657008CEB9A /* Debug */,
+				C76CDDF81D72A657008CEB9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C7BDEC951D7253050078E4B4 /* Project object */;
+	rootObject = C76CDDBE1D72A657008CEB9A /* Project object */;
 }

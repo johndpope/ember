@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C7BDEC9C1D7253050078E4B4"
+               BlueprintIdentifier = "C76CDDC51D72A657008CEB9A"
                BuildableName = "Ember.app"
                BlueprintName = "Ember"
                ReferencedContainer = "container:Ember.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C7BDECB21D7253050078E4B4"
+               BlueprintIdentifier = "C76CDDDB1D72A657008CEB9A"
                BuildableName = "EmberTests.xctest"
                BlueprintName = "EmberTests"
                ReferencedContainer = "container:Ember.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C7BDECBD1D7253050078E4B4"
+               BlueprintIdentifier = "C76CDDE61D72A657008CEB9A"
                BuildableName = "EmberUITests.xctest"
                BlueprintName = "EmberUITests"
                ReferencedContainer = "container:Ember.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C7BDEC9C1D7253050078E4B4"
+            BlueprintIdentifier = "C76CDDC51D72A657008CEB9A"
             BuildableName = "Ember.app"
             BlueprintName = "Ember"
             ReferencedContainer = "container:Ember.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C7BDEC9C1D7253050078E4B4"
+            BlueprintIdentifier = "C76CDDC51D72A657008CEB9A"
             BuildableName = "Ember.app"
             BlueprintName = "Ember"
             ReferencedContainer = "container:Ember.xcodeproj">
@@ -94,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C7BDEC9C1D7253050078E4B4"
+            BlueprintIdentifier = "C76CDDC51D72A657008CEB9A"
             BuildableName = "Ember.app"
             BlueprintName = "Ember"
             ReferencedContainer = "container:Ember.xcodeproj">
