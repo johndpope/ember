@@ -65,6 +65,7 @@ class OrgPreferencesViewController: UIViewController {
                 uid = user.uid
                 admins.append(uid)
                 orgObject["admins"] = admins
+                orgObject["followers"] = [uid:true]
                 userRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(uid)
                 userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                     self.adminOf = snapshot.value!.objectForKey("adminOf") as! [String]
