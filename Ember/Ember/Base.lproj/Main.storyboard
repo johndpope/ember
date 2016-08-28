@@ -1439,32 +1439,32 @@
             <point key="canvasLocation" x="-2455" y="2311"/>
         </scene>
         <!--Edit Org-->
-        <scene sceneID="C1G-F2-Oh1">
+        <scene sceneID="knH-A7-CMz">
             <objects>
-                <viewController storyboardIdentifier="editOrg" id="3IP-0s-xU2" userLabel="Edit Org" customClass="EditOrgViewController" customModule="Ember" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editOrg" id="58A-6C-8Ex" userLabel="Edit Org" customClass="EditOrgViewController" customModule="Ember" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O05-XT-DZq"/>
-                        <viewControllerLayoutGuide type="bottom" id="LtE-07-SmV"/>
+                        <viewControllerLayoutGuide type="top" id="z7F-1g-R6h"/>
+                        <viewControllerLayoutGuide type="bottom" id="D2A-lX-63v"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4tE-VT-jtl">
+                    <view key="view" contentMode="scaleToFill" id="eju-2d-azX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORG DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KP0-fw-SoA">
-                                <rect key="frame" x="225.5" y="81" width="149" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORG DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mld-yU-1MW">
+                                <rect key="frame" x="225" y="81" width="149" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="R8h-sd-jc1"/>
+                                    <constraint firstAttribute="height" constant="21" id="7Li-me-VuV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w9c-of-dT1">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ulr-jR-EK4">
                                 <rect key="frame" x="20" y="110" width="560" height="96"/>
                                 <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" hint="Short Description"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="96" id="ALE-ua-6hm"/>
+                                    <constraint firstAttribute="height" constant="96" id="i5B-ET-BWV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1474,80 +1474,90 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tI-jB-btg">
-                                <rect key="frame" x="189" y="226" width="222" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7T-R7-xD3">
+                                <rect key="frame" x="189" y="214" width="222" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="7Im-QS-gCO"/>
+                                    <constraint firstAttribute="width" constant="222" id="KG4-0J-Ekq"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Profile Picture"/>
+                                <state key="normal" title="Change Org Profile Picture"/>
                                 <connections>
-                                    <action selector="saveOrgProfilePicture:" destination="3IP-0s-xU2" eventType="touchUpInside" id="8Pb-4B-YR5"/>
+                                    <action selector="saveOrgProfilePicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="Rke-Nx-K2p"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Org Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kcG-1u-RE9">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Org Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tgP-5G-i5X">
                                 <rect key="frame" x="20" y="43" width="560" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Fx8-5Q-MBu"/>
+                                    <constraint firstAttribute="height" constant="30" id="gvL-C4-6yy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W1K-0H-TV4">
-                                <rect key="frame" x="200.5" y="261" width="200" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
+                                <rect key="frame" x="237" y="251" width="125" height="125"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="H8j-oN-X3G"/>
-                                    <constraint firstAttribute="height" constant="200" id="IKQ-KE-pCE"/>
+                                    <constraint firstAttribute="height" constant="125" id="WLW-cE-8q1"/>
+                                    <constraint firstAttribute="width" constant="125" id="u7V-bF-u6N"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oli-qC-NWS">
-                                <rect key="frame" x="189" y="469" width="222" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
+                                <rect key="frame" x="237.5" y="421" width="125" height="125"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="8LF-24-zdC"/>
+                                    <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
+                                    <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Cover Photo"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-Qw-Fk6">
+                                <rect key="frame" x="189" y="384" width="222" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="222" id="Oiz-dF-or4"/>
+                                </constraints>
+                                <state key="normal" title="Change Org Cover Photo"/>
                                 <connections>
-                                    <action selector="saveOrgProfilePicture:" destination="3IP-0s-xU2" eventType="touchUpInside" id="0VD-oK-Ibu"/>
+                                    <action selector="saveOrgCoverPicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="yhP-Vh-oGQ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kcG-1u-RE9" firstAttribute="top" secondItem="O05-XT-DZq" secondAttribute="bottom" constant="23" id="0tu-36-TiK"/>
-                            <constraint firstItem="Oli-qC-NWS" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="19f-hJ-MzO"/>
-                            <constraint firstItem="w9c-of-dT1" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="6Nh-ap-KmN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="w9c-of-dT1" secondAttribute="trailing" id="6Zc-8U-Mhm"/>
-                            <constraint firstItem="W1K-0H-TV4" firstAttribute="top" secondItem="7tI-jB-btg" secondAttribute="bottom" constant="5" id="7YE-9F-DGb"/>
-                            <constraint firstItem="7tI-jB-btg" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="9MT-1P-oQS"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="w9c-of-dT1" secondAttribute="leading" id="9f5-rp-Zgq"/>
-                            <constraint firstItem="W1K-0H-TV4" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="AMU-vW-G6t"/>
-                            <constraint firstItem="w9c-of-dT1" firstAttribute="top" secondItem="KP0-fw-SoA" secondAttribute="bottom" constant="8" id="JDV-kV-4rs"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="kcG-1u-RE9" secondAttribute="leading" id="TXf-gk-r6P"/>
-                            <constraint firstItem="7tI-jB-btg" firstAttribute="top" secondItem="w9c-of-dT1" secondAttribute="bottom" constant="20" id="Ve3-Q2-OmO"/>
-                            <constraint firstItem="Oli-qC-NWS" firstAttribute="top" secondItem="W1K-0H-TV4" secondAttribute="bottom" constant="8" symbolic="YES" id="j8M-Kd-6xe"/>
-                            <constraint firstItem="KP0-fw-SoA" firstAttribute="top" secondItem="kcG-1u-RE9" secondAttribute="bottom" constant="8" id="rGy-kH-LrQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kcG-1u-RE9" secondAttribute="trailing" id="y6V-1v-ArK"/>
-                            <constraint firstItem="KP0-fw-SoA" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="zFq-xl-b3F"/>
-                            <constraint firstItem="kcG-1u-RE9" firstAttribute="centerX" secondItem="4tE-VT-jtl" secondAttribute="centerX" id="zLd-xJ-dcw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgP-5G-i5X" secondAttribute="trailing" id="0cO-TH-NDE"/>
+                            <constraint firstItem="mld-yU-1MW" firstAttribute="top" secondItem="tgP-5G-i5X" secondAttribute="bottom" constant="8" id="5hf-jD-5UQ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Ulr-jR-EK4" secondAttribute="leading" id="8ey-Kh-lqE"/>
+                            <constraint firstItem="i8n-Tb-KvB" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="Egc-pH-06H"/>
+                            <constraint firstItem="LCm-Qw-Fk6" firstAttribute="top" secondItem="i8n-Tb-KvB" secondAttribute="bottom" constant="10" id="I82-FV-5ns"/>
+                            <constraint firstItem="Ulr-jR-EK4" firstAttribute="top" secondItem="mld-yU-1MW" secondAttribute="bottom" constant="8" id="NZ3-Fb-k3z"/>
+                            <constraint firstItem="tRk-aG-4sc" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="PFc-hQ-7cv"/>
+                            <constraint firstItem="mld-yU-1MW" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="Pgb-pZ-21L"/>
+                            <constraint firstItem="Ulr-jR-EK4" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="VCj-h3-pNp"/>
+                            <constraint firstItem="tgP-5G-i5X" firstAttribute="top" secondItem="z7F-1g-R6h" secondAttribute="bottom" constant="23" id="d7O-3a-geh"/>
+                            <constraint firstItem="s7T-R7-xD3" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="ecK-5F-IRW"/>
+                            <constraint firstItem="tgP-5G-i5X" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="fBJ-87-u4t"/>
+                            <constraint firstItem="tRk-aG-4sc" firstAttribute="top" secondItem="LCm-Qw-Fk6" secondAttribute="bottom" constant="5" id="frc-m5-eTz"/>
+                            <constraint firstItem="LCm-Qw-Fk6" firstAttribute="centerX" secondItem="eju-2d-azX" secondAttribute="centerX" id="lvj-PY-9aQ"/>
+                            <constraint firstItem="i8n-Tb-KvB" firstAttribute="top" secondItem="s7T-R7-xD3" secondAttribute="bottom" constant="5" id="nLC-53-CnN"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="tgP-5G-i5X" secondAttribute="leading" id="uwR-c9-83I"/>
+                            <constraint firstItem="s7T-R7-xD3" firstAttribute="top" secondItem="Ulr-jR-EK4" secondAttribute="bottom" constant="10" id="wjO-wX-c2Z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ulr-jR-EK4" secondAttribute="trailing" id="xtJ-BI-Aby"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Org" id="9dE-4D-ElU" userLabel="Create Org">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="Fef-Yq-UcZ">
+                    <navigationItem key="navigationItem" title="Create Org" id="aAq-5q-tEJ" userLabel="Create Org">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="5rx-jJ-s3R">
                             <connections>
-                                <action selector="saveOrganization:" destination="3IP-0s-xU2" id="hFv-KX-Oou"/>
+                                <action selector="saveOrganization:" destination="58A-6C-8Ex" id="Dwn-yD-HsG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="campDesc" destination="w9c-of-dT1" id="xnY-np-wK6"/>
-                        <outlet property="campName" destination="kcG-1u-RE9" id="eG0-uN-e2d"/>
-                        <outlet property="orgCoverPictureButton" destination="Oli-qC-NWS" id="ApB-A0-SR4"/>
-                        <outlet property="orgPictureButton" destination="7tI-jB-btg" id="C9o-BP-Hng"/>
-                        <outlet property="previewImage" destination="W1K-0H-TV4" id="E2J-nO-FLP"/>
+                        <outlet property="campDesc" destination="Ulr-jR-EK4" id="Bhh-1L-kvd"/>
+                        <outlet property="campName" destination="tgP-5G-i5X" id="cXu-7Y-wN9"/>
+                        <outlet property="orgCoverPictureButton" destination="LCm-Qw-Fk6" id="tSp-YR-FNa"/>
+                        <outlet property="orgPictureButton" destination="s7T-R7-xD3" id="gyf-J0-hpw"/>
+                        <outlet property="previewCoverImage" destination="tRk-aG-4sc" id="mvQ-Ha-7N0"/>
+                        <outlet property="previewImage" destination="i8n-Tb-KvB" id="oWu-lz-wYo"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="48d-GJ-waJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w0i-vc-pn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2250" y="254"/>
+            <point key="canvasLocation" x="2266" y="-270"/>
         </scene>
     </scenes>
     <resources>
