@@ -25,6 +25,7 @@ class OrgPreferencesViewController: UIViewController {
     var mainOrgTagsSet:Set<String> = Set([])
     var uid:String!
     var saveImage:UIImage?
+    var saveCoverImage:UIImage?
     
     var ref:FIRDatabaseReference!
     var userRef:FIRDatabaseReference!

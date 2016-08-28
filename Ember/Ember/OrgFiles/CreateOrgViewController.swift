@@ -13,13 +13,16 @@ import FirebaseAuth
 class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var ref:FIRDatabaseReference!
     var isOrgNameDuplicate:Bool = false
+    var isProfilePicture:Bool = true
     var key:String!
     var orgObject = [String: AnyObject]()
     var smallImageLink:String!
     var imagePicker = UIImagePickerController()
     var saveImage:UIImage?
-    var placeholderCoverPhoto: String = "https://firebasestorage.googleapis.com/v0/b/bounce-46de5.appspot.com/o/orgImages%2F-KOhTswa4BbI95AjOyce%2F2016-08-08%2009%3A07%3A11%20-0700?alt=media&token=28f65109-efb2-443d-958c-3e54f7931c3e"
+    var saveCoverImage:UIImage?
     
+    
+    @IBOutlet weak var previewCoverImage: UIImageView!
     @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var campName: UITextField!
     @IBOutlet weak var campDesc: UITextView!
@@ -30,7 +33,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     @IBAction func saveOrganization(sender: AnyObject) {
         key = ref.childByAutoId().key
         if (FIRAuth.auth()?.currentUser) != nil{
-            orgObject["largeImageLink"] = self.placeholderCoverPhoto
+            orgObject["largeImageLink"] = ""
             orgObject["orgName"] = campName.text
             orgObject["orgDesc"] = campDesc.text
             orgObject["smallImageLink"] = ""
@@ -47,6 +50,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
             orgPreferencesViewController.orgId = self.key
             orgPreferencesViewController.orgObject = self.orgObject
             orgPreferencesViewController.saveImage = self.saveImage
+            orgPreferencesViewController.saveCoverImage = self.saveCoverImage
         }
     }
     
@@ -84,19 +88,34 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     
     
     @IBAction func saveOrgProfilePicture(sender: AnyObject) {
+        isProfilePicture = true
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary
         self.navigationController!.presentViewController(imagePicker, animated: true, completion: nil)
         
     }
     
+    @IBAction func saveOrgCoverPicture(sender: AnyObject) {
+        isProfilePicture = false
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .PhotoLibrary
+        self.navigationController!.presentViewController(imagePicker, animated: true, completion: nil)
+    }
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            previewImage.contentMode = .ScaleAspectFit
-            previewImage.image = pickedImage
-            self.saveImage = pickedImage
+            if (isProfilePicture) {
+                previewImage.contentMode = .ScaleAspectFit
+                previewImage.image = pickedImage
+                self.saveImage = pickedImage
+            }
+            else {
+                previewCoverImage.contentMode = .ScaleAspectFit
+                previewCoverImage.image = pickedImage
+                self.saveCoverImage = pickedImage
+            }
+            
         }
         
         dismissViewControllerAnimated(true, completion: nil)

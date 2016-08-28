@@ -872,7 +872,6 @@
 				C76CDDC41D72A657008CEB9A /* Resources */,
 				95815F167D75123FCDA691C0 /* Embed Pods Frameworks */,
 				18160DAA4ABACFC33524BDDC /* Copy Pods Resources */,
-				C7CDC2BE1D73286C00B62B48 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1054,19 +1053,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ember/Pods-Ember-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		C7CDC2BE1D73286C00B62B48 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:11386638219:ios:bb3fa9eb2fd42063\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"/Users/AnthonyMaina/Desktop/ember/Ember/EmberApp-b7538e821b5e.json\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

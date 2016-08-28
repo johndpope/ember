@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1123,7 +1123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORG DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-0n-Wfx">
-                                <rect key="frame" x="225.5" y="81" width="149" height="21"/>
+                                <rect key="frame" x="225" y="81" width="149" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="gSf-Dc-9nL"/>
                                 </constraints>
@@ -1147,7 +1147,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkC-gd-6kw">
-                                <rect key="frame" x="189" y="226" width="222" height="30"/>
+                                <rect key="frame" x="189" y="216" width="222" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
                                 </constraints>
@@ -1165,25 +1165,33 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-VN-fQE">
-                                <rect key="frame" x="200.5" y="261" width="200" height="200"/>
+                                <rect key="frame" x="237" y="251" width="125" height="125"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="TnW-JR-xwH"/>
-                                    <constraint firstAttribute="width" constant="200" id="x1U-9R-c6Y"/>
+                                    <constraint firstAttribute="width" constant="125" id="8Vl-Dr-3jA"/>
+                                    <constraint firstAttribute="height" constant="125" id="f3z-of-ijs"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
-                                <rect key="frame" x="189" y="469" width="222" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
+                                <rect key="frame" x="237.5" y="421" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="8ej-mJ-WYx"/>
+                                    <constraint firstAttribute="height" constant="125" id="tW2-xT-pa0"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
+                                <rect key="frame" x="189" y="384" width="222" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="xpU-ox-OS5"/>
                                 </constraints>
                                 <state key="normal" title="Add Org Cover Photo"/>
                                 <connections>
-                                    <action selector="saveOrgProfilePicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="DYk-JB-Q55"/>
+                                    <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="0aj-qI-l9y" firstAttribute="top" secondItem="aKR-TJ-zEi" secondAttribute="bottom" constant="5" id="0Se-81-fng"/>
                             <constraint firstItem="IkC-gd-6kw" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="2q1-bn-Vqq"/>
                             <constraint firstItem="aKR-TJ-zEi" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="D0Z-5R-BKa"/>
                             <constraint firstItem="18v-G1-UbJ" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="ENX-fu-RsD"/>
@@ -1191,10 +1199,11 @@
                             <constraint firstAttribute="leadingMargin" secondItem="klf-0u-mri" secondAttribute="leading" id="Vu8-Fw-FbD"/>
                             <constraint firstItem="3lF-VN-fQE" firstAttribute="top" secondItem="IkC-gd-6kw" secondAttribute="bottom" constant="5" id="VvS-WT-gQe"/>
                             <constraint firstItem="klf-0u-mri" firstAttribute="top" secondItem="Cnq-0n-Wfx" secondAttribute="bottom" constant="8" id="W6r-fZ-yqh"/>
-                            <constraint firstItem="aKR-TJ-zEi" firstAttribute="top" secondItem="3lF-VN-fQE" secondAttribute="bottom" constant="8" symbolic="YES" id="WwE-bQ-TFL"/>
+                            <constraint firstItem="aKR-TJ-zEi" firstAttribute="top" secondItem="3lF-VN-fQE" secondAttribute="bottom" constant="10" id="WwE-bQ-TFL"/>
                             <constraint firstItem="klf-0u-mri" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="XJ4-Oy-uPr"/>
-                            <constraint firstItem="IkC-gd-6kw" firstAttribute="top" secondItem="klf-0u-mri" secondAttribute="bottom" constant="20" id="aep-Fg-9cG"/>
+                            <constraint firstItem="IkC-gd-6kw" firstAttribute="top" secondItem="klf-0u-mri" secondAttribute="bottom" constant="10" id="aep-Fg-9cG"/>
                             <constraint firstItem="3lF-VN-fQE" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="blZ-3I-wZ0"/>
+                            <constraint firstItem="0aj-qI-l9y" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="lBZ-aN-tiE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="klf-0u-mri" secondAttribute="trailing" id="m1d-Ey-mLt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="18v-G1-UbJ" secondAttribute="trailing" id="m8c-8f-17b"/>
                             <constraint firstItem="Cnq-0n-Wfx" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="p3r-3T-8OJ"/>
@@ -1214,6 +1223,7 @@
                         <outlet property="campName" destination="18v-G1-UbJ" id="mw8-CA-nks"/>
                         <outlet property="orgCoverPictureButton" destination="aKR-TJ-zEi" id="w24-El-JTr"/>
                         <outlet property="orgPictureButton" destination="IkC-gd-6kw" id="75z-ni-Nzl"/>
+                        <outlet property="previewCoverImage" destination="0aj-qI-l9y" id="3Fg-y2-BEv"/>
                         <outlet property="previewImage" destination="3lF-VN-fQE" id="zOR-BK-Z6d"/>
                         <segue destination="fHJ-ke-cty" kind="presentation" identifier="orgPreferenceSelect" id="8je-Bk-Ao3"/>
                         <segue destination="qzv-Ne-eCy" kind="show" identifier="gotoOrgPreferences" id="u0R-6m-rqZ"/>
@@ -1552,7 +1562,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ucT-Jv-n3U"/>
-        <segue reference="Cg9-OS-fjr"/>
+        <segue reference="8je-Bk-Ao3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>
