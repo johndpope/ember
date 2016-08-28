@@ -153,8 +153,12 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let profileData = NSData(contentsOfURL: profileUrl!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 let coverData = NSData(contentsOfURL: coverUrl!)
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.previewImage.image = UIImage(data: profileData!)
-                    self.previewCoverImage.image = UIImage(data: coverData!)
+                    if((profileData) != nil){
+                        self.previewImage.image = UIImage(data: profileData!)
+                    }
+                    if((coverData) != nil){
+                        self.previewCoverImage.image = UIImage(data: coverData!)
+                    }
                 });
             }
         })
