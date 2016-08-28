@@ -44,8 +44,6 @@
         [fileManager removeItemAtPath:_uploadUrl.path  error:NULL];
         [self compressVideo:_videoUrl outputURL:_uploadUrl handler:^(AVAssetExportSession *completion) {
             if (completion.status == AVAssetExportSessionStatusCompleted) {
-                NSData *newDataForUpload = [NSData dataWithContentsOfURL:_uploadUrl];
-                NSLog(@"Size of new Video after compression is (bytes):%d",[newDataForUpload length]);
             }
         }];
         

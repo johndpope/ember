@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -782,14 +782,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8L-dA-9Oq">
-                                <rect key="frame" x="20" y="138" width="560" height="442"/>
+                                <rect key="frame" x="20" y="94" width="560" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1EV-H1-aSR">
-                                <rect key="frame" x="290" y="113" width="20" height="20"/>
+                                <rect key="frame" x="290" y="69" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are you interested in?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7HY-Yb-H1m">
-                                <rect key="frame" x="20" y="84" width="560" height="24"/>
+                                <rect key="frame" x="20" y="40" width="560" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -929,13 +929,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X3x-tX-dS8">
-                                <rect key="frame" x="20" y="110" width="560" height="96"/>
+                                <rect key="frame" x="20" y="110" width="560" height="55"/>
                                 <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" hint="Short Description"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="96" id="epE-uU-xeZ"/>
+                                    <constraint firstAttribute="height" constant="55" id="epE-uU-xeZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -944,7 +944,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqf-xj-Fb3">
-                                <rect key="frame" x="20" y="325" width="560" height="30"/>
+                                <rect key="frame" x="20" y="275" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="4Nm-an-zbw"/>
                                 </constraints>
@@ -959,12 +959,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" background="user_male" translatesAutoresizingMaskIntoConstraints="NO" id="gs5-fK-ovP">
-                                <rect key="frame" x="20" y="227" width="560" height="30"/>
+                                <rect key="frame" x="20" y="185" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Date and Time" textAlignment="natural" minimumFontSize="17" background="user_male" translatesAutoresizingMaskIntoConstraints="NO" id="URM-Kc-n2S">
-                                <rect key="frame" x="20" y="276" width="560" height="30"/>
+                                <rect key="frame" x="20" y="230" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -972,7 +972,7 @@
                                 </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z2z-Ww-cDr">
-                                <rect key="frame" x="237" y="359" width="126" height="147"/>
+                                <rect key="frame" x="237" y="309" width="126" height="147"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="126" id="14s-7d-nq3"/>
                                     <constraint firstAttribute="height" constant="147" id="AGc-nU-96c"/>
@@ -991,11 +991,11 @@
                             <constraint firstItem="URM-Kc-n2S" firstAttribute="centerX" secondItem="KzW-gu-UPG" secondAttribute="centerX" id="CYH-gW-wX4"/>
                             <constraint firstItem="z2z-Ww-cDr" firstAttribute="top" secondItem="Nqf-xj-Fb3" secondAttribute="bottom" constant="4" id="JA1-Tn-eO7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nqf-xj-Fb3" secondAttribute="trailing" id="KhA-qu-p3w"/>
-                            <constraint firstItem="gs5-fK-ovP" firstAttribute="top" secondItem="X3x-tX-dS8" secondAttribute="bottom" constant="21" id="LzN-4l-g4I"/>
+                            <constraint firstItem="gs5-fK-ovP" firstAttribute="top" secondItem="X3x-tX-dS8" secondAttribute="bottom" constant="20" id="LzN-4l-g4I"/>
                             <constraint firstAttribute="leadingMargin" secondItem="vyr-Ca-PtL" secondAttribute="leading" id="MHj-wC-j4K"/>
                             <constraint firstAttribute="leadingMargin" secondItem="X3x-tX-dS8" secondAttribute="leading" id="NMh-dg-Uhp"/>
                             <constraint firstItem="z2z-Ww-cDr" firstAttribute="centerX" secondItem="KzW-gu-UPG" secondAttribute="centerX" id="NnW-SF-yI8"/>
-                            <constraint firstItem="URM-Kc-n2S" firstAttribute="top" secondItem="gs5-fK-ovP" secondAttribute="bottom" constant="19" id="Oyt-FV-oAM"/>
+                            <constraint firstItem="URM-Kc-n2S" firstAttribute="top" secondItem="gs5-fK-ovP" secondAttribute="bottom" constant="15" id="Oyt-FV-oAM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vyr-Ca-PtL" secondAttribute="trailing" id="X3N-Ys-gMF"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Nqf-xj-Fb3" secondAttribute="leading" id="fsX-x0-xqn"/>
                             <constraint firstItem="vyr-Ca-PtL" firstAttribute="centerX" secondItem="KzW-gu-UPG" secondAttribute="centerX" id="nlk-yT-QFI"/>
@@ -1003,7 +1003,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="gs5-fK-ovP" secondAttribute="leading" id="pz1-tu-DhD"/>
                             <constraint firstItem="X3x-tX-dS8" firstAttribute="centerX" secondItem="KzW-gu-UPG" secondAttribute="centerX" id="t1v-8d-gba"/>
                             <constraint firstItem="kJ4-D7-kaO" firstAttribute="centerX" secondItem="KzW-gu-UPG" secondAttribute="centerX" id="toy-Sb-JUN"/>
-                            <constraint firstItem="Nqf-xj-Fb3" firstAttribute="top" secondItem="URM-Kc-n2S" secondAttribute="bottom" constant="19" id="vt1-HJ-Yzk"/>
+                            <constraint firstItem="Nqf-xj-Fb3" firstAttribute="top" secondItem="URM-Kc-n2S" secondAttribute="bottom" constant="15" id="vt1-HJ-Yzk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nqf-xj-Fb3" secondAttribute="trailing" id="waK-UV-MYk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="URM-Kc-n2S" secondAttribute="trailing" id="zx1-v8-GzP"/>
                         </constraints>
@@ -1151,7 +1151,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Profile Picture"/>
+                                <state key="normal" title="Add Profile Picture"/>
                                 <connections>
                                     <action selector="saveOrgProfilePicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="99k-dU-sGX"/>
                                 </connections>
@@ -1178,12 +1178,12 @@
                                     <constraint firstAttribute="height" constant="125" id="tW2-xT-pa0"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
-                                <rect key="frame" x="189" y="384" width="222" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
+                                <rect key="frame" x="189" y="386" width="222" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="xpU-ox-OS5"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Cover Photo"/>
+                                <state key="normal" title="Add Cover Photo"/>
                                 <connections>
                                     <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
                                 </connections>
@@ -1474,12 +1474,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7T-R7-xD3">
-                                <rect key="frame" x="189" y="214" width="222" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7T-R7-xD3">
+                                <rect key="frame" x="189.5" y="216" width="222" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="KG4-0J-Ekq"/>
+                                    <constraint firstAttribute="width" constant="222" id="sdX-wN-Lfg"/>
                                 </constraints>
-                                <state key="normal" title="Change Org Profile Picture"/>
+                                <state key="normal" title="Change Profile Picture"/>
                                 <connections>
                                     <action selector="saveOrgProfilePicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="Rke-Nx-K2p"/>
                                 </connections>
@@ -1500,18 +1500,18 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
-                                <rect key="frame" x="237.5" y="421" width="125" height="125"/>
+                                <rect key="frame" x="237" y="421" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
                                     <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-Qw-Fk6">
-                                <rect key="frame" x="189" y="384" width="222" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-Qw-Fk6">
+                                <rect key="frame" x="189" y="386" width="222" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="Oiz-dF-or4"/>
                                 </constraints>
-                                <state key="normal" title="Change Org Cover Photo"/>
+                                <state key="normal" title="Change Cover Photo"/>
                                 <connections>
                                     <action selector="saveOrgCoverPicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="yhP-Vh-oGQ"/>
                                 </connections>
@@ -1553,11 +1553,12 @@
                         <outlet property="orgPictureButton" destination="s7T-R7-xD3" id="gyf-J0-hpw"/>
                         <outlet property="previewCoverImage" destination="tRk-aG-4sc" id="mvQ-Ha-7N0"/>
                         <outlet property="previewImage" destination="i8n-Tb-KvB" id="oWu-lz-wYo"/>
+                        <segue destination="qzv-Ne-eCy" kind="show" identifier="editOrgPreferences" id="ck8-Dd-TdR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0i-vc-pn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2266" y="-270"/>
+            <point key="canvasLocation" x="2262" y="-206"/>
         </scene>
     </scenes>
     <resources>
@@ -1573,6 +1574,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ucT-Jv-n3U"/>
         <segue reference="8je-Bk-Ao3"/>
+        <segue reference="u0R-6m-rqZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>

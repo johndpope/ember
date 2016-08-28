@@ -99,7 +99,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         indicator.frame = refreshRect
         self.view.addSubview(indicator)
 
-        self.navigationController?.navigationBar.topItem?.title = "your profile"
+        self.navigationController?.navigationBar.topItem?.title = "Your Profile"
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25)]
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "exit"), style: .Plain, target: self, action: nil)
@@ -202,7 +202,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                     if let dict = (child as! FIRDataSnapshot).value as? NSDictionary{
                         
                         for key in dict.allKeys{
-                            self.mainSet[homefeedKey] = key as! String // Has nested values hence image's mediaInfo key saved
+                            self.mainSet[homefeedKey] = key as? String // Has nested values hence image's mediaInfo key saved
                         }
                         
                     }else{
