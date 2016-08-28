@@ -107,7 +107,7 @@ import FirebaseAuth
             let storage = FIRStorage.storage()
             
             // Create a storage reference from our storage service
-            let storageRef = storage.referenceForURL("gs://bounce-46de5.appspot.com")
+            let storageRef = storage.referenceForURL(FIREBASE_STORAGE_URL)
             
             
             // Create a reference to the file I want to save

@@ -100,7 +100,6 @@
 		8ED8A7791D72C90500F396B0 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A7771D72C90500F396B0 /* CounterView.swift */; };
 		8ED8A77A1D72C90500F396B0 /* GalleryImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A7781D72C90500F396B0 /* GalleryImageProvider.swift */; };
 		8ED8A77D1D72C95100F396B0 /* TitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A77C1D72C95100F396B0 /* TitleNode.m */; };
-		C7119E301D72A80B0047A5CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */; };
 		C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E591D72A92D0047A5CD /* cell.xib */; };
 		C7119E5F1D72A92D0047A5CD /* last.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E5A1D72A92D0047A5CD /* last.xib */; };
 		C7119E651D72A95D0047A5CD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E631D72A95D0047A5CD /* PhotoViewController.swift */; };
@@ -133,6 +132,10 @@
 		C76CDDE11D72A657008CEB9A /* EmberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDE01D72A657008CEB9A /* EmberTests.swift */; };
 		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
 		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
+		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
+		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
+		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
+		C7CDC2BC1D73140600B62B48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7CDC2BB1D73140600B62B48 /* GoogleService-Info.plist */; };
 		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
 /* End PBXBuildFile section */
 
@@ -292,7 +295,6 @@
 		8ED8A77B1D72C95100F396B0 /* TitleNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleNode.h; path = EventFiles/TitleNode.h; sourceTree = "<group>"; };
 		8ED8A77C1D72C95100F396B0 /* TitleNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleNode.m; path = EventFiles/TitleNode.m; sourceTree = "<group>"; };
 		972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.debug.xcconfig"; sourceTree = "<group>"; };
-		C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ember-Bridging-Header.h"; sourceTree = "<group>"; };
 		C7119E591D72A92D0047A5CD /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
 		C7119E5A1D72A92D0047A5CD /* last.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = last.xib; sourceTree = "<group>"; };
@@ -336,6 +338,10 @@
 		C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberUITests.swift; sourceTree = "<group>"; };
 		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
+		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
+		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		C7CDC2BB1D73140600B62B48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -449,7 +455,7 @@
 			name = PreferencePageFiles;
 			sourceTree = "<group>";
 		};
-		C7119E551D72A9110047A5CD /* EventPageFiles */ = {
+		C7119E551D72A9110047A5CD /* EventFiles */ = {
 			isa = PBXGroup;
 			children = (
 				8ED8A77B1D72C95100F396B0 /* TitleNode.h */,
@@ -462,7 +468,7 @@
 				8ED8A7661D72C76B00F396B0 /* FinalEventTitleNode.h */,
 				8ED8A7671D72C76B00F396B0 /* FinalEventTitleNode.m */,
 			);
-			name = EventPageFiles;
+			name = EventFiles;
 			sourceTree = "<group>";
 		};
 		C7119E601D72A9340047A5CD /* Search */ = {
@@ -480,13 +486,15 @@
 		C7119E661D72A9650047A5CD /* CameraFiles */ = {
 			isa = PBXGroup;
 			children = (
+				C7119E6B1D72A9830047A5CD /* EventPickerFilesAfterCamera */,
+				C7119E751D72A9BE0047A5CD /* CameraUtility */,
+				C7119E7C1D72A9E00047A5CD /* CameraControllers */,
 				C7119E8E1D72AA350047A5CD /* RecordButton */,
 				C7119E8A1D72AA1D0047A5CD /* videoCompression */,
 				C7119E861D72AA080047A5CD /* camera */,
-				C7119E7C1D72A9E00047A5CD /* CameraControllers */,
-				C7119E751D72A9BE0047A5CD /* CameraUtility */,
-				C7119E6B1D72A9830047A5CD /* EventPickerFilesAfterCamera */,
 				C7119E631D72A95D0047A5CD /* PhotoViewController.swift */,
+				8ED8A7391D72C4EF00F396B0 /* CameraViewController.m */,
+				8ED8A7381D72C4EF00F396B0 /* CameraViewController.h */,
 			);
 			name = CameraFiles;
 			sourceTree = "<group>";
@@ -527,8 +535,6 @@
 		C7119E861D72AA080047A5CD /* camera */ = {
 			isa = PBXGroup;
 			children = (
-				8ED8A7381D72C4EF00F396B0 /* CameraViewController.h */,
-				8ED8A7391D72C4EF00F396B0 /* CameraViewController.m */,
 				8ED8A71F1D72C37500F396B0 /* LLSimpleCamera.h */,
 				8ED8A7201D72C37500F396B0 /* LLSimpleCamera.m */,
 				8ED8A7211D72C37500F396B0 /* LLSimpleCamera+Helper.h */,
@@ -770,33 +776,34 @@
 		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
-				8E852C1A1D72BD0A002FFB90 /* Util */,
-				8E852BCD1D72BA16002FFB90 /* HomeFeed */,
-				8ED8A6CC1D72C1BC00F396B0 /* Model */,
 				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
 				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
 				C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */,
 				C76CDDC91D72A657008CEB9A /* AppDelegate.swift */,
-				C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */,
-				C7119EF41D72AC870047A5CD /* CalendarFiles */,
+				8E852C1A1D72BD0A002FFB90 /* Util */,
+				C76CDE0F1D72A6FF008CEB9A /* OnBoarding */,
 				C7119EC31D72AB9F0047A5CD /* Notifications */,
 				C7119EBA1D72AB7A0047A5CD /* GeneralFiles */,
 				C7119EB71D72AB5A0047A5CD /* IndividualProfileFiles */,
+				C7CDC2B31D73068000B62B48 /* Authentication */,
 				C7119EAE1D72AAD60047A5CD /* GalleryViewFiles */,
 				C7119EAB1D72AA780047A5CD /* OrgFiles */,
+				8E852BCD1D72BA16002FFB90 /* HomeFeed */,
+				8ED8A6CC1D72C1BC00F396B0 /* Model */,
+				C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */,
+				C7119EF41D72AC870047A5CD /* CalendarFiles */,
 				C7119E661D72A9650047A5CD /* CameraFiles */,
 				C7119E601D72A9340047A5CD /* Search */,
-				C7119E551D72A9110047A5CD /* EventPageFiles */,
+				C7119E551D72A9110047A5CD /* EventFiles */,
 				C7119E461D72A8E80047A5CD /* PreferencePageFiles */,
 				C7119E3B1D72A8BA0047A5CD /* MyEventsFiles */,
 				C76CDE201D72A791008CEB9A /* CAPSPageMenu */,
-				C76CDE0F1D72A6FF008CEB9A /* OnBoarding */,
 				C76CDDF91D72A689008CEB9A /* Util */,
 				C7119EFD1D72AD090047A5CD /* Ember-83b1034663b1.json */,
 				C7119F001D72AD090047A5CD /* iTunesArtwork@2x.png */,
 				C76CDDD21D72A657008CEB9A /* Assets.xcassets */,
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
-				C7119E2F1D72A80B0047A5CD /* GoogleService-Info.plist */,
+				C7CDC2BB1D73140600B62B48 /* GoogleService-Info.plist */,
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
 			path = Ember;
@@ -843,6 +850,16 @@
 				8ED8A7441D72C52600F396B0 /* CAPSPageMenu.swift */,
 			);
 			name = CAPSPageMenu;
+			sourceTree = "<group>";
+		};
+		C7CDC2B31D73068000B62B48 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */,
+				C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */,
+				C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */,
+			);
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -916,6 +933,12 @@
 				TargetAttributes = {
 					C76CDDC51D72A657008CEB9A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = M5MDUJN294;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					C76CDDDB1D72A657008CEB9A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -952,6 +975,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7CDC2BC1D73140600B62B48 /* GoogleService-Info.plist in Resources */,
 				C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */,
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
@@ -965,7 +989,6 @@
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
 				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,
-				C7119E301D72A80B0047A5CD /* GoogleService-Info.plist in Resources */,
 				8ED8A7581D72C6D600F396B0 /* calLanding.png in Resources */,
 				C7119E5F1D72A92D0047A5CD /* last.xib in Resources */,
 				8ED8A7541D72C5F800F396B0 /* studentsLanding.png in Resources */,
@@ -1102,6 +1125,7 @@
 				8ED8A7421D72C50B00F396B0 /* MyEventsPostDetailsNode.m in Sources */,
 				8ED8A76A1D72C76B00F396B0 /* EventTitleNode.m in Sources */,
 				8ED8A7361D72C4DC00F396B0 /* EventPickerTableViewController.swift in Sources */,
+				C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */,
 				8E852C111D72BB5B002FFB90 /* FSCalendarHeader.m in Sources */,
 				C7119F0B1D72ADF00047A5CD /* CGPoint.swift in Sources */,
 				8ED8A7411D72C50B00F396B0 /* MyEventsNode.m in Sources */,
@@ -1111,6 +1135,7 @@
 				8ED8A6C41D72C19600F396B0 /* InternetConnection.swift in Sources */,
 				8ED8A6F21D72C2EE00F396B0 /* HeaderFooterLayout.swift in Sources */,
 				8ED8A7181D72C35C00F396B0 /* OrgDetailsNode.swift in Sources */,
+				C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */,
 				C7119E891D72AA190047A5CD /* SDAVAssetExportSession.m in Sources */,
 				8ED8A7501D72C5F800F396B0 /* BWWalkthroughViewController.swift in Sources */,
 				8ED8A76C1D72C76B00F396B0 /* FinalEventTitleNode.m in Sources */,
@@ -1122,6 +1147,7 @@
 				C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */,
 				8ED8A6DD1D72C1C900F396B0 /* EmberSnapShot.m in Sources */,
 				8E852C131D72BB5B002FFB90 /* FSCalendarStickyHeader.m in Sources */,
+				C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */,
 				8ED8A72A1D72C41900F396B0 /* VideoViewController.m in Sources */,
 				8ED8A6EE1D72C2DF00F396B0 /* GalleryCloseTransition.swift in Sources */,
 				8ED8A7131D72C35C00F396B0 /* EmberOrgNode.m in Sources */,
@@ -1291,9 +1317,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = awm.Ember;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ember.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1306,9 +1333,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = awm.Ember;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ember.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
 			};

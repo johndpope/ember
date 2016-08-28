@@ -83,7 +83,7 @@ class EventPreferencesViewController: UIViewController {
         let storage = FIRStorage.storage()
         
         // Create a storage reference from our storage service
-        let storageRef = storage.referenceForURL("gs://bounce-46de5.appspot.com")
+        let storageRef = storage.referenceForURL(FIREBASE_STORAGE_URL)
         
         let currentDate = NSDate()
         let userCalendar = NSDateFormatter()
