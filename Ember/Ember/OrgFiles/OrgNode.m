@@ -35,6 +35,7 @@
     ASTextNode *_dateTextNode;
     ASTextNode *_fireCount;
     ASTextNode *_eventDesc;
+    ASTextNode *_noInterestedBelow;
     
     
 }
@@ -52,6 +53,7 @@
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
     _noInterested = [[ASTextNode alloc] init];
+    _noInterestedBelow = [ASTextNode new];
     _eventName  = [ASTextNode new];
     
     _snapShot = snap;
@@ -60,7 +62,9 @@
     
 //    NSLog(@"details: %@", details);
     
-    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ Interested", details[@"fireCount"]] attributes:[self textStyle]];
+    
+    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
+    _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
     
     NSDictionary *eventDetails = [snap getData];
     _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
@@ -86,13 +90,12 @@
     _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventDesc"]
                                                                   attributes:[self textStyleDesc]];
     
-//    FIRDatabaseQuery *recentPostsQuery = [[[ref child:@"Events"] child:eventDetails[@"eventID"]] child:@"eventDesc"];
-//    [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-////        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-//        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
-//                                                                      attributes:[self textStyleDesc]];
-//        
-//    }];
+    FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:eventDetails[@"homeFeedMediaKey"]] child:@"fireCount"];
+    [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+//        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", snapShot.value] attributes:[self textStyle]];
+        
+    }];
     
     
     _line = [[ASDisplayNode alloc] init];
@@ -140,6 +143,7 @@
     [self addSubnode:_dateTextNode];
     [self addSubnode:_eventDesc];
     [self addSubnode:_fireCount];
+    [self addSubnode:_noInterestedBelow];
     
 
     // hairline cell separator
@@ -383,7 +387,11 @@
     horizontalSpacer.flexGrow = YES;
 
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
-    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 50, 0, 0) child:_noInterested];
+    
+    ASStackLayoutSpec *vertInterested = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_noInterested, _noInterestedBelow]];
+    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 50, 0, 0) child:vertInterested];
+    
+    
     ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[newSpec,horizontalSpacer]];
     
     ASStackLayoutSpec *fireStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[ _fire,_fireCount]];

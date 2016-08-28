@@ -235,12 +235,9 @@ class OrgDetailsNode : ASCellNode {
         
         let insetsFollowers = UIEdgeInsetsMake(0, kInsetFollowersLeft, 0, 10)
         let followingInset = ASInsetLayoutSpec(insets: insetsFollowers, child: hori)
-        
-        
-        
+ 
         let vert = ASStackLayoutSpec(direction: .Horizontal, spacing: 1.0, justifyContent: .Center, alignItems: .Stretch, children: [horizontalSpacer, followingInset, horizontalSpacer])
-        
-        
+
         
         let hori_events = ASStackLayoutSpec(direction: .Vertical, spacing: 1.0, justifyContent: .Center, alignItems: .Center, children: [noEvents, noEventsBelow])
         
