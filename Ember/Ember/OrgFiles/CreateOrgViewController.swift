@@ -49,6 +49,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
             let orgPreferencesViewController = (segue.destinationViewController as! OrgPreferencesViewController)
             orgPreferencesViewController.orgId = self.key
             orgPreferencesViewController.orgObject = self.orgObject
+            print("sending the bois the images")
             orgPreferencesViewController.saveImage = self.saveImage
             orgPreferencesViewController.saveCoverImage = self.saveCoverImage
         }

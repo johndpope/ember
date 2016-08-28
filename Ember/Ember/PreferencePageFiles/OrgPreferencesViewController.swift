@@ -20,7 +20,6 @@ class OrgPreferencesViewController: UIViewController {
     var prefTags = [String]()
     var orgInterests = [String:Bool]()
     var orgId:String!
-    var orgImageLink:String = ""
     var orgObject = [String:AnyObject]()
     var mainOrgTagsSet:Set<String> = Set([])
     var uid:String!
@@ -64,7 +63,8 @@ class OrgPreferencesViewController: UIViewController {
             uid = user.uid
             admins.append(uid)
             orgObject["admins"] = admins
-            uploadImage(self.saveImage!)
+            uploadImage(self.saveImage!, isProfileImage: true)
+            uploadImage(self.saveCoverImage!, isProfileImage: false)
             // value for smallImageLink is not ready at this time, so it is saved when it is ready in
             let orgRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
             orgRef.child(self.orgId).setValue(self.orgObject)
@@ -175,13 +175,20 @@ class OrgPreferencesViewController: UIViewController {
         userRef.updateChildValues(["adminOf": adminOf])
     }
     
-    func uploadImage(image:UIImage) {
+    func uploadImage(image:UIImage, isProfileImage:Bool) {
         let currentDate = NSDate()
         let userCalendar = NSDateFormatter()
         userCalendar.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
         let finalDate = userCalendar.stringFromDate(currentDate)
         
-        let reference = "orgImages/\(self.orgId)/\(finalDate)"
+        var reference:String
+        // Saves the profile picture and the cover photo in different locations.
+        if(isProfileImage) {
+           reference = "orgImages/\(self.orgId)/profile/\(finalDate)"
+        }
+        else {
+            reference = "orgImages/\(self.orgId)/cover/\(finalDate)"
+        }
         
         // Get a reference to the storage service, using the default Firebase App
         let storage = FIRStorage.storage()
@@ -205,9 +212,16 @@ class OrgPreferencesViewController: UIViewController {
                 return
             }else{
                 //store downloadURL
-                self.orgImageLink = metaData!.downloadURL()!.absoluteString
+                let orgImageLink = metaData!.downloadURL()!.absoluteString
                 let orgRef = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
-                orgRef.child(self.orgId).child("smallImageLink").setValue(self.orgImageLink)
+                // saves the image in a different location depending on if its a profile picture or cover photo
+                if (isProfileImage) {
+                    orgRef.child(self.orgId).child("smallImageLink").setValue(orgImageLink)
+                }
+                else {
+                    orgRef.child(self.orgId).child("largeImageLink").setValue(orgImageLink)
+                }
+                
             }
         }
         
