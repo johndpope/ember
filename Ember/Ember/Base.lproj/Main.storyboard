@@ -1151,7 +1151,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Profile Picture"/>
+                                <state key="normal" title="Add Profile Picture"/>
                                 <connections>
                                     <action selector="saveOrgProfilePicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="99k-dU-sGX"/>
                                 </connections>
@@ -1183,7 +1183,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="xpU-ox-OS5"/>
                                 </constraints>
-                                <state key="normal" title="Add Org Cover Photo"/>
+                                <state key="normal" title="Add Cover Photo"/>
                                 <connections>
                                     <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
                                 </connections>
@@ -1475,11 +1475,11 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7T-R7-xD3">
-                                <rect key="frame" x="189" y="214" width="222" height="30"/>
+                                <rect key="frame" x="163" y="214" width="275" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="KG4-0J-Ekq"/>
+                                    <constraint firstAttribute="width" constant="222" id="sdX-wN-Lfg"/>
                                 </constraints>
-                                <state key="normal" title="Change Org Profile Picture"/>
+                                <state key="normal" title="Change Profile Picture"/>
                                 <connections>
                                     <action selector="saveOrgProfilePicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="Rke-Nx-K2p"/>
                                 </connections>
@@ -1500,7 +1500,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
-                                <rect key="frame" x="237.5" y="421" width="125" height="125"/>
+                                <rect key="frame" x="237" y="421" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
                                     <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
@@ -1511,7 +1511,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="222" id="Oiz-dF-or4"/>
                                 </constraints>
-                                <state key="normal" title="Change Org Cover Photo"/>
+                                <state key="normal" title="Change Cover Photo"/>
                                 <connections>
                                     <action selector="saveOrgCoverPicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="yhP-Vh-oGQ"/>
                                 </connections>
@@ -1553,11 +1553,12 @@
                         <outlet property="orgPictureButton" destination="s7T-R7-xD3" id="gyf-J0-hpw"/>
                         <outlet property="previewCoverImage" destination="tRk-aG-4sc" id="mvQ-Ha-7N0"/>
                         <outlet property="previewImage" destination="i8n-Tb-KvB" id="oWu-lz-wYo"/>
+                        <segue destination="qzv-Ne-eCy" kind="show" identifier="editOrgPreferences" id="ck8-Dd-TdR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w0i-vc-pn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2266" y="-270"/>
+            <point key="canvasLocation" x="2262" y="-206"/>
         </scene>
     </scenes>
     <resources>
@@ -1573,6 +1574,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ucT-Jv-n3U"/>
         <segue reference="8je-Bk-Ao3"/>
+        <segue reference="u0R-6m-rqZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>

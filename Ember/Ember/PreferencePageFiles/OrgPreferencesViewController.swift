@@ -17,6 +17,7 @@ class OrgPreferencesViewController: UIViewController {
     var newTagListView:TagListView!
     var admins: [String] = []
     var adminOf: [String] = []
+    var isEditingOrg:Bool = false
     var prefTags = [String]()
     var orgInterests = [String:Bool]()
     var orgId:String!
@@ -60,25 +61,34 @@ class OrgPreferencesViewController: UIViewController {
     
     @IBAction func preferencesDone(sender: AnyObject) {
         if let user = FIRAuth.auth()?.currentUser{
-            uid = user.uid
-            admins.append(uid)
-            orgObject["admins"] = admins
-            uploadImage(self.saveImage!, isProfileImage: true)
-            uploadImage(self.saveCoverImage!, isProfileImage: false)
-            // value for smallImageLink is not ready at this time, so it is saved when it is ready in
-            let orgRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
-            orgRef.child(self.orgId).setValue(self.orgObject)
+            if(!isEditingOrg){
+                uid = user.uid
+                admins.append(uid)
+                orgObject["admins"] = admins
+                userRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(uid)
+                userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                    self.adminOf = snapshot.value!.objectForKey("adminOf") as! [String]
+                    
+                    let orgRef = self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseUsersChild()).child(user.uid).child(BounceConstants.firebaseUsersChildOrgsFollowed()).child(self.orgId)
+                    orgRef.setValue(true)
+                    self.appendToAdminArray(self.orgId)
+                    }, withCancelBlock: { error in
+                        print(error.description)
+                })
+                uploadImage(self.saveImage!, isProfileImage: true)
+                uploadImage(self.saveCoverImage!, isProfileImage: false)
+                // value for smallImageLink is not ready at this time, so it is saved when it is ready in
+                let orgRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
+                orgRef.child(self.orgId).setValue(self.orgObject)
+            }
+            else {
+                uploadImage(self.saveImage!, isProfileImage: true)
+                uploadImage(self.saveCoverImage!, isProfileImage: false)
+                // value for smallImageLink is not ready at this time, so it is saved when it is ready in
+                let orgRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
+                orgRef.child(self.orgId).updateChildValues(self.orgObject)
+            }
             
-            userRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(uid)
-            userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
-                self.adminOf = snapshot.value!.objectForKey("adminOf") as! [String]
-                
-                let orgRef = self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseUsersChild()).child(user.uid).child(BounceConstants.firebaseUsersChildOrgsFollowed()).child(self.orgId)
-                orgRef.setValue(true)
-                self.appendToAdminArray(self.orgId)
-                }, withCancelBlock: { error in
-                    print(error.description)
-            })
             
             for item in mainOrgTagsSet {
                 orgInterests[item] = true

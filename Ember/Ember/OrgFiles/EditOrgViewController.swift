@@ -34,10 +34,8 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func saveOrganization(sender: AnyObject) {
         key = ref.childByAutoId().key
         if (FIRAuth.auth()?.currentUser) != nil{
-            orgObject["largeImageLink"] = ""
             orgObject["orgName"] = campName.text
             orgObject["orgDesc"] = campDesc.text
-            orgObject["smallImageLink"] = ""
             checkOrgNameDuplicates(orgObject["orgName"]! as! String)
         }else{
             print("User is not signed in, please do so")
@@ -46,13 +44,13 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "gotoOrgPreferences") {
+        if(segue.identifier == "editOrgPreferences") {
             let orgPreferencesViewController = (segue.destinationViewController as! OrgPreferencesViewController)
-            orgPreferencesViewController.orgId = self.key
+            orgPreferencesViewController.orgId = self.orgId
             orgPreferencesViewController.orgObject = self.orgObject
-            print("sending the bois the images")
             orgPreferencesViewController.saveImage = self.saveImage
             orgPreferencesViewController.saveCoverImage = self.saveCoverImage
+            orgPreferencesViewController.isEditingOrg = true
         }
     }
     
@@ -60,13 +58,14 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
         ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
             .observeSingleEventOfType(.Value, withBlock: { snapshot in
                 for org in snapshot.children.allObjects {
-                    if (orgName == (org.value["orgName"] as! String)) {
+                    if (orgName == (org.value["orgName"] as! String) && String(org.key) != self.orgId) {
+                        print(String(org.key))
                         self.isOrgNameDuplicate = true
                         break
                     }
                 }
                 if(!self.isOrgNameDuplicate) {
-                    self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
+                    self.performSegueWithIdentifier("editOrgPreferences", sender: nil)
                 }
                 else {
                     // User needs to use .edu email address before continuing
@@ -140,16 +139,6 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
         orgCoverPictureButton.setImage(image, forState: UIControlState.Normal)
         orgCoverPictureButton.titleEdgeInsets.left = 15
         
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        navigationItem.title = "Edit Org"
         ref = FIRDatabase.database().reference()
         let orgsQuery = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.orgId)
         orgsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
@@ -164,11 +153,25 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let profileData = NSData(contentsOfURL: profileUrl!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 let coverData = NSData(contentsOfURL: coverUrl!)
                 dispatch_async(dispatch_get_main_queue(), {
+                    self.saveImage = UIImage(data: profileData!)
                     self.previewImage.image = UIImage(data: profileData!)
+                    
+                    self.saveCoverImage = UIImage(data: coverData!)
                     self.previewCoverImage.image = UIImage(data: coverData!)
                 });
             }
         })
+        
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationItem.title = "Edit Org"
     }
     
     
