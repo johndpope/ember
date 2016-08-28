@@ -128,6 +128,7 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Edit Org"
         imagePicker.delegate = self
         
         
@@ -171,7 +172,6 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        navigationItem.title = "Edit Org"
     }
     
     
