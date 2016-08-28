@@ -44,7 +44,7 @@ var mainSet:Set<String> = Set([])
         newTagListView.layer.borderColor = UIColor.whiteColor().CGColor
         newTagListView.layer.borderWidth = 0.2
         
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        //UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         
     }
 
@@ -61,12 +61,9 @@ var mainSet:Set<String> = Set([])
         if(label.backgroundColor != UIColor.lightGrayColor()) {
             mainSet.insert(textToInsert)
             label.backgroundColor = UIColor.lightGrayColor()
-            print(mainSet)
         } else {
             mainSet.remove(textToInsert)
             label.backgroundColor = getRandomColor()
-            print(mainSet)
-
         }
 
     }
