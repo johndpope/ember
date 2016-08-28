@@ -269,43 +269,42 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }else{
         _userName.hidden = YES;
         _caption.hidden = YES;
+     
+    }
+    
+    _fireCount = [[ASTextNode alloc] init];
+    
+    if(![([snapShot getData][@"fireCount"]) isEqual:[NSNull null]]){
         
-        _fireCount = [[ASTextNode alloc] init];
+        NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
+        NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
+        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
+                                                                      attributes:[self textStyleFireUnselected]];
+    }
+    
+    _fire = [[ASButtonNode alloc] init];
+    [_fire setImage:[UIImage imageNamed:@"homeFeedFireUnselected"] forState:ASControlStateNormal];
+    [_fire setImage:[UIImage imageNamed:@"homeFeedFireSelected"] forState:ASControlStateSelected];
+    
+    [_fire addTarget:self
+              action:@selector(fireButtonTapped)
+    forControlEvents:ASControlNodeEventTouchDown];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && [[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
+        [_fire setSelected:YES];
         
-        if(![([snapShot getData][@"fireCount"]) isEqual:[NSNull null]]){
-            
-            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
-            NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
-            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
-                                                                          attributes:[self textStyleFireUnselected]];
-        }
+        NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
+        NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
+        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
+                                                                      attributes:[self textStyleFire]];
         
-        _fire = [[ASButtonNode alloc] init];
-        [_fire setImage:[UIImage imageNamed:@"homeFeedFireUnselected"] forState:ASControlStateNormal];
-        [_fire setImage:[UIImage imageNamed:@"homeFeedFireSelected"] forState:ASControlStateSelected];
-        
-        [_fire addTarget:self
-                          action:@selector(fireButtonTapped)
-                forControlEvents:ASControlNodeEventTouchDown];
-        
-        if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && [[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
-            [_fire setSelected:YES];
-            
-            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
-            NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
-            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
-                                                                          attributes:[self textStyleFire]];
-            
-            NSUInteger count = [[[_fireCount attributedString] string] integerValue];
-            count++;
-            
-            
-        }else{
-            [_fire setSelected:NO];
-            // No need to change color of fireCount since it was set before
-        }
+        NSUInteger count = [[[_fireCount attributedString] string] integerValue];
+        count++;
         
         
+    }else{
+        [_fire setSelected:NO];
+        // No need to change color of fireCount since it was set before
     }
     
     
@@ -362,6 +361,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_fire];
     [self addSubnode:_fireCount];
+    
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
