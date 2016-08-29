@@ -59,8 +59,8 @@ let LANDING_PAGE_PAGE_TWO_TITLE =  "MY EVENTS";
 let LANDING_PAGE_PAGE_THREE_TITLE =  "ORGS";
 
 //School Root
-//var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
-var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
+var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
+//var FIREBASE_SCHOOL_ROOT = "/Davidson College/"
 
 //Users
 let FIREBASE_USERS_CHILD =  "users";
