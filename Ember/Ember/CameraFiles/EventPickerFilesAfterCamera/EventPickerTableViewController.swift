@@ -25,8 +25,10 @@ import FirebaseAuth
     var homeFeedMediaKey: String
     var orgProfImage: String
     var eventDateObject:NSNumber
+    var mEventID:String
 
     init (finalAddress: String,myImage:UIImage, myCaption:NSString) {
+        self.mEventID = ""
         self.mEventDate = ""
         self.mEventName = ""
         self.mEventTime = ""
@@ -164,7 +166,7 @@ import FirebaseAuth
                             
                             if (!snapshot.hasChildren()) {
                                 //save to homefeed
-                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"orgID":self.mOrgID,"orgProfileIMage": self.orgProfImage, "eventDateObject":self.eventDateObject])
+                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"orgID":self.mOrgID,"eventID":self.mEventID,"orgProfileIMage": self.orgProfImage, "eventDateObject":self.eventDateObject])
                                 
                                 //save fireCount
                                 self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).updateChildValues(["fireCount":0])
@@ -297,6 +299,7 @@ import FirebaseAuth
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .Checkmark
             
+            mEventID = snap.key as String
             mEventDate = (snap.childSnapshotForPath("eventDate").value)! as! String
             mEventName = (snap.childSnapshotForPath("eventName").value)! as! String
             mEventTime = (snap.childSnapshotForPath("eventTime").value)! as! String

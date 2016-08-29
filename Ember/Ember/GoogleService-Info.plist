@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>11386638219-umrq584gnm7mun1k7a62nf8b3rgveadd.apps.googleusercontent.com</string>
+	<string>11386638219-ko4qb98uvnlpqf8tnt6s5apq16e0r3c9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.11386638219-umrq584gnm7mun1k7a62nf8b3rgveadd</string>
+	<string>com.googleusercontent.apps.11386638219-ko4qb98uvnlpqf8tnt6s5apq16e0r3c9</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB2D99Sif1_R_Cy7d6dHJHHH-NyaAUVHU8</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.ember.app</string>
+	<string>com.fyre.ember</string>
 	<key>PROJECT_ID</key>
 	<string>ember-beaa6</string>
 	<key>STORAGE_BUCKET</key>
@@ -27,13 +27,13 @@
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
 	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:11386638219:ios:bb3fa9eb2fd42063</string>
+	<string>1:11386638219:ios:3558f6144303345d</string>
 	<key>DATABASE_URL</key>
 	<string>https://ember-beaa6.firebaseio.com</string>
 </dict>
