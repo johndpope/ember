@@ -143,7 +143,7 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
         ref = FIRDatabase.database().reference()
         let orgsQuery = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.orgId)
         orgsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
-            self.campName.text = snapshot.value!["orgName"] as! String
+            self.campName.text = snapshot.value!["orgName"] as? String
             self.campDesc.text = snapshot.value!["orgDesc"] as! String
             
             let profileUrl = NSURL(string: snapshot.value!["smallImageLink"] as! String)

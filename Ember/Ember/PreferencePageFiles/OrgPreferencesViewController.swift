@@ -99,8 +99,11 @@ class OrgPreferencesViewController: UIViewController {
                 orgInterests[item] = true
             }
             
-            let preferences = orgInterests
-            self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(orgId!).child("preferences").setValue(preferences)
+            if (orgInterests.count > 0){
+                let preferences = orgInterests
+                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(orgId!).child("preferences").setValue(preferences)
+            }
+            
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
         else {

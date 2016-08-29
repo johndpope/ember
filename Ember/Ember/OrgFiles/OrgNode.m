@@ -62,11 +62,11 @@
     
 //    NSLog(@"details: %@", details);
     
-    
-    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
+    NSNumber *noInterested = details[@"fireCount"];
+    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
     _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
     
-    NSDictionary *eventDetails = [snap getData];
+    NSDictionary *eventDetails = [snap getPostDetails];
     _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
     
     _dateTextNode = [[ASTextNode alloc] init];
@@ -87,13 +87,11 @@
     
     FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
-    _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventDesc"]
-                                                                  attributes:[self textStyleDesc]];
-    
-    FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:eventDetails[@"homeFeedMediaKey"]] child:@"fireCount"];
+    FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
     [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", snapShot.value] attributes:[self textStyle]];
+        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
+                                                                      attributes:[self textStyleDesc]];
         
     }];
     
