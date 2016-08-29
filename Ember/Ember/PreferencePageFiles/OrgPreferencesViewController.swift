@@ -83,8 +83,12 @@ class OrgPreferencesViewController: UIViewController {
                 orgRef.child(self.orgId).setValue(self.orgObject)
             }
             else {
-                uploadImage(self.saveImage!, isProfileImage: true)
-                uploadImage(self.saveCoverImage!, isProfileImage: false)
+                if((self.saveImage) != nil){
+                    uploadImage(self.saveImage!, isProfileImage: true)
+                }
+                if(self.saveCoverImage != nil){
+                    uploadImage(self.saveCoverImage!, isProfileImage: false)
+                }
                 // value for smallImageLink is not ready at this time, so it is saved when it is ready in
                 let orgRef = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations")
                 orgRef.child(self.orgId).updateChildValues(self.orgObject)
@@ -95,8 +99,11 @@ class OrgPreferencesViewController: UIViewController {
                 orgInterests[item] = true
             }
             
-            let preferences = orgInterests
-            self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(orgId!).child("preferences").setValue(preferences)
+            if (orgInterests.count > 0){
+                let preferences = orgInterests
+                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(orgId!).child("preferences").setValue(preferences)
+            }
+            
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
         else {

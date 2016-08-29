@@ -19,8 +19,8 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
     var orgObject = [String: AnyObject]()
     var smallImageLink:String!
     var imagePicker = UIImagePickerController()
-    var saveImage:UIImage?
-    var saveCoverImage:UIImage?
+    var saveImage:UIImage? = nil
+    var saveCoverImage:UIImage? = nil
     
     
     @IBOutlet weak var previewCoverImage: UIImageView!
@@ -143,7 +143,6 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
         ref = FIRDatabase.database().reference()
         let orgsQuery = ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.orgId)
         orgsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
-            print(snapshot.value!["orgName"])
             self.campName.text = snapshot.value!["orgName"] as? String
             self.campDesc.text = snapshot.value!["orgDesc"] as! String
             
@@ -154,11 +153,12 @@ class EditOrgViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let profileData = NSData(contentsOfURL: profileUrl!) //make sure your image in this url does exist, otherwise unwrap in a if let check
                 let coverData = NSData(contentsOfURL: coverUrl!)
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.saveImage = UIImage(data: profileData!)
-                    self.previewImage.image = UIImage(data: profileData!)
-                    
-                    self.saveCoverImage = UIImage(data: coverData!)
-                    self.previewCoverImage.image = UIImage(data: coverData!)
+                    if((profileData) != nil){
+                        self.previewImage.image = UIImage(data: profileData!)
+                    }
+                    if((coverData) != nil){
+                        self.previewCoverImage.image = UIImage(data: coverData!)
+                    }
                 });
             }
         })
