@@ -434,7 +434,15 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return titleNodeIndexPath.compare(indexPath) != .OrderedSame || (noPostsNodeIndexPath.compare(indexPath) != .OrderedSame && data.getNoOfBounceSnapShots() == 0)
+        
+        if(titleNodeIndexPath.compare(indexPath) != .OrderedSame){
+            return false
+        }else if(reloadCalled && noPostsNodeIndexPath.compare(indexPath) != .OrderedSame && data.getNoOfBounceSnapShots() == 0){
+            return false
+        }else{
+         return true
+        }
+        
     }
     
     

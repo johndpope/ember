@@ -87,7 +87,7 @@
     [_user loadPreferences:^(NSDictionary* completion){
         
         FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseOrgsChild]] queryLimitedToFirst:100];
-        [[recentPostsQuery queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
             
             NSInteger count = 0;
             for(FIRDataSnapshot* child in snapShot.children){
@@ -117,7 +117,6 @@
     }];
     
 }
-
 
 
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
