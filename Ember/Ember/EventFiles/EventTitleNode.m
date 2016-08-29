@@ -193,13 +193,9 @@ static const CGFloat kInnerPadding = 10.0f;
     [self addSubnode:_divider2];
     
     if(_alltags.count > 0){
-        
-        
-        
+ 
         for(NSUInteger i = 0; i < _alltags.count; i++){
-            
-            
-            
+   
         [self addSubnode:[_alltags objectAtIndex:i]];
             
         }

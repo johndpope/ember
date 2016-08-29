@@ -62,17 +62,47 @@
     
 //    NSLog(@"details: %@", details);
     
-    NSNumber *noInterested = details[@"fireCount"];
-    _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+   
+    if(details[@"fireCount"]){
+         NSNumber *noInterested = details[@"fireCount"];
+        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+    }else{
+        
+        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
+        
+        FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+        
+        FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:details[@"homeFeedMediaKey"]] child:@"fireCount"];
+        [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            NSNumber *noInterested = snapShot.value;
+            _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+            
+        }];
+    }
+    
     _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
     
     NSDictionary *eventDetails = [snap getPostDetails];
-    _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
+    
+    if(eventDetails[@"eventName"]){
+        _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
+    }else{
+       _eventName.attributedString = [[NSAttributedString alloc] initWithString:details[@"eventName"] attributes:[self textStyleLeft]];
+    }
+    
     
     _dateTextNode = [[ASTextNode alloc] init];
     
-    _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[@"eventDate"], eventDetails[@"eventTime"]]
-                                                                     attributes:[self textStyleLeft]];
+    
+    if(eventDetails[@"eventDate"]){
+        _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[@"eventDate"], eventDetails[@"eventTime"]]
+                                                                         attributes:[self textStyleLeft]];
+    }else{
+        _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", details[@"eventDate"], details[@"eventTime"]]
+                                                                         attributes:[self textStyleLeft]];
+    }
+    
     
     _fireCount = [[ASTextNode alloc] init];
     _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%@", details[@"fireCount"]]
@@ -80,21 +110,30 @@
     
     _eventDesc = [[ASTextNode alloc] init];
     _eventDesc.spacingBefore = 10;
-    _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:[@"" stringByPaddingToLength:30 withString:@" " startingAtIndex:0]
-                                                                  attributes:[self textStyleDesc]];
     _eventDesc.maximumNumberOfLines = 3;
     
+    _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:@" "
+                                                                 attributes:[self textStyleDesc]];
+    
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    
+    _eventDesc.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)));
     
     FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     
-    FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
-    [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-//        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
+    if(details[@"eventDesc"]){
+        _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:details[@"eventDesc"]
                                                                       attributes:[self textStyleDesc]];
-        
-    }];
-    
+    }else{
+        FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
+        [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
+                                                                          attributes:[self textStyleDesc]];
+            
+        }];
+    }
+
     
     _line = [[ASDisplayNode alloc] init];
     _line.backgroundColor  = [UIColor lightGrayColor];
