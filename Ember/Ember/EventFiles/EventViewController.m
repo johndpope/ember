@@ -112,6 +112,41 @@
     
    [_snapShots addObject:self.eventNode];
     
+    if(self.isFromSearch){
+        
+        NSString *homefeedKey = self.eventNode.getData[@"homeFeedMediaKey"];
+        FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseHomefeed]] child:homefeedKey];
+        [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            
+            EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:snapShot];
+            NSString *eventID = snap.getPostDetails[@"eventID"];
+            FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
+            [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+                //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+                
+                for(FIRDataSnapshot* child in snapShot.children){
+                    
+                    
+                    EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:child];
+                    
+                    // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
+                    // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
+                    
+                    if(![snap isEventPoster]){
+                        [self.snapShots addObject:snap];
+                    }
+                    
+                }
+                
+                // TODO : reloading is causing jitter
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_tableNode.view reloadData];
+                });
+            }];
+        }];
+        
+    }
     NSString *eventID = self.eventNode.getPostDetails[@"eventID"];
     FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
     [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
@@ -136,10 +171,7 @@
             [_tableNode.view reloadData];
         });
     }];
-    
-    
-    
-    
+ 
    
 }
 
@@ -354,12 +386,24 @@
     
     if ([_titleNodeIndexPath compare:indexPath] == NSOrderedSame) {
         EmberSnapShot* snapShot = _snapShots[indexPath.row];
-        NSDictionary *eventDetails = [snapShot getPostDetails];
+        
+        NSDictionary *eventDetails = nil;
+        if(self.isFromSearch){
+           eventDetails = [snapShot getData];
+        }else{
+            eventDetails = [snapShot getPostDetails];
+        }
+        
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot];
             _orgID = eventDetails[@"orgID"];
-            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventPosterLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            if(self.isFromSearch){
+                [self FIRTitleDownload:bounceNode url: eventDetails[@"eventImageLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            }else{
+               [self FIRTitleDownload:bounceNode url: eventDetails[@"eventPosterLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            }
+            
             return bounceNode;
         };
         

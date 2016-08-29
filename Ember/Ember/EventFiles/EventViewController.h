@@ -15,4 +15,5 @@
 @interface EventViewController : ASViewController
 @property(strong, nonatomic) FIRDatabaseReference *ref;
 @property(nonatomic) EmberSnapShot *eventNode;
+@property(nonatomic) BOOL isFromSearch;
 @end
