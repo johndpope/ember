@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         // [END register_for_notifications]
         FIRApp.configure()
+
+        
        let userCurrent = FIRAuth.auth()?.currentUser
         if(userCurrent != nil) {
             let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
