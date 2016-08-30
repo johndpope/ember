@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         
-        
+
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
         
         
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         // [END register_for_notifications]
         FIRApp.configure()
-        let userCurrent = FIRAuth.auth()?.currentUser
+       let userCurrent = FIRAuth.auth()?.currentUser
         if(userCurrent != nil) {
             let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
             let tabBarController: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController

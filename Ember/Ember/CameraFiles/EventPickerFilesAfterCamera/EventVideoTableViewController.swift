@@ -27,10 +27,13 @@ import FirebaseAuth
     var mVidCaption:String?
     var orgProfImage: String
     var eventDateObject:NSNumber
+    var mEventID:String
+
 
     
     
     init (finalAddress: String,myNSURL:NSURL,myVidCap:NSString) {
+        self.mEventID = ""
         self.mEventDate = ""
         self.mEventName = ""
         self.mEventTime = ""
@@ -124,7 +127,7 @@ import FirebaseAuth
             let autoVidHomefeed = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Homefeed").childByAutoId().key
             
             //save to homefeed
-            self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(autoVidHomefeed).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"orgID":self.mOrgID,"orgProfileIMage": self.orgProfImage,"eventDateObject":self.eventDateObject])
+            self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(autoVidHomefeed).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"eventID":self.mEventID,"orgID":self.mOrgID,"orgProfileIMage": self.orgProfImage,"eventDateObject":self.eventDateObject])
             
             //save fireCount
             self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(autoVidHomefeed).updateChildValues(["fireCount":0])
@@ -274,6 +277,8 @@ import FirebaseAuth
 
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .Checkmark
+            
+            mEventID = snap.key as String
             mEventDate = (snap.childSnapshotForPath("eventDate").value)! as! String
             mEventName = (snap.childSnapshotForPath("eventName").value)! as! String
             mEventTime = (snap.childSnapshotForPath("eventTime").value)! as! String
