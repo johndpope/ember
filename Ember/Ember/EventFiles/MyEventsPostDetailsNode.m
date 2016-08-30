@@ -124,18 +124,27 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                                                    attributes:[self textStyle]];
     
     //    NSLog(@"key: %@", _snapShot.key);
-    if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && ![[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
-        [_followButton setSelected:YES];
-        NSDictionary *attrDict = @{
-                                   NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14.0],
-                                   NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
-                                   };
-        _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                       attributes:attrDict];
-    }else{
+    NSString *uid = [[[FIRAuth auth] currentUser] uid];
+    
+    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        if(![snapShot.value isEqual:[NSNull null]]){
+            
+            [_followButton setSelected:YES];
+            //            NSLog(@"%@", _uid);
+            NSDictionary *attrDict = @{
+                                       NSFontAttributeName : [UIFont systemFontOfSize:14.0],
+                                       NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
+                                       };
+            _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
+                                                                           attributes:attrDict];
+            
+        }else{
+            [_followButton setSelected:NO];
+        }
         
-        [_followButton setSelected:NO];
-    }
+        
+    }];
     
     
     [_followButton addTarget:self
