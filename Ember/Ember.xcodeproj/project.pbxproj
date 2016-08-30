@@ -132,7 +132,6 @@
 		C76CDDE11D72A657008CEB9A /* EmberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDE01D72A657008CEB9A /* EmberTests.swift */; };
 		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
 		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
-		C7A3B9261D7522CB0025571B /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A3B9251D7522CB0025571B /* iTunesArtwork@2x.png */; };
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
@@ -340,7 +339,6 @@
 		C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberUITests.swift; sourceTree = "<group>"; };
 		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
-		C7A3B9251D7522CB0025571B /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -782,11 +780,11 @@
 		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
-				C7A3B9251D7522CB0025571B /* iTunesArtwork@2x.png */,
 				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
 				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
 				C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */,
 				C76CDDC91D72A657008CEB9A /* AppDelegate.swift */,
+				C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */,
 				8E852C1A1D72BD0A002FFB90 /* Util */,
 				C76CDE0F1D72A6FF008CEB9A /* OnBoarding */,
 				C7119EC31D72AB9F0047A5CD /* Notifications */,
@@ -797,7 +795,6 @@
 				C7119EAB1D72AA780047A5CD /* OrgFiles */,
 				8E852BCD1D72BA16002FFB90 /* HomeFeed */,
 				8ED8A6CC1D72C1BC00F396B0 /* Model */,
-				C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */,
 				C7119EF41D72AC870047A5CD /* CalendarFiles */,
 				C7119E661D72A9650047A5CD /* CameraFiles */,
 				C7119E601D72A9340047A5CD /* Search */,
@@ -984,7 +981,6 @@
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
 				8ED8A7521D72C5F800F396B0 /* fTagsLanding.png in Resources */,
-				C7A3B9261D7522CB0025571B /* iTunesArtwork@2x.png in Resources */,
 				8E852C141D72BB5B002FFB90 /* Info.plist in Resources */,
 				C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */,
 				C7CDC2C01D738BA100B62B48 /* GoogleService-Info.plist in Resources */,
@@ -1322,6 +1318,7 @@
 			baseConfigurationReference = 972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1355,6 +1352,7 @@
 			baseConfigurationReference = 1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (

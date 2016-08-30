@@ -18,24 +18,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ember" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAm-rD-aGJ">
-                                <rect key="frame" x="229" y="227" width="142" height="71"/>
+                                <rect key="frame" x="229" y="264" width="142" height="71"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="50"/>
                                 <color key="textColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork.png" translatesAutoresizingMaskIntoConstraints="NO" id="ONV-wJ-Eb8">
-                                <rect key="frame" x="239" y="120" width="123" height="107"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="Qy2-L6-nwh"/>
-                                    <constraint firstAttribute="height" constant="107" id="cqB-KO-YpB"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engage With Your Campus Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQv-Ne-iYl">
+                                <rect key="frame" x="174" y="340" width="252" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ONV-wJ-Eb8" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="100" id="Jyd-s0-wZ6"/>
-                            <constraint firstItem="ONV-wJ-Eb8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VmX-cx-t1X"/>
-                            <constraint firstItem="oAm-rD-aGJ" firstAttribute="top" secondItem="ONV-wJ-Eb8" secondAttribute="bottom" id="XBB-H3-2Rj"/>
+                            <constraint firstItem="IQv-Ne-iYl" firstAttribute="top" secondItem="oAm-rD-aGJ" secondAttribute="bottom" constant="5" id="3fq-uO-njd"/>
+                            <constraint firstItem="oAm-rD-aGJ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hHh-2X-J1C"/>
+                            <constraint firstItem="IQv-Ne-iYl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ho8-QW-ubD"/>
                             <constraint firstItem="oAm-rD-aGJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qgh-uF-y3W"/>
                         </constraints>
                     </view>
@@ -45,7 +44,4 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="iTunesArtwork.png" width="512" height="512"/>
-    </resources>
 </document>
