@@ -147,10 +147,11 @@
         }];
         
     }
-    NSString *eventID = self.eventNode.getPostDetails[@"eventID"];
+    NSString *eventID = self.eventNode.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]][@"eventID"];
+//    NSLog(@"event id: %@",eventID);
     FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
     [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+//                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         
         for(FIRDataSnapshot* child in snapShot.children){
             
@@ -391,7 +392,7 @@
         if(self.isFromSearch){
            eventDetails = [snapShot getData];
         }else{
-            eventDetails = [snapShot getPostDetails];
+            eventDetails = snapShot.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
         }
         
         

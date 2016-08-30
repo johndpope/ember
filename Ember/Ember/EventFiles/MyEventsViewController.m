@@ -145,8 +145,8 @@
 }
 
 -(void)myEventsImageClicked:(EmberSnapShot *)snap{
-    NSDictionary *eventDetails = [snap getPostDetails];
-    NSLog(@"snap: %@", eventDetails);
+    NSDictionary *eventDetails = snap.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
+//    NSLog(@"snap: %@", eventDetails);
     NSString *url = eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
     if(![url containsString:@"mp4"]  || [url containsString:@"mov"] ){
         EventViewController *_myViewController = [EventViewController new];
@@ -237,11 +237,10 @@
     
     FIRUser *user = [FIRAuth auth].currentUser;
     
-    
     [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
-         FIRDatabaseQuery *query = [[[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] child:[BounceConstants firebaseHomefeedPostDetails]] queryLimitedToFirst:100];
+         FIRDatabaseQuery *query = [[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] queryLimitedToFirst:100];
          [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
 //             NSLog(@"second: %@", second);
@@ -333,7 +332,7 @@
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:indexPath.row];
-    NSDictionary *eventDetails = [snap getPostDetails];
+    NSDictionary *eventDetails = snap.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
     
 //    NSLog(@"details: %@", eventDetails);
     

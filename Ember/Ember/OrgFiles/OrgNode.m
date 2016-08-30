@@ -36,6 +36,7 @@
     ASTextNode *_fireCount;
     ASTextNode *_eventDesc;
     ASTextNode *_noInterestedBelow;
+    NSString *_uid;
     
     
 }
@@ -72,18 +73,24 @@
         
         FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
         
-        FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:details[@"homeFeedMediaKey"]] child:@"fireCount"];
-        [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-            NSNumber *noInterested = snapShot.value;
-            _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
-            
-        }];
+        if(details[@"homeFeedMediaKey"]){
+            FIRDatabaseQuery *recentPostsQuery = [[[ref child:[BounceConstants firebaseHomefeed]] child:details[@"homeFeedMediaKey"]] child:@"fireCount"];
+            [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+                //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+                NSNumber *noInterested = snapShot.value;
+                _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+                
+            }];
+        }else{
+            FIRDataSnapshot *snapshot = [snap getFirebaseSnapShot];
+            NSLog(@"snapshot: %@", snapshot);
+        }
+        
     }
     
     _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
     
-    NSDictionary *eventDetails = [snap getPostDetails];
+    NSDictionary *eventDetails = snap.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
     
     if(eventDetails[@"eventName"]){
         _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
@@ -158,19 +165,29 @@
                                                                       attributes:[self textStyleFireUnselected]];
     }
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && [[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
-        [_fire setSelected:YES];
+    _uid = [[[FIRAuth auth] currentUser] uid];
+    
+    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        if(![snap.value isEqual:[NSNull null]]){
+            [_fire setSelected:YES];
+            
+            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [_snapShot getData][@"fireCount"]];
+            NSUInteger fireCountNum = [fireCountString integerValue];
+            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", (unsigned long)fireCountNum]
+                                                                          attributes:[self textStyleFire]];
+            
+            NSUInteger count = [[[_fireCount attributedString] string] integerValue];
+            count++;
+            
+            
+        }else{
+            [_fire setSelected:NO];
+            // No need to change color of fireCount since it was set before
+        }
         
-        NSString *fireCountString = [NSString stringWithFormat:@"+%@", [_snapShot getData][@"fireCount"]];
-        NSUInteger fireCountNum = [fireCountString integerValue];
-        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
-                                                                      attributes:[self textStyleFire]];
         
-        
-    }else{
-        [_fire setSelected:NO];
-        // No need to change color of fireCount since it was set before
-    }
+    }];
     
     
     [self addSubnode:_fire];
@@ -203,7 +220,8 @@
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFireUnselected]];
         
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
         
         
         [_fire setSelected:NO];
@@ -220,7 +238,7 @@
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFire]];
         
-        [[NSUserDefaults standardUserDefaults] setValue:@"pastFireCount" forKey:_snapShot.key];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
         [_fire setSelected:YES];
         
         [self increaseFireCount];

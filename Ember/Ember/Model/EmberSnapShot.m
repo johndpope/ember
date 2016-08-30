@@ -62,7 +62,7 @@
 -(instancetype)initWithMyEventsSnapShot:(FIRDataSnapshot*)snapShot key:(NSString*)key{
     if (!(self = [super init]))
         return nil;
-    
+    _snap = snapShot;
     _values = snapShot.value;
     _eventDetails = _values;
     self.key = key;

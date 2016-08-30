@@ -72,7 +72,6 @@ static const CGFloat kInnerPadding = 10.0f;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
     _snapShot = snapShot;
-
  
     _myeventsPostDetailsNode = [[MyEventsPostDetailsNode alloc] initWithEvent:snapShot];
    
