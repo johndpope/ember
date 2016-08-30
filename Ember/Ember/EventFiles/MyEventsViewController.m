@@ -167,12 +167,9 @@
     
     FIRUser *user = [FIRAuth auth].currentUser;
 
-    NSString *key = [[NSUserDefaults standardUserDefaults] valueForKey:snapshotKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:snapshotKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MyAppSettingsChanged" object:self userInfo:nil];
     
-    [[[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:key] removeValue];
+    [[[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:snapshotKey] removeValue];
     
     [self decreaseFireCount:snapshotKey];
 
