@@ -150,6 +150,7 @@
     if(![url containsString:@"mp4"]  || [url containsString:@"mov"] ){
         EventViewController *_myViewController = [EventViewController new];
         _myViewController.eventNode = snap;
+        _myViewController.isFromSearch = NO;
         [[self navigationController] pushViewController:_myViewController animated:YES];
     }
     
