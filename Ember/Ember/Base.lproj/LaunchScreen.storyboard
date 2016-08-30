@@ -17,34 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y8m-7m-mwt">
-                                <rect key="frame" x="205" y="170" width="191" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="65W-us-AMK"/>
-                                    <constraint firstAttribute="width" constant="77" id="ShF-J0-kIN"/>
-                                    <constraint firstAttribute="height" constant="170" id="g7W-h7-YfX"/>
-                                    <constraint firstAttribute="width" constant="191" id="pPa-Xh-Kyb"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="65W-us-AMK"/>
-                                        <exclude reference="ShF-J0-kIN"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ember" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAm-rD-aGJ">
-                                <rect key="frame" x="229" y="340" width="142" height="71"/>
+                                <rect key="frame" x="229" y="227" width="142" height="71"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="50"/>
                                 <color key="textColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="ONV-wJ-Eb8">
+                                <rect key="frame" x="239" y="120" width="123" height="107"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="123" id="Qy2-L6-nwh"/>
+                                    <constraint firstAttribute="height" constant="107" id="cqB-KO-YpB"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oAm-rD-aGJ" firstAttribute="top" secondItem="Y8m-7m-mwt" secondAttribute="bottom" id="086-Gy-Izv"/>
-                            <constraint firstItem="Y8m-7m-mwt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6h3-D9-Ihg"/>
+                            <constraint firstItem="ONV-wJ-Eb8" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="100" id="Jyd-s0-wZ6"/>
+                            <constraint firstItem="ONV-wJ-Eb8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VmX-cx-t1X"/>
+                            <constraint firstItem="oAm-rD-aGJ" firstAttribute="top" secondItem="ONV-wJ-Eb8" secondAttribute="bottom" id="XBB-H3-2Rj"/>
                             <constraint firstItem="oAm-rD-aGJ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qgh-uF-y3W"/>
-                            <constraint firstItem="Y8m-7m-mwt" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="150" id="tdu-0g-1M6"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -54,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="iTunesArtwork.png" width="512" height="512"/>
+        <image name="iTunesArtwork" width="87" height="87"/>
     </resources>
 </document>
