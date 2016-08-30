@@ -68,6 +68,7 @@
     
    
     if(details[@"fireCount"]){
+        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
         FIRDatabaseQuery *recentPostsQuery = [[[_ref child:[BounceConstants firebaseHomefeed]] child:snap.key] child:@"fireCount"];
         [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
             //        NSLog(@"%@  %@", snapShot.key, snapShot.value);

@@ -86,7 +86,7 @@
     self.eventRef = [[self.ref child:@"Bounce"] child:@"Events"];
     
     _storage = [FIRStorage storage];
-    _storageRef = [_storage referenceForURL:@"gs://ember-beaa6.appspot.com"];
+    _storageRef = [_storage referenceForURL:[BounceConstants firebaseStorageUrl]];
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
    
     _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
