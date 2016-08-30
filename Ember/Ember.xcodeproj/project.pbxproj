@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E2EC2261D74AA6200086FF7 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2EC2251D74AA6200086FF7 /* FirebaseUtil.swift */; };
+
 		8E852C051D72BB5B002FFB90 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE61D72BB5B002FFB90 /* CALayer+FSExtension.m */; };
 		8E852C061D72BB5B002FFB90 /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE81D72BB5B002FFB90 /* FSCalendar.m */; };
 		8E852C071D72BB5B002FFB90 /* FSCalendar+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE91D72BB5B002FFB90 /* FSCalendar+DateTools.m */; };
@@ -135,7 +137,9 @@
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
+
 		C7CDC2C01D738BA100B62B48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7CDC2BF1D738BA100B62B48 /* GoogleService-Info.plist */; };
+
 		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +162,9 @@
 
 /* Begin PBXFileReference section */
 		1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.release.xcconfig"; sourceTree = "<group>"; };
+
+		8E2EC2251D74AA6200086FF7 /* FirebaseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
+
 		8E852BE51D72BB5B002FFB90 /* CALayer+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+FSExtension.h"; path = "FSCalendar/CALayer+FSExtension.h"; sourceTree = "<group>"; };
 		8E852BE61D72BB5B002FFB90 /* CALayer+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+FSExtension.m"; path = "FSCalendar/CALayer+FSExtension.m"; sourceTree = "<group>"; };
 		8E852BE71D72BB5B002FFB90 /* FSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCalendar.h; path = FSCalendar/FSCalendar.h; sourceTree = "<group>"; };
@@ -342,6 +349,7 @@
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+
 		C7CDC2BF1D738BA100B62B48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -407,6 +415,9 @@
 				8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */,
 				8EDA06AB1D735503002840AE /* Iphone5Test.m */,
 				8EDA06AD1D73550D002840AE /* Iphone5Test.h */,
+
+				8E2EC2251D74AA6200086FF7 /* FirebaseUtil.swift */,
+
 			);
 			name = Util;
 			path = ..;
@@ -805,7 +816,9 @@
 				C7119F001D72AD090047A5CD /* iTunesArtwork@2x.png */,
 				C76CDDD21D72A657008CEB9A /* Assets.xcassets */,
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
+
 				C7CDC2BF1D738BA100B62B48 /* GoogleService-Info.plist */,
+
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
 			path = Ember;
@@ -977,12 +990,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */,
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
 				8ED8A7521D72C5F800F396B0 /* fTagsLanding.png in Resources */,
 				8E852C141D72BB5B002FFB90 /* Info.plist in Resources */,
 				C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */,
+
 				C7CDC2C01D738BA100B62B48 /* GoogleService-Info.plist in Resources */,
 				C7119F041D72AD090047A5CD /* iTunesArtwork@2x.png in Resources */,
 				C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */,
@@ -1118,6 +1133,9 @@
 				8ED8A7681D72C76B00F396B0 /* CreateEventViewController.swift in Sources */,
 				8E852C0B1D72BB5B002FFB90 /* FSCalendarAppearance.m in Sources */,
 				8ED8A6F51D72C30300F396B0 /* GalleryViewControllerDatasource.swift in Sources */,
+
+				8E2EC2261D74AA6200086FF7 /* FirebaseUtil.swift in Sources */,
+
 				8ED8A6E01D72C1C900F396B0 /* Video.m in Sources */,
 				8ED8A7431D72C50B00F396B0 /* MyEventsViewController.m in Sources */,
 				8ED8A76E1D72C84300F396B0 /* EventPreferencesViewController.swift in Sources */,
@@ -1338,9 +1356,11 @@
 				);
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+
 				PRODUCT_BUNDLE_IDENTIFIER = com.fyre.ember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+
 				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1352,7 +1372,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/FirebaseAnalytics/Frameworks/frameworks",
@@ -1371,9 +1393,11 @@
 				);
 				INFOPLIST_FILE = Ember/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+
 				PRODUCT_BUNDLE_IDENTIFIER = com.fyre.ember;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+
 				SWIFT_OBJC_BRIDGING_HEADER = "Ember/Ember-Bridging-Header.h";
 			};
 			name = Release;

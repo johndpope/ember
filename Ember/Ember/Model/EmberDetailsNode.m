@@ -60,6 +60,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASTextNode *_fireCount;
     ASButtonNode *_fire;
     NSUInteger _mediaItemsCount;
+    NSString *_uid;
     
 }
 
@@ -286,22 +287,29 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
               action:@selector(fireButtonTapped)
     forControlEvents:ASControlNodeEventTouchDown];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && [[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
-        [_fire setSelected:YES];
+    _uid = [[[FIRAuth auth] currentUser] uid];
+    
+    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        if(![snap.value isEqual:[NSNull null]]){
+            [_fire setSelected:YES];
+            
+            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
+            NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
+            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", (unsigned long)fireCountNum]
+                                                                          attributes:[self textStyleFire]];
+            
+            NSUInteger count = [[[_fireCount attributedString] string] integerValue];
+            count++;
+            
+            
+        }else{
+            [_fire setSelected:NO];
+            // No need to change color of fireCount since it was set before
+        }
         
-        NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
-        NSUInteger fireCountNum = [fireCountString integerValue] + _mediaItemsCount;
-        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
-                                                                      attributes:[self textStyleFire]];
         
-        NSUInteger count = [[[_fireCount attributedString] string] integerValue];
-        count++;
-        
-        
-    }else{
-        [_fire setSelected:NO];
-        // No need to change color of fireCount since it was set before
-    }
+    }];
     
     
     _userName.maximumNumberOfLines = 1;
@@ -329,17 +337,26 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
   
     
     //    NSLog(@"key homefeed: %@", _snapShot.key);
-    if([[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] != nil && ![[[NSUserDefaults standardUserDefaults] objectForKey:_snapShot.key] isEqualToString:@"pastFireCount"]){
-        [_followButton setSelected:YES];
-        NSDictionary *attrDict = @{
-                                   NSFontAttributeName : [UIFont systemFontOfSize:14.0],
-                                   NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
-                                   };
-        _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                       attributes:attrDict];
-    }else{
-        [_followButton setSelected:NO];
-    }
+    
+    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        if(![snapShot.value isEqual:[NSNull null]]){
+            
+            [_followButton setSelected:YES];
+//            NSLog(@"%@", _uid);
+            NSDictionary *attrDict = @{
+                                       NSFontAttributeName : [UIFont systemFontOfSize:14.0],
+                                       NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
+                                       };
+            _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
+                                                                           attributes:attrDict];
+            
+        }else{
+            [_followButton setSelected:NO];
+        }
+        
+        
+    }];
     
     
     [_followButton addTarget:self
@@ -512,9 +529,9 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFireUnselected]];
         
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
+//        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
      
-        
         [_fire setSelected:NO];
         
         [self decreaseFireCount];
@@ -529,7 +546,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFire]];
       
-        [[NSUserDefaults standardUserDefaults] setValue:@"pastFireCount" forKey:_snapShot.key];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
         [_fire setSelected:YES];
         
         [self increaseFireCount];
@@ -541,19 +558,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 -(void)buttonTapped{
     if(_followButton.selected){
         
-        
         NSDictionary *attrDict = @{
                                    NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14.0],
                                    NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                    };
         _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
                                                                        attributes:attrDict];
-        
-        
-        NSString *key = [[NSUserDefaults standardUserDefaults] valueForKey:_snapShot.key];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:key] removeValue];
-        
+
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key] removeValue];
         
         [_followButton setSelected:NO];
         
@@ -562,9 +574,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         
     }
     else{
-        
-        //        UIColor(red:90.0/255.0, green: 187.0/255.0, blue: 181.0/255.0, alpha: 1.0)
-        
+  
         NSDictionary *attrDict = @{
                                    NSFontAttributeName : [UIFont systemFontOfSize:14.0f],
                                    NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
@@ -574,8 +584,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         FIRDatabaseReference *ref = [self getFollowersReference];
         
         // TODO use String : Bool pair
-        [ref setValue:_snapShot.key];
-        [[NSUserDefaults standardUserDefaults] setValue:ref.key forKey:_snapShot.key];
+        [ref setValue:[NSNumber numberWithBool:YES]];
         [_followButton setSelected:YES];
         
         [self increaseFireCount];
@@ -603,7 +612,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
 }
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] childByAutoId];
+    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key];
 }
 
 - (NSDictionary *)textStyle{
