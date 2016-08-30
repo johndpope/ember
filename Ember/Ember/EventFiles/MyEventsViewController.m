@@ -146,6 +146,7 @@
 
 -(void)myEventsImageClicked:(EmberSnapShot *)snap{
     NSDictionary *eventDetails = [snap getPostDetails];
+    NSLog(@"snap: %@", eventDetails);
     NSString *url = eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
     if(![url containsString:@"mp4"]  || [url containsString:@"mov"] ){
         EventViewController *_myViewController = [EventViewController new];
