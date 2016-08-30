@@ -240,11 +240,11 @@
     [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
-         FIRDatabaseQuery *query = [[[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.value] child:[BounceConstants firebaseHomefeedPostDetails]] queryLimitedToFirst:100];
+         FIRDatabaseQuery *query = [[[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] child:[BounceConstants firebaseHomefeedPostDetails]] queryLimitedToFirst:100];
          [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
 //             NSLog(@"second: %@", second);
-             [_data addMyEventsSnapShot:second key:firstSnap.value];
+             [_data addMyEventsSnapShot:second key:firstSnap.key];
              dispatch_async(dispatch_get_main_queue(), ^{
                  [_tableNode.view reloadData];
              });
@@ -268,7 +268,7 @@
          for(int i = 0; i < _data.getNoOfBounceSnapShots; i++){
              counter++;
              EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:i];
-             if([snap.key isEqualToString:snapshot.value]){
+             if([snap.key isEqualToString:snapshot.key]){
                  break;
              }
          }
