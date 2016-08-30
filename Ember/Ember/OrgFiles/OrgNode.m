@@ -59,14 +59,26 @@
     
     _snapShot = snap;
     
+    _fireCount = [[ASTextNode alloc] init];
+    
+    
     NSDictionary *details = [snap getData];
     
 //    NSLog(@"details: %@", details);
     
    
     if(details[@"fireCount"]){
-         NSNumber *noInterested = details[@"fireCount"];
-        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+        FIRDatabaseQuery *recentPostsQuery = [[[_ref child:[BounceConstants firebaseHomefeed]] child:snap.key] child:@"fireCount"];
+        [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            NSNumber *noInterested = snapShot.value;
+            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%@", noInterested]
+                                                                          attributes:[self textStyleFireUnselected]];
+            _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
+            
+        }];
+//         NSNumber *noInterested = details[@"fireCount"];
+//        _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
     }else{
         
         _noInterested.attributedString = [[NSAttributedString alloc] initWithString:@"     " attributes:[self textStyle]];
@@ -78,6 +90,8 @@
             [recentPostsQuery observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
                 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
                 NSNumber *noInterested = snapShot.value;
+                _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%@", noInterested]
+                                                                              attributes:[self textStyleFireUnselected]];
                 _noInterested.attributedString = [[NSAttributedString alloc] initWithString:[noInterested stringValue] attributes:[self textStyle]];
                 
             }];
@@ -110,10 +124,6 @@
                                                                          attributes:[self textStyleLeft]];
     }
     
-    
-    _fireCount = [[ASTextNode alloc] init];
-    _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%@", details[@"fireCount"]]
-                                                                     attributes:[self textStyleFire]];
     
     _eventDesc = [[ASTextNode alloc] init];
     _eventDesc.spacingBefore = 10;
@@ -172,13 +182,14 @@
         if(![snap.value isEqual:[NSNull null]]){
             [_fire setSelected:YES];
             
-            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [_snapShot getData][@"fireCount"]];
-            NSUInteger fireCountNum = [fireCountString integerValue];
-            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", (unsigned long)fireCountNum]
-                                                                          attributes:[self textStyleFire]];
+//            NSString *fireCountString = [NSString stringWithFormat:@"+%@", [_snapShot getData][@"fireCount"]];
+//            NSUInteger fireCountNum = [fireCountString integerValue];
+            
             
             NSUInteger count = [[[_fireCount attributedString] string] integerValue];
-            count++;
+            _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", (unsigned long)count]
+                                                                          attributes:[self textStyleFire]];
+//            count++;
             
             
         }else{
