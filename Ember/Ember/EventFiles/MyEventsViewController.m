@@ -165,6 +165,8 @@
 
 -(void)unfollow:(NSString*)snapshotKey{
     
+    NSLog(@"unfollow: %@", snapshotKey);
+    
     FIRUser *user = [FIRAuth auth].currentUser;
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MyAppSettingsChanged" object:self userInfo:nil];
