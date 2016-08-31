@@ -215,7 +215,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventName
                                                                  attributes:[self textStyle]];
     
-    _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(120, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(130, _textNode.attributedString.size.height * 2)));
+    _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height * 2)));
     
     _textNode.maximumNumberOfLines = 2;
     _textNode.truncationMode = NSLineBreakByTruncatingTail;
@@ -356,8 +356,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _dateTextNode = [[ASTextNode alloc] init];
     _dateTextNode.layerBacked = YES;
+    
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
                                                                      attributes:[self textStyleItalic]];
+    
+//    _dateTextNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)));
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
@@ -806,6 +809,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //    NSLog(@"screenwidth: %f", screenWidth);
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
+//    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
     
     NSArray *info = @[ eventNameStatic, _dateTextNode];
     NSArray *info_2 = @[ _numberInterested, _followButton];
