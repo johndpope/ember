@@ -374,7 +374,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_dateTextNode];
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_fire];
-    [self addSubnode:_fireCount];
+//    [self addSubnode:_fireCount];
     
     
     // hairline cell separator
@@ -773,8 +773,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         
         
         if(_showFireCount){
+//            infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:0.0
+//                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[orgPhotoInset,infoStack,horizontalSpacer, _fire, _fireCount]];
+
             infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:0.0
-                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[orgPhotoInset,infoStack,horizontalSpacer, _fire, _fireCount]];
+                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[orgPhotoInset,infoStack,horizontalSpacer, _fire]];
         }
         
         if(_userName.hidden && _caption.hidden){
