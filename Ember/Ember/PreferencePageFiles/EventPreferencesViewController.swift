@@ -152,7 +152,7 @@ class EventPreferencesViewController: UIViewController {
                     
                     let homefeedItem = ["eventDate":self.eventsegDate,"eventID": eventsTreekey, "eventName": self.eventsegName,"eventPosterLink":(URL?.absoluteString)!,"eventTime":self.eventsegTime,"eventDateObject":eventDateObject,"orgID":self.eventsegOrgID,"orgProfileImage":self.segProfileImage,"eventTags":evTags]
                     
-                    let eventItem = ["eventDate":self.eventsegDate,"eventName": self.eventsegName, "eventDesc": self.eventSegDesc,"eventLocation":self.eventsegLocation,"eventTime":self.eventsegTime,"orgID":self.eventsegOrgID,"orgName":self.eventsegOrgName,"eventImageLink":(URL?.absoluteString)!, "eventTags":evTags,"orgProfileImage":self.segProfileImage,"homeFeedMediaKey":homeFeedMediaKey,"timeStamp":timeStamp,"eventDateObject":eventDateObject]
+                    let eventItem = ["eventDate":self.eventsegDate,"eventName": self.eventsegName, "eventDesc": self.eventSegDesc,"eventLocation":self.eventsegLocation,"eventTime":self.eventsegTime,"orgID":self.eventsegOrgID,"orgName":self.eventsegOrgName,"eventImageLink":(URL?.absoluteString)!, "eventTags":evTags,"orgProfileImage":self.segProfileImage,"homeFeedMediaKey":homeFeedMediaKey,"homefeedPostKey":homeFeedEntryKey,"timeStamp":timeStamp,"eventDateObject":eventDateObject]
                     
                     //Upload Poster
                     //self.uploadImage(self.segPosterImage)
