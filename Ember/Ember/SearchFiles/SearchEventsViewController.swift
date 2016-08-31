@@ -96,10 +96,9 @@ class SearchEventsViewController : UITableViewController{
         
         if let posterKey = (snap.value!.valueForKey("homefeedPostKey") as? String){
             
-            
                     self.ref.child(BounceConstants.firebaseHomefeed()).child(posterKey).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
             
-                        print(snapshot)
+//                        print(snapshot)
                         let controller = EventViewController()
                         let bounceSnap = EmberSnapShot(snapShot: snapshot)
                         controller.eventNode = bounceSnap

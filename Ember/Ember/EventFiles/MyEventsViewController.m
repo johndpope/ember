@@ -241,8 +241,11 @@
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
          FIRDatabaseQuery *query = [[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] queryLimitedToFirst:100];
-         [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
+         [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
+             // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
+             // the fireCount is not obtained due to a transaction update happening on the fireCount child
+             // Therefore, the count is not displayed in MyEvents
 //             NSLog(@"second: %@", second);
              [_data addMyEventsSnapShot:second key:firstSnap.key];
              dispatch_async(dispatch_get_main_queue(), ^{

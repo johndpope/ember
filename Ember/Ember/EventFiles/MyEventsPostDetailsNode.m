@@ -40,7 +40,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     float _scale;
     float _imageHeight;
     CGFloat screenWidth;
-    ASTextNode *_interested;
+    ASTextNode *_numberInterested;
     ASButtonNode* _followButton;
     ASNetworkImageNode *_orgProfilePhoto;
     ASTextNode *_dateTextNode;
@@ -60,7 +60,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId{
     
     FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseOrgsChild]] child:orgId]  queryLimitedToFirst:100];
-    [[recentPostsQuery queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+    [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary * event = snapShot.value;
         //        NSLog(@"%@", event[[BounceConstants firebaseOrgsChildSmallImageLink]]);
@@ -119,9 +119,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedUnselected"] forState:ASControlStateNormal];
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedSelected"] forState:ASControlStateSelected];
     
-    _interested = [[ASTextNode alloc] init];
-    _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                   attributes:[self textStyle]];
+    _numberInterested = [[ASTextNode alloc] init];
+    
+    NSDictionary *allPostInfo = snapShot.getData;
+//    NSLog(@"allpost: %@", allPostInfo);
+    NSString *fireCountString = [NSString stringWithFormat:@"+%@", allPostInfo[@"fireCount"]];
+    NSUInteger fireCountNum = [fireCountString integerValue];
+    _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", fireCountNum]
+                                                                         attributes:[self textStyle]];
     
     //    NSLog(@"key: %@", _snapShot.key);
     NSString *uid = [[[FIRAuth auth] currentUser] uid];
@@ -136,8 +141,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                        NSFontAttributeName : [UIFont systemFontOfSize:14.0],
                                        NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
                                        };
-            _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                           attributes:attrDict];
+            
+            NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
+            _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
+                                                                                 attributes:attrDict];
             
         }else{
             [_followButton setSelected:NO];
@@ -183,7 +190,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
   
     [self addSubnode:_textNode];
     [self addSubnode:_followButton];
-    [self addSubnode:_interested];
+//    [self addSubnode:_numberInterested];
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_dateTextNode];
     
@@ -317,7 +324,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //    NSLog(@"screenwidth: %f", screenWidth);
     
     NSArray *info = @[ _textNode, _dateTextNode];
-    NSArray *info_2 = @[_followButton, _interested];
+    NSArray *info_2 = @[ _followButton];
     
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
