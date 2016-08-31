@@ -16,10 +16,11 @@
 @interface EventTitleNode : ASCellNode
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
-- (instancetype)initWithEvent:(EmberSnapShot*)event;
+- (instancetype)initWithEvent:(EmberSnapShot*)event mediaCount: (NSUInteger)mediaCount;
 
 -(ASNetworkImageNode*) getImageNode;
 - (NSDictionary *)textStyle;
 -(ASTextNode *)getOrgNameNode;
+-(ASTextNode *)getFireCount;
 
 @end

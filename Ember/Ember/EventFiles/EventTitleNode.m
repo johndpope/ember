@@ -68,8 +68,12 @@ static const CGFloat kInnerPadding = 10.0f;
     return _orgName;
 }
 
+-(ASTextNode *)getFireCount{
+   return _orgNode.getFireCount;
+}
 
-- (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
+
+- (instancetype)initWithEvent:(EmberSnapShot*)snapShot mediaCount:(NSUInteger)mediaCount{
     if (!(self = [super init]))
         return nil;
     
@@ -87,7 +91,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _backGround.backgroundColor = [BounceConstants primaryAppColor];
     
-    _orgNode = [[OrgNode alloc] initWithBounceSnapShot:snapShot];
+    _orgNode = [[OrgNode alloc] initWithBounceSnapShot:snapShot mediaCount:mediaCount];
     
     [self addSubnode: _imageNode];
     
@@ -172,8 +176,13 @@ static const CGFloat kInnerPadding = 10.0f;
     _seeWhatsHappening.spacingBefore = 10;
     _seeWhatsHappening.spacingAfter = 10;
     
-//    _orgName.attributedString = [[NSAttributedString alloc] initWithString:event[@"orgName"] attributes:[self textStyle]];
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
+    _orgName.attributedString = [[NSAttributedString alloc] initWithString:@" " attributes:[self textStyleOrgName]];
+    _orgName.maximumNumberOfLines = 1;
+                           
+    _orgName.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _orgName.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _orgName.attributedString.size.height)));
+   
     
     [self addSubnode:_orgName];
  
@@ -276,6 +285,26 @@ static const CGFloat kInnerPadding = 10.0f;
               NSForegroundColorAttributeName: [UIColor whiteColor], NSParagraphStyleAttributeName: style};
 }
 
+- (NSDictionary *)textStyleOrgName{
+    
+    UIFont *font = nil;
+    
+    if(Iphone5Test.isIphone5){
+        font = [UIFont systemFontOfSize:18.0f];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f];
+    }
+    
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.paragraphSpacing = 0.5 * font.lineHeight;
+    style.alignment = NSTextAlignmentLeft;
+    
+    
+    return @{ NSFontAttributeName: font,
+              NSForegroundColorAttributeName: [UIColor whiteColor], NSParagraphStyleAttributeName: style};
+}
+
 - (void)layout
 {
     [super layout];
@@ -305,11 +334,10 @@ static const CGFloat kInnerPadding = 10.0f;
     
     ASInsetLayoutSpec *specName = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insetsName child:_orgName];
     
-    ASStackLayoutSpec *orgPhotoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                        justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsBaselineLast children:@[horizontalSpacer, specName]];
+    ASStackLayoutSpec *orgPhotoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
+                                                                        justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[horizontalSpacer, specName]];
     
-    
-    ASOverlayLayoutSpec *overlay = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:orgPhotoStack];
+    ASOverlayLayoutSpec *overlay = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:orgPhotoStackVert];
     
     ASInsetLayoutSpec *specOrgNode = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInnerPadding, 10, kInnerPadding, 10) child:_orgNode];
     

@@ -18,7 +18,7 @@
 @interface FinalEventTitleNode : ASCellNode
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
-- (instancetype)initWithEvent:(EmberSnapShot*)event;
+- (instancetype)initWithEvent:(EmberSnapShot*)event mediaCount: (NSUInteger)mediaCount;
 -(EventTitleNode *)getTitleNode;
 -(ASNetworkImageNode *)getLocalNode;
 

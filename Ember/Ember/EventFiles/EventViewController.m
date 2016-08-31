@@ -37,6 +37,7 @@
     dispatch_queue_t _previewQueue;
     NSString *_orgID;
     NSString *_url;
+    NSUInteger _mediaCount;
 }
 @property (nonatomic, strong) NSString *marker;
 @property (nonatomic, strong) NSArray *contents;
@@ -85,8 +86,10 @@
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     self.eventRef = [[self.ref child:@"Bounce"] child:@"Events"];
     
+    _mediaCount = 0;
+    
     _storage = [FIRStorage storage];
-    _storageRef = [_storage referenceForURL:@"gs://ember-beaa6.appspot.com"];
+    _storageRef = [_storage referenceForURL:[BounceConstants firebaseStorageUrl]];
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
    
     _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -110,14 +113,14 @@
 -(void)fetchData{
 //    NSLog(@"eventID: %@", self.eventNode.getPostDetails);
     
-   [_snapShots addObject:self.eventNode];
-    
+   
     if(self.isFromSearch){
         
         NSString *homefeedKey = self.eventNode.getData[@"homeFeedMediaKey"];
+//        NSLog(@"eventID: %@", homefeedKey);
         FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseHomefeed]] child:homefeedKey];
         [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+//                    NSLog(@"%@  %@", snapShot.key, snapShot.value);
             
             EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:snapShot];
             NSString *eventID = snap.getPostDetails[@"eventID"];
@@ -133,7 +136,9 @@
                     // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
                     // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
                     
-                    if(![snap isEventPoster]){
+                    if([snap isEventPoster]){
+                        [self.snapShots insertObject:snap atIndex:0];
+                    }else{
                         [self.snapShots addObject:snap];
                     }
                     
@@ -146,33 +151,46 @@
             }];
         }];
         
-    }
-    NSString *eventID = self.eventNode.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]][@"eventID"];
-//    NSLog(@"event id: %@",eventID);
-    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
-    [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-//                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+    }else{
+        [_snapShots addObject:self.eventNode];
         
-        for(FIRDataSnapshot* child in snapShot.children){
+        NSString *eventID = self.eventNode.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]][@"eventID"];
+        //    NSLog(@"event id: %@",eventID);
+        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventID"] queryEqualToValue:eventID];
+        [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+//            NSLog(@"%@  %@", snapShot.key, snapShot.value);
             
-            
-            EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:child];
-            
-            // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
-            // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
-            
-            if(![snap isEventPoster]){
-                [self.snapShots addObject:snap];
+            for(FIRDataSnapshot* child in snapShot.children){
+                
+                
+                EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:child];
+                
+                // Assumption is that there is only one event poster so any poster matching this event ID is the poster that
+                // was clicked from the homefeed and whose details are populating the first node of this page i.e. self.eventNode
+                
+                if(![snap isEventPoster]){
+//                    snap.getPostDetails[[BounceConstants firebaseHomefeedMediaInfo]];
+                    if([snap.getPostDetails[[BounceConstants firebaseHomefeedMediaInfo]] isKindOfClass:[NSDictionary class]]){
+                        NSArray *values = [snap.getPostDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
+                        _mediaCount = values.count;
+                        
+                    }else{
+                        NSArray *values = snap.getPostDetails[[BounceConstants firebaseHomefeedMediaInfo]];
+                        _mediaCount = values.count;
+                        
+                    }
+                    [self.snapShots addObject:snap];
+                }
+                
             }
             
-        }
-        
-        // TODO : reloading is causing jitter
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_tableNode.view reloadData];
-        });
-    }];
- 
+            // TODO : reloading is causing jitter
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableNode.view reloadData];
+            });
+        }];
+    }
+
    
 }
 
@@ -389,15 +407,11 @@
         EmberSnapShot* snapShot = _snapShots[indexPath.row];
         
         NSDictionary *eventDetails = nil;
-        if(self.isFromSearch){
-           eventDetails = [snapShot getData];
-        }else{
-            eventDetails = snapShot.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
-        }
+        eventDetails = [snapShot getPostDetails];
         
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot];
+            FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot mediaCount: _mediaCount];
             _orgID = eventDetails[@"orgID"];
             if(self.isFromSearch){
                 [self FIRTitleDownload:bounceNode url: eventDetails[@"eventImageLink"] orgId: eventDetails[@"orgID"] event:eventDetails];

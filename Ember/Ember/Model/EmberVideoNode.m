@@ -233,6 +233,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _userName.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)));
         
         [self fetchUserName];
+        
     }else{
         _userName.hidden = YES;
         _caption.hidden = YES;
