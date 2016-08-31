@@ -68,8 +68,12 @@ static const CGFloat kInnerPadding = 10.0f;
     return _orgName;
 }
 
+-(ASTextNode *)getFireCount{
+   return _orgNode.getFireCount;
+}
 
-- (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
+
+- (instancetype)initWithEvent:(EmberSnapShot*)snapShot mediaCount:(NSUInteger)mediaCount{
     if (!(self = [super init]))
         return nil;
     
@@ -87,7 +91,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _backGround.backgroundColor = [BounceConstants primaryAppColor];
     
-    _orgNode = [[OrgNode alloc] initWithBounceSnapShot:snapShot];
+    _orgNode = [[OrgNode alloc] initWithBounceSnapShot:snapShot mediaCount:mediaCount];
     
     [self addSubnode: _imageNode];
     

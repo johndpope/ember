@@ -17,7 +17,8 @@
 @interface OrgNode : ASCellNode
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
-- (instancetype)initWithBounceSnapShot:(EmberSnapShot*)snap;
+- (instancetype)initWithBounceSnapShot:(EmberSnapShot*)snap mediaCount:(NSUInteger) mediaCount;
 
 - (NSDictionary *)textStyle;
+-(ASTextNode*)getFireCount;
 @end

@@ -50,11 +50,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 
 
 
-- (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
+- (instancetype)initWithEvent:(EmberSnapShot*)snapShot mediaCount:(NSUInteger)mediaCount{
     if (!(self = [super init]))
         return nil;
     
-    _eventTitleNode = [[EventTitleNode alloc] initWithEvent:snapShot];
+    _eventTitleNode = [[EventTitleNode alloc] initWithEvent:snapShot mediaCount: mediaCount];
     
     NSDictionary *eventDetails = [snapShot getPostDetails];
 
