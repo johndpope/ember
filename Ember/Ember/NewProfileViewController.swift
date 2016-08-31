@@ -46,6 +46,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
     let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     var reloadCalled = false
     var mainSet = [String: String]() // String for key and Bool for false if image post and true for video post
+    let refreshControl = UIRefreshControl()
     
     
     init(){
@@ -64,7 +65,14 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        refreshControl.tintColor = BounceConstants.primaryAppColor()
+        self.tableNode.view.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(NewProfileViewController.fetchData), forControlEvents: .ValueChanged)
 
+        
         FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
             if user != nil {
                 if let user = FIRAuth.auth()?.currentUser {
@@ -170,6 +178,10 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
         indicator.startAnimating()
         
+        if(refreshControl.refreshing){
+            self.data.removeAllSnapShots()
+        }
+        
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid;
             
@@ -184,13 +196,19 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                 
                 if(snapShot.childrenCount == 0){ // If no posts are available then only add the the first node with the user details
                     self.indicator.stopAnimating()
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.reloadCalled = true
-                        self.tableNode.view.beginUpdates()
-                        self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Fade)
-                        self.tableNode.view.endUpdates()
+                    if(self.refreshControl.refreshing){
+                        self.refreshControl.endRefreshing()
                         return
-                    })
+                    }else{
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.reloadCalled = true
+                            self.tableNode.view.beginUpdates()
+                            self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Fade)
+                            self.tableNode.view.endUpdates()
+                            return
+                        })
+                    }
+                    
                     
                 }
                 
@@ -221,6 +239,10 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
 
                             self.indicator.stopAnimating()
                             
+                            if(self.refreshControl.refreshing){
+                                self.refreshControl.endRefreshing()
+                            }
+                            
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.reloadCalled = true
                                 
@@ -244,6 +266,10 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                                 if self.mainSet[homefeedKey]! == key as! String{
                                     
                                     self.indicator.stopAnimating()
+                                    
+                                    if(self.refreshControl.refreshing){
+                                        self.refreshControl.endRefreshing()
+                                    }
                                     
                                     dispatch_async(dispatch_get_main_queue(), {
                                         self.reloadCalled = true
