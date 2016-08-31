@@ -73,7 +73,7 @@ let FIREBASE_USERS_CHILD_ORG_ID =  "orgID";
 let FIREBASE_STORAGE_URL = "gs://ember-beaa6.appspot.com"
 
 //Gallery
-let MAX_PHOTOS_IN_GALLERY = 2
+let MAX_PHOTOS_IN_GALLERY = 5
 
 @objc class BounceConstants : NSObject{
     private override init() {}
