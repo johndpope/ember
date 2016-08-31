@@ -64,7 +64,7 @@
         return nil;
     _snap = snapShot;
     _values = snapShot.value;
-    _eventDetails = _values;
+    _eventDetails = _values[[BounceConstants firebaseHomefeedPostDetails]];
     self.key = key;
     
     return self;

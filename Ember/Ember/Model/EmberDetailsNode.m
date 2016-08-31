@@ -51,7 +51,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     float _imageHeight;
     CGFloat screenWidth;
     ASButtonNode *_playNode;
-    ASTextNode *_interested;
     BOOL _followButtonHidden;
     ASTextNode *_userName;
     ASTextNode *_caption;
@@ -62,6 +61,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     NSUInteger _mediaItemsCount;
     NSString *_uid;
     ASTextNode *_noImages;
+    ASTextNode *_numberInterested;
+    
     
     
 }
@@ -95,7 +96,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _followButtonHidden = YES;
     
     _followButton.hidden = YES;
-    _interested.hidden = YES;
+    _numberInterested.hidden = YES;
     
 }
 
@@ -145,6 +146,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _showFireCount = NO;
     
     _mediaItemsCount = 0;
+    
+    _numberInterested = [ASTextNode new];
     
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
@@ -212,7 +215,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventName
                                                                  attributes:[self textStyle]];
     
-    _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(120, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(130, _textNode.attributedString.size.height * 2)));
+    _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height * 2)));
     
     _textNode.maximumNumberOfLines = 2;
     _textNode.truncationMode = NSLineBreakByTruncatingTail;
@@ -291,6 +294,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }else{
         _userName.hidden = YES;
         _caption.hidden = YES;
+        
+        NSDictionary *allPostInfo = snapShot.getData;
+        NSString *fireCountString = [NSString stringWithFormat:@"+%@", allPostInfo[@"fireCount"]];
+        NSUInteger fireCountNum = [fireCountString integerValue];
+        _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", fireCountNum]
+                                                                      attributes:[self textStyleInterested]];
+        
      
     }
     
@@ -346,8 +356,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _dateTextNode = [[ASTextNode alloc] init];
     _dateTextNode.layerBacked = YES;
+    
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
                                                                      attributes:[self textStyleItalic]];
+    
+//    _dateTextNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)));
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
@@ -356,9 +369,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedUnselected"] forState:ASControlStateNormal];
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedSelected"] forState:ASControlStateSelected];
     
-    _interested = [[ASTextNode alloc] init];
-    _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                   attributes:[self textStyleInterested]];
   
     
     //    NSLog(@"key homefeed: %@", _snapShot.key);
@@ -373,7 +383,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                        NSFontAttributeName : [UIFont systemFontOfSize:14.0],
                                        NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
                                        };
-            _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
+            NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
+            _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
                                                                            attributes:attrDict];
             
         }else{
@@ -395,10 +406,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_caption];
     [self addSubnode:_noImages];
     [self addSubnode:_textNode];
-    [self addSubnode:_interested];
     [self addSubnode:_dateTextNode];
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_fire];
+    [self addSubnode:_numberInterested];
     
 //    [self addSubnode:_fireCount];
     
@@ -589,8 +600,12 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                    NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14.0],
                                    NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                    };
-        _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                       attributes:attrDict];
+        
+        
+        NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
+        count--;
+        _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
+                                                                             attributes:attrDict];
 
         [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key] removeValue];
         
@@ -606,8 +621,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                    NSFontAttributeName : [UIFont systemFontOfSize:14.0f],
                                    NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
                                    };
-        _interested.attributedString = [[NSAttributedString alloc] initWithString:@"Interested"
-                                                                       attributes:attrDict];
+        NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
+        count++;
+        _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
+                                                                             attributes:attrDict];
         FIRDatabaseReference *ref = [self getFollowersReference];
         
         // TODO use String : Bool pair
@@ -667,9 +684,9 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIFont *font  = nil;
     
     if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:8.0f];
-    }else{
         font = [UIFont systemFontOfSize:10.0f];
+    }else{
+        font = [UIFont systemFontOfSize:12.0f];
     }
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -792,9 +809,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //    NSLog(@"screenwidth: %f", screenWidth);
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
+//    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
     
     NSArray *info = @[ eventNameStatic, _dateTextNode];
-    NSArray *info_2 = @[_followButton, _interested];
+    NSArray *info_2 = @[ _numberInterested, _followButton];
     
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];

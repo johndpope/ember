@@ -56,7 +56,7 @@ let FIREBASE_ORGS_CHILD_LARGEIMAGELINK = "largeImageLink"
 //Landing page titles
 let LANDING_PAGE_PAGE_ONE_TITLE =  "HOMEFEED";
 let LANDING_PAGE_PAGE_TWO_TITLE =  "MY EVENTS";
-let LANDING_PAGE_PAGE_THREE_TITLE =  "ORGS";
+let LANDING_PAGE_PAGE_THREE_TITLE =  " DISCOVER";
 
 //School Root
 var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
@@ -74,7 +74,7 @@ let FIREBASE_STORAGE_URL = "gs://ember-beaa6.appspot.com" // Production
 //let FIREBASE_STORAGE_URL = "gs://bounce-46de5.appspot.com" // Dev
 
 //Gallery
-let MAX_PHOTOS_IN_GALLERY = 5
+let MAX_PHOTOS_IN_GALLERY = 2
 
 @objc class BounceConstants : NSObject{
     private override init() {}
