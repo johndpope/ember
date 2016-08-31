@@ -61,6 +61,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASButtonNode *_fire;
     NSUInteger _mediaItemsCount;
     NSString *_uid;
+    ASTextNode *_noImages;
+    
     
 }
 
@@ -199,6 +201,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _textNode = [[ASTextNode alloc] init];
     _textNode.layerBacked = YES;
     
+    _noImages = [ASTextNode new];
+    _noImages.layerBacked = YES;
+    _noImages.attributedString = [[NSAttributedString alloc] initWithString:@"   images"
+                                                                attributes:[self textStyleNoImages]];
+    
     NSString *eventName = eventDetails[[BounceConstants firebaseEventsChildEventName]];
     
     //    eventName = [self truncateEventName:eventName];
@@ -224,6 +231,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             NSArray *values = [eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
             _mediaItemsCount = values.count;
             if ([values count] != 0){
+                if(values.count == 1){
+                    _noImages.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu image", values.count]
+                                                                                 attributes:[self textStyleNoImages]];
+                }else{
+                    _noImages.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu images", values.count]
+                                                                                 attributes:[self textStyleNoImages]];
+                }
+                
                 NSDictionary *first = [values objectAtIndex:0];
                 uuid = first[@"userID"];
                 
@@ -238,6 +253,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             
             NSArray *values = eventDetails[[BounceConstants firebaseHomefeedMediaInfo]];
             _mediaItemsCount = values.count;
+            if(values.count == 1){
+                _noImages.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu image", values.count]
+                                                                             attributes:[self textStyleNoImages]];
+            }else{
+                _noImages.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu images", values.count]
+                                                                             attributes:[self textStyleNoImages]];
+            }
+            
             NSDictionary *first = [values objectAtIndex:0];
 //            NSLog(@"classname: %@", className);
 //            NSLog(@"%@", eventDetails[[BounceConstants firebaseHomefeedMediaInfo]]);
@@ -255,7 +278,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             
         }
         
-        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)));
+        // Using 0.845 since that's the best width to allow some space for text with number of gallery images
+        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height)));
         
         _userName.attributedString = [[NSAttributedString alloc] initWithString:@" "
                                                                      attributes:[self textStyleUsername]];
@@ -369,11 +393,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_followButton];
     [self addSubnode:_userName];
     [self addSubnode:_caption];
+    [self addSubnode:_noImages];
     [self addSubnode:_textNode];
     [self addSubnode:_interested];
     [self addSubnode:_dateTextNode];
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_fire];
+    
 //    [self addSubnode:_fireCount];
     
     
@@ -636,6 +662,26 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
               NSForegroundColorAttributeName: [UIColor blackColor], NSParagraphStyleAttributeName: style};
 }
 
+- (NSDictionary *)textStyleNoImages{
+    
+    UIFont *font  = nil;
+    
+    if(IS_IPHONE_5){
+        font = [UIFont systemFontOfSize:8.0f];
+    }else{
+        font = [UIFont systemFontOfSize:10.0f];
+    }
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.paragraphSpacing = 0.5 * font.lineHeight;
+    style.hyphenationFactor = 1.0;
+    style.alignment = NSTextAlignmentRight;
+    
+    
+    return @{ NSFontAttributeName: font,
+              NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
+}
+
 - (NSDictionary *)textStyleInterested{
     UIFont *font = nil;
     if(IS_IPHONE_5){
@@ -733,12 +779,15 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     //    NSLog(@"screen width: %f", screenWidth);
     
-    
+    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
+    horizontalSpacer.flexGrow = YES;
     
     ASStaticLayoutSpec *captionStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_caption]];
     
-    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
-    horizontalSpacer.flexGrow = YES;
+    ASStackLayoutSpec *captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,_noImages]];
+    
+    
     
     //    NSLog(@"screenwidth: %f", screenWidth);
     
@@ -787,7 +836,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
             
             infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionStatic, userNameStatic, infoStack_2]];
+                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2]];
         }
         
     }else{
