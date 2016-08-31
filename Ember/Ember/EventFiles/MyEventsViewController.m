@@ -145,13 +145,12 @@
 }
 
 -(void)myEventsImageClicked:(EmberSnapShot *)snap{
-    NSDictionary *eventDetails = snap.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
+    NSDictionary *eventDetails = [snap getPostDetails];
 //    NSLog(@"snap: %@", eventDetails);
     NSString *url = eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
     if(![url containsString:@"mp4"]  || [url containsString:@"mov"] ){
         EventViewController *_myViewController = [EventViewController new];
         _myViewController.eventNode = snap;
-        _myViewController.isFromSearch = NO;
         [[self navigationController] pushViewController:_myViewController animated:YES];
     }
     

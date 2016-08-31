@@ -102,7 +102,6 @@ class SearchEventsViewController : UITableViewController{
                         let controller = EventViewController()
                         let bounceSnap = EmberSnapShot(snapShot: snapshot)
                         controller.eventNode = bounceSnap
-                        controller.isFromSearch = true
                         self.navigationController?.pushViewController(controller, animated: true)
                         
                     })
