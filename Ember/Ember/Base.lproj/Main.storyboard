@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cPV-8a-SbK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1122,93 +1122,104 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORG DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-0n-Wfx">
-                                <rect key="frame" x="225" y="81" width="149" height="21"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEo-7r-VfY">
+                                <rect key="frame" x="0.0" y="23" width="600" height="577"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORG DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnq-0n-Wfx">
+                                        <rect key="frame" x="225" y="58" width="149" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="gSf-Dc-9nL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klf-0u-mri">
+                                        <rect key="frame" x="20" y="87" width="560" height="55"/>
+                                        <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Short Description"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="6rv-cY-Apx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkC-gd-6kw">
+                                        <rect key="frame" x="189" y="152" width="222" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
+                                        </constraints>
+                                        <state key="normal" title="Add Profile Picture"/>
+                                        <connections>
+                                            <action selector="saveOrgProfilePicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="99k-dU-sGX"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Org Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="18v-G1-UbJ">
+                                        <rect key="frame" x="20" y="20" width="560" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="vFW-Ds-s14"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-VN-fQE">
+                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="WJF-hL-1Jb"/>
+                                            <constraint firstAttribute="height" constant="125" id="xki-wy-D7Q"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
+                                        <rect key="frame" x="189" y="322" width="222" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="222" id="xpU-ox-OS5"/>
+                                        </constraints>
+                                        <state key="normal" title="Add Cover Photo"/>
+                                        <connections>
+                                            <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
+                                        <rect key="frame" x="238" y="360" width="125" height="125"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="7E4-y7-Uwn"/>
+                                            <constraint firstAttribute="height" constant="125" id="CL2-S6-ube"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="gSf-Dc-9nL"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="leading" secondItem="klf-0u-mri" secondAttribute="leading" id="7hB-Os-juC"/>
+                                    <constraint firstItem="klf-0u-mri" firstAttribute="centerX" secondItem="IkC-gd-6kw" secondAttribute="centerX" id="DS9-nx-d12"/>
+                                    <constraint firstAttribute="trailing" secondItem="18v-G1-UbJ" secondAttribute="trailing" constant="20" id="GxX-2P-lWx"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="trailing" secondItem="klf-0u-mri" secondAttribute="trailing" id="IAL-Mh-Yi5"/>
+                                    <constraint firstItem="0aj-qI-l9y" firstAttribute="top" secondItem="aKR-TJ-zEi" secondAttribute="bottom" constant="5" id="IQK-y8-aXA"/>
+                                    <constraint firstItem="aKR-TJ-zEi" firstAttribute="centerX" secondItem="0aj-qI-l9y" secondAttribute="centerX" id="OmX-Xu-Rrg"/>
+                                    <constraint firstItem="IkC-gd-6kw" firstAttribute="leading" secondItem="aKR-TJ-zEi" secondAttribute="leading" id="P9Y-xe-HCb"/>
+                                    <constraint firstItem="klf-0u-mri" firstAttribute="top" secondItem="Cnq-0n-Wfx" secondAttribute="bottom" constant="8" symbolic="YES" id="QV9-eb-yfN"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="centerX" secondItem="LEo-7r-VfY" secondAttribute="centerX" id="T8Q-AQ-ZC6"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="leading" secondItem="LEo-7r-VfY" secondAttribute="leading" constant="20" id="dnv-Zl-QC1"/>
+                                    <constraint firstItem="aKR-TJ-zEi" firstAttribute="top" secondItem="3lF-VN-fQE" secondAttribute="bottom" constant="10" id="fZV-Ou-UPY"/>
+                                    <constraint firstItem="3lF-VN-fQE" firstAttribute="top" secondItem="IkC-gd-6kw" secondAttribute="bottom" constant="5" id="jPb-ge-y7i"/>
+                                    <constraint firstItem="IkC-gd-6kw" firstAttribute="centerX" secondItem="3lF-VN-fQE" secondAttribute="centerX" id="m3G-YT-cvW"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="centerX" secondItem="Cnq-0n-Wfx" secondAttribute="centerX" id="mA2-JD-65O"/>
+                                    <constraint firstItem="IkC-gd-6kw" firstAttribute="top" secondItem="klf-0u-mri" secondAttribute="bottom" constant="10" id="oFk-ht-5Aa"/>
+                                    <constraint firstAttribute="bottom" secondItem="0aj-qI-l9y" secondAttribute="bottom" constant="20" id="rti-er-eq5"/>
+                                    <constraint firstItem="Cnq-0n-Wfx" firstAttribute="top" secondItem="18v-G1-UbJ" secondAttribute="bottom" constant="8" symbolic="YES" id="uuf-c2-Edo"/>
+                                    <constraint firstItem="18v-G1-UbJ" firstAttribute="top" secondItem="LEo-7r-VfY" secondAttribute="top" constant="20" id="zRq-Fz-NpT"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klf-0u-mri">
-                                <rect key="frame" x="20" y="110" width="560" height="55"/>
-                                <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <accessibility key="accessibilityConfiguration" hint="Short Description"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="6rv-cY-Apx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkC-gd-6kw">
-                                <rect key="frame" x="189" y="175" width="222" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
-                                </constraints>
-                                <state key="normal" title="Add Profile Picture"/>
-                                <connections>
-                                    <action selector="saveOrgProfilePicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="99k-dU-sGX"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Org Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="18v-G1-UbJ">
-                                <rect key="frame" x="20" y="43" width="560" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="vFW-Ds-s14"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-VN-fQE">
-                                <rect key="frame" x="237" y="210" width="125" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="8Vl-Dr-3jA"/>
-                                    <constraint firstAttribute="height" constant="125" id="f3z-of-ijs"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
-                                <rect key="frame" x="237.5" y="380" width="125" height="125"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="8ej-mJ-WYx"/>
-                                    <constraint firstAttribute="height" constant="125" id="tW2-xT-pa0"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
-                                <rect key="frame" x="189" y="345" width="222" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="xpU-ox-OS5"/>
-                                </constraints>
-                                <state key="normal" title="Add Cover Photo"/>
-                                <connections>
-                                    <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
-                                </connections>
-                            </button>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0aj-qI-l9y" firstAttribute="top" secondItem="aKR-TJ-zEi" secondAttribute="bottom" constant="5" id="0Se-81-fng"/>
-                            <constraint firstItem="IkC-gd-6kw" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="2q1-bn-Vqq"/>
-                            <constraint firstItem="aKR-TJ-zEi" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="D0Z-5R-BKa"/>
-                            <constraint firstItem="18v-G1-UbJ" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="ENX-fu-RsD"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="18v-G1-UbJ" secondAttribute="leading" id="Spk-0l-2Bj"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="klf-0u-mri" secondAttribute="leading" id="Vu8-Fw-FbD"/>
-                            <constraint firstItem="3lF-VN-fQE" firstAttribute="top" secondItem="IkC-gd-6kw" secondAttribute="bottom" constant="5" id="VvS-WT-gQe"/>
-                            <constraint firstItem="klf-0u-mri" firstAttribute="top" secondItem="Cnq-0n-Wfx" secondAttribute="bottom" constant="8" id="W6r-fZ-yqh"/>
-                            <constraint firstItem="aKR-TJ-zEi" firstAttribute="top" secondItem="3lF-VN-fQE" secondAttribute="bottom" constant="10" id="WwE-bQ-TFL"/>
-                            <constraint firstItem="klf-0u-mri" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="XJ4-Oy-uPr"/>
-                            <constraint firstItem="IkC-gd-6kw" firstAttribute="top" secondItem="klf-0u-mri" secondAttribute="bottom" constant="10" id="aep-Fg-9cG"/>
-                            <constraint firstItem="3lF-VN-fQE" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="blZ-3I-wZ0"/>
-                            <constraint firstItem="0aj-qI-l9y" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="lBZ-aN-tiE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="klf-0u-mri" secondAttribute="trailing" id="m1d-Ey-mLt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="18v-G1-UbJ" secondAttribute="trailing" id="m8c-8f-17b"/>
-                            <constraint firstItem="Cnq-0n-Wfx" firstAttribute="centerX" secondItem="YNf-Dr-nOI" secondAttribute="centerX" id="p3r-3T-8OJ"/>
-                            <constraint firstItem="Cnq-0n-Wfx" firstAttribute="top" secondItem="18v-G1-UbJ" secondAttribute="bottom" constant="8" id="qwa-Ol-bey"/>
-                            <constraint firstItem="18v-G1-UbJ" firstAttribute="top" secondItem="N6r-h1-idw" secondAttribute="bottom" constant="23" id="x3V-f4-USF"/>
+                            <constraint firstAttribute="trailing" secondItem="LEo-7r-VfY" secondAttribute="trailing" id="KWT-gj-sKO"/>
+                            <constraint firstItem="LEo-7r-VfY" firstAttribute="leading" secondItem="YNf-Dr-nOI" secondAttribute="leading" id="Vfq-uW-p6i"/>
+                            <constraint firstItem="LEo-7r-VfY" firstAttribute="top" secondItem="N6r-h1-idw" secondAttribute="bottom" constant="3" id="jBp-8n-2ab"/>
+                            <constraint firstItem="gsN-sE-3rD" firstAttribute="top" secondItem="LEo-7r-VfY" secondAttribute="bottom" id="qR2-T6-jBV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create Org" id="7Np-x5-y8l" userLabel="Create Org">
@@ -1231,7 +1242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zv4-Xi-oIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1538" y="-270"/>
+            <point key="canvasLocation" x="1529" y="-420"/>
         </scene>
         <!--Org Preferences View Controller-->
         <scene sceneID="mio-s9-ETL">
@@ -1572,9 +1583,9 @@
         <image name="user_male" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8je-Bk-Ao3"/>
-        <segue reference="ck8-Dd-TdR"/>
         <segue reference="ucT-Jv-n3U"/>
+        <segue reference="8je-Bk-Ao3"/>
+        <segue reference="u0R-6m-rqZ"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>
