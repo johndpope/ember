@@ -37,6 +37,7 @@
     ASTextNode *_eventDesc;
     ASTextNode *_noInterestedBelow;
     NSString *_uid;
+    ASTextNode *_eventLocation;
     
     
 }
@@ -102,6 +103,10 @@
     
     _dateTextNode = [[ASTextNode alloc] init];
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[@"eventDate"], eventDetails[@"eventTime"]]
+                                                                     attributes:[self textStyleLeft]];
+    
+    _eventLocation = [[ASTextNode alloc] init];
+    _eventLocation.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventLocation"]
                                                                      attributes:[self textStyleLeft]];
     
     
@@ -171,7 +176,7 @@
     [self addSubnode:_eventDesc];
     [self addSubnode:_fireCount];
     [self addSubnode:_noInterestedBelow];
-    
+    [self addSubnode:_eventLocation];
 
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
@@ -429,7 +434,7 @@
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
 
-    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, _eventDesc,_divider]];
+    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, _eventLocation,_eventDesc,_divider]];
    
     
     return vertical;

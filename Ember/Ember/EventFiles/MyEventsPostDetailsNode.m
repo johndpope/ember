@@ -44,6 +44,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASButtonNode* _followButton;
     ASNetworkImageNode *_orgProfilePhoto;
     ASTextNode *_dateTextNode;
+    ASTextNode *_eventLocation;
+    
 }
 
 
@@ -86,7 +88,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
     _snapShot = snapShot;
     //    NSDictionary* event = snapShot.value;
-    NSDictionary *eventDetails = snapShot.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
+    NSDictionary *eventDetails = snapShot.getPostDetails;
     
     _orgProfilePhoto = [[ASNetworkImageNode alloc] init];
     _orgProfilePhoto.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
@@ -185,6 +187,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                                                      attributes:[self textStyleItalic]];
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
+    
+    
     
     
   
