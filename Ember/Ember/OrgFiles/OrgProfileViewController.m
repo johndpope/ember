@@ -88,13 +88,14 @@
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
 //                                                                                           target:self
 //                                                                                           action:@selector(toggleEditingMode)];
-    
+//    isAdmin = YES;
     
     _snapShots = [[NSMutableArray alloc] init];
     //        [self fetchData];
     
     [user isAdminOf:self.orgId completionHandler:^(BOOL completionHandler){
        
+        
         if(completionHandler){
             isAdmin = YES;
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
@@ -193,7 +194,7 @@
 - (void)toggleEditingMode
 {
     [_tableNode.view setEditing:!_tableNode.view.editing animated:YES];
-    NSLog(@"hey I just got toggled");
+//    NSLog(@"hey I just got toggled");
     
 }
 
@@ -457,7 +458,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [_titleNodeIndexPath compare:indexPath] != NSOrderedSame;
+    return [_titleNodeIndexPath compare:indexPath] != NSOrderedSame && isAdmin;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
