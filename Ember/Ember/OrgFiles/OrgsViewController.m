@@ -16,7 +16,7 @@
 
 @import Firebase;
 
-@interface OrgsViewController () <ASTableDataSource, ASTableDelegate>
+@interface OrgsViewController () <ASTableDataSource, ASTableDelegate, FindOrgsImageClickedDelegate>
 {
     ASTableNode *_tableNode;
     dispatch_queue_t _previewQueue;
@@ -80,6 +80,10 @@
     _orgs = [[EmberSnapShot alloc] init];
 
     [self fetchData];
+}
+
+-(void)findOrgsImageClicked:(NSString *)orgId{
+    NSLog(@"clicked");
 }
 
 -(void)fetchData{

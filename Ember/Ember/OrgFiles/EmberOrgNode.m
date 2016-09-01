@@ -40,6 +40,7 @@ static const CGFloat kInnerPadding = 10.0f;
     if (!(self = [super init]))
         return nil;
     
+    _snapShot = snapShot;
     NSDictionary* org = snapShot.getPostDetails;
     background = [[ASDisplayNode alloc] init];
     background.flexGrow = YES;
@@ -49,7 +50,10 @@ static const CGFloat kInnerPadding = 10.0f;
     _imageNode = [[ASNetworkImageNode alloc] init];
     _imageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
     _imageNode.URL = [[NSURL alloc] initWithString:org[[BounceConstants firebaseOrgsChildLargeImageLink]]];
-    _imageNode.layerBacked = YES;
+    
+    [_imageNode addTarget:self
+                      action:@selector(imageTapped)
+            forControlEvents:ASControlNodeEventTouchDown];
     
     [self addSubnode: _imageNode];
     [self addSubnode:background];
@@ -72,7 +76,15 @@ static const CGFloat kInnerPadding = 10.0f;
     return self;
 }
 
-
+-(void)imageTapped{
+    
+    NSString *orgId = _snapShot.key;
+    
+    id<FindOrgsImageClickedDelegate> strongDelegate = self.findOrgsImageClickedDelegate;
+    if ([strongDelegate respondsToSelector:@selector(findOrgsImageClicked:)]) {
+        [strongDelegate findOrgsImageClicked:orgId];
+    }
+}
 
 
 - (NSDictionary *)textStyle{
