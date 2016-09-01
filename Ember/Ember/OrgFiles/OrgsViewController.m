@@ -83,7 +83,10 @@
 }
 
 -(void)findOrgsImageClicked:(NSString *)orgId{
-    NSLog(@"clicked");
+//    NSLog(@"clicked");
+    OrgProfileViewController *_myViewController = [OrgProfileViewController new];
+    _myViewController.orgId = orgId;
+    [[self navigationController] pushViewController:_myViewController animated:YES];
 }
 
 -(void)fetchData{
