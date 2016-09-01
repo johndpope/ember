@@ -194,7 +194,6 @@
 - (void)toggleEditingMode
 {
     [_tableNode.view setEditing:!_tableNode.view.editing animated:YES];
-//    NSLog(@"hey I just got toggled");
     
 }
 
@@ -360,6 +359,7 @@
     
     NSString *key = _snapShots[row].key;
     [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
+    [[[[_ref child:[BounceConstants firebaseUsersChild]] child:@"eventsFollowed"] child:key] removeValue];
     
 }
 
