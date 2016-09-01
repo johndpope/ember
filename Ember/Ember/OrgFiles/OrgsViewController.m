@@ -130,6 +130,7 @@
     EmberSnapShot* snapShot = [_orgs getBounceSnapShotAtIndex:indexPath.row];
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
         EmberOrgNode *bounceOrgNode = [[EmberOrgNode alloc] initWithOrg:snapShot];
+        bounceOrgNode.findOrgsImageClickedDelegate = self;
         return bounceOrgNode;
     };
     
