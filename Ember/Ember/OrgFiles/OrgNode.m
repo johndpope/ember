@@ -446,8 +446,10 @@
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
     
+    ASInsetLayoutSpec *eventDescSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 10) child:_eventDesc];
+    
     ASStaticLayoutSpec *statLocation = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_eventLocation]];
-    ASStaticLayoutSpec *staticDesc = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_eventDesc]];
+    ASStaticLayoutSpec *staticDesc = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[eventDescSpecs]];
 
     ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, statLocation,staticDesc,_divider]];
    
