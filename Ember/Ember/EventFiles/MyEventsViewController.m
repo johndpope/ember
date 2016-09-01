@@ -97,13 +97,10 @@
     
     
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-
+    
+    _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _titleNodeIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                           target:self
-                                                                                           action:@selector(toggleEditingMode)];
 
     _comments = [[NSMutableArray alloc] init];
     
