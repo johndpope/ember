@@ -36,7 +36,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
 
     ASTextNode *_textNode;
-    ASDisplayNode *_divider;
     BOOL _swappedTextAndImage;
     ASTextNode *_dateTextNode;
     UIImage *_placeholderImage;
@@ -412,14 +411,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_numberInterested];
     
 //    [self addSubnode:_fireCount];
-    
-    
-    // hairline cell separator
-    _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor lightGrayColor];
-    [self addSubnode:_divider];
-    
-    
+
     return self;
 }
 
