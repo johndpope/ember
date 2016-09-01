@@ -24,7 +24,6 @@ static const CGFloat kInnerPadding = 10.0f;
 @interface EmberOrgNode (){
     
     ASTextNode *_textNode;
-    ASDisplayNode *_divider;
     UIImage *_placeholderImage;
     FIRDataSnapshot*_snapShot;
     ASDisplayNode *background;
@@ -50,7 +49,6 @@ static const CGFloat kInnerPadding = 10.0f;
     _imageNode = [[ASNetworkImageNode alloc] init];
     _imageNode.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
     _imageNode.URL = [[NSURL alloc] initWithString:org[[BounceConstants firebaseOrgsChildLargeImageLink]]];
-    
     _imageNode.layerBacked = YES;
     
     [self addSubnode: _imageNode];
@@ -69,13 +67,6 @@ static const CGFloat kInnerPadding = 10.0f;
     _followNode.cornerRadius = 5.0f;
     _followNode.userInteractionEnabled = YES;
     
-    
-    // hairline cell separator
-    _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor lightGrayColor];
-    [self addSubnode:_divider];
-    
-     [self addSubnode:_followNode];
     
     return self;
 }

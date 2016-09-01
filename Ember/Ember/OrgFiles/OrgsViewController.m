@@ -72,6 +72,8 @@
     [self.view addSubview:_activityIndicatorView];
     
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    
+    _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
   
     _user = [[EmberUser alloc] init];
     

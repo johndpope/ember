@@ -140,7 +140,7 @@ FIRDatabaseHandle _refHandle;
     _storageRef = [_storage referenceForURL:[BounceConstants firebaseStorageUrl]];
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     
-    _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _titleNodeIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     
