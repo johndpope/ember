@@ -22,6 +22,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     var saveCoverImage:UIImage?
     
     
+    @IBOutlet weak var previewCoverImageLabel: UILabel!
     @IBOutlet weak var previewCoverImage: UIImageView!
     @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var campName: UITextField!
@@ -111,6 +112,8 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
                 self.saveImage = pickedImage
             }
             else {
+                previewCoverImageLabel.text = ""
+                previewCoverImage.alpha = CGFloat(1)
                 previewCoverImage.contentMode = .ScaleAspectFit
                 previewCoverImage.image = pickedImage
                 self.saveCoverImage = pickedImage

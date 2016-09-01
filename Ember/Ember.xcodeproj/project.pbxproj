@@ -137,6 +137,7 @@
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
 		C7CDC2C01D738BA100B62B48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7CDC2BF1D738BA100B62B48 /* GoogleService-Info.plist */; };
 		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
+		DDEED2FA1D77F085008EE08E /* pexels-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDEED2F91D77F085008EE08E /* pexels-photo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -344,6 +345,7 @@
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		C7CDC2BF1D738BA100B62B48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDEED2F91D77F085008EE08E /* pexels-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pexels-photo.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -780,6 +782,7 @@
 		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
+				DDEED2F91D77F085008EE08E /* pexels-photo.jpg */,
 				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
 				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
 				C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */,
@@ -991,6 +994,7 @@
 				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,
 				8ED8A7581D72C6D600F396B0 /* calLanding.png in Resources */,
 				C7119E5F1D72A92D0047A5CD /* last.xib in Resources */,
+				DDEED2FA1D77F085008EE08E /* pexels-photo.jpg in Resources */,
 				8ED8A7541D72C5F800F396B0 /* studentsLanding.png in Resources */,
 				C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */,
 			);
