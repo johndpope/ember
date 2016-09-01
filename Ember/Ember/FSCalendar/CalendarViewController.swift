@@ -90,10 +90,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             thisDateEvents = []
              self.mainTableView.reloadData()
         }
-        
-        
-        
-        
     }
     
     func calendar(calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {

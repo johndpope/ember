@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class EventPreferencesViewController: UIViewController {
 
@@ -78,6 +79,8 @@ class EventPreferencesViewController: UIViewController {
         let eventsTreekey = ref.childByAutoId().key
         let eventsRefChild = ref.child(BounceConstants.firebaseSchoolRoot()).child("Events")
         
+        //Get current user UID
+        let userID = FIRAuth.auth()?.currentUser?.uid
         
         // Get a reference to the storage service, using the default Firebase App
         let storage = FIRStorage.storage()
@@ -143,6 +146,11 @@ class EventPreferencesViewController: UIViewController {
                     //get eventDateObject
                     let eventDateObject = -(self.segEventDateObject.timeIntervalSince1970)
                     
+                    //Ref to events followed
+                    let eventsFollowedRefChild = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("eventsFollowed")
+                    
+                    
+                    
                     //Post as homefeed item
                     let homeFeedEntryKey = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").childByAutoId().key
                     let homeFeedRefChild = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed")
@@ -164,6 +172,8 @@ class EventPreferencesViewController: UIViewController {
                     homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["fireCount":0])
                     homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["timeStamp":timeStamp])
                     
+                    //Add to events Followed
+                    eventsFollowedRefChild.updateChildValues([homeFeedEntryKey:true])
                     
                     //Get list of tags
                     let orgTagsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.eventsegOrgID).child("preferences")
