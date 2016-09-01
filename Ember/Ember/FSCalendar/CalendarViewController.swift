@@ -171,25 +171,48 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         return 1
     }
     
-    /*
+    
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        let snap = self.thisDateEvents[indexPath.row];
+        
+        let dateToCheck = snap.childSnapshotForPath("eventDateObject").value as! NSNumber
+        if(checkDate(dateToCheck)) {
+        
+        if let posterKey = (snap.value!.valueForKey("homefeedPostKey") as? String){
+            
+            self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseHomefeed()).child(posterKey).observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
+                let controller = EventViewController()
+                let bounceSnap = EmberSnapShot(snapShot: snapshot)
+                controller.eventNode = bounceSnap
+                self.navigationController?.pushViewController(controller, animated: true)
+                
+            })
+            
+            }
+        }
         
     }
-     */
+    
+    func checkDate(dateToCheck:NSNumber) -> Bool {
+        let date = NSDate()
+        let dateObject = -(dateToCheck.doubleValue)
+        let myDate = NSDate.init(timeIntervalSince1970: dateObject)
+        
+        if (myDate > date) {
+            return true
+        } else {
+            return false
+        }
+        
+        
+        
+    }
+ 
 //    func calendar(calendar: FSCalendar, imageForDate date: NSDate) -> UIImage? {
 //        return [13,24].containsObject(calendar.dayOfDate(date)) ? UIImage(named: "tinyFire") : nil
 //    }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
