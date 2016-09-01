@@ -1168,11 +1168,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-VN-fQE">
-                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pexels-photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
+                                        <rect key="frame" x="238" y="360" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="WJF-hL-1Jb"/>
-                                            <constraint firstAttribute="height" constant="125" id="xki-wy-D7Q"/>
+                                            <constraint firstAttribute="width" constant="125" id="7E4-y7-Uwn"/>
+                                            <constraint firstAttribute="height" constant="125" id="CL2-S6-ube"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-TJ-zEi">
@@ -1185,11 +1185,17 @@
                                             <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
-                                        <rect key="frame" x="238" y="360" width="125" height="125"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Default Cover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10n-sF-bca">
+                                        <rect key="frame" x="248" y="403" width="105" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3lF-VN-fQE">
+                                        <rect key="frame" x="237" y="189" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="7E4-y7-Uwn"/>
-                                            <constraint firstAttribute="height" constant="125" id="CL2-S6-ube"/>
+                                            <constraint firstAttribute="width" constant="125" id="WJF-hL-1Jb"/>
+                                            <constraint firstAttribute="height" constant="125" id="xki-wy-D7Q"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1203,6 +1209,8 @@
                                     <constraint firstItem="IkC-gd-6kw" firstAttribute="leading" secondItem="aKR-TJ-zEi" secondAttribute="leading" id="P9Y-xe-HCb"/>
                                     <constraint firstItem="klf-0u-mri" firstAttribute="top" secondItem="Cnq-0n-Wfx" secondAttribute="bottom" constant="8" symbolic="YES" id="QV9-eb-yfN"/>
                                     <constraint firstItem="18v-G1-UbJ" firstAttribute="centerX" secondItem="LEo-7r-VfY" secondAttribute="centerX" id="T8Q-AQ-ZC6"/>
+                                    <constraint firstItem="10n-sF-bca" firstAttribute="centerX" secondItem="0aj-qI-l9y" secondAttribute="centerX" id="bJo-NJ-T6W"/>
+                                    <constraint firstItem="10n-sF-bca" firstAttribute="centerY" secondItem="0aj-qI-l9y" secondAttribute="centerY" id="bfk-PT-7gx"/>
                                     <constraint firstItem="18v-G1-UbJ" firstAttribute="leading" secondItem="LEo-7r-VfY" secondAttribute="leading" constant="20" id="dnv-Zl-QC1"/>
                                     <constraint firstItem="aKR-TJ-zEi" firstAttribute="top" secondItem="3lF-VN-fQE" secondAttribute="bottom" constant="10" id="fZV-Ou-UPY"/>
                                     <constraint firstItem="3lF-VN-fQE" firstAttribute="top" secondItem="IkC-gd-6kw" secondAttribute="bottom" constant="5" id="jPb-ge-y7i"/>
@@ -1236,6 +1244,7 @@
                         <outlet property="orgCoverPictureButton" destination="aKR-TJ-zEi" id="w24-El-JTr"/>
                         <outlet property="orgPictureButton" destination="IkC-gd-6kw" id="75z-ni-Nzl"/>
                         <outlet property="previewCoverImage" destination="0aj-qI-l9y" id="3Fg-y2-BEv"/>
+                        <outlet property="previewCoverImageLabel" destination="10n-sF-bca" id="wyz-y6-sSf"/>
                         <outlet property="previewImage" destination="3lF-VN-fQE" id="zOR-BK-Z6d"/>
                         <segue destination="fHJ-ke-cty" kind="presentation" identifier="orgPreferenceSelect" id="8je-Bk-Ao3"/>
                         <segue destination="qzv-Ne-eCy" kind="show" identifier="gotoOrgPreferences" id="u0R-6m-rqZ"/>
@@ -1507,11 +1516,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
-                                        <rect key="frame" x="237" y="357" width="125" height="125"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
+                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
-                                            <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
+                                            <constraint firstAttribute="height" constant="125" id="WLW-cE-8q1"/>
+                                            <constraint firstAttribute="width" constant="125" id="u7V-bF-u6N"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-Qw-Fk6">
@@ -1524,11 +1533,11 @@
                                             <action selector="saveOrgCoverPicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="yhP-Vh-oGQ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
-                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
+                                        <rect key="frame" x="237" y="358" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="WLW-cE-8q1"/>
-                                            <constraint firstAttribute="width" constant="125" id="u7V-bF-u6N"/>
+                                            <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
+                                            <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1590,6 +1599,7 @@
         <image name="exit" width="25" height="25"/>
         <image name="groups_filled" width="50" height="50"/>
         <image name="home" width="25" height="25"/>
+        <image name="pexels-photo.jpg" width="640" height="360"/>
         <image name="search_filled" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="user_male" width="25" height="25"/>
