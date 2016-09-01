@@ -15,7 +15,15 @@
 
 @import Firebase;
 
+@protocol FindOrgsImageClickedDelegate;
+
 @interface EmberOrgNode : ASCellNode
+
+@property (nonatomic, weak) id<FindOrgsImageClickedDelegate> findOrgsImageClickedDelegate;
 -(instancetype)initWithOrg: (EmberSnapShot*) snapShot;
+@end
+
+@protocol FindOrgsImageClickedDelegate <NSObject>
+-(void)findOrgsImageClicked:(NSString*)orgId;
 @end
 

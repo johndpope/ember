@@ -16,7 +16,7 @@
 
 @import Firebase;
 
-@interface OrgsViewController () <ASTableDataSource, ASTableDelegate>
+@interface OrgsViewController () <ASTableDataSource, ASTableDelegate, FindOrgsImageClickedDelegate>
 {
     ASTableNode *_tableNode;
     dispatch_queue_t _previewQueue;
@@ -82,6 +82,13 @@
     [self fetchData];
 }
 
+-(void)findOrgsImageClicked:(NSString *)orgId{
+//    NSLog(@"clicked");
+    OrgProfileViewController *_myViewController = [OrgProfileViewController new];
+    _myViewController.orgId = orgId;
+    [[self navigationController] pushViewController:_myViewController animated:YES];
+}
+
 -(void)fetchData{
     
     [_activityIndicatorView startAnimating];
@@ -126,6 +133,7 @@
     EmberSnapShot* snapShot = [_orgs getBounceSnapShotAtIndex:indexPath.row];
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
         EmberOrgNode *bounceOrgNode = [[EmberOrgNode alloc] initWithOrg:snapShot];
+        bounceOrgNode.findOrgsImageClickedDelegate = self;
         return bounceOrgNode;
     };
     
