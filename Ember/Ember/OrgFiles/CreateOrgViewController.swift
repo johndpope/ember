@@ -131,6 +131,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        saveCoverImage = previewCoverImage.image
         
         
          // Do any additional setup after loading the view, typically from a nib.

@@ -1515,11 +1515,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
-                                        <rect key="frame" x="237" y="357" width="125" height="125"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
+                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
-                                            <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
+                                            <constraint firstAttribute="height" constant="125" id="WLW-cE-8q1"/>
+                                            <constraint firstAttribute="width" constant="125" id="u7V-bF-u6N"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCm-Qw-Fk6">
@@ -1532,11 +1532,11 @@
                                             <action selector="saveOrgCoverPicture:" destination="58A-6C-8Ex" eventType="touchUpInside" id="yhP-Vh-oGQ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
-                                        <rect key="frame" x="237" y="187" width="125" height="125"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRk-aG-4sc" userLabel="Preview Cover Image">
+                                        <rect key="frame" x="237" y="358" width="125" height="125"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="WLW-cE-8q1"/>
-                                            <constraint firstAttribute="width" constant="125" id="u7V-bF-u6N"/>
+                                            <constraint firstAttribute="height" constant="125" id="BwH-1p-OGM"/>
+                                            <constraint firstAttribute="width" constant="125" id="mlW-oJ-wHi"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1606,7 +1606,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ucT-Jv-n3U"/>
         <segue reference="8je-Bk-Ao3"/>
-        <segue reference="u0R-6m-rqZ"/>
+        <segue reference="ck8-Dd-TdR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
 </document>
