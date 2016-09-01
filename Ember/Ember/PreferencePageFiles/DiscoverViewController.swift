@@ -23,9 +23,6 @@ class DiscoverViewController: UIViewController {
     
     var ref:FIRDatabaseReference!
     
-    
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference()
@@ -64,8 +61,6 @@ class DiscoverViewController: UIViewController {
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
-
 
     //Method to ensure you have deselected.
     func getRandomColor() -> UIColor  {
@@ -89,6 +84,7 @@ class DiscoverViewController: UIViewController {
         }
     return color
     }
+    
     override func viewDidAppear(animated: Bool) {
         
         if (didAppear == false) {
@@ -162,15 +158,6 @@ class DiscoverViewController: UIViewController {
         
         
     }
-      /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+  
 }
 
