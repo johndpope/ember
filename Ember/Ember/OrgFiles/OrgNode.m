@@ -105,9 +105,24 @@
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[@"eventDate"], eventDetails[@"eventTime"]]
                                                                      attributes:[self textStyleLeft]];
     
+    
+    FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    
     _eventLocation = [[ASTextNode alloc] init];
-    _eventLocation.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventLocation"]
-                                                                     attributes:[self textStyleLeft]];
+    _eventLocation.attributedString = [[NSAttributedString alloc] initWithString:@" "
+                                                                      attributes:[self textStyleLeft]];
+    
+    _eventLocation.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventLocation.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventLocation.attributedString.size.height)));
+    
+    FIRDatabaseQuery *recentPostsQuery3 = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventLocation"];
+    [recentPostsQuery3 observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        _eventLocation.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
+                                                                          attributes:[self textStyleLeft]];
+        
+    }];
     
     
     _eventDesc = [[ASTextNode alloc] init];
@@ -117,12 +132,8 @@
     _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:@" "
                                                                  attributes:[self textStyleDesc]];
     
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    
     _eventDesc.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)));
-    
-    FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    
+
 
     FIRDatabaseQuery *recentPostsQuery2 = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
     [recentPostsQuery2 observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
@@ -433,8 +444,10 @@
 
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
+    
+    ASStaticLayoutSpec *statLocation = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_eventLocation]];
 
-    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, _eventLocation,_eventDesc,_divider]];
+    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, statLocation,_eventDesc,_divider]];
    
     
     return vertical;
