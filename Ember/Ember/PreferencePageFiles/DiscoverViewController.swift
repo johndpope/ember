@@ -61,8 +61,6 @@ class DiscoverViewController: UIViewController {
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
-
 
     //Method to ensure you have deselected.
     func getRandomColor() -> UIColor  {
@@ -86,6 +84,7 @@ class DiscoverViewController: UIViewController {
         }
     return color
     }
+    
     override func viewDidAppear(animated: Bool) {
         
         if (didAppear == false) {
