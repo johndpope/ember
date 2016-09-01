@@ -67,6 +67,7 @@ static const CGFloat kInnerPadding = 10.0f;
     _followNode.cornerRadius = 5.0f;
     _followNode.userInteractionEnabled = YES;
     
+    [self addSubnode:_followNode];
     
     return self;
 }

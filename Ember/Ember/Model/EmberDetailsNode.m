@@ -61,7 +61,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     NSString *_uid;
     ASTextNode *_noImages;
     ASTextNode *_numberInterested;
-    
+    ASDisplayNode*_divider;
     
     
 }
@@ -410,7 +410,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_fire];
     [self addSubnode:_numberInterested];
     
-//    [self addSubnode:_fireCount];
+
+    _divider = [[ASDisplayNode alloc] init];
+    _divider.backgroundColor = [UIColor lightGrayColor];
+    [self addSubnode:_divider];
 
     return self;
 }
@@ -846,7 +849,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
             
             infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2]];
+                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2, _divider]];
         }
         
     }else{
@@ -854,11 +857,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         
         infoStackVert = infoStack_2;
     }
+    
+    ASStackLayoutSpec* final =  [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
+                                                                 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[infoStackVert, _divider]];
 
     
     UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStackVert];
+    ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:final];
     
     // MAKES NODE STRETCH TO FILL AVAILABLE SPACE
     //        spec_2.flexGrow = YES;
