@@ -234,6 +234,8 @@ import FirebaseAuth
         }
         
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -253,6 +255,8 @@ import FirebaseAuth
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
     }
+    
+    
     func getData(){
         
         let eventsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseEventsChild()).queryLimitedToFirst(100)
@@ -291,7 +295,6 @@ import FirebaseAuth
     }
     
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         var item : FIRDataSnapshot
@@ -303,6 +306,7 @@ import FirebaseAuth
         
         return cell
     }
+    
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             cell.accessoryType = .None
