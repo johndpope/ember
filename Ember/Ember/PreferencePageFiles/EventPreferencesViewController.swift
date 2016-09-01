@@ -103,7 +103,7 @@ class EventPreferencesViewController: UIViewController {
         let imgRef = storageRef.child(reference)
         
         // Local file you want to upload
-        let localFile: NSData = UIImageJPEGRepresentation(image, 1.0)!
+        let localFile: NSData = UIImageJPEGRepresentation(image, 0.9)!
         // Create the file metadata
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
@@ -278,9 +278,6 @@ class EventPreferencesViewController: UIViewController {
         }
         return color
     }
-    
-    
-    func uploadImage(image:UIImage)  {
-           }
+
 
 }
