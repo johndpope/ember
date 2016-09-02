@@ -93,7 +93,14 @@
     
     [_activityIndicatorView startAnimating];
     
-    [_user loadPreferences:^(NSDictionary* completion){
+    [_user loadUserInfo:^(NSDictionary* completion){
+        
+        NSDictionary *userPrefs = completion[@"userPreferences"];
+        _user.userPreferences = [userPrefs allKeys];
+        
+        if(completion[@"orgsFollowed"]){
+            _user.orgsFollowed = [completion[@"orgsFollowed"] allKeys];
+        }
         
         FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseOrgsChild]] queryLimitedToFirst:100];
         [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
@@ -111,18 +118,19 @@
                         [_tableNode.view endUpdates];
                     });
                     
-                     count++;
+                    count++;
                 }
- 
- 
+                
+                
             }
             
             if(_activityIndicatorView.isAnimating){
-               [_activityIndicatorView stopAnimating]; 
+                [_activityIndicatorView stopAnimating];
             }
             
             
         }];
+        
     }];
     
 }

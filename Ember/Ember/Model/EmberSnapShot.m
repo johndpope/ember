@@ -92,7 +92,7 @@
         
         if(val[@"preferences"]){
             //                    NSLog(@"past: %@", val[@"preferences"]);
-            NSDictionary *prefs = val[@"preferences"];
+            NSArray *prefs = [val[@"preferences"] allKeys];
  
             if([user matchesUserPreferences:prefs]){ // Add orgs that match prefs at top of list
                 

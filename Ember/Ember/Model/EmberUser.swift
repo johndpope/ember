@@ -15,6 +15,7 @@ class EmberUser : NSObject{
     let debug = false
     
     var userPreferences = NSArray()
+    var orgsFollowed = NSArray()
     
     let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
     
@@ -41,6 +42,24 @@ class EmberUser : NSObject{
             ref.child("users").child(userID).child("preferences").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 if let snap = snapshot.value as? NSDictionary{ // making sure org tags list exists
                     self.userPreferences = Array(snap.allKeys)
+                    //                print(snap)
+                    completion(snap)
+                }
+                
+            }) { (error) in
+                print("error: \(error.localizedDescription)")
+            }
+        }
+        
+    }
+    
+    func loadUserInfo(completion : (NSDictionary)->()){
+        
+        if let userID = FIRAuth.auth()?.currentUser?.uid{
+            
+            ref.child("users").child(userID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if let snap = snapshot.value as? NSDictionary{ // making sure org tags list exists
+//                    self.orgsFollowed = Array(snap.allKeys)
                     //                print(snap)
                     completion(snap)
                 }
@@ -115,9 +134,10 @@ class EmberUser : NSObject{
     
     func userFollowsOrg(key : NSString)->Bool{
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if((userDefaults.objectForKey(key as String)) != nil){
-            return true
+        if(orgsFollowed.count != 0){
+            if(orgsFollowed.containsObject(key as String)){
+                return true
+            }
         }
         return false
     }
