@@ -1078,7 +1078,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:11386638219:ios:3558f6144303345d\n#/Users/AnthonyMaina/Desktop/ember/Ember/Ember/EmberApp-b7538e821b5e.json\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"../Ember/EmberApp-b7538e821b5e.json\"";
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:11386638219:ios:3558f6144303345d\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"../Ember/EmberApp-b7538e821b5e.json\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
