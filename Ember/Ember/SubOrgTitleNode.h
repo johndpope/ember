@@ -19,6 +19,7 @@
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
 @property(strong, nonatomic) NSString *orgID;
+@property(strong, nonatomic) BOOL isAdmin;
 - (instancetype)initWithEvent:(EmberSnapShot*)orgInfo;
 
 -(ASNetworkImageNode*) getImageNode;

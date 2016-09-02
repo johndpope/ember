@@ -61,6 +61,7 @@ static const CGFloat kInnerPadding = 10.0f;
     return _orgNode;
 }
 
+
 - (instancetype)initWithEvent:(EmberSnapShot*)orgInfo{
     if (!(self = [super init]))
         return nil;
@@ -107,6 +108,9 @@ static const CGFloat kInnerPadding = 10.0f;
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:orgDetails[@"orgName"]
                                                                  attributes:[self textStyle]];
     
+    if(self.isAdmin){
+        _followButton.hidden = YES;
+    }
     
     [self addSubnode:_textNode];
     

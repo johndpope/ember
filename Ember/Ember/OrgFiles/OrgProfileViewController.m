@@ -378,6 +378,7 @@
             bounceNode.orgID = self.orgId;
             bounceNode.getSubOrgTitleNode.getOrgDetailsNode.delegate = self;
             [bounceNode.getSubOrgTitleNode.getOrgDetailsNode setAdminStatus:isAdmin];
+            bounceNode.getSubOrgTitleNode.isAdmin = isAdmin;
             [self FIRTitleDownload:bounceNode url: orgDetails[[BounceConstants firebaseOrgsChildLargeImageLink]]];
             return bounceNode;
         };
