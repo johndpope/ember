@@ -10,31 +10,24 @@ import AsyncDisplayKit
 
 @objc class HomeFeedHeaderNode : ASCellNode {
     
-    let orgDesc = ASTextNode()
+    let labelDesc = ASTextNode()
     let background  = ASDisplayNode()
     let divider = ASDisplayNode()
 
     
-    override init() {
-        super.init()
-      
-    }
-    
     convenience init(orgInfo : NSString) {
         self.init()
         
-        self.orgDesc.attributedText = NSAttributedString(string: orgInfo as String, attributes: self.textStyle())
+        self.labelDesc.attributedText = NSAttributedString(string: orgInfo as String, attributes: self.textStyle())
             
         self.background.backgroundColor = UIColor.whiteColor()
-            
-            
-            divider.backgroundColor = UIColor.lightGrayColor()
-            divider.preferredFrameSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 2)
-            divider.spacingAfter = 30
+        divider.backgroundColor = UIColor.lightGrayColor()
+        divider.preferredFrameSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 2)
+        divider.spacingAfter = 30
         
-            addSubnode(background)
-            addSubnode(orgDesc)
-            addSubnode(divider)
+        addSubnode(background)
+        addSubnode(labelDesc)
+        addSubnode(divider)
     }
  
     
@@ -48,7 +41,7 @@ import AsyncDisplayKit
         }
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
-        style.alignment = NSTextAlignment.Left
+        style.alignment = .Left
         
         var multipleAttributes = [String : NSObject]()
         multipleAttributes[NSFontAttributeName] = font
@@ -66,15 +59,15 @@ import AsyncDisplayKit
         
         self.background.flexGrow = true
         
-        let horizontalSpacer = ASLayoutSpec.init()
+        let horizontalSpacer = ASLayoutSpec()
         horizontalSpacer.flexGrow = true
 
         
-        orgDesc.sizeRange = ASRelativeSizeRangeMakeWithExactRelativeDimensions(
+        labelDesc.sizeRange = ASRelativeSizeRangeMakeWithExactRelativeDimensions(
             ASRelativeDimensionMakeWithPercent(1), // Fill parent width
             ASRelativeDimensionMakeWithPoints(50))
         
-        let createEventStaticLayout = ASStaticLayoutSpec(children: [orgDesc])
+        let createEventStaticLayout = ASStaticLayoutSpec(children: [labelDesc])
         
         let insets = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 0), child: createEventStaticLayout)
         

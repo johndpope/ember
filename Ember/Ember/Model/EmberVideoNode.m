@@ -270,7 +270,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor lightGrayColor];
+    _divider.backgroundColor = [UIColor darkGrayColor];
     [self addSubnode:_divider];
     
     return self;
@@ -383,6 +383,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 //    
 //}
 
+
 //#if UseAutomaticLayout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
 
@@ -436,40 +437,14 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     return lastSpecs;
 }
 
-// With box model, you don't need to override this method, unless you want to add custom logic.
 - (void)layout
 {
     [super layout];
     
     // Manually layout the divider.
-//    CGFloat pixelHeight = 1.0f / [[UIScreen mainScreen] scale];
-//    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
+    CGFloat pixelHeight = 1.0f / [[UIScreen mainScreen] scale];
+    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
 }
-//#else
-//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize
-//{
-//    NSLog(@"else called");
-//    CGSize imageSize = CGSizeMake(kImageSize, kImageSize);
-//    CGSize textSize = [_textNode measure:CGSizeMake(constrainedSize.width - kImageSize - 2 * kOuterPadding - kInnerPadding,
-//                                                    constrainedSize.height)];
-//    
-//    // ensure there's room for the text
-//    CGFloat requiredHeight = MAX(textSize.height, imageSize.height);
-//    return CGSizeMake(constrainedSize.width, requiredHeight + 2 * kOuterPadding);
-//}
-//
-//- (void)layout
-//{
-//    CGFloat pixelHeight = 1.0f / [[UIScreen mainScreen] scale];
-//    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
-//    
-//    _imageNode.frame = CGRectMake(kOuterPadding, kOuterPadding, kImageSize, kImageSize);
-//    
-//    CGSize textSize = _textNode.calculatedSize;
-//    _textNode.frame = CGRectMake(kOuterPadding + kImageSize + kInnerPadding, kOuterPadding, textSize.width, textSize.height);
-//}
-//#endif
-
 
 - (void)toggleNodesSwap
 {

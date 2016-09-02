@@ -100,7 +100,7 @@
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor lightGrayColor];
+    _divider.backgroundColor = [UIColor darkGrayColor];
     [self addSubnode:_divider];
     
     
@@ -171,6 +171,14 @@
     
 }
 
+- (void)layout
+{
+    [super layout];
+    
+    // Manually layout the divider.
+    CGFloat pixelHeight = 1.0f;
+    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
+}
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
@@ -190,24 +198,8 @@
     
     ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
     horizontalSpacer.flexGrow = YES;
-    
-//    NSLog(@"screenwidth: %f", screenWidth);
-
-    
-    // MAKES NODE STRETCH TO FILL AVAILABLE SPACE
-//        spec_2.flexGrow = YES;
-
-    
-//    ASBackgroundLayoutSpec *bG = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:_imageNode background:_imageNode];
-    
-    
     ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, _emberDetailsNode]];
     
-    
-//    ASRelativeSize min = ASRelativeSizeMake(ASRelativeDimensionMakeWithPoints(screenWidth), ASRelativeDimensionMakeWithPoints(constrainedSize.min.height));
-//    ASRelativeSize max = ASRelativeSizeMake(ASRelativeDimensionMakeWithPoints(screenWidth), ASRelativeDimensionMakeWithPoints(constrainedSize.max.height));
-//    vert.sizeRange = ASRelativeSizeRangeMake(min, max);
-//    return [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[vert]];
     
     return vert;
 }

@@ -798,10 +798,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     ASStackLayoutSpec *captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
                                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,_noImages]];
-    
-    
-    
-    //    NSLog(@"screenwidth: %f", screenWidth);
+
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
 //    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
@@ -849,7 +846,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
             
             infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2, _divider]];
+                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2]];
         }
         
     }else{
@@ -859,7 +856,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }
     
     ASStackLayoutSpec* final =  [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                                 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[infoStackVert, _divider]];
+                                                                 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[infoStackVert]];
 
     
     UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);

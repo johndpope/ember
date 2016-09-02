@@ -629,7 +629,7 @@ FIRDatabaseHandle _refHandle;
         }
     
     
-    [node measure:CGSizeMake(tableView.bounds.size.width, FLT_MAX)];
+    [node measure:CGSizeMake(tableView.bounds.size.width, 50.0f)];
     
     return node.view;
 }
@@ -659,7 +659,11 @@ FIRDatabaseHandle _refHandle;
             [_messageLabel removeFromSuperview];
         }
     }
-    return 2;
+    
+    if(_data.getNoOfBounceSnapShots > 0 && _dataSection2.getNoOfBounceSnapShots > 0){
+        return 2;
+    }
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
