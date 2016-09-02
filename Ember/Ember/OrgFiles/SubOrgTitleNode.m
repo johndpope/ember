@@ -38,6 +38,7 @@ static const CGFloat kInnerPadding = 10.0f;
     FIRDatabaseReference *_ref;
     OrgDetailsNode *_orgNode;
     NSString* orgId;
+    BOOL _isAdmin;
 }
 
 @end
@@ -61,11 +62,16 @@ static const CGFloat kInnerPadding = 10.0f;
     return _orgNode;
 }
 
+-(void)setAdminStatus:(BOOL)adminStatus{
+    
+    _isAdmin = adminStatus;
+}
 
 - (instancetype)initWithEvent:(EmberSnapShot*)orgInfo{
     if (!(self = [super init]))
         return nil;
     
+    _isAdmin = NO;
     _ref = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
@@ -107,10 +113,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:orgDetails[@"orgName"]
                                                                  attributes:[self textStyle]];
-    
-    if(self.isAdmin){
-        _followButton.hidden = YES;
-    }
+
     
     [self addSubnode:_textNode];
     
@@ -204,6 +207,10 @@ static const CGFloat kInnerPadding = 10.0f;
     CGFloat height = width * 3/4;
     _imageNode.preferredFrameSize = CGSizeMake(width, height);
     _textNode.flexShrink = YES;
+    
+    if(_isAdmin){
+        _followButton.hidden = YES;
+    }
     
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
     
