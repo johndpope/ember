@@ -136,6 +136,7 @@
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
 		C7F7A7951D79BA1D00970438 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */; };
+		C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */ = {isa = PBXBuildFile; fileRef = C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */; };
 		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
 		DDEED2FA1D77F085008EE08E /* pexels-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DDEED2F91D77F085008EE08E /* pexels-photo.jpg */; };
 /* End PBXBuildFile section */
@@ -344,6 +345,7 @@
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "EmberApp-b7538e821b5e.json"; sourceTree = "<group>"; };
 		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDEED2F91D77F085008EE08E /* pexels-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "pexels-photo.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -808,6 +810,7 @@
 				C76CDDF91D72A689008CEB9A /* Util */,
 				C76CDDD21D72A657008CEB9A /* Assets.xcassets */,
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
+				C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */,
 				C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */,
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
@@ -880,6 +883,7 @@
 				C76CDDC41D72A657008CEB9A /* Resources */,
 				95815F167D75123FCDA691C0 /* Embed Pods Frameworks */,
 				18160DAA4ABACFC33524BDDC /* Copy Pods Resources */,
+				C7F7A7981D79EA5C00970438 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -988,6 +992,7 @@
 				C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */,
 				C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */,
 				8ED8A74E1D72C5F800F396B0 /* BackgroundVideo.mp4 in Resources */,
+				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
 				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,
@@ -1061,6 +1066,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ember/Pods-Ember-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C7F7A7981D79EA5C00970438 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:11386638219:ios:3558f6144303345d\n#/Users/AnthonyMaina/Desktop/ember/Ember/Ember/EmberApp-b7538e821b5e.json\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"../Ember/EmberApp-b7538e821b5e.json\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
