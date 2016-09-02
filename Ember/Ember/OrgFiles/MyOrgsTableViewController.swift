@@ -54,7 +54,7 @@ class MyOrgsTableViewController: UITableViewController {
             }
             for object in self.interimIds {
                 let orgsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations/\(object)")
-                orgsQuery.queryOrderedByKey().observeEventType(FIRDataEventType.Value, withBlock: {(snapshot)in
+                orgsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot)in
                     dispatch_async(dispatch_get_main_queue(),{
                         self.orgs.append(snapshot)
                         self.tableView.reloadData()

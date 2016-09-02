@@ -127,19 +127,21 @@
     
     _eventDesc = [[ASTextNode alloc] init];
     _eventDesc.spacingBefore = 10;
-    _eventDesc.maximumNumberOfLines = 3;
+    _eventDesc.maximumNumberOfLines = 5;
+    _eventDesc.flexGrow = YES;
     
     _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:@" "
                                                                  attributes:[self textStyleDesc]];
     
-    _eventDesc.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)));
+    _eventDesc.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height * 5)));
 
 
     FIRDatabaseQuery *recentPostsQuery2 = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
-    [recentPostsQuery2 observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+    [recentPostsQuery2 observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+//                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
                                                                       attributes:[self textStyleDesc]];
+        [self setNeedsLayout];
         
     }];
     
@@ -372,7 +374,6 @@
     }else{
         font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
     }
-
     
     NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -445,9 +446,12 @@
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
     
+    ASInsetLayoutSpec *eventDescSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 10) child:_eventDesc];
+    
     ASStaticLayoutSpec *statLocation = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_eventLocation]];
+    ASStaticLayoutSpec *staticDesc = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[eventDescSpecs]];
 
-    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, statLocation,_eventDesc,_divider]];
+    ASStackLayoutSpec *vertical = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[followingSpecs, _eventName, _dateTextNode, statLocation,staticDesc,_divider]];
    
     
     return vertical;
