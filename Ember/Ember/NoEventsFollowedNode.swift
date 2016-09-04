@@ -1,8 +1,8 @@
 //
-//  NoPostsNode.swift
-//  bounceapp
+//  NoEventsFollowedNode.swift
+//  Ember
 //
-//  Created by Gabriel Wamunyu on 8/23/16.
+//  Created by Gabriel Wamunyu on 9/4/16.
 //  Copyright © 2016 Anthony Wamunyu Maina. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import AsyncDisplayKit
 import FirebaseAuth
 
-class NoPostsNode: ASCellNode {
+class NoEventsFollowedNode: ASCellNode {
     
     let mediaText = ASTextNode()
     
@@ -25,15 +25,15 @@ class NoPostsNode: ASCellNode {
     
     override init() {
         super.init()
- 
-        self.mediaText.attributedText = NSAttributedString(string: "No Posts yet. Go ahead and make your first post!", attributes:
-        self.textStyle())
-    
+        
+        self.mediaText.attributedText = NSAttributedString(string: "No events followed yet. Go ahead and follow one!", attributes:
+            self.textStyle())
+        
         addSubnode(mediaText)
-      
+        
     }
-
-
+    
+    
     
     func textStyle() -> [String : NSObject]{
         
@@ -43,7 +43,7 @@ class NoPostsNode: ASCellNode {
         }else{
             font = UIFont.systemFontOfSize(16)
         }
-
+        
         let style = NSMutableParagraphStyle()
         style.paragraphSpacing = 0.5 * font.lineHeight
         style.alignment = NSTextAlignment.Center
@@ -62,11 +62,11 @@ class NoPostsNode: ASCellNode {
         mediaText.sizeRange = ASRelativeSizeRangeMakeWithExactRelativeDimensions(
             ASRelativeDimensionMakeWithPercent(1),
             ASRelativeDimensionMakeWithPoints(50))
-      
+        
         let usernameStaticLayout = ASStaticLayoutSpec(children: [mediaText])
         
         let insets = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), child: usernameStaticLayout)
-
+        
         return insets
     }
     

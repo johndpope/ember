@@ -92,6 +92,8 @@ class OrgDetailsNode : ASCellNode {
             attr2.addAttributes(attrChange2, range: stringFollowers2.rangeOfString(followerString))
             self.noFollowersBelow.attributedText = attr2
             
+            self.setNeedsLayout()
+            
             
         })
         
@@ -118,6 +120,8 @@ class OrgDetailsNode : ASCellNode {
             let attrEventsChange2 = [NSForegroundColorAttributeName: UIColor.lightGrayColor()]
             attrEvents2.addAttributes(attrEventsChange2, range: stringEvents2.rangeOfString("Events"))
             self.noEventsBelow.attributedText = attrEvents2
+            
+            self.setNeedsLayout()
             
         })
         

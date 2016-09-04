@@ -214,7 +214,12 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventName
                                                                  attributes:[self textStyle]];
     
-    _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _textNode.attributedString.size.height * 2)));
+    if(IS_IPHONE_5){
+        _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.55, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.55, _textNode.attributedString.size.height * 2)));
+    }else{
+       _textNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.605, _textNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.605, _textNode.attributedString.size.height * 2)));
+    }
+    
     
     _textNode.maximumNumberOfLines = 2;
     _textNode.truncationMode = NSLineBreakByTruncatingTail;
@@ -299,8 +304,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         NSUInteger fireCountNum = [fireCountString integerValue];
         _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", fireCountNum]
                                                                       attributes:[self textStyleInterested]];
-        
-     
     }
     
     _fireCount = [[ASTextNode alloc] init];
@@ -359,7 +362,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
                                                                      attributes:[self textStyleItalic]];
     
-//    _dateTextNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.604, _dateTextNode.attributedString.size.height)));
+    _dateTextNode.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.204, _dateTextNode.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.204, _dateTextNode.attributedString.size.height)));
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
@@ -798,13 +801,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     ASStackLayoutSpec *captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
                                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,_noImages]];
-    
-    
-    
-    //    NSLog(@"screenwidth: %f", screenWidth);
+
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
-//    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
+    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
     
     NSArray *info = @[ eventNameStatic, _dateTextNode];
     NSArray *info_2 = @[ _numberInterested, _followButton];
@@ -838,8 +838,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 //            infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:0.0
 //                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[orgPhotoInset,infoStack,horizontalSpacer, _fire, _fireCount]];
 
-            infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:0.0
-                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[orgPhotoInset,infoStack,horizontalSpacer, _fire]];
+            ASInsetLayoutSpec *fireInset = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 30) child:_fire];
+            
+            infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[orgPhotoInset,infoStack,horizontalSpacer, fireInset]];
         }
         
         if(_userName.hidden && _caption.hidden){
@@ -849,7 +851,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
             
             infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2, _divider]];
+                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2]];
         }
         
     }else{
@@ -859,7 +861,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }
     
     ASStackLayoutSpec* final =  [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                                 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[infoStackVert, _divider]];
+                                                                 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[infoStackVert]];
 
     
     UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);

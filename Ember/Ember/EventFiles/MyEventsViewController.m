@@ -30,12 +30,13 @@
     ASTableNode *_tableNode;
     FIRDataSnapshot *_snapShot;
     BOOL _dataSourceLocked;
-    NSIndexPath *_titleNodeIndexPath;
+    NSIndexPath *_noEventsFollowedNodeIndexPath;
     int *count;
     dispatch_queue_t _previewQueue;
     NSString *_url;
     int _lastFireCount;
     EmberSnapShot *_data;
+    BOOL _reloadCalled;
     
     
 }
@@ -74,6 +75,7 @@
     [super viewDidLoad];
     
     
+    
     [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
                                                     FIRUser *_Nullable user) {
         if (user != nil) {
@@ -84,6 +86,8 @@
             NSLog(@"user is NOT signed in");
         }
     }];
+    
+    _reloadCalled = NO;
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     self.eventRef = [[self.ref child:@"Bounce"] child:[BounceConstants firebaseEventsChild]];
@@ -100,7 +104,7 @@
     
     _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    _titleNodeIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    _noEventsFollowedNodeIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
 
     _comments = [[NSMutableArray alloc] init];
     
@@ -236,6 +240,7 @@
     [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
+//         NSLog(@"first: %@", firstSnap);
          FIRDatabaseQuery *query = [[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] queryLimitedToFirst:100];
          [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
@@ -245,12 +250,22 @@
 //             NSLog(@"second: %@", second);
              [_data addMyEventsSnapShot:second key:firstSnap.key];
              dispatch_async(dispatch_get_main_queue(), ^{
+//                 NSLog(@"reload");
+                 _reloadCalled = YES;
                  [_tableNode.view reloadData];
              });
              
          }];
          
      }];
+    
+    // NOTE: Needed since the evnet type above (child added) only fires if a value exists in the tree
+    if(_data.getNoOfBounceSnapShots == 0){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _reloadCalled = YES;
+            [_tableNode.view reloadData];
+        });
+    }
     
 
     
@@ -330,6 +345,14 @@
 
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if([_noEventsFollowedNodeIndexPath compare:indexPath] == NSOrderedSame && _reloadCalled && _data.getNoOfBounceSnapShots == 0){
+        ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
+            return [[NoEventsFollowedNode alloc] init];
+        };
+        
+        return cellNodeBlock;
+    }
+    
     EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:indexPath.row];
     NSDictionary *eventDetails = snap.getFirebaseSnapShot.value[[BounceConstants firebaseHomefeedPostDetails]];
     
@@ -355,6 +378,9 @@
     
     if(_data.getNoOfBounceSnapShots != 0){
         return _data.getNoOfBounceSnapShots;
+    }
+    if(_reloadCalled){
+        return 1;
     }
     return 0;
 }
