@@ -29,7 +29,7 @@ class NotificationsTableViewController: UITableViewController {
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.tintColor = PRIMARY_APP_COLOR
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 25)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName:UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
         
         // Use the edit button item provided by the table view controller.
         self.navigationItem.rightBarButtonItem = editButtonItem()

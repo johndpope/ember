@@ -595,7 +595,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     if(_followButton.selected){
         
         NSDictionary *attrDict = @{
-                                   NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:14.0],
+                                   NSFontAttributeName : [UIFont systemFontOfSize:14 weight:UIFontWeightRegular],
                                    NSForegroundColorAttributeName : [UIColor lightGrayColor]
                                    };
         

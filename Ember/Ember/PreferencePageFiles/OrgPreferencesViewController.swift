@@ -141,7 +141,7 @@ class OrgPreferencesViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Org Tags"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 25)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
         
         // Do any additional setup after loading the view.
         newTagListView = TagListView(frame: CGRectMake(0, orgTagsView.frame.minY , orgTagsView.frame.size.width,orgTagsView.frame.size.height))

@@ -104,7 +104,7 @@ class ProfileViewController: UIViewController, OpenMyOrgsFromSuperDelegate, Open
             self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
 //            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor() // HIDES NAVIGATION TEXT
             
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 30)!]
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(30, weight: UIFontWeightThin)]
             
             
             // MARK: - Scroll menu setup

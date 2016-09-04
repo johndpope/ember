@@ -82,8 +82,7 @@ class HomeFeedViewController: UIViewController {
             //self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 30)!]
-            
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName:UIFont.systemFontOfSize(30, weight: UIFontWeightThin)]
             
             // MARK: - Scroll menu setup
             // Initialize view controllers to display and place in array
@@ -102,7 +101,7 @@ class HomeFeedViewController: UIViewController {
                 //.ViewBackgroundColor(UIColor(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1.0)),
                 .SelectionIndicatorColor(PRIMARY_APP_COLOR),
                 .BottomMenuHairlineColor(UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 80.0/255.0, alpha: 1.0)),
-                .MenuItemFont(UIFont(name: "HelveticaNeue", size: 13.0)!),
+                .MenuItemFont(UIFont.systemFontOfSize(13, weight: UIFontWeightRegular)),
                 .MenuHeight(40.0),
                 .MenuItemWidth(90.0),
                 .CenterMenuItems(true)

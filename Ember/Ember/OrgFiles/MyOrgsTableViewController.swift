@@ -21,7 +21,7 @@ class MyOrgsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         retrieveORGIDS()
-               self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 25)!]
+               self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
