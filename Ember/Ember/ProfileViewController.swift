@@ -96,7 +96,7 @@ class ProfileViewController: UIViewController, OpenMyOrgsFromSuperDelegate, Open
         
         if(noOfTimesControllerCameIntoView < 1){
             
-            self.navigationController?.navigationBar.topItem?.title = "your profile"
+            self.navigationController?.navigationBar.topItem?.title = "Your Profile"
             
             self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
             self.navigationController?.navigationBar.shadowImage = UIImage()

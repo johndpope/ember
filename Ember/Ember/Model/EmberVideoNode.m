@@ -270,7 +270,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor darkGrayColor];
+    _divider.backgroundColor = [UIColor lightGrayColor];
     [self addSubnode:_divider];
     
     return self;

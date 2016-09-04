@@ -16,6 +16,7 @@
 @interface HomefeedController : ASViewController <UITabBarControllerDelegate>
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
+@property(nonatomic, strong) NSMutableDictionary *headers;
 
 
 @end

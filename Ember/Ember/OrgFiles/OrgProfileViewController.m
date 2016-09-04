@@ -29,7 +29,7 @@
 @import FirebaseStorage;
 
 
-@interface OrgProfileViewController () <ASTableDataSource, ASTableDelegate, OpenCreateEventDelegate, ImageClickedDelegate>
+@interface OrgProfileViewController () <ASTableDataSource, ASTableDelegate, OpenCreateEventDelegate, ImageClickedDelegate, BounceImageClickedDelegate>
 {
     ASTableNode *_tableNode;
     BOOL _dataSourceLocked;
@@ -109,6 +109,16 @@
     }];
     
     
+}
+
+-(void)bounceImageClicked:(EmberSnapShot *)snap{
+    NSDictionary *eventDetails = [snap getPostDetails];
+    NSString *url = eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
+    if(![url containsString:@"mp4"]  || [url containsString:@"mov"] ){
+        EventViewController *_myViewController = [EventViewController new];
+        _myViewController.eventNode = snap;
+        [[self navigationController] pushViewController:_myViewController animated:YES];
+    }
 }
 
 -(void)childNode:(EmberNode *)childImage didClickImage:(UIImage *)image withLinks:(NSArray *)array{
@@ -411,11 +421,13 @@
             
             bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:true];
             bounceNode.delegate = self;
+            bounceNode.imageDelegate = self;
             
             
         }else{
             bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:false];
             bounceNode.delegate = self;
+            bounceNode.imageDelegate = self;
             
         }
         

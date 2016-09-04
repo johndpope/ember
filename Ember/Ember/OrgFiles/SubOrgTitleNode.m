@@ -100,11 +100,18 @@ static const CGFloat kInnerPadding = 10.0f;
     [_followButton setImage:[UIImage imageNamed:@"plus-not-filled"] forState:ASControlStateNormal];
     [_followButton setImage:[UIImage imageNamed:@"event-selected"] forState:ASControlStateSelected];
     
-    if(orgInfo != nil && [[NSUserDefaults standardUserDefaults] objectForKey:orgInfo.key] != nil){
-        [_followButton setSelected:YES];
-    }else{
-        [_followButton setSelected:NO];
-    }
+    
+    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        if([snap.value isEqual:[NSNull null]]){
+            [_followButton setSelected:NO];
+            
+        }else{
+            [_followButton setSelected:YES];
+         
+        }
+        
+    }];
     
 
     [_followButton addTarget:self action:@selector(followButtonClicked) forControlEvents:ASControlNodeEventTouchDown];
@@ -133,9 +140,7 @@ static const CGFloat kInnerPadding = 10.0f;
 -(void)followButtonClicked{
   
     if(_followButton.selected){
-        NSString *key = [[NSUserDefaults standardUserDefaults] valueForKey:_snapShot.key];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:key] removeValue];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] removeValue];
         
         [[[[[_ref child:[BounceConstants firebaseOrgsChild]] child: _snapShot.key] child:@"followers"] child:_user.uid] removeValue];
    
@@ -149,11 +154,11 @@ static const CGFloat kInnerPadding = 10.0f;
         [ref setValue:[NSNumber numberWithBool:YES]];
         [orgListRef setValue:[NSNumber numberWithBool:YES]]; // Won't add a new entry since the key is the user ID and using number format of bool
         // since Firebase doesn't allow keys without values
-        
-        [[NSUserDefaults standardUserDefaults] setValue:ref.key forKey:_snapShot.key];
+
         [_followButton setSelected:YES];
         
     }
+//    [self setNeedsLayout];
 }
 
 -(FIRDatabaseReference*) getOrgFollowersReference{

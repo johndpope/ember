@@ -100,7 +100,7 @@
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
-    _divider.backgroundColor = [UIColor darkGrayColor];
+    _divider.backgroundColor = [UIColor lightGrayColor];
     [self addSubnode:_divider];
     
     
@@ -193,8 +193,6 @@
     _imageNode.preferredFrameSize = CGSizeMake(screenWidth, screenWidth * 0.8);
     _emberDetailsNode.flexShrink = YES;
     _emberDetailsNode.preferredFrameSize = CGSizeMake(screenWidth, constrainedSize.min.height);
-    
-
     
     ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
     horizontalSpacer.flexGrow = YES;

@@ -51,8 +51,7 @@ import AsyncDisplayKit
         return multipleAttributes
         
     }
-    
-    
+
     override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
 
         self.divider.flexGrow = true

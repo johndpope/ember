@@ -25,6 +25,7 @@
 		8E852C131D72BB5B002FFB90 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */; };
 		8E852C141D72BB5B002FFB90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E852C021D72BB5B002FFB90 /* Info.plist */; };
 		8E852C151D72BB5B002FFB90 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852C041D72BB5B002FFB90 /* UIView+FSExtension.m */; };
+		8E926C4F1D7CB72D005F46BB /* NoEventsFollowedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */; };
 		8ED8A6C41D72C19600F396B0 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */; };
 		8ED8A6C91D72C1B800F396B0 /* HomefeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C61D72C1B800F396B0 /* HomefeedController.m */; };
 		8ED8A6CA1D72C1B800F396B0 /* HomeFeedHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C71D72C1B800F396B0 /* HomeFeedHeaderNode.swift */; };
@@ -192,6 +193,7 @@
 		8E852C021D72BB5B002FFB90 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FSCalendar/Info.plist; sourceTree = "<group>"; };
 		8E852C031D72BB5B002FFB90 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FSExtension.h"; path = "FSCalendar/UIView+FSExtension.h"; sourceTree = "<group>"; };
 		8E852C041D72BB5B002FFB90 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
+		8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoEventsFollowedNode.swift; sourceTree = "<group>"; };
 		8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InternetConnection.swift; path = Ember/Util/InternetConnection.swift; sourceTree = "<group>"; };
 		8ED8A6C51D72C1B800F396B0 /* HomefeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomefeedController.h; path = Ember/HomeFeed/HomefeedController.h; sourceTree = "<group>"; };
 		8ED8A6C61D72C1B800F396B0 /* HomefeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomefeedController.m; path = Ember/HomeFeed/HomefeedController.m; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				8ED8A73E1D72C50B00F396B0 /* MyEventsPostDetailsNode.m */,
 				8ED8A73F1D72C50B00F396B0 /* MyEventsViewController.h */,
 				8ED8A7401D72C50B00F396B0 /* MyEventsViewController.m */,
+				8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */,
 			);
 			name = MyEventsFiles;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				8ED8A6FA1D72C32500F396B0 /* GalleryConfiguration.swift in Sources */,
 				8ED8A6DF1D72C1C900F396B0 /* EmberVideoNode.m in Sources */,
 				8E852C151D72BB5B002FFB90 /* UIView+FSExtension.m in Sources */,
+				8E926C4F1D7CB72D005F46BB /* NoEventsFollowedNode.swift in Sources */,
 				C7119EB91D72AB760047A5CD /* TabBarController.swift in Sources */,
 				C7119EC11D72AB960047A5CD /* NotificationItem.swift in Sources */,
 				C7119F0C1D72ADF00047A5CD /* CGSize.swift in Sources */,

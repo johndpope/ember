@@ -150,6 +150,8 @@ FIRDatabaseHandle _refHandle;
     
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppSettingsChanged:) name:@"MyAppSettingsChanged" object:nil];
+    
+    _headers = [[NSMutableDictionary alloc] init];
 
    
     //[self loadMoreContents];
@@ -304,6 +306,8 @@ FIRDatabaseHandle _refHandle;
                     
                     if(val[@"orgTags"]){
                         
+//                        NSLog(@"passed");
+                        
                         NSArray *prefs = nil;
                         
                         if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
@@ -366,6 +370,9 @@ FIRDatabaseHandle _refHandle;
                 
             }
             
+//            NSLog(@"before reload 1: %lu", _dataSection2.getNoOfBounceSnapShots);
+//            NSLog(@"before reload 2: %lu", _data.getNoOfBounceSnapShots);
+            
             [_activityIndicatorView stopAnimating];
             
             if(_refreshControl.isRefreshing){
@@ -375,6 +382,7 @@ FIRDatabaseHandle _refHandle;
             
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 [_tableNode.view reloadData];
             });
         }withCancelBlock:^(NSError *_Nonnull error){
@@ -386,25 +394,11 @@ FIRDatabaseHandle _refHandle;
     
 }
 
-
-
-- (BOOL)prefersStatusBarHidden
+- (void)viewDidLayoutSubviews
 {
-    return YES;
-}
-
-
-- (NSDictionary *)textStyle{
-    UIFont *font = [UIFont systemFontOfSize:14.0f];
- 
-    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    style.paragraphSpacing = 0.5 * font.lineHeight;
-    style.hyphenationFactor = 1.0;
-    style.alignment = NSTextAlignmentLeft;
+    [super viewDidLayoutSubviews];
     
-    
-    return @{ NSFontAttributeName: font,
-              NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
+    [_refreshControl.superview sendSubviewToBack:_refreshControl];
 }
 
 -(void)FIRDownload:(EmberNode*)node post:(NSDictionary*)post{
@@ -618,18 +612,27 @@ FIRDatabaseHandle _refHandle;
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
  
+    id key = @(section);
+    
     HomeFeedHeaderNode *node = nil;
     
         if(section == 0){
-            node = [[HomeFeedHeaderNode alloc] initWithOrgInfo:@"UPCOMING"];
+            node = _headers[key];
+            if (!node) {
+                node = [[HomeFeedHeaderNode alloc] initWithOrgInfo:@"UPCOMING"];
+                _headers[key] = node;
+            }
             
         }else{
-            node = [[HomeFeedHeaderNode alloc] initWithOrgInfo:@"PAST"];
+            node = _headers[key];
+            if (!node) {
+                node = [[HomeFeedHeaderNode alloc] initWithOrgInfo:@"PAST"];
+                _headers[key] = node;
+            }
 
         }
     
-    
-    [node measure:CGSizeMake(tableView.bounds.size.width, 50.0f)];
+    [node measure:CGSizeMake(tableView.bounds.size.width, FLT_MAX)];
     
     return node.view;
 }
@@ -660,10 +663,10 @@ FIRDatabaseHandle _refHandle;
         }
     }
     
-    if(_data.getNoOfBounceSnapShots > 0 && _dataSection2.getNoOfBounceSnapShots > 0){
-        return 2;
-    }
-    return 1;
+//    if(_data.getNoOfBounceSnapShots > 0 && _dataSection2.getNoOfBounceSnapShots > 0){
+//        return 2;
+//    }
+    return 2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -671,7 +674,7 @@ FIRDatabaseHandle _refHandle;
         return 0;
     } else {
         // whatever height you'd want for a real section header
-        return 20;
+        return 22;
     }
     
 }
@@ -724,12 +727,15 @@ FIRDatabaseHandle _refHandle;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     if(section == 0){
+//        NSLog(@"section 1 rows: %lu", _dataSection2.getNoOfBounceSnapShots);
         if([_dataSection2 getNoOfBounceSnapShots] != 0){
             return [_dataSection2 getNoOfBounceSnapShots];
         }
         return 0;
     }else{
+//        NSLog(@"section 2 rows: %lu", _data.getNoOfBounceSnapShots);
         if([_data getNoOfBounceSnapShots] != 0){
             return [_data getNoOfBounceSnapShots];
         }
