@@ -107,6 +107,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             if (isProfilePicture) {
+                previewImage.backgroundColor = nil
                 previewImage.contentMode = .ScaleAspectFit
                 previewImage.image = pickedImage
                 self.saveImage = pickedImage
