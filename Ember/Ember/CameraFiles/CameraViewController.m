@@ -48,9 +48,6 @@ const int videoDuration  = 15;
     self.view.backgroundColor = [UIColor blackColor];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
-    
-     //self.applicationWindow?.windowLevel = (statusBarHidden) ? UIWindowLevelStatusBar + 1 : UIWindowLevelNormal
-    //
     //[self.view.window addSubview:<#(nonnull UIView *)#>]
     
         
@@ -136,9 +133,9 @@ const int videoDuration  = 15;
     
     //button to go back to app
     self.homeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.homeButton.frame = CGRectMake(0, 0, 50.0f, 50.0f);
+    self.homeButton.frame = CGRectMake(0, 0, 60.0f, 60.0f);
     self.homeButton.tintColor = [UIColor whiteColor];
-    [self.homeButton setImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
+    [self.homeButton setImage:[UIImage imageNamed:@"undo"] forState:UIControlStateNormal];
     self.homeButton.imageEdgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
     
     self.homeButton.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -151,7 +148,7 @@ const int videoDuration  = 15;
     if([LLSimpleCamera isFrontCameraAvailable] && [LLSimpleCamera isRearCameraAvailable]) {
         // button to toggle camera positions
         self.switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.switchButton.frame = CGRectMake(0, 0, 50.0f, 50.0f);
+        self.switchButton.frame = CGRectMake(0, 0, 60.0f, 60.0f);
         self.switchButton.tintColor = [UIColor whiteColor];
         [self.switchButton setImage:[UIImage imageNamed:@"camera-switch"] forState:UIControlStateNormal];
         self.switchButton.imageEdgeInsets = UIEdgeInsetsMake(10.0f, 10.0f, 10.0f, 10.0f);
@@ -340,11 +337,17 @@ const int videoDuration  = 15;
     self.flashButton.center = self.view.contentCenter;
     self.flashButton.top = 5.0f;
     
-    self.switchButton.top = 5.0f;
-    self.switchButton.right = self.view.width - 5.0f;
+//    self.switchButton.top = 5.0f;
+//    self.switchButton.right = self.view.width - 5.0f;
     
-    self.homeButton.top = 5.0f;
-    self.homeButton.left = 5.0f;
+//    self.homeButton.top = 5.0f;
+//    self.homeButton.left = 5.0f;
+    
+    self.homeButton.left = 5;
+    self.homeButton.bottom = self.view.height - 15.0f;
+    
+    self.switchButton.right = self.view.contentBounds.size.width - 5;
+    self.switchButton.bottom = self.view.height - 15.0f;
 
 }
 
