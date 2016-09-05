@@ -126,6 +126,7 @@
 		C7119F1D1D72AE900047A5CD /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */; };
 		C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F2E1D72B1D00047A5CD /* Main.storyboard */; };
 		C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F311D72B2720047A5CD /* Walkthrough.storyboard */; };
+		C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */ = {isa = PBXBuildFile; fileRef = C71B6DBF1D7D3E4000F50B8C /* mainLand.png */; };
 		C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDC91D72A657008CEB9A /* AppDelegate.swift */; };
 		C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDD21D72A657008CEB9A /* Assets.xcassets */; };
 		C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDD41D72A657008CEB9A /* LaunchScreen.storyboard */; };
@@ -330,6 +331,7 @@
 		C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		C7119F2F1D72B1D00047A5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C7119F311D72B2720047A5CD /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
+		C71B6DBF1D7D3E4000F50B8C /* mainLand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainLand.png; sourceTree = "<group>"; };
 		C76CDDC61D72A657008CEB9A /* Ember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CDDC91D72A657008CEB9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C76CDDD21D72A657008CEB9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -841,6 +843,7 @@
 		C76CDE0F1D72A6FF008CEB9A /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
+				C71B6DBF1D7D3E4000F50B8C /* mainLand.png */,
 				8ED8A7561D72C6D600F396B0 /* calLanding.png */,
 				8ED8A7571D72C6D600F396B0 /* orgsLanding.png */,
 				8ED8A7461D72C5F800F396B0 /* BackgroundVideo.mp4 */,
@@ -996,6 +999,7 @@
 				C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */,
 				8ED8A74E1D72C5F800F396B0 /* BackgroundVideo.mp4 in Resources */,
 				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
+				C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
 				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,

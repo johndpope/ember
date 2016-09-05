@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUp-73-c2f">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUp-73-c2f">
                                 <rect key="frame" x="4" y="530" width="50" height="50"/>
                                 <state key="normal" image="backWhite">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -179,7 +179,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="studentsLanding.png" translatesAutoresizingMaskIntoConstraints="NO" id="fRh-bz-E4c">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLand.png" translatesAutoresizingMaskIntoConstraints="NO" id="fRh-bz-E4c">
                                 <rect key="frame" x="50" y="218.5" width="500" height="450"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="450" id="nR0-un-dJd"/>
@@ -400,7 +400,7 @@
         <image name="eventsLanding.png" width="750" height="1236"/>
         <image name="fTagsLanding.png" width="746" height="1232"/>
         <image name="forwardWhite" width="50" height="50"/>
+        <image name="mainLand.png" width="704" height="1252"/>
         <image name="orgsLanding.png" width="752" height="1242"/>
-        <image name="studentsLanding.png" width="748" height="1234"/>
     </resources>
 </document>
