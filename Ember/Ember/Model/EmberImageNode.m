@@ -101,6 +101,9 @@
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
+    _divider.spacingAfter = 5.0f;
+    CGFloat pixelHeight = 1.0f;
+    _divider.preferredFrameSize = CGSizeMake(screenWidth, pixelHeight);
     [self addSubnode:_divider];
     
     
@@ -171,15 +174,6 @@
     
 }
 
-- (void)layout
-{
-    [super layout];
-    
-    // Manually layout the divider.
-    CGFloat pixelHeight = 1.0f;
-    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
-}
-
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
 //    CGFloat kInsetHorizontal = 16.0;
@@ -187,6 +181,7 @@
 //    CGFloat kInsetBottom = 6.0;
     
 //    CGFloat kOuterPadding = 10.0f;
+    
     
 //    NSLog(@"screen width: %f", screenWidth);
     _imageNode.contentMode = UIViewContentModeScaleAspectFill;
@@ -196,7 +191,7 @@
     
     ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
     horizontalSpacer.flexGrow = YES;
-    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, _emberDetailsNode]];
+    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
     
     
     return vert;

@@ -286,7 +286,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         }
         
         // Using 0.845 since that's the best width to allow some space for text with number of gallery images
-        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height)));
+        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height * 2)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height * 2)));
         
         _userName.attributedString = [[NSAttributedString alloc] initWithString:@" "
                                                                      attributes:[self textStyleUsername]];

@@ -268,9 +268,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_dateTextNode];
     
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;;
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
+    _divider.spacingAfter = 5.0f;
+    CGFloat pixelHeight = 1.0f;
+    _divider.preferredFrameSize = CGSizeMake(screenWidth, pixelHeight);
     [self addSubnode:_divider];
     
     return self;
@@ -285,33 +289,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         [strongDelegate bounceVideoOrgImageClicked:orgId];
     }
     
-    
-}
-
--(NSString*)truncateEventName:(NSString*)eventName{
-    
-    if([eventName length] < 30){
-        return eventName;
-    }
-    
-    // define the range you're interested in
-    NSRange stringRange = {0, MIN([eventName length], 30)};
-    
-    
-    // adjust the range to include dependent chars
-    stringRange = [eventName rangeOfComposedCharacterSequencesForRange:stringRange];
-    
-    // Now you can create the short string
-    NSString *result = [eventName substringWithRange:stringRange];
-    
-    
-    NSRange range = [result rangeOfString:@" " options:NSBackwardsSearch];
-    
-    if(range.location != NSNotFound){
-        return [[result substringToIndex:range.location] stringByAppendingString:@"..."];
-    }else{
-        return eventName;
-    }
     
 }
 
@@ -417,7 +394,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                                                       justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[spec2, infoStack]];
     
     ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
-    
+    	
     ASStackLayoutSpec *infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                         justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionStatic,userNameStatic, infoStack_2]];
     
@@ -426,7 +403,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStackVert];
     
     ASStackLayoutSpec *stackSpec2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
-                                                                            spacing:0.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_videoNode, spec_2]];
+                                                                            spacing:0.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_videoNode, spec_2]];
     
     ASBackgroundLayoutSpec *backSpec = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:stackSpec2 background:_background];
     

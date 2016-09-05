@@ -405,6 +405,12 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
     }
     
+    // iOS bug - prevents refreshcontrol from appearing above content
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.refreshControl.superview?.sendSubviewToBack(self.refreshControl)
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if(data.getNoOfBounceSnapShots() != 0){

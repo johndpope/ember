@@ -47,6 +47,7 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *comments;
 @property (strong, nonatomic) FIRStorage *storage;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
+@property(nonatomic, strong) NSMutableDictionary *headers;
 
 @end
 
@@ -107,6 +108,8 @@
     _noEventsFollowedNodeIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
 
     _comments = [[NSMutableArray alloc] init];
+    
+    _headers = [[NSMutableDictionary alloc] init];
     
     [self fetchData];
   
@@ -237,6 +240,10 @@
     
     FIRUser *user = [FIRAuth auth].currentUser;
     
+    NSDate *now = [NSDate date];
+    NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
+    NSNumber *numNowInMillis = [NSNumber numberWithDouble:[nowInMillis doubleValue]];
+    
     [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
@@ -244,16 +251,25 @@
          FIRDatabaseQuery *query = [[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] queryLimitedToFirst:100];
          [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
-             // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
-             // the fireCount is not obtained due to a transaction update happening on the fireCount child
-             // Therefore, the count is not displayed in MyEvents
-//             NSLog(@"second: %@", second);
-             [_data addMyEventsSnapShot:second key:firstSnap.key];
-             dispatch_async(dispatch_get_main_queue(), ^{
-//                 NSLog(@"reload");
-                 _reloadCalled = YES;
-                 [_tableNode.view reloadData];
-             });
+             NSDictionary *val = second.value;
+             NSDictionary *postDetails = val[@"postDetails"];
+             NSNumber *time = postDetails[@"eventDateObject"];
+             NSString *orgID = postDetails[@"orgID"];
+             
+             // Only adding UPCOMING events
+             if(-[time doubleValue] > [numNowInMillis doubleValue]){
+                 
+                 // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
+                 // the fireCount is not obtained due to a transaction update happening on the fireCount child
+                 // Therefore, the count is not displayed in MyEvents
+                 //             NSLog(@"second: %@", second);
+                 [_data addMyEventsSnapShot:second key:firstSnap.key];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     //                 NSLog(@"reload");
+                     _reloadCalled = YES;
+                     [_tableNode.view reloadData];
+                 });
+             }
              
          }];
          
@@ -337,6 +353,25 @@
 
 #pragma mark -
 #pragma mark ASTableView.
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    id key = @(section);
+    
+    HomeFeedHeaderNode *node = nil;
+    
+        node = _headers[key];
+        if (!node) {
+            node = [[HomeFeedHeaderNode alloc] initWithOrgInfo:@"UPCOMING"];
+            _headers[key] = node;
+        }
+    
+    
+    [node measure:CGSizeMake(tableView.bounds.size.width, FLT_MAX)];
+    
+    return node.view;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
