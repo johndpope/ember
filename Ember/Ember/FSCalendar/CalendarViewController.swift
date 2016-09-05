@@ -39,7 +39,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         })
        
         // Do any additional setup after loading the view.
-        
         calendar.scrollDirection = .Horizontal
         calendar.appearance.caseOptions = [.HeaderUsesUpperCase,.WeekdayUsesUpperCase]
         calendar.selectDate(calendar.dateWithYear(2015, month: 10, day: 10))
@@ -58,7 +57,13 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
-        return calendar.dateWithYear(2016, month: 8, day: 1)
+        let date = NSDate()
+        let unitFlags: NSCalendarUnit = [.Hour, .Day, .Month, .Year]
+        let components = NSCalendar.currentCalendar().components(unitFlags, fromDate: date)
+        
+        let month = components.month
+        let year = components.year
+        return calendar.dateWithYear(year, month: month, day: 1)
     }
     
     func maximumDateForCalendar(calendar: FSCalendar) -> NSDate {

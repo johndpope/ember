@@ -26,6 +26,7 @@ class OrgPreferencesViewController: UIViewController {
     var uid:String!
     var saveImage:UIImage?
     var saveCoverImage:UIImage?
+    var maxTags:Int = 0
     
     var ref:FIRDatabaseReference!
     var userRef:FIRDatabaseReference!
@@ -49,13 +50,19 @@ class OrgPreferencesViewController: UIViewController {
         let label = (sender.view as! UILabel)
         let textToInsert = label.text!
         
+        
         if(label.backgroundColor != UIColor.lightGrayColor()) {
+            if (maxTags < 5) {
             mainOrgTagsSet.insert(textToInsert)
+            maxTags+=1
             label.backgroundColor = UIColor.lightGrayColor()
+            }
         } else {
             mainOrgTagsSet.remove(textToInsert)
+            maxTags-=1
             label.backgroundColor = getRandomColor()
-        }
+            }
+        
     }
 
     
