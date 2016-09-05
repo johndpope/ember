@@ -169,7 +169,7 @@ class EventPreferencesViewController: UIViewController {
                     //post to Firebase
                     eventsRefChild.child(eventsTreekey).setValue(eventItem)
                     homeFeedRefChild.child(homeFeedEntryKey).child("postDetails").setValue(homefeedItem)
-                    homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["fireCount":0])
+                    homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["fireCount":1])
                     homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["timeStamp":timeStamp])
                     
                     //Add to events Followed
