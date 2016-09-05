@@ -317,7 +317,7 @@
                             <outlet property="delegate" destination="cdt-Wn-g73" id="ZUD-jG-foG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="orgs" id="mJw-fu-nU5" userLabel="My Orgs">
+                    <navigationItem key="navigationItem" title="My Orgs" id="mJw-fu-nU5" userLabel="My Orgs">
                         <barButtonItem key="rightBarButtonItem" title="Create" id="oCR-bs-zOa">
                             <connections>
                                 <segue destination="qZV-BW-IMC" kind="show" id="3Tk-Rx-8vv"/>
