@@ -250,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="1018" y="1106"/>
         </scene>
-        <!--orgs-->
+        <!--My Orgs-->
         <scene sceneID="jrq-pR-jm8">
             <objects>
-                <tableViewController storyboardIdentifier="MyOrgs" id="cdt-Wn-g73" customClass="MyOrgsTableViewController" customModule="Ember" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyOrgs" id="cdt-Wn-g73" userLabel="My Orgs" customClass="MyOrgsTableViewController" customModule="Ember" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="9kd-WP-cTs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -317,7 +317,7 @@
                             <outlet property="delegate" destination="cdt-Wn-g73" id="ZUD-jG-foG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="orgs" id="mJw-fu-nU5">
+                    <navigationItem key="navigationItem" title="orgs" id="mJw-fu-nU5" userLabel="My Orgs">
                         <barButtonItem key="rightBarButtonItem" title="Create" id="oCR-bs-zOa">
                             <connections>
                                 <segue destination="qZV-BW-IMC" kind="show" id="3Tk-Rx-8vv"/>
@@ -1308,7 +1308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rLY-qx-J2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2403" y="-1020"/>
+            <point key="canvasLocation" x="2339" y="-1368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="185-aA-tnY">
@@ -1605,8 +1605,8 @@
         <image name="user_male" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ucT-Jv-n3U"/>
-        <segue reference="8je-Bk-Ao3"/>
+        <segue reference="d2t-YR-DUg"/>
+        <segue reference="br8-vf-IvQ"/>
         <segue reference="ck8-Dd-TdR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
