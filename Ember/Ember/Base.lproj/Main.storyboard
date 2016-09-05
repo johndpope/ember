@@ -232,7 +232,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="bKh-vx-JyH">
                             <color key="tintColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem key="leftBarButtonItem" image="settings" id="z1K-9U-Uem">
+                        <barButtonItem key="leftBarButtonItem" image="deleteIcon" id="z1K-9U-Uem">
                             <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsButtonClicked:" destination="FXM-yO-cKe" id="Xqx-Ki-Rh8"/>
@@ -1596,12 +1596,12 @@
     <resources>
         <image name="appointment_reminders" width="25" height="25"/>
         <image name="camera" width="25" height="25"/>
+        <image name="deleteIcon" width="50" height="50"/>
         <image name="exit" width="25" height="25"/>
         <image name="groups_filled" width="50" height="50"/>
         <image name="home" width="25" height="25"/>
         <image name="pexels-photo.jpg" width="640" height="360"/>
         <image name="search_filled" width="25" height="25"/>
-        <image name="settings" width="25" height="25"/>
         <image name="user_male" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

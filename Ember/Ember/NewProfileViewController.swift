@@ -95,7 +95,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
 //        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
 //        navigationItem.leftBarButtonItem = backButton
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: navigationController, action: nil)
+        let backButton = UIBarButtonItem(image: UIImage(named: "deleteIcon"), style: .Plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         
         let boundSize = self.view.bounds.size
@@ -118,7 +118,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .Plain, target: navigationController, action: #selector(NewProfileViewController.gearIconClicked(_:)))
+        let backButton = UIBarButtonItem(image: UIImage(named: "deleteIcon"), style: .Plain, target: navigationController, action: #selector(NewProfileViewController.gearIconClicked(_:)))
         navigationItem.leftBarButtonItem = backButton
         
     }

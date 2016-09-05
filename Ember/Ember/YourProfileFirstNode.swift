@@ -168,9 +168,9 @@ class YourProfileFirstNode: ASCellNode {
         
         var font = UIFont()
         if(Iphone5Test.isIphone5()){
-            font = UIFont.systemFontOfSize(18, weight: UIFontWeightLight)
+            font = UIFont.systemFontOfSize(18, weight: UIFontWeightRegular)
         }else{
-            font = UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
+            font = UIFont.systemFontOfSize(20, weight: UIFontWeightRegular)
         }
   
         let style = NSMutableParagraphStyle()
