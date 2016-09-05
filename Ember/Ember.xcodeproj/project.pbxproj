@@ -24,7 +24,6 @@
 		8E852C121D72BB5B002FFB90 /* FSCalendarScopeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BFF1D72BB5B002FFB90 /* FSCalendarScopeHandle.m */; };
 		8E852C131D72BB5B002FFB90 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */; };
 		8E852C141D72BB5B002FFB90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E852C021D72BB5B002FFB90 /* Info.plist */; };
-		8E852C151D72BB5B002FFB90 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852C041D72BB5B002FFB90 /* UIView+FSExtension.m */; };
 		8E926C4F1D7CB72D005F46BB /* NoEventsFollowedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */; };
 		8ED8A6C41D72C19600F396B0 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */; };
 		8ED8A6C91D72C1B800F396B0 /* HomefeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C61D72C1B800F396B0 /* HomefeedController.m */; };
@@ -133,6 +132,7 @@
 		C76CDDE11D72A657008CEB9A /* EmberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDE01D72A657008CEB9A /* EmberTests.swift */; };
 		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
 		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
+		C7A337861D7CFA50001F54A9 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */; };
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
@@ -193,7 +193,6 @@
 		8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCalendarStickyHeader.m; path = FSCalendar/FSCalendarStickyHeader.m; sourceTree = "<group>"; };
 		8E852C021D72BB5B002FFB90 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FSCalendar/Info.plist; sourceTree = "<group>"; };
 		8E852C031D72BB5B002FFB90 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FSExtension.h"; path = "FSCalendar/UIView+FSExtension.h"; sourceTree = "<group>"; };
-		8E852C041D72BB5B002FFB90 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
 		8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoEventsFollowedNode.swift; sourceTree = "<group>"; };
 		8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InternetConnection.swift; path = Ember/Util/InternetConnection.swift; sourceTree = "<group>"; };
 		8ED8A6C51D72C1B800F396B0 /* HomefeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomefeedController.h; path = Ember/HomeFeed/HomefeedController.h; sourceTree = "<group>"; };
@@ -343,6 +342,7 @@
 		C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmberUITests.swift; sourceTree = "<group>"; };
 		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
+		C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 				8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */,
 				8E852C021D72BB5B002FFB90 /* Info.plist */,
 				8E852C031D72BB5B002FFB90 /* UIView+FSExtension.h */,
-				8E852C041D72BB5B002FFB90 /* UIView+FSExtension.m */,
+				C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */,
 				C7119EF51D72ACB60047A5CD /* FSCalendar */,
 			);
 			name = CalendarFiles;
@@ -1072,7 +1072,7 @@
 		};
 		C7F7A7981D79EA5C00970438 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1099,6 +1099,7 @@
 				8ED8A7191D72C35C00F396B0 /* OrgNode.m in Sources */,
 				8ED8A7231D72C37500F396B0 /* LLSimpleCamera.m in Sources */,
 				8ED8A7321D72C47300F396B0 /* UIImage+Resize.m in Sources */,
+				C7A337861D7CFA50001F54A9 /* UIView+FSExtension.m in Sources */,
 				8ED8A6CB1D72C1B800F396B0 /* HomeFeedViewController.swift in Sources */,
 				8ED8A7731D72C8A500F396B0 /* DiscoverViewController.swift in Sources */,
 				8ED8A6DA1D72C1C900F396B0 /* EmberDetailsNode.m in Sources */,
@@ -1130,7 +1131,6 @@
 				8ED8A6EF1D72C2DF00F396B0 /* GalleryPresentTransition.swift in Sources */,
 				8ED8A6FA1D72C32500F396B0 /* GalleryConfiguration.swift in Sources */,
 				8ED8A6DF1D72C1C900F396B0 /* EmberVideoNode.m in Sources */,
-				8E852C151D72BB5B002FFB90 /* UIView+FSExtension.m in Sources */,
 				8E926C4F1D7CB72D005F46BB /* NoEventsFollowedNode.swift in Sources */,
 				C7119EB91D72AB760047A5CD /* TabBarController.swift in Sources */,
 				C7119EC11D72AB960047A5CD /* NotificationItem.swift in Sources */,
@@ -1344,7 +1344,6 @@
 			baseConfigurationReference = 972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1378,7 +1377,6 @@
 			baseConfigurationReference = 1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (

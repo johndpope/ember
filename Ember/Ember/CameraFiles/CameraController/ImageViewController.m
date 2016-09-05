@@ -186,7 +186,7 @@
     self.captionInput = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.contentBounds.size.width, 50.0f)];
     self.captionInput.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     self.captionInput.layer.borderWidth = 1;
-    self.captionInput.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
+    self.captionInput.font = [UIFont systemFontOfSize:17 weight:UIFontWeightLight];
     self.captionInput.textColor = [UIColor whiteColor];
     self.captionInput.layer.cornerRadius=8.0f;
     self.captionInput.layer.masksToBounds=YES;

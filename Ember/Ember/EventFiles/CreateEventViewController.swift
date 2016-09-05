@@ -77,7 +77,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         let okBarBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CreateEventViewController.donePressed))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 3, height: self.view.frame.size.height))
-        label.font = UIFont(name: "HelveticaNeue", size: 17)
+        label.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
         
         label.backgroundColor = UIColor.clearColor()
         

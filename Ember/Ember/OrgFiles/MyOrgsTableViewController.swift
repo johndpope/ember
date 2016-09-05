@@ -20,8 +20,12 @@ class MyOrgsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
-        retrieveORGIDS()
-               self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 25)!]
+        //retrieveORGIDS()
+        
+        retrieveORGIDS({ (downLoadState) in
+           downLoadState
+        })
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -36,7 +40,25 @@ class MyOrgsTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        //return 1
+        var numOfSections: Int = 0
+        if orgs.count > 0
+        {
+            tableView.separatorStyle = .SingleLine
+            numOfSections                = 1
+            tableView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text             = "You are not currently following any orgs."
+            noDataLabel.textColor        = UIColor.blackColor()
+            noDataLabel.textAlignment    = .Center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
+        return numOfSections
+        
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +67,7 @@ class MyOrgsTableViewController: UITableViewController {
     }
     
     
-    func retrieveORGIDS() {
+    func retrieveORGIDS(completion : (Bool) ->()) {
         let userID = FIRAuth.auth()?.currentUser?.uid
         ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("orgsFollowed").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             let enumerator = snapshot.children
@@ -64,6 +86,7 @@ class MyOrgsTableViewController: UITableViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+        completion(true)
         
     }
 

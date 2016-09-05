@@ -26,6 +26,7 @@ class OrgPreferencesViewController: UIViewController {
     var uid:String!
     var saveImage:UIImage?
     var saveCoverImage:UIImage?
+    var maxTags:Int = 0
     
     var ref:FIRDatabaseReference!
     var userRef:FIRDatabaseReference!
@@ -49,13 +50,19 @@ class OrgPreferencesViewController: UIViewController {
         let label = (sender.view as! UILabel)
         let textToInsert = label.text!
         
+        
         if(label.backgroundColor != UIColor.lightGrayColor()) {
+            if (maxTags < 5) {
             mainOrgTagsSet.insert(textToInsert)
+            maxTags+=1
             label.backgroundColor = UIColor.lightGrayColor()
+            }
         } else {
             mainOrgTagsSet.remove(textToInsert)
+            maxTags-=1
             label.backgroundColor = getRandomColor()
-        }
+            }
+        
     }
 
     
@@ -141,7 +148,7 @@ class OrgPreferencesViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Org Tags"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 25)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
         
         // Do any additional setup after loading the view.
         newTagListView = TagListView(frame: CGRectMake(0, orgTagsView.frame.minY , orgTagsView.frame.size.width,orgTagsView.frame.size.height))
