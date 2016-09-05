@@ -639,7 +639,7 @@ FIRDatabaseHandle _refHandle;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    if(![InternetConnection isConnectedToNetwork]){
+    if(![InternetConnection isConnectedToNetwork] && _data.getNoOfBounceSnapShots == 0 && _dataSection2.getNoOfBounceSnapShots == 0){
         
         if([_activityIndicatorView isAnimating]){
             [_activityIndicatorView stopAnimating];
@@ -651,7 +651,7 @@ FIRDatabaseHandle _refHandle;
         _messageLabel.textColor = [UIColor blackColor];
         _messageLabel.numberOfLines = 0;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
-        _messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+        _messageLabel.font = [UIFont systemFontOfSize:20.0f];
         [_messageLabel sizeToFit];
         
         _tableNode.view.backgroundView = _messageLabel;
@@ -660,12 +660,10 @@ FIRDatabaseHandle _refHandle;
         if(_messageLabel != nil){
             _tableNode.view.backgroundView = nil;
             [_messageLabel removeFromSuperview];
+            _messageLabel = nil;
         }
     }
-    
-//    if(_data.getNoOfBounceSnapShots > 0 && _dataSection2.getNoOfBounceSnapShots > 0){
-//        return 2;
-//    }
+ 
     return 2;
 }
 
