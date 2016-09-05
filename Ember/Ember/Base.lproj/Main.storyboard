@@ -920,7 +920,7 @@
                                             <constraint firstAttribute="height" constant="30" id="3Rh-8u-T13"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ4-D7-kaO">
                                         <rect key="frame" x="217" y="58" width="166" height="21"/>
@@ -1166,7 +1166,7 @@
                                             <constraint firstAttribute="height" constant="30" id="vFW-Ds-s14"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pexels-photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0aj-qI-l9y" userLabel="Preview Cover Image">
                                         <rect key="frame" x="238" y="360" width="125" height="125"/>
@@ -1514,7 +1514,7 @@
                                             <constraint firstAttribute="height" constant="30" id="gvL-C4-6yy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Tb-KvB">
                                         <rect key="frame" x="237" y="187" width="125" height="125"/>
