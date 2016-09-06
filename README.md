@@ -1,6 +1,6 @@
 # README #
 
-The Ember App designed for students to better engage with your campus.
+The Ember App designed for students to better engage with their campus.
 
 ### What is this repository for? ###
 
