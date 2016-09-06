@@ -178,9 +178,9 @@
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId{
     
 //    FIRDatabaseReference *reference = [[FIRDatabase database] reference];
-    NSLog(@"orgid: %@", orgId);
+//    NSLog(@"orgid: %@", orgId);
     // TODO change this to school root
-    FIRDatabaseQuery *recentPostsQuery = [[[_ref child:[BounceConstants firebaseOrgsChild]] child:orgId]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[_ref child:[BounceConstants firebaseOrgsChild]] child:orgId];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         EmberSnapShot *snap = [[EmberSnapShot alloc] initWithSnapShot:snapShot];
@@ -280,6 +280,7 @@
             }
             
             [_tableNode.view reloadData];
+//            NSLog(@"passed reload");
         });
         
     }];
@@ -368,8 +369,17 @@
 -(void)deletePost:(NSUInteger)row{
     
     NSString *key = _snapShots[row].key;
-    [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
-    [[[[_ref child:[BounceConstants firebaseUsersChild]] child:@"eventsFollowed"] child:key] removeValue];
+    NSString *userId = [[[FIRAuth auth] currentUser] uid];
+    
+    FIRDatabaseQuery *recentPostsQuery = [[[[_ref child:[BounceConstants firebaseHomefeed]] child:key] child:@"postDetails"] child:@"eventID"];
+    [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        NSString *eventID = snapShot.value;
+        [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue];
+        [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
+        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+        
+    }];
     
 }
 

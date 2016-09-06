@@ -252,6 +252,7 @@
          [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
              NSDictionary *val = second.value;
+//             NSLog(@"first: %@", second);
              NSDictionary *postDetails = val[@"postDetails"];
              NSNumber *time = postDetails[@"eventDateObject"];
              NSString *orgID = postDetails[@"orgID"];
@@ -378,6 +379,15 @@
    
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return 0;
+    } else {
+        // whatever height you'd want for a real section header
+        return 22;
+    }
+    
+}
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if([_noEventsFollowedNodeIndexPath compare:indexPath] == NSOrderedSame && _reloadCalled && _data.getNoOfBounceSnapShots == 0){
