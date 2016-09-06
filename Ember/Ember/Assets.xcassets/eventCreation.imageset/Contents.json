@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "add_to_favorites.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "add_to_favorites.png",
+      "filename" : "add_to_favorites-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "add_to_favorites-1.png",
+      "filename" : "add_to_favorites-2.png",
       "scale" : "3x"
     }
   ],
