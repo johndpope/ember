@@ -180,7 +180,11 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
         if(refreshControl.refreshing){
             self.data.removeAllSnapShots()
+            self.mainSet.removeAll()
+            self.reloadCalled = false
+            self.tableNode.view.reloadData()
         }
+        
         
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid;
@@ -220,7 +224,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                     if let dict = (child as! FIRDataSnapshot).value as? NSDictionary{
                         
                         for key in dict.allKeys{
-                            self.mainSet[homefeedKey] = key as? String // Has nested values hence image's mediaInfo key saved
+                            self.mainSet[(key as? String)!] = homefeedKey // Has nested values hence image's mediaInfo key saved
                         }
                         
                     }else{
@@ -263,7 +267,8 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
 //                            print("dict: \(dict)")
                             
                             for key in dict{
-                                if self.mainSet[homefeedKey]! == key as! String{
+//                                print(key as! String)
+                                if self.mainSet[key as! String] == homefeedKey{
                                     
                                     self.indicator.stopAnimating()
                                     
