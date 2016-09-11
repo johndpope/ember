@@ -16,7 +16,7 @@ import FirebaseAuth
       
         
         ref.runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
-            if var post = currentData.value as? [String : AnyObject], let uid = FIRAuth.auth()?.currentUser?.uid {
+            if let post = currentData.value as? [String : AnyObject], let uid = FIRAuth.auth()?.currentUser?.uid {
                 
                 if(post.isEmpty){
                     return FIRTransactionResult.successWithValue(currentData)

@@ -133,7 +133,7 @@ class OrgDetailsNode : ASCellNode {
         self.background.addTarget(self, action: #selector(OrgDetailsNode.createEvent), forControlEvents: .TouchUpInside)
 
         
-        self.star.image = UIImage(named: "star")
+        self.star.image = UIImage(named: "eventCreation")
         
         self.background.backgroundColor = PRIMARY_APP_COLOR
         self.background.cornerRadius = 10 // value for corner radius

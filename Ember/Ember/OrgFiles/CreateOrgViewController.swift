@@ -65,7 +65,15 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
                     }
                 }
                 if(!self.isOrgNameDuplicate) {
+                    if ((self.saveImage) != nil) {
+
                    self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
+                    } else {
+                        let alertController = UIAlertController(title: "Hi :)", message:
+                            "Please upload a profile picture for this organization.", preferredStyle: UIAlertControllerStyle.Alert)
+                        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
                 }
                 else {
                     // User needs to use .edu email address before continuing

@@ -32,7 +32,7 @@ final class GalleryPresentTransition: NSObject, UIViewControllerAnimatedTransiti
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         
         /// Get the temporary container view that facilitates all the animations
-        let transitionContainerView = transitionContext.containerView()! //Apple, Apple..
+        let transitionContainerView = transitionContext.containerView() //Apple, Apple..
         
         /// Get the target controller's root view and add it to the scene
         let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
