@@ -332,6 +332,7 @@
 		C7119F2F1D72B1D00047A5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C7119F311D72B2720047A5CD /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
 		C71B6DBF1D7D3E4000F50B8C /* mainLand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainLand.png; sourceTree = "<group>"; };
+		C728917C1D850F1C0031D788 /* Ember.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ember.entitlements; sourceTree = "<group>"; };
 		C76CDDC61D72A657008CEB9A /* Ember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ember.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CDDC91D72A657008CEB9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C76CDDD21D72A657008CEB9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -789,6 +790,7 @@
 		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
+				C728917C1D850F1C0031D788 /* Ember.entitlements */,
 				DDEED2F91D77F085008EE08E /* pexels-photo.jpg */,
 				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
 				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
@@ -1353,6 +1355,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ember/Ember.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M5MDUJN294;
@@ -1390,6 +1393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Ember/Ember.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEVELOPMENT_TEAM = M5MDUJN294;
 				FRAMEWORK_SEARCH_PATHS = (
