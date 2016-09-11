@@ -162,23 +162,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mNk-w4-3xx" customClass="SDRecordButton">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OcE-ZB-7cK" customClass="SDRecordButton">
+                                <frame key="frameInset" minX="150" minY="296.27893748933911" width="75" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="4Ic-o1-rcN"/>
-                                    <constraint firstAttribute="width" constant="75" id="xED-Xw-jOg"/>
+                                    <constraint firstAttribute="height" constant="75" id="3md-y9-SgN"/>
+                                    <constraint firstAttribute="width" constant="75" id="gYS-Bu-F11"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mNk-w4-3xx" firstAttribute="centerX" secondItem="FJB-Wu-JqI" secondAttribute="centerX" id="B4a-PK-wVf"/>
-                            <constraint firstItem="TRd-Ko-bfU" firstAttribute="top" secondItem="mNk-w4-3xx" secondAttribute="bottom" constant="20" id="oqH-9m-fIf"/>
+                            <constraint firstItem="OcE-ZB-7cK" firstAttribute="centerX" secondItem="FJB-Wu-JqI" secondAttribute="centerX" id="R5n-vY-rjS"/>
+                            <constraint firstItem="TRd-Ko-bfU" firstAttribute="top" secondItem="OcE-ZB-7cK" secondAttribute="bottom" constant="20" id="opn-65-zi3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Gl9-wz-y8J"/>
                     <connections>
-                        <outlet property="recordButton" destination="mNk-w4-3xx" id="ru2-t8-cQh"/>
+                        <outlet property="recordButton" destination="OcE-ZB-7cK" id="JE9-GX-DfY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qzm-Id-uOl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1312,10 +1313,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CalendarDetailsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsCell" id="uIB-rE-LpA" customClass="CalendarDetailsTableViewCell" customModule="Ember" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uIB-rE-LpA" id="dz1-cf-XVg">
-                                            <frame key="frameInset" width="383" height="59.5"/>
+                                            <frame key="frameInset" width="1000" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7uR-ak-3YH">
