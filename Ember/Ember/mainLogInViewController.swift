@@ -140,7 +140,6 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
 
     }
-    
     /*
     // MARK: - Navigation
 

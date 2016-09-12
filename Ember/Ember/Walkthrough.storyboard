@@ -16,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dNM-hK-Bd7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l4d-iW-4b6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUp-73-c2f">
@@ -93,7 +93,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6za-RR-vOJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UYE-yj-Aef">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="As an organization admin you can create an event, post photos and short videos to engage the campus." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdn-SE-zv2">
@@ -161,7 +161,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7Wl-7t-hyt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5Hs-ox-tfO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Students" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3d-MT-xbI">
@@ -221,7 +221,7 @@
                         <viewControllerLayoutGuide type="bottom" id="1C0-OU-dfs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HjG-0n-f7r">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&quot;Lit&quot; Factor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kW1-br-ja0">
@@ -282,7 +282,7 @@
                         <viewControllerLayoutGuide type="bottom" id="iRt-DP-WUt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YdO-Do-9xE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pick Your Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pF-bx-JhZ">
@@ -342,7 +342,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lAc-lq-Jco"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S5T-Xt-IZg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QN-GT-8zC">
@@ -396,11 +396,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backWhite" width="33" height="33"/>
+        <image name="backWhite" width="37" height="37"/>
         <image name="calLanding.png" width="750" height="1238"/>
         <image name="eventsLanding.png" width="750" height="1236"/>
         <image name="fTagsLanding.png" width="746" height="1232"/>
-        <image name="forwardWhite" width="33" height="33"/>
+        <image name="forwardWhite" width="37" height="37"/>
         <image name="mainLand.png" width="704" height="1252"/>
         <image name="orgsLanding.png" width="752" height="1242"/>
     </resources>

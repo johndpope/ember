@@ -23,7 +23,6 @@
 		8E852C111D72BB5B002FFB90 /* FSCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BFD1D72BB5B002FFB90 /* FSCalendarHeader.m */; };
 		8E852C121D72BB5B002FFB90 /* FSCalendarScopeHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BFF1D72BB5B002FFB90 /* FSCalendarScopeHandle.m */; };
 		8E852C131D72BB5B002FFB90 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */; };
-		8E852C141D72BB5B002FFB90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E852C021D72BB5B002FFB90 /* Info.plist */; };
 		8E926C4F1D7CB72D005F46BB /* NoEventsFollowedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */; };
 		8ED8A6C41D72C19600F396B0 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */; };
 		8ED8A6C91D72C1B800F396B0 /* HomefeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A6C61D72C1B800F396B0 /* HomefeedController.m */; };
@@ -117,7 +116,6 @@
 		C7119EC01D72AB960047A5CD /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBC1D72AB960047A5CD /* NotificationsTableViewController.swift */; };
 		C7119EC11D72AB960047A5CD /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBD1D72AB960047A5CD /* NotificationItem.swift */; };
 		C7119EC21D72AB960047A5CD /* NotificationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EBE1D72AB960047A5CD /* NotificationsTableViewCell.swift */; };
-		C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */ = {isa = PBXBuildFile; fileRef = C7119EF51D72ACB60047A5CD /* FSCalendar */; };
 		C7119EFC1D72ACF30047A5CD /* BounceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */; };
 		C7119F0B1D72ADF00047A5CD /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F071D72ADF00047A5CD /* CGPoint.swift */; };
 		C7119F0C1D72ADF00047A5CD /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F081D72ADF00047A5CD /* CGSize.swift */; };
@@ -137,6 +135,7 @@
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
+		C7F49D401D870A7F00AF9AAE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7F49D3F1D870A7F00AF9AAE /* Info.plist */; };
 		C7F7A7951D79BA1D00970438 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */; };
 		C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */ = {isa = PBXBuildFile; fileRef = C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */; };
 		CA11AB0B2E5E76E879EA9B31 /* Pods_Ember.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD6D85F519588C85EEC384E /* Pods_Ember.framework */; };
@@ -192,7 +191,6 @@
 		8E852BFF1D72BB5B002FFB90 /* FSCalendarScopeHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCalendarScopeHandle.m; path = FSCalendar/FSCalendarScopeHandle.m; sourceTree = "<group>"; };
 		8E852C001D72BB5B002FFB90 /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCalendarStickyHeader.h; path = FSCalendar/FSCalendarStickyHeader.h; sourceTree = "<group>"; };
 		8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSCalendarStickyHeader.m; path = FSCalendar/FSCalendarStickyHeader.m; sourceTree = "<group>"; };
-		8E852C021D72BB5B002FFB90 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FSCalendar/Info.plist; sourceTree = "<group>"; };
 		8E852C031D72BB5B002FFB90 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+FSExtension.h"; path = "FSCalendar/UIView+FSExtension.h"; sourceTree = "<group>"; };
 		8E926C4E1D7CB72D005F46BB /* NoEventsFollowedNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoEventsFollowedNode.swift; sourceTree = "<group>"; };
 		8ED8A6C31D72C19600F396B0 /* InternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InternetConnection.swift; path = Ember/Util/InternetConnection.swift; sourceTree = "<group>"; };
@@ -322,7 +320,6 @@
 		C7119EBC1D72AB960047A5CD /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		C7119EBD1D72AB960047A5CD /* NotificationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 		C7119EBE1D72AB960047A5CD /* NotificationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewCell.swift; sourceTree = "<group>"; };
-		C7119EF51D72ACB60047A5CD /* FSCalendar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FSCalendar; sourceTree = "<group>"; };
 		C7119EFB1D72ACF30047A5CD /* BounceConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceConstants.swift; sourceTree = "<group>"; };
 		C7119F071D72ADF00047A5CD /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		C7119F081D72ADF00047A5CD /* CGSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
@@ -349,6 +346,7 @@
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		C7F49D3F1D870A7F00AF9AAE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FSCalendar/Info.plist; sourceTree = "<group>"; };
 		C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "EmberApp-b7538e821b5e.json"; sourceTree = "<group>"; };
 		DBD6D85F519588C85EEC384E /* Pods_Ember.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ember.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -649,6 +647,7 @@
 		C7119EF41D72AC870047A5CD /* CalendarFiles */ = {
 			isa = PBXGroup;
 			children = (
+				C7F49D3F1D870A7F00AF9AAE /* Info.plist */,
 				8ED8A6E11D72C23300F396B0 /* CalendarDetailsTableViewCell.swift */,
 				8ED8A6E21D72C23300F396B0 /* CalendarViewController.swift */,
 				8E852BE51D72BB5B002FFB90 /* CALayer+FSExtension.h */,
@@ -680,10 +679,8 @@
 				8E852BFF1D72BB5B002FFB90 /* FSCalendarScopeHandle.m */,
 				8E852C001D72BB5B002FFB90 /* FSCalendarStickyHeader.h */,
 				8E852C011D72BB5B002FFB90 /* FSCalendarStickyHeader.m */,
-				8E852C021D72BB5B002FFB90 /* Info.plist */,
 				8E852C031D72BB5B002FFB90 /* UIView+FSExtension.h */,
 				C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */,
-				C7119EF51D72ACB60047A5CD /* FSCalendar */,
 			);
 			name = CalendarFiles;
 			sourceTree = "<group>";
@@ -1000,15 +997,14 @@
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
 				8ED8A7521D72C5F800F396B0 /* fTagsLanding.png in Resources */,
-				8E852C141D72BB5B002FFB90 /* Info.plist in Resources */,
 				C76CDDD61D72A657008CEB9A /* LaunchScreen.storyboard in Resources */,
 				C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */,
 				8ED8A74E1D72C5F800F396B0 /* BackgroundVideo.mp4 in Resources */,
 				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
 				C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */,
+				C7F49D401D870A7F00AF9AAE /* Info.plist in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
-				C7119EF61D72ACB60047A5CD /* FSCalendar in Resources */,
 				8ED8A7581D72C6D600F396B0 /* calLanding.png in Resources */,
 				C7119E5F1D72A92D0047A5CD /* last.xib in Resources */,
 				C7F7A7951D79BA1D00970438 /* GoogleService-Info.plist in Resources */,
