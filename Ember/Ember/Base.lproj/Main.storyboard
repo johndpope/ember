@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cPV-8a-SbK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cPV-8a-SbK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -1090,20 +1090,6 @@
                                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klf-0u-mri">
-                                        <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <accessibility key="accessibilityConfiguration" hint="Short Description"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="6rv-cY-Apx"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <real key="value" value="3"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkC-gd-6kw">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="222" id="ggH-kb-w8P"/>
@@ -1147,6 +1133,34 @@
                                             <action selector="saveOrgCoverPicture:" destination="qZV-BW-IMC" eventType="touchUpInside" id="40V-cV-1mH"/>
                                         </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9W-IE-m56">
+                                        <rect key="frame" x="199" y="4" width="156" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVF-JV-8A5">
+                                        <rect key="frame" x="265" y="73" width="90" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="klf-0u-mri">
+                                        <color key="backgroundColor" red="0.90744791670000002" green="0.90744791670000002" blue="0.90744791670000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Short Description"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="6rv-cY-Apx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="18v-G1-UbJ" firstAttribute="leading" secondItem="klf-0u-mri" secondAttribute="leading" id="7hB-Os-juC"/>
@@ -1195,6 +1209,8 @@
                         <outlet property="campDesc" destination="klf-0u-mri" id="u6w-dR-ldw"/>
                         <outlet property="campName" destination="18v-G1-UbJ" id="mw8-CA-nks"/>
                         <outlet property="orgCoverPictureButton" destination="aKR-TJ-zEi" id="w24-El-JTr"/>
+                        <outlet property="orgDescLabel" destination="EVF-JV-8A5" id="9q7-MD-Hga"/>
+                        <outlet property="orgNameLabel" destination="E9W-IE-m56" id="aX6-wA-fwq"/>
                         <outlet property="orgPictureButton" destination="IkC-gd-6kw" id="75z-ni-Nzl"/>
                         <outlet property="previewCoverImage" destination="0aj-qI-l9y" id="3Fg-y2-BEv"/>
                         <outlet property="previewCoverImageLabel" destination="10n-sF-bca" id="wyz-y6-sSf"/>
@@ -1205,7 +1221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zv4-Xi-oIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="-420"/>
+            <point key="canvasLocation" x="1528.8" y="-420.53973013493254"/>
         </scene>
         <!--Org Preferences View Controller-->
         <scene sceneID="mio-s9-ETL">
@@ -1545,9 +1561,9 @@
         <image name="user_male" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Cg9-OS-fjr"/>
         <segue reference="d2t-YR-DUg"/>
-        <segue reference="ck8-Dd-TdR"/>
+        <segue reference="u0R-6m-rqZ"/>
+        <segue reference="8je-Bk-Ao3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

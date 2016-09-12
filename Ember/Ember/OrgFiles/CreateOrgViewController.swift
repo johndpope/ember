@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SwiftValidator
 
-class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ValidationDelegate {
     var ref:FIRDatabaseReference!
     var isOrgNameDuplicate:Bool = false
     var isProfilePicture:Bool = true
@@ -20,6 +21,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     var imagePicker = UIImagePickerController()
     var saveImage:UIImage?
     var saveCoverImage:UIImage?
+    var validator:Validator!
     
     
     @IBOutlet weak var previewCoverImageLabel: UILabel!
@@ -29,6 +31,8 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var campDesc: UITextView!
     @IBOutlet weak var orgPictureButton: UIButton!
     @IBOutlet weak var orgCoverPictureButton: UIButton!
+    @IBOutlet weak var orgNameLabel: UILabel!
+    @IBOutlet weak var orgDescLabel: UILabel!
     
     
     @IBAction func saveOrganization(sender: AnyObject) {
@@ -67,7 +71,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
                 if(!self.isOrgNameDuplicate) {
                     if ((self.saveImage) != nil) {
 
-                   self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
+                   self.validator.validate(self)
                     } else {
                         let alertController = UIAlertController(title: "Hi :)", message:
                             "Please upload a profile picture for this organization.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -161,7 +165,29 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     override func viewDidAppear(animated: Bool) {
         ref = FIRDatabase.database().reference()
         navigationItem.title = "Create Org"
+        validator = Validator()
+        
+        validator.registerField(campName, errorLabel: orgNameLabel, rules: [RequiredRule()])
+        //validator.registerField(campDesc, errorLabel: orgDescLabel, rules: [RequiredRule()])
     }
+    
+    func validationSuccessful() {
+        // submit the form
+        self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
+    }
+    
+    func validationFailed(errors:[(Validatable ,ValidationError)]) {
+        // turn the fields to red
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.redColor().CGColor
+                field.layer.borderWidth = 1.0
+            }
+            error.errorLabel?.text = error.errorMessage // works if you added labels
+            error.errorLabel?.hidden = false
+        }
+    }
+
     
     
 }
