@@ -31,6 +31,8 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var campDesc: UITextView!
     @IBOutlet weak var orgPictureButton: UIButton!
     @IBOutlet weak var orgCoverPictureButton: UIButton!
+    @IBOutlet weak var orgNameLabel: UILabel!
+    @IBOutlet weak var orgDescLabel: UILabel!
     
     
     @IBAction func saveOrganization(sender: AnyObject) {
@@ -69,7 +71,7 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
                 if(!self.isOrgNameDuplicate) {
                     if ((self.saveImage) != nil) {
 
-                   self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
+                   self.validator.validate(self)
                     } else {
                         let alertController = UIAlertController(title: "Hi :)", message:
                             "Please upload a profile picture for this organization.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -164,10 +166,14 @@ class CreateOrgViewController: UIViewController, UIImagePickerControllerDelegate
         ref = FIRDatabase.database().reference()
         navigationItem.title = "Create Org"
         validator = Validator()
+        
+        validator.registerField(campName, errorLabel: orgNameLabel, rules: [RequiredRule()])
+        //validator.registerField(campDesc, errorLabel: orgDescLabel, rules: [RequiredRule()])
     }
     
     func validationSuccessful() {
         // submit the form
+        self.performSegueWithIdentifier("gotoOrgPreferences", sender: nil)
     }
     
     func validationFailed(errors:[(Validatable ,ValidationError)]) {
