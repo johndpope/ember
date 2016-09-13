@@ -952,8 +952,15 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMF-0a-BEc">
+                                        <rect key="frame" x="20" y="0.0" width="335" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="vyr-Ca-PtL" firstAttribute="top" secondItem="gMF-0a-BEc" secondAttribute="bottom" constant="-1" id="1fx-c2-Bot"/>
                                     <constraint firstItem="vyr-Ca-PtL" firstAttribute="trailing" secondItem="X3x-tX-dS8" secondAttribute="trailing" id="1nD-o4-mB0"/>
                                     <constraint firstAttribute="bottom" secondItem="z2z-Ww-cDr" secondAttribute="bottom" constant="20" id="50h-qZ-3Yh"/>
                                     <constraint firstAttribute="trailing" secondItem="vyr-Ca-PtL" secondAttribute="trailing" constant="20" id="6Wc-Gc-laC"/>
@@ -964,7 +971,9 @@
                                     <constraint firstItem="vyr-Ca-PtL" firstAttribute="centerX" secondItem="V8z-hm-WLR" secondAttribute="centerX" id="Je5-S3-4Px"/>
                                     <constraint firstItem="URM-Kc-n2S" firstAttribute="top" secondItem="gs5-fK-ovP" secondAttribute="bottom" constant="15" id="P94-8g-mrD"/>
                                     <constraint firstItem="X3x-tX-dS8" firstAttribute="trailing" secondItem="gs5-fK-ovP" secondAttribute="trailing" id="PEO-jM-3eS"/>
+                                    <constraint firstAttribute="trailing" secondItem="gMF-0a-BEc" secondAttribute="trailing" constant="20" id="QdB-ce-E9D"/>
                                     <constraint firstItem="kJ4-D7-kaO" firstAttribute="top" secondItem="vyr-Ca-PtL" secondAttribute="bottom" constant="8" symbolic="YES" id="Rh2-P0-hgF"/>
+                                    <constraint firstItem="gMF-0a-BEc" firstAttribute="centerX" secondItem="V8z-hm-WLR" secondAttribute="centerX" id="a68-7l-9Ps"/>
                                     <constraint firstItem="Nqf-xj-Fb3" firstAttribute="centerX" secondItem="z2z-Ww-cDr" secondAttribute="centerX" id="ef0-d8-TIi"/>
                                     <constraint firstItem="z2z-Ww-cDr" firstAttribute="top" secondItem="Nqf-xj-Fb3" secondAttribute="bottom" constant="4" id="f8C-GN-DSp"/>
                                     <constraint firstItem="gs5-fK-ovP" firstAttribute="trailing" secondItem="URM-Kc-n2S" secondAttribute="trailing" id="fda-Qx-gbc"/>
@@ -975,6 +984,7 @@
                                     <constraint firstItem="URM-Kc-n2S" firstAttribute="trailing" secondItem="Nqf-xj-Fb3" secondAttribute="trailing" id="sCm-Ds-hNY"/>
                                     <constraint firstItem="vyr-Ca-PtL" firstAttribute="leading" secondItem="X3x-tX-dS8" secondAttribute="leading" id="tW3-Ui-C5X"/>
                                     <constraint firstItem="X3x-tX-dS8" firstAttribute="top" secondItem="kJ4-D7-kaO" secondAttribute="bottom" constant="8" symbolic="YES" id="uEt-jp-hGx"/>
+                                    <constraint firstItem="gMF-0a-BEc" firstAttribute="leading" secondItem="V8z-hm-WLR" secondAttribute="leading" constant="20" id="w7Q-Rj-72I"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -994,6 +1004,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createEventLabel" destination="gMF-0a-BEc" id="F7F-d1-AXS"/>
                         <outlet property="dateTextField" destination="URM-Kc-n2S" id="tCP-x7-FDO"/>
                         <outlet property="eventDesc" destination="X3x-tX-dS8" id="4w7-bk-ou1"/>
                         <outlet property="eventName" destination="vyr-Ca-PtL" id="cu2-oX-hJ7"/>
@@ -1005,7 +1016,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-ky-xDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1974" y="1932"/>
+            <point key="canvasLocation" x="1973.5999999999999" y="1931.7841079460272"/>
         </scene>
         <!--Tags-->
         <scene sceneID="gFJ-5q-H5B">
