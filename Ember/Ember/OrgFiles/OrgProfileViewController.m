@@ -371,15 +371,25 @@
     NSString *key = _snapShots[row].key;
     NSString *userId = [[[FIRAuth auth] currentUser] uid];
     
-    FIRDatabaseQuery *recentPostsQuery = [[[[_ref child:[BounceConstants firebaseHomefeed]] child:key] child:@"postDetails"] child:@"eventID"];
-    [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-        //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        NSString *eventID = snapShot.value;
-        [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue];
+    NSDictionary *snap = _snapShots[row].getPostDetails;
+    if(snap[[BounceConstants firebaseHomefeedEventPosterLink]]){
+        FIRDatabaseQuery *recentPostsQuery = [[[[_ref child:[BounceConstants firebaseHomefeed]] child:key] child:@"postDetails"] child:@"eventID"];
+        [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            
+            
+            NSString *eventID = snapShot.value;
+            [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue];
+            [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
+            [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+            
+        }];
+    }else{
+        
         [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
         [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
-        
-    }];
+    }
+    
     
 }
 
