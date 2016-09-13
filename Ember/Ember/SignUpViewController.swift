@@ -63,7 +63,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 3, height: self.view.frame.size.height))
         
-        label.font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
+        label.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
         
         label.backgroundColor = UIColor.clearColor()
         
