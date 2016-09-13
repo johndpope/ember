@@ -212,7 +212,7 @@
         self.captionInput.layer.masksToBounds=YES;
         self.captionInput.layer.borderColor= [[UIColor whiteColor]CGColor];
         [self.captionInput becomeFirstResponder];
-        
+        //self.captionInput.returnKeyType = UIReturnKeyDone;
         [self.view addSubview:self.captionInput];
         
         [_captionInput setAlpha:0.f];
