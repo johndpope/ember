@@ -10,9 +10,11 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseMessaging
+import SwiftValidator
 
-class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,BWWalkthroughViewControllerDelegate  {
+class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,BWWalkthroughViewControllerDelegate, ValidationDelegate  {
 
+    @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -27,6 +29,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     var mypassword:String = ""
     var myusername:String = ""
     var schoolOptions = [String]()
+    var validator:Validator!
     
     var ref:FIRDatabaseReference!
     override func viewDidLoad() {
@@ -92,20 +95,22 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         })
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @IBAction func backToSplashPage(sender: AnyObject) {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    @IBAction func signUpButton(sender: AnyObject) {
-        //Start Activity Indicator
-        accountCreationIndicator.hidden = false
-        accountCreationIndicator.startAnimating()
+    
+    override func viewDidAppear(animated: Bool) {
+        validator = Validator()
         
+        validator.registerField(firstName, errorLabel: fullNameLabel, rules: [RequiredRule(), FullNameRule()])
+        validator.registerField(emailAddress, errorLabel: fullNameLabel, rules: [RequiredRule(),
+            EmailRule(message:"Please provide a .edu email address")])
+        validator.registerField(password, errorLabel: fullNameLabel, rules: [RequiredRule(), MinLengthRule(length: 6, message: "Passowrd must by at least 6 characters.")])
+        validator.registerField(schoolChoice, errorLabel: fullNameLabel, rules: [RequiredRule()])
+        
+    }
+    
+    func validationSuccessful() {
+        accountCreationIndicator.hidden = false
+        //accountCreationIndicator.startAnimating()
+        // submit the form
         //Ensure email is lowercase
         self.email = self.emailAddress.text!
         self.finalEmail = email.lowercaseString
@@ -142,30 +147,78 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                         
                         let defaults = NSUserDefaults.standardUserDefaults()
                         defaults.setBool(false, forKey: "hasViewedOnBoarding")
-                        self.logIn(self.finalEmail,logInPassword: self.mypassword)
-                    }
+                        self.logIn(self.finalEmail,logInPassword: self.mypassword)                   }
                 })
                 self.initialSignIn = true
             }
             else {
                 self.logIn(self.finalEmail,logInPassword: self.mypassword)
             }
-        
+            
+        }
+        else {
+            self.accountCreationIndicator.stopAnimating()
+            // User needs to use .edu email address before continuing
+            let alertController = UIAlertController(title: "Email address",
+                                                    message: "Please use a correct .edu email address only",
+                                                    preferredStyle: UIAlertControllerStyle.Alert
+            )
+            alertController.addAction(UIAlertAction(title: "Ok",
+                style: UIAlertActionStyle.Default, handler: nil)
+            )
+            // Display alert
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+
+
     }
-    else {
-        self.accountCreationIndicator.stopAnimating()
-        // User needs to use .edu email address before continuing
-        let alertController = UIAlertController(title: "Email address",
-        message: "Please use a correct .edu email address only",
-        preferredStyle: UIAlertControllerStyle.Alert
-        )
-        alertController.addAction(UIAlertAction(title: "Ok",
-        style: UIAlertActionStyle.Default, handler: nil)
-        )
-        // Display alert
-        self.presentViewController(alertController, animated: true, completion: nil)
+    
+    func validationFailed(errors:[(Validatable ,ValidationError)]) {
+        // turn the fields to red
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.redColor().CGColor
+                field.layer.borderWidth = 1.0
+            }
+            error.errorLabel?.text = error.errorMessage // works if you added labels
+            error.errorLabel?.hidden = false
         }
     }
+    
+    func editBorder() {
+        
+        //firstName.layer.borwerColor = UIColor.blackColor().CGColor
+        //emailAddress.layer.border
+        
+        resetBorderColor(firstName)
+        resetBorderColor(emailAddress)
+        resetBorderColor(password)
+        resetBorderColor(schoolChoice)
+        fullNameLabel.layer.hidden = true
+    }
+    
+    func resetBorderColor(textView: UITextField){
+        var borderColor = UIColor(red: 204.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+        textView.layer.borderColor = borderColor.CGColor
+        textView.layer.borderWidth = 1.0;
+        textView.layer.cornerRadius = 5.0;
+    }
+
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func backToSplashPage(sender: AnyObject) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func signUpButton(sender: AnyObject) {
+        //Start Activity Indicator
+        self.editBorder()
+        self.validator.validate(self)
+        
+           }
     
     func logIn(logInEmail:String, logInPassword:String) {
         FIRAuth.auth()?.signInWithEmail(logInEmail, password: logInPassword, completion: {
@@ -278,5 +331,7 @@ extension String {
             return false
         }
     }
-    
-   }
+}
+
+
+
