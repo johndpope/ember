@@ -346,7 +346,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                 } else {
                     
                     dispatch_async(dispatch_get_main_queue(), {
-                        if(URL!.absoluteString.containsString("mp4") || URL!.absoluteString.containsString("mov")){
+                        if(URL!.absoluteString!.containsString("mp4") || URL!.absoluteString!.containsString("mov")){
                             bounceNode.getSubVideoNode().asset = AVAsset(URL: URL!)
                             
                         }else{

@@ -87,9 +87,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Ember/AsyncDisplayKit.framework"
   install_framework "Pods-Ember/PINCache.framework"
   install_framework "Pods-Ember/PINRemoteImage.framework"
+  install_framework "Pods-Ember/SwiftValidator.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Ember/AsyncDisplayKit.framework"
   install_framework "Pods-Ember/PINCache.framework"
   install_framework "Pods-Ember/PINRemoteImage.framework"
+  install_framework "Pods-Ember/SwiftValidator.framework"
 fi

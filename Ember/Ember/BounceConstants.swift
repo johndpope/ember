@@ -60,8 +60,8 @@ let LANDING_PAGE_PAGE_THREE_TITLE =  "FIND ORGS";
 
 
 //School Root
-var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
-//var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
+//var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
+var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
 
 //Users
 let FIREBASE_USERS_CHILD =  "users";

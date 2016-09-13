@@ -21,6 +21,7 @@ const int videoDuration  = 15;
 
 @property (weak, nonatomic) IBOutlet SDRecordButton *recordButton;
 
+
 @property (nonatomic, strong)          NSTimer        *progressTimer;
 @property (nonatomic)                  CGFloat        progress;
 
