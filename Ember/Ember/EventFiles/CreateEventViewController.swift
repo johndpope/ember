@@ -62,7 +62,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     override func viewDidLoad() {
         super.viewDidLoad()
         eventName.delegate = self
+        locationText.delegate = self
         
+        //.Done 
+        eventName.returnKeyType = UIReturnKeyType.Done
+        locationText.returnKeyType = UIReturnKeyType.Done
+
         
         imagePicker.delegate = self
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
@@ -99,6 +104,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         posterButton.titleEdgeInsets.left = 15
     }
     
+    //Return to dismiss first repsonder
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        eventName.resignFirstResponder()
+        locationText.resignFirstResponder()
+        return true
+    }
   
     @IBAction func saveEvent(sender: AnyObject) {
         
