@@ -30,7 +30,7 @@
 @import FirebaseStorage;
 
 
-@interface HomefeedController () <ASTableDataSource, ASTableDelegate, ImageClickedDelegate, OrgImageClickedDelegate,  OrgImageInVideoNodeClickedDelegate, BounceImageClickedDelegate,LongPressDelegate ,UIGestureRecognizerDelegate>
+@interface HomefeedController () <ASTableDataSource, ASTableDelegate, ImageClickedDelegate, OrgImageClickedDelegate,  OrgImageInVideoNodeClickedDelegate, BounceImageClickedDelegate,LongPressDelegate ,VideoLongPressDelegate,ShowAlertDelegate,UIGestureRecognizerDelegate>
 {
     ASTableNode *_tableNode;
     FIRDataSnapshot *_snapShot;
@@ -180,7 +180,7 @@ FIRDatabaseHandle _refHandle;
  *  @param image      First image clicked
  *  @param array      Array with all the info under 'mediaInfo' of firebase tree
  */
-- (void)childNode:(EmberNode *)childImage didClickImage:(UIImage *)image withLinks:(NSArray*) array{
+- (void)childNode:(EmberNode *)childImage didClickImage:(UIImage *)image withLinks:(NSArray*) array withHomeFeedID:(NSString *)homefeedID{
     
 //    id<PassedDelegate> strongDelegate = self.delegate;
 //    
@@ -200,8 +200,8 @@ FIRDatabaseHandle _refHandle;
     CounterView *footerView = [[CounterView alloc] initWithFrame:frame node:childImage currentIndex:0 count:array.count index:1 mediaInfo:array];
     
     GalleryViewController *galleryViewController  = [[GalleryViewController alloc] init];
-    
     [galleryViewController setImageProvider:provider];
+    [galleryViewController setHomeFeedID: homefeedID];
     [galleryViewController setDisplacedView:childImage.getSubImageNode.view];
     [galleryViewController setImageCount:array.count];
     [galleryViewController setStartIndex:0];
@@ -210,6 +210,7 @@ FIRDatabaseHandle _refHandle;
     galleryViewController.headerView = headerView;
     galleryViewController.footerView = footerView;
     
+    galleryViewController.getInitialImageController.showAlertDelegate = self;
 //        galleryViewController.launchedCompletion = { print("LAUNCHED") }
 //        galleryViewController.closedCompletion = { print("CLOSED") }
 //        galleryViewController.swipedToDismissCompletion = { print("SWIPE-DISMISSED") }
@@ -225,6 +226,10 @@ FIRDatabaseHandle _refHandle;
         
     };
     
+}
+
+-(void)showAlert:(NSInteger)index{
+    NSLog(@"index: %lu", index);
 }
 
 -(void)deleteDefaults{
@@ -274,21 +279,14 @@ FIRDatabaseHandle _refHandle;
 //        NSLog(@"array: %@", completion);
         
         NSDate *now = [NSDate date];
-        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-7 * 24 * 60 * 60];
+        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
         
         NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
         NSString *oneDayInMillis = [NSString stringWithFormat:@"%f",[oneDayAgo timeIntervalSince1970]];
         
-        
-        //    NSLog(@"%@",nowInMillis);
-        //    NSLog(@"%@",oneDayInMillis);
-        
         NSNumber *numNowInMillis = [NSNumber numberWithDouble:[nowInMillis doubleValue]];
         NSNumber *numOneDayAgoInMillis = [NSNumber numberWithDouble:-[oneDayInMillis doubleValue]];
-        
-        //    NSLog(@"time now: %@",numNowInMillis);
-        //    NSLog(@"one day ago: %@",numOneDayAgoInMillis);
-        
+
         
         FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventDateObject"] queryEndingAtValue:numOneDayAgoInMillis];
         [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
@@ -306,28 +304,19 @@ FIRDatabaseHandle _refHandle;
                     
                     if(val[@"orgTags"]){
                         
-//                        NSLog(@"passed");
-                        
                         NSArray *prefs = nil;
                         
                         if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
                             prefs = [val[@"orgTags"] allKeys];
-//                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                            
-                            
                         }else{ // IS OF TYPE NSARRAY
                             prefs = val[@"orgTags"];
-//                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                            
-                            
+   
                         }
-//                        NSLog(@"%@", prefs);
-                        //                    NSLog(@"past: %@", val[@"preferences"]);
-//                        NSDictionary *prefs = val[@"orgTags"];
+
                         if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                            [_data addSnapShot:child]; // Past Events
+                            [_data addSnapShot:child user:_user]; // Past Events
                         }else{
-                            [_data addSnapShotToEnd:child];
+                            [_data addSnapShotToEnd:child user: _user];
                         }
                     }
                     
@@ -357,21 +346,16 @@ FIRDatabaseHandle _refHandle;
                         
 //                        NSDictionary *prefs = val[@"orgTags"];
                         if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                            [_dataSection2 addSnapShot:child]; // Upcoming Events
+                            [_dataSection2 addSnapShot:child user:_user]; // Upcoming Events
                         }else{
-                            [_dataSection2 addSnapShotToEnd:child];
+                            [_dataSection2 addSnapShotToEnd:child user:_user];
                         }
                     }
                     
                 }
-                
-                //            NSLog(@"%@", time);
-                
-                
+
             }
-            
-//            NSLog(@"before reload 1: %lu", _dataSection2.getNoOfBounceSnapShots);
-//            NSLog(@"before reload 2: %lu", _data.getNoOfBounceSnapShots);
+
             
             [_activityIndicatorView stopAnimating];
             
@@ -494,6 +478,67 @@ FIRDatabaseHandle _refHandle;
     [[self navigationController] pushViewController:_myViewController animated:YES];
 }
 
+-(void)videolongPressDetected:(EmberSnapShot *)snap{
+    
+    NSArray *mediaInfo = snap.getMediaInfo.allValues;
+    NSString *myUserid = [FIRAuth auth].currentUser.uid;
+    NSString *snapShotid = [[mediaInfo valueForKey:@"userID"] objectAtIndex:0];
+    
+    NSLog(@"mine: %@, reported: %@", myUserid,snapShotid);
+    
+   
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Select Action"
+                                  message:nil
+                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleCancel
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    UIAlertAction* blockUser = [UIAlertAction
+                                actionWithTitle:@"Block User"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    
+                                    [self blockUser:snap userToBlockId:snapShotid myUserId:myUserid];
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                }];
+    
+    
+    UIAlertAction* report = [UIAlertAction
+                             actionWithTitle:@"Report"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [self sendReport:snap];
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    // Users should not be able to report themselves
+    if(![myUserid isEqualToString:snapShotid]){
+        [alert addAction:report];
+        [alert addAction:blockUser];
+    }
+    [alert addAction:cancel];
+    
+    
+    if([self presentedViewController] == nil){
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
+
+-(void)blockUser:(EmberSnapShot*)snap userToBlockId:(NSString*) usertoblockid myUserId:(NSString*)myuserid{
+    
+    [[[[[self.ref child:@"users"] child:myuserid] child:@"usersBlocked"] child:usertoblockid] setValue:[NSNumber numberWithBool:YES]];
+    
+}
 -(void)longPressDetected:(EmberSnapShot *)snap{
     
     UIAlertController * alert=   [UIAlertController
@@ -509,6 +554,7 @@ FIRDatabaseHandle _refHandle;
                                  [alert dismissViewControllerAnimated:YES completion:nil];
                              }];
     
+  
     UIAlertAction* report = [UIAlertAction
                              actionWithTitle:@"Report"
                              style:UIAlertActionStyleDefault
@@ -518,8 +564,17 @@ FIRDatabaseHandle _refHandle;
                                 [alert dismissViewControllerAnimated:YES completion:nil];
                              }];
     
+    NSDictionary *mediaInfo = snap.getMediaInfo;
+    NSString *myUserid = [FIRAuth auth].currentUser.uid;
+    NSString *reportedUserid = mediaInfo[@"userID"];
+    
+    // Users should not be able to report themselves
+    if(![myUserid isEqualToString:reportedUserid]){
+        [alert addAction:report];
+    }
+    
     [alert addAction:cancel];
-    [alert addAction:report];
+    
     
     if([self presentedViewController] == nil){
         [self presentViewController:alert animated:YES completion:nil];
@@ -531,6 +586,30 @@ FIRDatabaseHandle _refHandle;
     UIAlertController * alert=   [UIAlertController
                                   alertControllerWithTitle:nil
                                   message:@"Report Sent Successfully"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"Ok"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    
+    
+    [alert addAction:ok];
+    
+    if([self presentedViewController] == nil){
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
+
+-(void)presentUserBlockedSuccessfullyAlert{
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:nil
+                                  message:@"User blocked"
                                   preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* ok = [UIAlertAction
@@ -715,6 +794,7 @@ FIRDatabaseHandle _refHandle;
 
 -(void)setDelegates:(EmberNode*)bounceNode{
     
+    bounceNode.getSuperVideoNode.videolongPressDelegate = self;
     bounceNode.getSuperImageNode.getDetailsNode.delegate = self;
     bounceNode.getSuperVideoNode.delegate = self;
     bounceNode.delegate = self;

@@ -136,14 +136,29 @@
  *
  *  @param snap - The Homefeed tree post
  */
--(void)addSnapShot:(FIRDataSnapshot*)snap{
+-(void)addSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user{
+    
+    NSArray *usersBlocked = user.usersBlocked;
     
     NSDictionary *post = snap.value;
     NSDictionary *postDetails = post[[BounceConstants firebaseHomefeedPostDetails]];
     
     NSArray *values = [postDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
+//    NSLog(@"values: %@",values);
+//    NSLog(@"users blocked: %@", usersBlocked);
 //        NSLog(@"values: %lu", (unsigned long)values.count);
     NSMutableArray *valuesMutable = [values mutableCopy];
+    NSMutableArray *toDelete = [NSMutableArray array];
+
+    // remove arrays for blocked users
+    for(NSDictionary *arr in valuesMutable){
+        NSString *userid = [arr objectForKey:@"userID"];
+//        NSLog(@"user id: %@", userid);
+        if(![usersBlocked isEqual:[NSNull null]] && [usersBlocked containsObject:userid]){
+            [toDelete addObject:arr];
+        }
+    }
+    [valuesMutable removeObjectsInArray:toDelete];
     
     if(values.count >= [BounceConstants maxPhotosInGallery]){
 
@@ -162,8 +177,10 @@
         
     }else{
         
-        EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-        [bounceSnapShots insertObject:newSnap atIndex:0];
+        if(valuesMutable.count > 0){
+            EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
+            [bounceSnapShots insertObject:newSnap atIndex:0];
+        }
         
     }
     
@@ -174,14 +191,25 @@
  *
  *  @param snap - The Homefeed tree post
  */
--(void)addSnapShotToEnd:(FIRDataSnapshot *)snap{
+-(void)addSnapShotToEnd:(FIRDataSnapshot *)snap user:(EmberUser*)user{
     
+    NSArray *usersBlocked = user.usersBlocked;
     NSDictionary *post = snap.value;
     NSDictionary *postDetails = post[[BounceConstants firebaseHomefeedPostDetails]];
     
     NSArray *values = [postDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
     //        NSLog(@"values: %lu", (unsigned long)values.count);
     NSMutableArray *valuesMutable = [values mutableCopy];
+    NSMutableArray *toDelete = [NSMutableArray array];
+    
+    // remove arrays for blocked users
+    for(NSDictionary *arr in valuesMutable){
+        NSString *userid = [arr objectForKey:@"userID"];
+        if(![usersBlocked isEqual:[NSNull null]] && [usersBlocked containsObject:userid]){
+            [toDelete addObject:arr];
+        }
+    }
+    [valuesMutable removeObjectsInArray:toDelete];
     
     if(values.count >= [BounceConstants maxPhotosInGallery]){
         
@@ -200,8 +228,11 @@
         
     }else{
         
-        EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-        [bounceSnapShots addObject:newSnap];
+        if(valuesMutable.count > 0){
+            EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
+            [bounceSnapShots addObject:newSnap];
+        }
+        
         
     }
     

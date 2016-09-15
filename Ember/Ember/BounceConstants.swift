@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+// Search page titles
 let SEARCH_EVENTS_PAGE_TITLE =  "EVENTS";
 let SEARCH_ORGS_PAGE_TITLE =  "ORGS";
 
@@ -60,8 +60,8 @@ let LANDING_PAGE_PAGE_THREE_TITLE =  "FIND ORGS";
 
 
 //School Root
-//var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
-var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
+var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
+//var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
 
 //Users
 let FIREBASE_USERS_CHILD =  "users";
@@ -76,6 +76,9 @@ let FIREBASE_STORAGE_URL = "gs://ember-beaa6.appspot.com" // Production
 
 //Gallery
 let MAX_PHOTOS_IN_GALLERY = 5
+
+// Number of past days in the past for showing posts
+let NUM_PAST_DAYS = 7;
 
 @objc class BounceConstants : NSObject{
     private override init() {}
@@ -138,5 +141,8 @@ let MAX_PHOTOS_IN_GALLERY = 5
     
     // App Colors
     class func primaryAppColor() -> UIColor {return PRIMARY_APP_COLOR}
+    
+    // Number of past days in the past for showing posts
+    class func maxNumberPastDays() -> NSInteger {return NUM_PAST_DAYS}
     
 }

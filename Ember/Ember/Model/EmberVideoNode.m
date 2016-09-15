@@ -29,7 +29,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 
-@interface EmberVideoNode () <ASVideoNodeDelegate> {
+@interface EmberVideoNode () <ASVideoNodeDelegate,UIGestureRecognizerDelegate> {
     
     ASNetworkImageNode *_imageNode;
     Video *_videoNode;
@@ -278,6 +278,32 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [self addSubnode:_divider];
     
     return self;
+}
+
+-(void)didLoad{
+    [super didLoad];
+    
+        // Enabling long press only for videos on homefeed
+        UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressRecognizer)];
+        
+        longPressGestureRecognizer.numberOfTouchesRequired = 1;
+        longPressGestureRecognizer.minimumPressDuration = 0.2;
+        //            [longPressGestureRecognizer requireGestureRecognizerToFail:[self getButtonTap]];
+        //            if([self getImageTap]){
+        //                [longPressGestureRecognizer requireGestureRecognizerToFail:[self getImageTap]];
+        //            }
+        
+        longPressGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:longPressGestureRecognizer];
+    
+}
+
+-(void)handleLongPressRecognizer{
+//    NSLog(@"long press detected");
+    id<VideoLongPressDelegate> strongDelegate = self.videolongPressDelegate;
+    if ([strongDelegate respondsToSelector:@selector(longPressDetected:)]) {
+        [strongDelegate videolongPressDetected:_snapShot];
+    }
 }
 
 -(void)orgPhotoClicked{

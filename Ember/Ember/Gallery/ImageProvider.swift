@@ -12,5 +12,5 @@ import UIKit
 @objc public protocol ImageProvider {
     
     func provideImage(completion: NSURL? -> Void)
-   func provideImage(atIndex index: Int, completion: NSURL? -> Void)
+   func provideImage(atIndex index: Int, completion: NSDictionary? -> Void)
 }

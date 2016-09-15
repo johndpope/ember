@@ -21,11 +21,14 @@ import UIKit
         return UIApplication.sharedApplication().delegate?.window?.flatMap { $0 }
     }
     
+    var initialImageController : GalleryImageViewController?
+    
     /// DATA
     private var imageProvider: ImageProvider?
     private var displacedView: UIView?
     private var imageCount: Int?
     private var startIndex: Int?
+    private var homefeedID : NSString?
     
     private var galleryDatasource: GalleryViewControllerDatasource!
     private let fadeInHandler = ImageFadeInHandler()
@@ -88,6 +91,10 @@ import UIKit
         self.currentIndex = startIndex
     }
     
+    func getInitialImageController() -> GalleryImageViewController{
+        return initialImageController!
+    }
+    
     public func intializeTransitions(){
         
         self.presentTransition = GalleryPresentTransition(duration: presentTransitionDuration, displacedView: self.displacedView! , decorationViewsHidden: isDecorationViewsHidden)
@@ -95,9 +102,13 @@ import UIKit
         
     }
     
+    public func setHomeFeedID(homefeedID : NSString){
+        self.homefeedID = homefeedID
+    }
+    
     public func completeInit(){
         
-        self.imageControllerFactory = ImageViewControllerFactory(imageProvider: imageProvider!, displacedView: displacedView!, imageCount: imageCount!, startIndex: startIndex!, configuration: configuration, fadeInHandler: fadeInHandler, delegate: self)
+        self.imageControllerFactory = ImageViewControllerFactory(imageProvider: imageProvider!, displacedView: displacedView!, imageCount: imageCount!, startIndex: startIndex!, configuration: configuration, fadeInHandler: fadeInHandler, delegate: self, homefeedID: self.homefeedID!)
         
         /// Needs to be kept alive with strong reference
         self.galleryDatasource = GalleryViewControllerDatasource(imageControllerFactory: imageControllerFactory, imageCount: imageCount!, galleryPagingMode: galleryPagingMode)
@@ -202,12 +213,12 @@ import UIKit
     
     func configureInitialImageController() {
         
-        let initialImageController = GalleryImageViewController(imageProvider: imageProvider!, configuration: configuration, imageCount: imageCount!, displacedView: displacedView!, startIndex: startIndex!,  imageIndex: startIndex!, showDisplacedImage: true, fadeInHandler: fadeInHandler, delegate: self)
-        self.setViewControllers([initialImageController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
-        initialImageController.view.hidden = true
+        initialImageController = GalleryImageViewController(imageProvider: imageProvider!, configuration: configuration, imageCount: imageCount!, displacedView: displacedView!, startIndex: startIndex!,  imageIndex: startIndex!, showDisplacedImage: true, fadeInHandler: fadeInHandler, delegate: self, homefeedID: self.homefeedID!)
+        self.setViewControllers([initialImageController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        initialImageController!.view.hidden = true
         
         self.presentTransition!.completion = { [weak self] in
-            initialImageController.view.hidden = false
+            self!.initialImageController!.view.hidden = false
             
             self?.launchedCompletion?()
         }
