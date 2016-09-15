@@ -8,8 +8,8 @@
 
 import UIKit
 import Firebase
-
-class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+import SwiftValidator
+class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, ValidationDelegate {
     var ref:FIRDatabaseReference!
     var imagePicker = UIImagePickerController()
     var finalEventDateFormat: String = ""
@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var saveImage:UIImage?
     var eventImageLink:String = ""
     var eventDateObject = NSDate()
+    var validator:Validator!
     
     
     //segue variables
@@ -51,6 +52,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBOutlet weak var eventName: UITextField!
     let eventNameLimitLength = 30
 
+    @IBOutlet weak var createEventLabel: UILabel!
     @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var eventDesc: UITextView!
     @IBOutlet weak var posterButton: UIButton!
@@ -62,7 +64,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     override func viewDidLoad() {
         super.viewDidLoad()
         eventName.delegate = self
+        locationText.delegate = self
         
+        //.Done 
+        eventName.returnKeyType = UIReturnKeyType.Done
+        locationText.returnKeyType = UIReturnKeyType.Done
+
         
         imagePicker.delegate = self
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
@@ -99,57 +106,16 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         posterButton.titleEdgeInsets.left = 15
     }
     
+    //Return to dismiss first repsonder
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        eventName.resignFirstResponder()
+        locationText.resignFirstResponder()
+        return true
+    }
   
     @IBAction func saveEvent(sender: AnyObject) {
-        
-        if ((self.saveImage) != nil) {
-        let desc = eventDesc.text
-        let name = eventName.text
-        let location = locationText.text
-        print(desc.characters.count)
-        
-        
-        if name != "" && !(desc.isEmpty) &&
-            
-            location != ""  {
-            
-            //Assign information to be passed
-            self.eventsegDate = finalEventDateFormat
-            self.eventsegTime = finalEventStartTimeFormat
-            self.eventsegName = name!
-            self.eventsegLocation = location!
-            self.eventsegOrgID = self.orgID
-            self.eventsegOrgName = self.orgName
-            self.eventSegDesc = desc
-            self.imagesegLink  = self.eventImageLink
-            self.segOrgID = self.orgID
-            self.segOrgName = self.orgName
-            self.segProfileImage = self.orgProfileImage
-            self.segEventDateObject = self.eventDateObject
-            self.segPosterImage = self.saveImage
-            
-            //Post to events Tree
-            let eventsTreekey = ref.childByAutoId().key
-            self.eventsKeyToPass = eventsTreekey
-            //Post as homefeed item
-            let homeFeedEntryKey = ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").childByAutoId().key
-            self.homefeedKeyToPass = homeFeedEntryKey
-            
-            //self.navigationController?.popViewControllerAnimated(true)
-            performSegueWithIdentifier("finalEventTagsSegue", sender: nil)
-            
-        } else {
-            let alertController = UIAlertController(title: "Hi :)", message:
-                "Please fill in all the fields before creating an event.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        } else {
-            let alertController = UIAlertController(title: "Hi :)", message:
-                "Please upload a poster or image for your event.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        editBorder()
+        self.validator.validate(self)
     }
     
     @IBAction func posterAdd(sender: AnyObject) {
@@ -249,7 +215,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
 
     override func viewDidAppear(animated: Bool) {
         //establishNavBar()
+        validator = Validator()
         ref = FIRDatabase.database().reference()
+        validator.registerField(eventName, errorLabel: createEventLabel, rules: [RequiredRule()])
+        validator.registerField(locationText, errorLabel: createEventLabel, rules: [RequiredRule()])
+        validator.registerField(dateTextField, errorLabel: createEventLabel, rules: [RequiredRule()])
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -271,6 +242,88 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 destination.segEventDateObject = self.segEventDateObject
                 destination.segPosterImage = self.segPosterImage
             }
+        }
+    }
+    
+    func editBorder() {
+        
+        resetBorderColor(eventName)
+        resetBorderColor(locationText)
+        resetBorderColor(dateTextField)
+        createEventLabel.layer.hidden = true
+    }
+    
+    func resetBorderColor(textView: UITextField){
+        var borderColor = UIColor(red: 204.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+        textView.layer.borderColor = borderColor.CGColor
+        textView.layer.borderWidth = 1.0;
+        textView.layer.cornerRadius = 5.0;
+    }
+    
+    func validationSuccessful() {
+        // submit the form
+        
+        
+        if ((self.saveImage) != nil) {
+            let desc = eventDesc.text
+            let name = eventName.text
+            let location = locationText.text
+            print(desc.characters.count)
+            
+            
+            if name != "" && !(desc.isEmpty) &&
+                
+                location != ""  {
+                
+                //Assign information to be passed
+                self.eventsegDate = finalEventDateFormat
+                self.eventsegTime = finalEventStartTimeFormat
+                self.eventsegName = name!
+                self.eventsegLocation = location!
+                self.eventsegOrgID = self.orgID
+                self.eventsegOrgName = self.orgName
+                self.eventSegDesc = desc
+                self.imagesegLink  = self.eventImageLink
+                self.segOrgID = self.orgID
+                self.segOrgName = self.orgName
+                self.segProfileImage = self.orgProfileImage
+                self.segEventDateObject = self.eventDateObject
+                self.segPosterImage = self.saveImage
+                
+                //Post to events Tree
+                let eventsTreekey = ref.childByAutoId().key
+                self.eventsKeyToPass = eventsTreekey
+                //Post as homefeed item
+                let homeFeedEntryKey = ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").childByAutoId().key
+                self.homefeedKeyToPass = homeFeedEntryKey
+                
+                //self.navigationController?.popViewControllerAnimated(true)
+                performSegueWithIdentifier("finalEventTagsSegue", sender: nil)
+                
+            } else {
+                let alertController = UIAlertController(title: "Hi :)", message:
+                    "Please fill in all the fields before creating an event.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        } else {
+            let alertController = UIAlertController(title: "Hi :)", message:
+                "Please upload a poster or image for your event.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+
+    }
+    
+    func validationFailed(errors:[(Validatable ,ValidationError)]) {
+        // turn the fields to red
+        for (field, error) in errors {
+            if let field = field as? UITextField {
+                field.layer.borderColor = UIColor.redColor().CGColor
+                field.layer.borderWidth = 1.0
+            }
+            error.errorLabel?.text = error.errorMessage // works if you added labels
+            error.errorLabel?.hidden = false
         }
     }
     
