@@ -106,14 +106,11 @@
                 
             }else{
                 _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
-//                _imageNode.frame = _videoNode.frame;
                 
                 if(past){
                     [_imageNode setFollowButtonHidden];
                     [_imageNode showFireCount];
                 }
-                
-                
                 
                 [self addSubnode:_imageNode];
                 
@@ -147,7 +144,6 @@
             
         }else{
             _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
-//            [_imageNode setUserName:_userName];
             
             [_imageNode setFollowButtonHidden];
             
@@ -183,25 +179,34 @@
             _imageTap.delegate = self;
             [self.view addGestureRecognizer:_imageTap];
         }
+        
+        
+        // Enabling long press for Event Posters so that gallery images can only be reported if the user opens the
+        // full screen image
+        UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressRecognizer)];
+        
+        longPressGestureRecognizer.numberOfTouchesRequired = 1;
+        longPressGestureRecognizer.minimumPressDuration = 0.2;
+        [longPressGestureRecognizer requireGestureRecognizerToFail:[self getButtonTap]];
+        if([self getImageTap]){
+            [longPressGestureRecognizer requireGestureRecognizerToFail:[self getImageTap]];
+        }
+        
+        longPressGestureRecognizer.delegate = self;
+        [self.view addGestureRecognizer:longPressGestureRecognizer];
+        
+    }else{
+        
+        
+        
     }
     
-    
-    
-    UILongPressGestureRecognizer *longPressGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPressRecognizer)];
-    
-    longPressGestureRecognizer.numberOfTouchesRequired = 1;
-    longPressGestureRecognizer.minimumPressDuration = 0.2;
-    [longPressGestureRecognizer requireGestureRecognizerToFail:[self getButtonTap]];
-    if([self getImageTap]){
-        [longPressGestureRecognizer requireGestureRecognizerToFail:[self getImageTap]];
-    }
-    
-    longPressGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:longPressGestureRecognizer];
+
     
 }
 
 -(void)handleLongPressRecognizer{
+   
     id<LongPressDelegate> strongDelegate = self.longPressDelegate;
     if ([strongDelegate respondsToSelector:@selector(longPressDetected:)]) {
         [strongDelegate longPressDetected:_snapShot];
@@ -229,8 +234,8 @@
     
     id<ImageClickedDelegate> strongDelegate = self.delegate;
     
-    if ([strongDelegate respondsToSelector:@selector(childNode:didClickImage:withLinks:)]) {
-        [strongDelegate childNode:self didClickImage:_imageNode.getImageNode.image withLinks:values];
+    if ([strongDelegate respondsToSelector:@selector(childNode:didClickImage:withLinks:withHomeFeedID:)]) {
+        [strongDelegate childNode:self didClickImage:_imageNode.getImageNode.image withLinks:values withHomeFeedID: _snapShot.key];
     }
 }
 

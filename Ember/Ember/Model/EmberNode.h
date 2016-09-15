@@ -35,7 +35,7 @@
 @protocol ImageClickedDelegate <NSObject>
 
 - (void)childNode:(EmberNode*)childImage
-    didClickImage:(UIImage*)image withLinks:(NSArray*)array;
+    didClickImage:(UIImage*)image withLinks:(NSArray*)array withHomeFeedID:(NSString*)homefeedID;
 
 @end
 

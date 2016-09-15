@@ -123,8 +123,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
     }
     
-    func childNode(childImage: EmberNode!, didClickImage image: UIImage!, withLinks array: [AnyObject]!) {
-
+    func childNode(childImage: EmberNode!, didClickImage image: UIImage!, withLinks array: [AnyObject]!, withHomeFeedID homefeedID: String!) {
         let provider = GalleryImageProvider()
         provider.setUrls(array)
         
@@ -135,6 +134,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
         let galleryViewController  = GalleryViewController()
         galleryViewController.setImageProvider(provider)
+        galleryViewController.setHomeFeedID(homefeedID)
         galleryViewController.setDisplacedView(childImage.getSubImageNode().view)
         galleryViewController.setImageCount(array.count)
         galleryViewController.setStartIndex(0)
@@ -150,8 +150,8 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
             headerView.currentIndex = index
             footerView.currentIndex = index
         }
-        
     }
+    
     
     func openDiscoverViewController() {
         discoverViewControllerDelegate1!.openDiscoverFromSuperViewController()

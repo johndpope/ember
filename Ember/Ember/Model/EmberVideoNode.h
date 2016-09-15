@@ -16,12 +16,14 @@
 @import Firebase;
 
 @protocol OrgImageInVideoNodeClickedDelegate;
+@protocol VideoLongPressDelegate;
 
 @interface EmberVideoNode : ASCellNode
 
 - (instancetype)initWithEvent:(EmberSnapShot *)snapShot;
 
 @property (nonatomic, weak) id<OrgImageInVideoNodeClickedDelegate> delegate;
+@property (nonatomic, weak) id<VideoLongPressDelegate> videolongPressDelegate;
 @property(strong, nonatomic) FIRDatabaseReference *ref;
 
 -(ASVideoNode*) getVideoNode;
@@ -36,5 +38,11 @@
 @protocol OrgImageInVideoNodeClickedDelegate <NSObject>
 
 - (void)bounceVideoOrgImageClicked:(NSString*)orgId;
+
+@end
+
+@protocol VideoLongPressDelegate <NSObject>
+
+- (void)videolongPressDetected:(EmberSnapShot*)snap;
 
 @end

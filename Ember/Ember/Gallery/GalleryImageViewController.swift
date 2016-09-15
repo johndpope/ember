@@ -9,6 +9,11 @@
 import UIKit
 import AsyncDisplayKit
 import AVFoundation
+import FirebaseAuth
+
+@objc protocol ShowAlertDelegate: class {
+    func showAlert(index:Int)
+}
 
 enum SwipeToDismiss {
     
@@ -32,6 +37,10 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
     
     /// DELEGATE
     weak var delegate: ImageViewControllerDelegate?
+    weak var showAlertDelegate:ShowAlertDelegate?
+    
+    private var dictionary  = NSMutableArray()
+    private var homefeedID : NSString?
     
     /// MODEL & STATE
     private let imageProvider: ImageProvider
@@ -64,7 +73,7 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
     // TRANSITIONS
     private var swipeToDismissTransition: GallerySwipeToDismissTransition?
     
-    init(imageProvider: ImageProvider, configuration: GalleryConfiguration, imageCount: Int, displacedView: UIView, startIndex: Int,  imageIndex: Int, showDisplacedImage: Bool, fadeInHandler: ImageFadeInHandler?, delegate: ImageViewControllerDelegate?) {
+    init(imageProvider: ImageProvider, configuration: GalleryConfiguration, imageCount: Int, displacedView: UIView, startIndex: Int,  imageIndex: Int, showDisplacedImage: Bool, fadeInHandler: ImageFadeInHandler?, delegate: ImageViewControllerDelegate?, homefeedID: NSString) {
 
         self.imageProvider = imageProvider
         self.imageCount = imageCount
@@ -74,6 +83,8 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
         self.showDisplacedImage = showDisplacedImage
         self.fadeInHandler = fadeInHandler
         self.delegate = delegate
+        self.homefeedID = homefeedID
+        self.showAlertDelegate = nil;
         
         super.init(nibName: nil, bundle: nil)
         
@@ -120,6 +131,7 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         imageView.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
         
+        
 //
 //        
 //        videoNode = ASVideoNode.init()
@@ -137,7 +149,12 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
 //            updateImageAndContentSize(screenshotFromView(displacedView))
         }
         
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(GalleryImageViewController.longPressed(_:)))
+        self.view.addGestureRecognizer(longPressRecognizer)
+        
+        
         self.fetchImage(self.index)  { [weak self] image in
+            
             
             dispatch_async(dispatch_get_main_queue()) {
                 
@@ -148,14 +165,135 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
         }
     }
     
+    func report(){
+        let dict = self.dictionary.objectAtIndex(0) as! NSDictionary
+//        let userid = dict.objectForKey("userID") as! String
+        
+        let timeStamp = NSString(format: "%f", NSDate().timeIntervalSince1970)
+        let mediaLink = dict.objectForKey("mediaLink") as! String
+        let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+    
+        // Subtracting index from MAX_IN_GALLERY since the objects are reversed in processing and so the index of the
+        // image in Firebase would be the reverse
+        ref.child("Reports").child(homefeedID as! String).child(String(BounceConstants.maxPhotosInGallery() - self.index)).observeSingleEventOfType(.Value, withBlock: { snap in
+            
+            print(snap.value)
+            if snap.value is NSNull {
+
+                let obj : [NSString : AnyObject] = [
+                    "timeStamp" : timeStamp,
+                    "mediaLink" : mediaLink,
+                    "count" : 1
+                ]
+                ref.child("Reports").child(self.homefeedID as! String).child(String(BounceConstants.maxPhotosInGallery() - self.index)).setValue(obj)
+                return
+                
+            }else{
+                
+                ref.child("Reports").child(self.homefeedID as! String).child(String(BounceConstants.maxPhotosInGallery() - self.index)).child("count").runTransactionBlock({ (currentData: FIRMutableData) -> FIRTransactionResult in
+                    print(currentData.value)
+                    if currentData.value != nil{
+                       
+                        var starCount = currentData.value as? Int ?? 0
+                        starCount += 1
+                        currentData.value = starCount
+                      
+                    }
+                    return FIRTransactionResult.successWithValue(currentData)
+                }) { (error, committed, snapshot) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }else{
+                        self.presentSuccessAlert()
+                    }
+                }
+            }
+            
+            
+        })
+  
+    }
+    
+    func presentSuccessAlert(){
+        
+        let alert  = UIAlertController(title: nil, message: "Report Sent Successfully", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alert.addAction(ok)
+        if(self.presentedViewController == nil){
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+
+    }
+    
+    func longPressed(sender: UILongPressGestureRecognizer)    {
+        
+        let alertController =  UIAlertController(title: "Select Action", message: nil, preferredStyle: .ActionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        })
+        let report = UIAlertAction(title: "Report", style: .Default, handler: { action in
+            self.report()
+        })
+        let blockUser = UIAlertAction(title: "Block User", style: .Default, handler: { action in
+            self.blockUser()
+//            alertController.dismissViewControllerAnimated(true, completion: nil)
+        })
+        let dict = self.dictionary.objectAtIndex(0) as! NSDictionary
+        let useridToBlock = dict.objectForKey("userID") as! String
+        let myUserid = FIRAuth.auth()?.currentUser?.uid
+        
+        
+         alertController.addAction(report)
+        
+        // Users should not be able to block themselves
+        if(!(useridToBlock == myUserid)){
+            alertController.addAction(blockUser)
+        }
+        alertController.addAction(cancel)
+       
+        
+        if(self.presentedViewController == nil){
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func blockUser(){
+        let dict = self.dictionary.objectAtIndex(0) as! NSDictionary
+        let useridToBlock = dict.objectForKey("userID") as! String
+        let myUserid = FIRAuth.auth()?.currentUser?.uid
+        
+        let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        ref.child("users").child(myUserid!).child("usersBlocked").child(useridToBlock).setValue(true)
+        self.presentBlockSuccessfulAlert()
+    }
+    
+    func presentBlockSuccessfulAlert(){
+        let alert  = UIAlertController(title: nil, message: "User blocked", preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alert.addAction(ok)
+        if(self.presentedViewController == nil){
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
     func fetchImage(atIndex: Int, completion: NSURL? -> Void) {
         
         let backgroundQueue = dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
         
         dispatch_async(backgroundQueue) {
             
-            self.imageProvider.provideImage(atIndex: atIndex, completion: completion)
-//            self.imageProvider.provideImage(completion)
+            self.imageProvider.provideImage(atIndex: atIndex, completion: { dict in
+                self.dictionary.addObject(dict!)
+                let mediaLink = dict!.objectForKey("mediaLink") as! String
+                let url = NSURL(string: mediaLink)
+                completion(url)
+            })
         }
     }
     

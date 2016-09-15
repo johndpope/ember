@@ -17,8 +17,9 @@ final class ImageViewControllerFactory {
     private var configuration: GalleryConfiguration
     private var fadeInHandler: ImageFadeInHandler
     private weak var delegate: ImageViewControllerDelegate?
+    private var homefeedID : NSString?
     
-    init(imageProvider: ImageProvider, displacedView: UIView, imageCount: Int, startIndex: Int, configuration: GalleryConfiguration, fadeInHandler: ImageFadeInHandler, delegate: ImageViewControllerDelegate) {
+    init(imageProvider: ImageProvider, displacedView: UIView, imageCount: Int, startIndex: Int, configuration: GalleryConfiguration, fadeInHandler: ImageFadeInHandler, delegate: ImageViewControllerDelegate, homefeedID: NSString) {
         
         self.imageProvider = imageProvider
         self.displacedView = displacedView
@@ -28,10 +29,11 @@ final class ImageViewControllerFactory {
         self.configuration = configuration
         self.fadeInHandler = fadeInHandler
         self.delegate = delegate
+        self.homefeedID = homefeedID
     }
     
     func createImageViewController(imageIndex: Int) -> GalleryImageViewController? {
       
-        return GalleryImageViewController(imageProvider: imageProvider,  configuration: configuration, imageCount: imageCount, displacedView: displacedView, startIndex: startIndex, imageIndex: imageIndex, showDisplacedImage: (imageIndex == self.startIndex), fadeInHandler: fadeInHandler, delegate: delegate)
+        return GalleryImageViewController(imageProvider: imageProvider,  configuration: configuration, imageCount: imageCount, displacedView: displacedView, startIndex: startIndex, imageIndex: imageIndex, showDisplacedImage: (imageIndex == self.startIndex), fadeInHandler: fadeInHandler, delegate: delegate, homefeedID: homefeedID!)
     }
 }

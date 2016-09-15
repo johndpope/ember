@@ -9,13 +9,14 @@
 import Foundation
 import FirebaseAuth
 
-class EmberUser : NSObject{
+public class EmberUser : NSObject{
     
     var signedIn = false
     let debug = false
     
     var userPreferences = NSArray()
     var orgsFollowed = NSArray()
+    public var usersBlocked = NSArray()
     
     let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
     
@@ -39,9 +40,16 @@ class EmberUser : NSObject{
         
         if let userID = FIRAuth.auth()?.currentUser?.uid{
             
-            ref.child("users").child(userID).child("preferences").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            ref.child("users").child(userID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 if let snap = snapshot.value as? NSDictionary{ // making sure org tags list exists
-                    self.userPreferences = Array(snap.allKeys)
+                    
+                    let prefs = snap.objectForKey("preferences") as! NSDictionary
+                     self.userPreferences = Array(prefs.allKeys)
+                    
+                    if let usersblocked = snap.objectForKey("usersBlocked") as? NSDictionary{
+                        self.usersBlocked = Array(usersblocked.allKeys)
+                    }
+                   
                     //                print(snap)
                     completion(snap)
                 }
