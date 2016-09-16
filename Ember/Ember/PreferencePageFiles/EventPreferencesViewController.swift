@@ -147,7 +147,7 @@ class EventPreferencesViewController: UIViewController {
                     let eventDateObject = -(self.segEventDateObject.timeIntervalSince1970)
                     
                     //Ref to events followed
-                    let eventsFollowedRefChild = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("eventsFollowed")
+                    let eventsFollowedRefChild = self.ref.child("users").child(userID!).child("eventsFollowed")
                     
                     
                     

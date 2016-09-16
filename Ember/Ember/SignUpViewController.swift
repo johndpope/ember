@@ -228,7 +228,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             }
             else {
                 if (!user!.emailVerified) {
-                    self.ref.child(FIREBASE_SCHOOL_ROOT).child("users").child(user!.uid).setValue(["username": self.myusername, "email-address": self.finalEmail, "adminOf":self.adminOf])
+                    self.ref.child("users").child(user!.uid).setValue(["username": self.myusername, "email-address": self.finalEmail, "adminOf":self.adminOf, "school": self.schoolChoice.text!])
                     
                     self.accountCreationIndicator.stopAnimating()
                     // User needs to use .edu email address before continuing

@@ -69,7 +69,7 @@ class MyOrgsTableViewController: UITableViewController {
     
     func retrieveORGIDS(completion : (Bool) ->()) {
         let userID = FIRAuth.auth()?.currentUser?.uid
-        ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("orgsFollowed").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("users").child(userID!).child("orgsFollowed").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             let enumerator = snapshot.children
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 self.interimIds.append(rest.key)

@@ -23,6 +23,7 @@ class NoEventsFollowedNode: ASCellNode {
     
     var ref:FIRDatabaseReference!
     
+    
     override init() {
         super.init()
         

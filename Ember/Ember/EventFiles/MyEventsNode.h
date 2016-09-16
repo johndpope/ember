@@ -20,7 +20,6 @@
 @interface MyEventsNode : ASCellNode <ASNetworkImageNodeDelegate>
 
 @property (nonatomic, weak) id<MyEventsImageClickedDelegate> myEventsImageDelegate;
-@property(strong, nonatomic) FIRDatabaseReference *ref;
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
 
 -(ASNetworkImageNode*) getImageNode;

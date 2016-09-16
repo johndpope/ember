@@ -55,6 +55,8 @@
 @property (atomic, assign) BOOL dataSourceLocked;
 @property (strong, nonatomic) FIRStorage *storage;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) FIRDatabaseReference *childRef;
+
 
 @end
 
@@ -131,6 +133,7 @@ FIRDatabaseHandle _refHandle;
     //    }];
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    _childRef = [[FIRDatabase database] reference];
   
     
     _data = [[EmberSnapShot alloc] init];
@@ -536,7 +539,7 @@ FIRDatabaseHandle _refHandle;
 
 -(void)blockUser:(EmberSnapShot*)snap userToBlockId:(NSString*) usertoblockid myUserId:(NSString*)myuserid{
     
-    [[[[[self.ref child:@"users"] child:myuserid] child:@"usersBlocked"] child:usertoblockid] setValue:[NSNumber numberWithBool:YES]];
+    [[[[[_childRef child:@"users"] child:myuserid] child:@"usersBlocked"] child:usertoblockid] setValue:[NSNumber numberWithBool:YES]];
     
 }
 -(void)longPressDetected:(EmberSnapShot *)snap{

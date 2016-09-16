@@ -47,6 +47,8 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *comments;
 @property (strong, nonatomic) FIRStorage *storage;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) FIRDatabaseReference *childRef;
+
 @property(nonatomic, strong) NSMutableDictionary *headers;
 
 @end
@@ -91,7 +93,8 @@
     _reloadCalled = NO;
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    self.eventRef = [[self.ref child:@"Bounce"] child:[BounceConstants firebaseEventsChild]];
+    _childRef = [[FIRDatabase database] reference];
+
     
     
     _data = [[EmberSnapShot alloc] init];
@@ -176,7 +179,7 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MyAppSettingsChanged" object:self userInfo:nil];
     
-    [[[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:snapshotKey] removeValue];
+    [[[[[_childRef child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:snapshotKey] removeValue];
     
     [self decreaseFireCount:snapshotKey];
 
@@ -224,7 +227,7 @@
 }
 
 -(FIRDatabaseReference*)getUsersReference{
-    return [self.ref child:[BounceConstants firebaseUsersChild]];
+    return [_childRef child:[BounceConstants firebaseUsersChild]];
 }
 
 -(void)saveEvent:(NSString*)date imageUrl:(NSString*)imageUrl name:(NSString*)name time:(NSString*)time{
@@ -244,7 +247,7 @@
     NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
     NSNumber *numNowInMillis = [NSNumber numberWithDouble:[nowInMillis doubleValue]];
     
-    [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
+    [[[[_childRef child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
 //         NSLog(@"first: %@", firstSnap);
@@ -287,7 +290,7 @@
 
     
     // Listen for deleted comments in the Firebase database
-    [[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
+    [[[[_childRef child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]]
      observeEventType:FIRDataEventTypeChildRemoved
      withBlock:^(FIRDataSnapshot *snapshot) {
          int counter = 0;

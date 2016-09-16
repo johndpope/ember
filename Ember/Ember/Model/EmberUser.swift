@@ -18,7 +18,7 @@ public class EmberUser : NSObject{
     var orgsFollowed = NSArray()
     public var usersBlocked = NSArray()
     
-    let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+    let ref = FIRDatabase.database().reference()
     
   
     func isSignedIn(completionHandler: (Bool) ->()) {

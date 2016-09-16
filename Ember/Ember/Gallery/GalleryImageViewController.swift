@@ -265,7 +265,7 @@ final class GalleryImageViewController: UIViewController, UIScrollViewDelegate, 
         let useridToBlock = dict.objectForKey("userID") as! String
         let myUserid = FIRAuth.auth()?.currentUser?.uid
         
-        let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        let ref = FIRDatabase.database().reference()
         ref.child("users").child(myUserid!).child("usersBlocked").child(useridToBlock).setValue(true)
         self.presentBlockSuccessfulAlert()
     }

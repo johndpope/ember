@@ -55,9 +55,9 @@ class DiscoverViewController: UIViewController {
     @IBAction func preferencesDone(sender: AnyObject) {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
-        self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("preferences").removeValue()
+        self.ref.child("users").child(userID!).child("preferences").removeValue()
         for item in mainSet {
-        self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("preferences").updateChildValues([item:true])
+        self.ref.child("users").child(userID!).child("preferences").updateChildValues([item:true])
         }
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -100,7 +100,7 @@ class DiscoverViewController: UIViewController {
         
         let mainTagsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("orgTags").queryLimitedToFirst(50)
             
-        let tagsFromUserObjectQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("preferences").queryLimitedToFirst(50)
+        let tagsFromUserObjectQuery = self.ref.child("users").child(userID!).child("preferences").queryLimitedToFirst(50)
             
         tagsFromUserObjectQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
                 for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {

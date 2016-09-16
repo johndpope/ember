@@ -79,7 +79,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _ref = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
-    self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    self.ref = [[FIRDatabase database] reference];
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
     _snapShot = snapShot;
     NSDictionary *eventDetails = [snapShot getPostDetails];

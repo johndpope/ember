@@ -75,7 +75,7 @@ var mainSet:Set<String> = Set([])
             let userID = FIRAuth.auth()?.currentUser?.uid
     
         for object in preferences {
-            self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userID!).child("preferences").updateChildValues([object:true])
+            self.ref.child("users").child(userID!).child("preferences").updateChildValues([object:true])
             
         }
     

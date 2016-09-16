@@ -175,7 +175,7 @@ import FirebaseAuth
                                 self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").child("mediaInfo").child(imageKeyForDeletion).updateChildValues(["fireCount":0,"mediaLink":(URL?.absoluteString)!,"userID":(user.uid),"mediaCaption":self.mImageCaption!,"timeStamp":timeStamp])
                                 
                                 //Improved feature saving to personal profile
-                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userUID).child("HomeFeedPosts").child(self.homeFeedMediaKey).updateChildValues([imageKeyForDeletion:(URL?.absoluteString)!])
+                                self.ref.child("users").child(userUID).child("HomeFeedPosts").child(self.homeFeedMediaKey).updateChildValues([imageKeyForDeletion:(URL?.absoluteString)!])
                                 
                                 //save highest level timeStamp
                                 self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).updateChildValues(["timeStamp":timeStamp])
@@ -197,7 +197,7 @@ import FirebaseAuth
                                 self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").child("mediaInfo").child(imageKeyForDeletion).updateChildValues(["fireCount":0,"mediaLink":(URL?.absoluteString)!,"userID":(user.uid),"mediaCaption":self.mImageCaption!,"timeStamp":timeStamp])
                                 
                                 //save to personal profile
-                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userUID).child("HomeFeedPosts").child(self.homeFeedMediaKey).updateChildValues([imageKeyForDeletion:(URL?.absoluteString)!])
+                                self.ref.child("users").child(userUID).child("HomeFeedPosts").child(self.homeFeedMediaKey).updateChildValues([imageKeyForDeletion:(URL?.absoluteString)!])
                             }
                         })
                     }

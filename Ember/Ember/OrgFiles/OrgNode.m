@@ -28,6 +28,7 @@
     NSMutableDictionary*_events;
     FIRUser *_user;
     FIRDatabaseReference *_ref;
+    FIRDatabaseReference *_childRef;
     ASTextNode *_noInterested;
     ASDisplayNode *_line;
     ASButtonNode *_fire;
@@ -59,7 +60,8 @@
     _ref = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    
+    _childRef = [[FIRDatabase database] reference];
+
     _noInterested = [[ASTextNode alloc] init];
     _noInterestedBelow = [ASTextNode new];
     _eventName  = [ASTextNode new];
@@ -320,7 +322,7 @@
 
 
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_ref child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
+    return [[[[_childRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
 }
 
 - (NSDictionary *)textStyle{

@@ -136,7 +136,7 @@ import FirebaseAuth
             self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(autoVidHomefeed).child("postDetails").child("mediaInfo").childByAutoId().updateChildValues(["fireCount":0,"mediaLink":vidRef.fullPath as String,"userID":(user.uid),"mediaCaption":self.mVidCaption!,"timeStamp":timeStamp])
             
             //save to personal profile
-        self.ref.child(BounceConstants.firebaseSchoolRoot()).child("users").child(userUID).child("HomeFeedPosts").updateChildValues([autoVidHomefeed:(vidRef.fullPath as String)])
+        self.ref.child("users").child(userUID).child("HomeFeedPosts").updateChildValues([autoVidHomefeed:(vidRef.fullPath as String)])
             
             
             //save highest level timeStamp

@@ -36,6 +36,7 @@ static const CGFloat kInnerPadding = 10.0f;
     NSMutableDictionary*_events;
     FIRUser *_user;
     FIRDatabaseReference *_ref;
+    FIRDatabaseReference *_childRef;
     OrgDetailsNode *_orgNode;
     NSString* orgId;
     BOOL _isAdmin;
@@ -73,6 +74,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _isAdmin = NO;
     _ref = [[FIRDatabase database] reference];
+    _childRef = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -171,7 +173,7 @@ static const CGFloat kInnerPadding = 10.0f;
 
 
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_ref child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
+    return [[[[_childRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
 }
 
 - (NSDictionary *)textStyle{
