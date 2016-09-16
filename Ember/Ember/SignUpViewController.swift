@@ -320,6 +320,10 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         schoolChoice.text = schoolOptions[row]
     }
 
+    @IBAction func viewPolicy(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://docs.google.com/document/d/188bf_bn_Mer_C8APTkEit-c0oMuxaSk5NGBxWekdy50/edit?usp=sharing")!)
+
+    }
 }
 extension String {
     //Validate Email
