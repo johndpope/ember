@@ -35,7 +35,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     EmberSnapShot*_snapShot;
     NSMutableDictionary*_events;
     FIRUser *_user;
-    FIRDatabaseReference *_ref;
+    FIRDatabaseReference *_usersRef;
     ASTextNode *_text;
     float _scale;
     float _imageHeight;
@@ -61,7 +61,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId{
     
-    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseOrgsChild]] child:orgId]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[[self.schoolRootRef child:[BounceConstants firebaseOrgsChild]] child:orgId]  queryLimitedToFirst:100];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary * event = snapShot.value;
@@ -82,9 +82,9 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     screenWidth = [UIScreen mainScreen].bounds.size.width;
     
-    _ref = [[FIRDatabase database] reference];
+    _usersRef = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
-    self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    self.schoolRootRef = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
     _snapShot = snapShot;
     //    NSDictionary* event = snapShot.value;
@@ -133,20 +133,24 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //    NSLog(@"key: %@", _snapShot.key);
     NSString *uid = [[[FIRAuth auth] currentUser] uid];
     
-    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-        //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+    [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        
+        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+        NSLog(@"snapshot key: %@", _snapShot.key);
         if(![snapShot.value isEqual:[NSNull null]]){
             
-            [_followButton setSelected:YES];
-            //            NSLog(@"%@", _uid);
-            NSDictionary *attrDict = @{
-                                       NSFontAttributeName : [UIFont systemFontOfSize:14.0],
-                                       NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
-                                       };
-            
-            NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
-            _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
-                                                                                 attributes:attrDict];
+            if([snapShot.key isEqualToString:_snapShot.key]){
+                [_followButton setSelected:YES];
+                //            NSLog(@"%@", _uid);
+                NSDictionary *attrDict = @{
+                                           NSFontAttributeName : [UIFont systemFontOfSize:14.0],
+                                           NSForegroundColorAttributeName : [UIColor colorWithRed: 32.0/255.0 green: 173.0/255.0 blue: 5.0/255.0 alpha: 1.0]
+                                           };
+                
+                NSUInteger count = [[[_numberInterested attributedString] string] integerValue];
+                _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
+                                                                                     attributes:attrDict];
+            }
             
         }else{
             [_followButton setSelected:NO];
@@ -188,10 +192,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
-    
-    
-    
-  
     [self addSubnode:_textNode];
     [self addSubnode:_followButton];
 //    [self addSubnode:_numberInterested];
@@ -281,7 +281,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 
 -(FIRDatabaseReference*) getFollowersReference{
     //    return [[[self.ref child:@"Bounce"] child:@"Followers"] childByAutoId];
-    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
+    return [[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
 }
 
 - (NSDictionary *)textStyle{

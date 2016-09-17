@@ -95,8 +95,6 @@
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _childRef = [[FIRDatabase database] reference];
 
-    
-    
     _data = [[EmberSnapShot alloc] init];
     
     
@@ -217,7 +215,6 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
-
 
 
 -(void)viewDidAppear:(BOOL)animated{

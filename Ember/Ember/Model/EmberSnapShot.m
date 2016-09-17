@@ -142,6 +142,7 @@
     
     NSDictionary *post = snap.value;
     NSDictionary *postDetails = post[[BounceConstants firebaseHomefeedPostDetails]];
+//    NSLog(@"postdetails: %@",postDetails);
     
     NSArray *values = [postDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
 //    NSLog(@"values: %@",values);
@@ -176,7 +177,12 @@
         
         
     }else{
-        
+        // No media info; is Poster
+        if(values.count == 0){
+            EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
+            [bounceSnapShots insertObject:newSnap atIndex:0];
+            return;
+        }
         if(valuesMutable.count > 0){
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
             [bounceSnapShots insertObject:newSnap atIndex:0];
