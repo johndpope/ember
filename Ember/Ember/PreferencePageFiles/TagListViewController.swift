@@ -20,6 +20,7 @@ var mainSet:Set<String> = Set([])
 
     
     @IBOutlet weak var tagListView: UIView!
+    
     @IBOutlet weak var callToAction: UILabel!
     @IBOutlet weak var loadingPreferences: UIActivityIndicatorView!
     
@@ -33,18 +34,15 @@ var mainSet:Set<String> = Set([])
         individualInterests = []
   
         // Do any additional setup after loading the view.
-        
-        loadingPreferences.hidesWhenStopped = true;
-        loadingPreferences.hidden  = false
-        loadingPreferences.startAnimating()
-
         newTagListView = TagListView(frame: CGRectMake(0, tagListView.frame.minY , self.view.frame.size.width,tagListView.frame.size.height))
         self.view.addSubview(newTagListView)
         newTagListView.backgroundColor = UIColor.whiteColor()
         newTagListView.layer.borderColor = UIColor.whiteColor().CGColor
         newTagListView.layer.borderWidth = 0.2
         
-        //UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        
+        loadingPreferences.hidesWhenStopped = true;
+        loadingPreferences.startAnimating()
         
     }
 
@@ -100,8 +98,6 @@ var mainSet:Set<String> = Set([])
             for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 self.prefTags.append(rest.value as! String)
             }
-            
-            
             for (index,i) in self.prefTags.enumerate()
             {
                 let color:UIColor!
@@ -123,8 +119,9 @@ var mainSet:Set<String> = Set([])
                 }
                 self.newTagListView.addTag(i, target: self, tapAction: #selector(TagListViewController.tap(_:)),backgroundColor: color,textColor: UIColor.whiteColor())
             }
+            self.loadingPreferences.stopAnimating()
         })
-        loadingPreferences.stopAnimating()
+        
 
     }
     
