@@ -46,6 +46,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASTextNode *_userName;
     ASTextNode *_caption;
     NSString *uuid;
+    FIRDatabaseReference *_usersRef;
 }
 
 @end
@@ -87,14 +88,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 -(void)fetchUserName{
-    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseUsersChild]] child:uuid]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uuid]  child:@"username"];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //                        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        NSDictionary *userInfo = snapShot.value;
         
-        NSString *userName = userInfo[@"username"];
-        
-        
+        NSString *userName = snapShot.value;
         dispatch_async(dispatch_get_main_queue(), ^{
             [_userName setAttributedString:[[NSAttributedString alloc] initWithString:userName
                                                                            attributes:[self textStyleUsername]]];
@@ -149,6 +147,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         return nil;
   
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    _usersRef = [[FIRDatabase database] reference];
     
     _background = [[ASDisplayNode alloc] init];
     _background.layerBacked = YES;

@@ -38,6 +38,7 @@
     NSString *_url;
     EmberSnapShot *_orgInfo;
     BOOL isAdmin;
+    FIRDatabaseReference *_usersRef;
 
 }
 
@@ -73,6 +74,8 @@
     self.navigationController.navigationBar.tintColor = [BounceConstants primaryAppColor];
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    _usersRef = [[FIRDatabase database] reference];
+    
     _storage = [FIRStorage storage];
     _storageRef = [_storage referenceForURL:[BounceConstants firebaseStorageUrl]];
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
@@ -381,13 +384,13 @@
             NSString *eventID = snapShot.value;
             [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue];
             [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
-            [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+            [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
             
         }];
     }else{
         
         [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
     }
     
     

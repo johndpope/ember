@@ -189,7 +189,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid;
             
-            let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+            let ref = FIRDatabase.database().reference()
             
             let query = ref.child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts")
             query.observeSingleEventOfType(.Value, withBlock: {(snapShot) in
@@ -403,7 +403,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid;
             // Delete from user object
-            FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).removeValue()
+            FIRDatabase.database().reference().child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).removeValue()
         }
         
         data.removeSnapShotAtIndex(UInt(row) - 1)

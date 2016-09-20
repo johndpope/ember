@@ -55,7 +55,7 @@
 @property (atomic, assign) BOOL dataSourceLocked;
 @property (strong, nonatomic) FIRStorage *storage;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
-@property (strong, nonatomic) FIRDatabaseReference *childRef;
+@property (strong, nonatomic) FIRDatabaseReference *userRef;
 
 
 @end
@@ -133,7 +133,7 @@ FIRDatabaseHandle _refHandle;
     //    }];
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    _childRef = [[FIRDatabase database] reference];
+    _userRef = [[FIRDatabase database] reference];
   
     
     _data = [[EmberSnapShot alloc] init];
@@ -248,7 +248,7 @@ FIRDatabaseHandle _refHandle;
 -(void)fetchOrgsFollowed{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     FIRUser *user = [FIRAuth auth].currentUser;
-    [[[[[self.ref child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+    [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         
         for(FIRDataSnapshot* child in snapShot.children){
 
@@ -539,7 +539,7 @@ FIRDatabaseHandle _refHandle;
 
 -(void)blockUser:(EmberSnapShot*)snap userToBlockId:(NSString*) usertoblockid myUserId:(NSString*)myuserid{
     
-    [[[[[_childRef child:@"users"] child:myuserid] child:@"usersBlocked"] child:usertoblockid] setValue:[NSNumber numberWithBool:YES]];
+    [[[[[_userRef child:@"users"] child:myuserid] child:@"usersBlocked"] child:usertoblockid] setValue:[NSNumber numberWithBool:YES]];
     
 }
 -(void)longPressDetected:(EmberSnapShot *)snap{

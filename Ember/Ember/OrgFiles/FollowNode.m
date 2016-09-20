@@ -28,6 +28,7 @@
     NSMutableDictionary*_orgs;
     FIRUser *_user;
     EmberSnapShot*_snapShot;
+    FIRDatabaseReference *_usersRef;
     
 }
 
@@ -39,6 +40,7 @@
     self = [super init];
     
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
+    _usersRef = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     _orgs = [[NSMutableDictionary alloc]initWithCapacity:10];
     
@@ -57,11 +59,19 @@
         [_followButton setImage:[UIImage imageNamed:@"event-selected-small"] forState:ASControlStateSelected];
         
 //        NSLog(@"Key: %@, value: %@", snapShot.key, snapShot.value);
-        if(snapShot != nil && [[NSUserDefaults standardUserDefaults] objectForKey:snapShot.key] != nil){
-            [_followButton setSelected:YES];
-        }else{
-            [_followButton setSelected:NO];
-        }
+       
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
+            if(![snapShot.value isEqual:[NSNull null]]){
+                
+                [_followButton setSelected:YES];
+                
+            }else{
+                [_followButton setSelected:NO];
+            }
+            
+            
+        }];
         
         
         [_followButton addTarget:self
@@ -82,9 +92,8 @@
 -(void)buttonTapped{
     
     if(_followButton.selected){
-        NSString *key = [[NSUserDefaults standardUserDefaults] valueForKey:_snapShot.key];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:key] removeValue];
+       
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] removeValue];
         
         [[[[[_ref child:[BounceConstants firebaseOrgsChild]] child: _snapShot.key] child:@"followers"] child:_user.uid] removeValue];
         
@@ -98,8 +107,7 @@
         [ref setValue:[NSNumber numberWithBool:YES]];
         [orgListRef setValue:[NSNumber numberWithBool:YES]]; // Won't add a new entry since the key is the user ID and using number format of bool
         // since Firebase doesn't allow keys without values
-        
-        [[NSUserDefaults standardUserDefaults] setValue:ref.key forKey:_snapShot.key];
+       
         [_followButton setSelected:YES];
         
     }
@@ -112,7 +120,7 @@
 }
 
 -(FIRDatabaseReference*) getOrgFollowersReference{
-    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key];
+    return [[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key];
 }
 
 - (NSDictionary *)textStyle{

@@ -36,7 +36,7 @@ static const CGFloat kInnerPadding = 10.0f;
     NSMutableDictionary*_events;
     FIRUser *_user;
     FIRDatabaseReference *_ref;
-    FIRDatabaseReference *_childRef;
+    FIRDatabaseReference *_userRef;
     OrgDetailsNode *_orgNode;
     NSString* orgId;
     BOOL _isAdmin;
@@ -74,7 +74,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _isAdmin = NO;
     _ref = [[FIRDatabase database] reference];
-    _childRef = [[FIRDatabase database] reference];
+    _userRef = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _events = [[NSMutableDictionary alloc]initWithCapacity:10];
@@ -103,7 +103,7 @@ static const CGFloat kInnerPadding = 10.0f;
     [_followButton setImage:[UIImage imageNamed:@"event-selected"] forState:ASControlStateSelected];
     
     
-    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+    [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
         //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         if([snap.value isEqual:[NSNull null]]){
             [_followButton setSelected:NO];
@@ -142,7 +142,7 @@ static const CGFloat kInnerPadding = 10.0f;
 -(void)followButtonClicked{
   
     if(_followButton.selected){
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] removeValue];
+        [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key] removeValue];
         
         [[[[[_ref child:[BounceConstants firebaseOrgsChild]] child: _snapShot.key] child:@"followers"] child:_user.uid] removeValue];
    
@@ -164,7 +164,7 @@ static const CGFloat kInnerPadding = 10.0f;
 }
 
 -(FIRDatabaseReference*) getOrgFollowersReference{
-    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key];
+    return [[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildOrgsFollowed]] child:_snapShot.key];
 }
 
 -(FIRDatabaseReference*) getOrgListOfFollowersReference{
@@ -173,7 +173,7 @@ static const CGFloat kInnerPadding = 10.0f;
 
 
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_childRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
+    return [[[[_userRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
 }
 
 - (NSDictionary *)textStyle{

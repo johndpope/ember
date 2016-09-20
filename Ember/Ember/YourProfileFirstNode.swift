@@ -84,7 +84,7 @@ class YourProfileFirstNode: ASCellNode {
         
         let uid = FIRAuth.auth()?.currentUser?.uid
         
-        ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        ref = FIRDatabase.database().reference()
         
         ref.child(BounceConstants.firebaseUsersChild()).child(uid!).observeSingleEventOfType(.Value, withBlock: { (snap) in
             

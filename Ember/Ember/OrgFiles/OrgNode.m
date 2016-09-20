@@ -27,8 +27,7 @@
     EmberSnapShot*_snapShot;
     NSMutableDictionary*_events;
     FIRUser *_user;
-    FIRDatabaseReference *_ref;
-    FIRDatabaseReference *_childRef;
+    FIRDatabaseReference *_userRef;
     ASTextNode *_noInterested;
     ASDisplayNode *_line;
     ASButtonNode *_fire;
@@ -57,10 +56,9 @@
     
     NSLog(@"mediaCount: %lu", mediaCount);
     
-    _ref = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    _childRef = [[FIRDatabase database] reference];
+    _userRef = [[FIRDatabase database] reference];
 
     _noInterested = [[ASTextNode alloc] init];
     _noInterestedBelow = [ASTextNode new];
@@ -108,8 +106,6 @@
                                                                      attributes:[self textStyleLeft]];
     
     
-    FIRDatabaseReference *ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
-    
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     _eventLocation = [[ASTextNode alloc] init];
@@ -118,7 +114,7 @@
     
     _eventLocation.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventLocation.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventLocation.attributedString.size.height)));
     
-    FIRDatabaseQuery *recentPostsQuery3 = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventLocation"];
+    FIRDatabaseQuery *recentPostsQuery3 = [[[self.ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventLocation"];
     [recentPostsQuery3 observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         _eventLocation.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
@@ -138,7 +134,7 @@
     _eventDesc.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _eventDesc.attributedString.size.height * 5)));
 
 
-    FIRDatabaseQuery *recentPostsQuery2 = [[[ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
+    FIRDatabaseQuery *recentPostsQuery2 = [[[self.ref child:[BounceConstants firebaseEventsChild]] child:eventDetails[@"eventID"]] child:@"eventDesc"];
     [recentPostsQuery2 observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         _eventDesc.attributedString = [[NSAttributedString alloc] initWithString:snapShot.value
@@ -164,7 +160,7 @@
     
     _uid = [[[FIRAuth auth] currentUser] uid];
     
-    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+    [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
         //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         if(![snap.value isEqual:[NSNull null]]){
             [_fire setSelected:YES];
@@ -214,7 +210,7 @@
                                                                       attributes:[self textStyleFireUnselected]];
         
 //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
+        [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
         
         
         [_fire setSelected:NO];
@@ -231,7 +227,7 @@
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFire]];
         
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
+        [[[[[_userRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
         [_fire setSelected:YES];
         
         [self increaseFireCount];
@@ -322,7 +318,7 @@
 
 
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_childRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
+    return [[[[_userRef child:@"users"] child:_user.uid] child:@"eventsFollowed"] childByAutoId];
 }
 
 - (NSDictionary *)textStyle{

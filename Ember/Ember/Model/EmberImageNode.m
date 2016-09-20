@@ -137,12 +137,6 @@
     
 }
 
-
--(FIRDatabaseReference*)getHomeFeedPostReference{
-    return [[[_ref child:[BounceConstants firebaseHomefeed]] child:_snapShot.key] child:@"fireCount"];
-}
-
-
 -(void)sendNotif{
     
     NSDictionary *postDetails = [_snapShot getPostDetails];
@@ -158,10 +152,6 @@
     
 
 }
--(FIRDatabaseReference*) getFollowersReference{
-   return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] childByAutoId];
-}
-
 
 -(void)scalingTemplate{
     

@@ -123,7 +123,7 @@ import FirebaseAuth
             //        print(uid)
             
             
-            let ref = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+            let ref = FIRDatabase.database().reference()
             
             ref.child(BounceConstants.firebaseUsersChild()).child(uid).child("username").observeSingleEventOfType(.Value, withBlock: {
                 (snap) in
