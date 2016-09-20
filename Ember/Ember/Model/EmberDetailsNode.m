@@ -62,6 +62,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASTextNode *_noImages;
     ASTextNode *_numberInterested;
     ASDisplayNode*_divider;
+    FIRDatabaseReference *_usersRef;
     
     
 }
@@ -118,7 +119,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 -(void)fetchUserName{
-    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseUsersChild]] child:uuid]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uuid]  queryLimitedToFirst:100];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary *userInfo = snapShot.value;
@@ -148,6 +149,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _numberInterested = [ASTextNode new];
     
+    _usersRef = [[FIRDatabase database] reference];
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _snapShot = snapShot;
@@ -326,7 +328,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _uid = [[[FIRAuth auth] currentUser] uid];
     
-    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
+    [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snap){
         //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         if(![snap.value isEqual:[NSNull null]]){
             [_fire setSelected:YES];
@@ -375,7 +377,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     //    NSLog(@"key homefeed: %@", _snapShot.key);
     
-    [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+    [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //                NSLog(@"%@  %@", snapShot.key, snapShot.value);
         if(![snapShot.value isEqual:[NSNull null]]){
             
@@ -566,7 +568,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                                                                       attributes:[self textStyleFireUnselected]];
         
 //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] removeValue];
      
         [_fire setSelected:NO];
         
@@ -582,7 +584,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
                                                                       attributes:[self textStyleFire]];
       
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
         [_fire setSelected:YES];
         
         [self increaseFireCount];
@@ -605,7 +607,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", count]
                                                                              attributes:attrDict];
 
-        [[[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key] removeValue];
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key] removeValue];
         
         [_followButton setSelected:NO];
         
@@ -654,7 +656,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
 }
 -(FIRDatabaseReference*) getFollowersReference{
-    return [[[[_ref child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key];
+    return [[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid] child:[BounceConstants firebaseUsersChildEventsFollowed]] child:_snapShot.key];
 }
 
 - (NSDictionary *)textStyle{

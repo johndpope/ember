@@ -23,7 +23,7 @@
 
 @property (nonatomic, weak) id<MyEventsNodeDelegate> myEventsNodeDelegate;
 @property (nonatomic, weak) id<MyEventsOrgImageClickedDelegate> myEventsOrgImageDelegate;
-@property(strong, nonatomic) FIRDatabaseReference *ref;
+@property(strong, nonatomic) FIRDatabaseReference *schoolRootRef;
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
 
 -(ASTextNode *) getTextNode;

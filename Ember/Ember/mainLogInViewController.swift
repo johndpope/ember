@@ -90,7 +90,15 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
                         defaults.setBool(true, forKey: "hasViewedOnboarding")
                     }
                     else {
+                        if let school = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT") {
                        self.performSegueWithIdentifier("loginSegue", sender: nil)
+                        } else {
+                            self.getSchoolName((user!.uid), completion: { (schoolName) in
+                                NSUserDefaults.standardUserDefaults().setObject(schoolName, forKey: "FIREBASE_SCHOOL_ROOT")
+                                self.performSegueWithIdentifier("loginSegue", sender: nil)
+
+                            })
+                        }
                     }
                     
                 }
@@ -98,6 +106,16 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         })
 
     }
+    
+    func getSchoolName (userUID:String,completion :(String) -> ()) {
+        ref = FIRDatabase.database().reference()
+        let schoolQuery = ref.child("users").child(userUID).child("school").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+        
+        let mySchool = snapshot.value as! String
+            completion(mySchool)
+        })
+    }
+
     
     func startOnboarding() {
         // Get view controllers and build the walkthrough
@@ -127,7 +145,16 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
     
     func walkthroughCloseButtonPressed() {
         self.dismissViewControllerAnimated(true, completion: nil)
-        self.performSegueWithIdentifier("initialLoginSegue", sender: nil)
+        let userCurrent = FIRAuth.auth()?.currentUser
+        if let school = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT") {
+            self.performSegueWithIdentifier("initialLoginSegue", sender: nil)
+        } else {
+            self.getSchoolName((userCurrent!.uid), completion: { (schoolName) in
+                NSUserDefaults.standardUserDefaults().setObject(schoolName, forKey: "FIREBASE_SCHOOL_ROOT")
+                self.performSegueWithIdentifier("initialLoginSegue", sender: nil)
+
+            })
+        }
     }
 
     @IBAction func forgottenPasswordLink(sender: AnyObject) {

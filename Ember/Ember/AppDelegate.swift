@@ -16,6 +16,7 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var ref:FIRDatabaseReference!
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -37,10 +38,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
        let userCurrent = FIRAuth.auth()?.currentUser
         if(userCurrent != nil) {
-            let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
-            let tabBarController: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+            if let school = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT") {
+                let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
+                let tabBarController: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+                
+                window?.rootViewController = tabBarController
+            } else {
+              getSchoolName((userCurrent?.uid)!, completion: { (schoolName) in
+                    //FIREBASE_SCHOOL_ROOT = "/\(schoolName)/"
+                    NSUserDefaults.standardUserDefaults().setObject(schoolName, forKey: "FIREBASE_SCHOOL_ROOT")
+                    let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
+                    let tabBarController: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+                    
+                    self.window?.rootViewController = tabBarController
+                })
             
-            window?.rootViewController = tabBarController
+            }
         }
         return true;
     }
@@ -97,6 +110,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return true;
+    }
+    
+    func getSchoolName (userUID:String,completion :(String) -> ()) {
+        ref = FIRDatabase.database().reference()
+        let schoolQuery = ref.child("users").child(userUID).child("school").observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+            
+            let mySchool = snapshot.value as! String
+            completion(mySchool)
+        })
     }
     
     func applicationWillResignActive(application: UIApplication) {
