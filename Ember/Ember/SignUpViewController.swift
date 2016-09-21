@@ -112,7 +112,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         //accountCreationIndicator.startAnimating()
         // submit the form
         //Ensure email is lowercase
-        self.email = self.emailAddress.text!
+        self.email = self.emailAddress.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         self.finalEmail = email.lowercaseString
         
         //Get full name and password

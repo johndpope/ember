@@ -47,7 +47,7 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         
         logInIndicator.hidden = false
         logInIndicator.startAnimating()
-        let email = emailAddres.text!
+        var email = emailAddres.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         let myPassword = password.text!
         
         FIRAuth.auth()?.signInWithEmail(email, password: myPassword, completion: {
@@ -59,7 +59,7 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
                 print(error!.localizedDescription)
                 
                 let alertController = UIAlertController(title: "Email address",
-                    message: "Please check that you typed the email address correctly.",
+                    message: "Invalid Login. Please try again.",
                     preferredStyle: UIAlertControllerStyle.Alert
                 )
                 alertController.addAction(UIAlertAction(title: "Ok",
