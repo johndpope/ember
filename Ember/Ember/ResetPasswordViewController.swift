@@ -15,7 +15,8 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var backResetButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.emailAddressLink.keyboardType = UIKeyboardType.EmailAddress
         // Do any additional setup after loading the view.
         let image = UIImage(named: "backReset") as UIImage?
         backResetButton.setImage(image, forState: UIControlState.Normal)
