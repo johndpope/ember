@@ -28,6 +28,8 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         logInIndicator.hidesWhenStopped = true
         logInIndicator.hidden = true
         
+        self.emailAddres.keyboardType = UIKeyboardType.EmailAddress
+        
         let image = UIImage(named: "backDown") as UIImage?
         backSplashButton.setImage(image, forState: UIControlState.Normal)
         backSplashButton.titleEdgeInsets.left = 15
@@ -166,6 +168,10 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
 
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
     /*
     // MARK: - Navigation

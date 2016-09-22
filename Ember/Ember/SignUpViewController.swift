@@ -84,6 +84,11 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         let image = UIImage(named: "backDown") as UIImage?
         backToSplashButton.setImage(image, forState: UIControlState.Normal)
         backToSplashButton.titleEdgeInsets.left = 15
+        
+        
+        //Set keyboard type
+        self.emailAddress.keyboardType = UIKeyboardType.EmailAddress
+
 
         
         //populate schools

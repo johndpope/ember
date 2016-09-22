@@ -190,6 +190,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
             let uid = user.uid;
             
             let ref = FIRDatabase.database().reference()
+            let homefeedRef = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
             
             let query = ref.child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts")
             query.observeSingleEventOfType(.Value, withBlock: {(snapShot) in
@@ -235,7 +236,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                     
 //                    print("mainset: \(self.mainSet)")
                     
-                    ref.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
+                    homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
                         (snap) in
                         
                         // If video post...
