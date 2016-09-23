@@ -27,7 +27,7 @@
 -(instancetype)initWithOrgsSnapShot:(FIRDataSnapshot*)snapShot;
 -(BOOL)addOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user;
 
--(void)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap;
+-(NSInteger)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap;
 -(NSDictionary*)getMediaInfo;
 
 
@@ -40,5 +40,7 @@
 -(void)replaceMediaLinks:(NSArray*)mediaLinks;
 -(NSDictionary*)getPostDetails;
 -(NSDictionary*)getData;
+
+-(void)reverseBounceSnapShots;
 
 @end

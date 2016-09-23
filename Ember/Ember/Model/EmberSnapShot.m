@@ -244,8 +244,9 @@
     
 }
 
--(void)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap{
+-(NSInteger)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap{
     
+    NSInteger count = 0;
     
     FIRUser *user = [FIRAuth auth].currentUser;
     NSString *uid = user.uid;
@@ -266,26 +267,32 @@
         }
     }
     
+//    NSLog(@"values: %lu", (unsigned long)valuesMutable.count);
+    
     if(values.count >= 1){
         
         while (valuesMutable.count > 0) {
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
             NSDictionary *eventDetails = [newSnap getPostDetails];
-            NSArray *replacement = [valuesMutable subarrayWithRange:NSMakeRange(0, MIN( 1,valuesMutable.count))];
+            NSArray *replacement = [valuesMutable subarrayWithRange:NSMakeRange(0, MIN( 1 ,valuesMutable.count))];
             [eventDetails setValue:replacement forKeyPath:@"mediaInfo"];
             [newSnap replaceMediaLinks:replacement];
             [valuesMutable removeObjectsInRange:NSMakeRange(0, MIN( 1 ,valuesMutable.count))];
             [bounceSnapShots addObject:newSnap];
+            count++;
             
         }
-        
         
     }else{
         
         EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
         [bounceSnapShots addObject:newSnap];
+        count++;
         
     }
+    
+//    NSLog(@"count: %lu", (unsigned long)count);
+    return count;
         
 }
 
@@ -336,6 +343,10 @@
 // Returns higher tree level with fireCount
 -(NSDictionary*)getData{
     return _values;
+}
+
+-(void)reverseBounceSnapShots{
+    bounceSnapShots =  [[[bounceSnapShots reverseObjectEnumerator] allObjects] mutableCopy];
 }
 
 

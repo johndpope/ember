@@ -321,6 +321,7 @@ FIRDatabaseHandle _refHandle;
                         }else{
                             [_data addSnapShotToEnd:child user: _user];
                         }
+                        [_data reverseBounceSnapShots];
                     }
                     
                     

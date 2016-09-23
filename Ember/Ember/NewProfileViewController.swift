@@ -190,16 +190,16 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
             let uid = user.uid;
             
             let ref = FIRDatabase.database().reference()
-            let homefeedRef = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+            
             
             let query = ref.child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts")
             query.observeSingleEventOfType(.Value, withBlock: {(snapShot) in
                 
-                var count = 1; // Maintains index for inserting posts into tableview
-                //            print("your profile: \(snapShot)")
+//                            print("your profile: \(snapShot)")
 //                print("snap count: \(snapShot.childrenCount)")
                 
-                if(snapShot.childrenCount == 0){ // If no posts are available then only add the the first node with the user details
+                
+                if(snapShot.childrenCount == 0){    // If no posts are available then only add the the first node with the user details
                     self.indicator.stopAnimating()
                     if(self.refreshControl.refreshing){
                         self.refreshControl.endRefreshing()
@@ -222,80 +222,34 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                     
                     let homefeedKey = (child as! FIRDataSnapshot).key
                     
-                    if let dict = (child as! FIRDataSnapshot).value as? NSDictionary{
-                        
-                        for key in dict.allKeys{
-                            self.mainSet[(key as? String)!] = homefeedKey // Has nested values hence image's mediaInfo key saved
+                    if let dict = (child as! FIRDataSnapshot).value as? NSDictionary{ //get all media info keys
+//                        print(dict)
+                        let mediaInfoKeys = dict.allKeys as NSArray
+                        for key in mediaInfoKeys {
+                            self.mainSet[key as! String] = homefeedKey
                         }
+                        self.getMultipleGalleryItems(mediaInfoKeys, homefeedKey: homefeedKey)
+                       
                         
-                    }else{
-                        self.mainSet[homefeedKey] = "video" // No nested values hence video post
+                    }else{ // If not dictionary then there's only one item
+                        
+                        let val = (child as! FIRDataSnapshot).value as! String
+//                        print(val)
+                        if val.containsString("videos"){
+                            self.mainSet[homefeedKey] = "video" // No nested values hence video post
+                            self.getVideo(homefeedKey)
+                           
+                        }else{
+                            let key = (child as! FIRDataSnapshot).key
+//                            print(key)
+                           self.mainSet[key] = homefeedKey
+                            self.getSingleGalleryItem(homefeedKey, mediaInfoKey:val)
+                           
+                        }
+
+                        
                         
                     }
-
-                    
-//                    print("mainset: \(self.mainSet)")
-                    
-                    homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
-                        (snap) in
-                        
-                        // If video post...
-                        if((self.mainSet[homefeedKey]) == "video"){
-
-                            self.indicator.stopAnimating()
-                            
-                            if(self.refreshControl.refreshing){
-                                self.refreshControl.endRefreshing()
-                            }
-                            
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.reloadCalled = true
-                                
-                                self.tableNode.view.beginUpdates()
-                                self.data.addIndividualProfileSnapShot(snap)
-                                self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: count, inSection: 0)], withRowAnimation: .Fade)
-                                self.tableNode.view.endUpdates()
-                                
-                                count += 1
-                                return
-                                
-                            })
-                            return
-                        }
-                        
-                        // Image post if reaches this point
-                        if let dict = (snap.value as! NSDictionary).objectForKey("postDetails")?.objectForKey("mediaInfo")?.allKeys{
-//                            print("dict: \(dict)")
-                            
-                            for key in dict{
-//                                print(key as! String)
-                                if self.mainSet[key as! String] == homefeedKey{
-                                    
-                                    self.indicator.stopAnimating()
-                                    
-                                    if(self.refreshControl.refreshing){
-                                        self.refreshControl.endRefreshing()
-                                    }
-                                    
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        self.reloadCalled = true
-                                        
-                                        self.tableNode.view.beginUpdates()
-                                        self.data.addIndividualProfileSnapShot(snap)
-                                        self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: count, inSection: 0)], withRowAnimation: .Fade)
-                                        self.tableNode.view.endUpdates()
-                                        
-                                        count += 1
-                                        
-                                    })
-                                    
-                                }
-                            }
-                            
-                        }
-                        
-                        
-                    })
   
 
                 } 
@@ -306,7 +260,113 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
     }
     
+    func getSingleGalleryItem(homefeedKey:String, mediaInfoKey:String){
+        
+        let homefeedRef = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        
+        homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
+            (snap) in
+            
+            self.indicator.stopAnimating()
+            
+            if(self.refreshControl.refreshing){
+                self.refreshControl.endRefreshing()
+            }
+            
+            if let dict = (snap.value as! NSDictionary).objectForKey("postDetails")?.objectForKey("mediaInfo")?.allKeys{
+                //                            print("dict: \(dict)")
+                
+                for key in dict{
 
+                    if key as! String == mediaInfoKey{
+                        
+                        self.indicator.stopAnimating()
+                        
+                        if(self.refreshControl.refreshing){
+                            self.refreshControl.endRefreshing()
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.reloadCalled = true
+                            
+                            self.tableNode.view.beginUpdates()
+                            self.data.addIndividualProfileSnapShot(snap)
+                            self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
+                            self.tableNode.view.endUpdates()
+                          
+                            return
+                        })
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+        })
+        
+    }
+    
+    func getVideo(homefeedKey:String){
+        
+        let homefeedRef = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        
+        homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
+            (snap) in
+            
+            self.indicator.stopAnimating()
+            
+            if(self.refreshControl.refreshing){
+                self.refreshControl.endRefreshing()
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.reloadCalled = true
+                
+                self.tableNode.view.beginUpdates()
+                self.data.addIndividualProfileSnapShot(snap)
+                self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
+                self.tableNode.view.endUpdates()
+                
+                
+            })
+        })
+    }
+    
+    func getMultipleGalleryItems(FIRDict:NSArray, homefeedKey:String){
+        
+        var num = 0
+        
+        let homefeedRef = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+  
+        homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
+            (snap) in
+            
+            
+            var arr = [NSIndexPath]()
+            dispatch_async(dispatch_get_main_queue(), {
+                self.reloadCalled = true
+                
+                self.tableNode.view.beginUpdates()
+                num = self.data.addIndividualProfileSnapShot(snap) as NSInteger
+                let start = Int(self.data.getNoOfBounceSnapShots()) - num
+                for index in 1...num {
+//                    print("indexpath count: \(count+index-1)")
+                    let indexpath = NSIndexPath(forRow:start + index, inSection: 0)
+                    arr.append(indexpath)
+                }
+                self.tableNode.view.insertRowsAtIndexPaths(arr, withRowAnimation: .Fade)
+                self.tableNode.view.endUpdates()
+              
+                
+            })
+  
+            
+        })
+
+        
+    }
     
     func FIRDownload(bounceNode : EmberNode, postDetails : NSDictionary){
         
@@ -378,7 +438,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         
         let post = data.getBounceSnapShotAtIndex(UInt(row) - 1)
         let key = post.key
-        
+        let mediaInfoKey = self.mainSet[key]
         
         // Delete from homefeed
         let refHomefeed = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
@@ -388,7 +448,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         }else{
             print(key)
             print(self.mainSet)
-            let mediaInfoKey = self.mainSet[key]
+            
             refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).observeSingleEventOfType(.Value, withBlock: {(snap) in
                 
 //                print("children count: \(snap.childrenCount)")
@@ -404,7 +464,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         if let user = FIRAuth.auth()?.currentUser {
             let uid = user.uid;
             // Delete from user object
-            FIRDatabase.database().reference().child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).removeValue()
+            FIRDatabase.database().reference().child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).child(mediaInfoKey!).removeValue()
         }
         
         data.removeSnapShotAtIndex(UInt(row) - 1)

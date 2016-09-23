@@ -27,7 +27,7 @@
 @import FirebaseStorage;
 
 
-@interface EventViewController () <ASTableDataSource, ASTableDelegate, ImageClickedDelegate>
+@interface EventViewController () <ASTableDataSource, ASTableDelegate, ImageClickedDelegate, ShowAlertDelegate>
 {
     ASTableNode *_tableNode;
     BOOL _dataSourceLocked;
@@ -166,8 +166,23 @@
             }];
 }
 
-
--(void)childNode:(EmberNode *)childImage didClickImage:(UIImage *)image withLinks:(NSArray *)array{
+/**
+ *  Delegate method called when user clicks on gallery
+ *
+ *  @param childImage First node with the associated info. Used for acquiring view for first image
+ *  @param image      First image clicked
+ *  @param array      Array with all the info under 'mediaInfo' of firebase tree
+ */
+- (void)childNode:(EmberNode *)childImage didClickImage:(UIImage *)image withLinks:(NSArray*) array withHomeFeedID:(NSString *)homefeedID{
+    
+    //    id<PassedDelegate> strongDelegate = self.delegate;
+    //
+    //    if ([strongDelegate respondsToSelector:@selector(childController:imagePassed:)]) {
+    //        [strongDelegate childController:self imagePassed:image];
+    //    }
+    
+    //    NSLog(@"array: %@", array);
+    
     GalleryImageProvider *provider = [[GalleryImageProvider alloc] init];
     
     [provider setUrls:array];
@@ -178,8 +193,8 @@
     CounterView *footerView = [[CounterView alloc] initWithFrame:frame node:childImage currentIndex:0 count:array.count index:1 mediaInfo:array];
     
     GalleryViewController *galleryViewController  = [[GalleryViewController alloc] init];
-    
     [galleryViewController setImageProvider:provider];
+    [galleryViewController setHomeFeedID: homefeedID];
     [galleryViewController setDisplacedView:childImage.getSubImageNode.view];
     [galleryViewController setImageCount:array.count];
     [galleryViewController setStartIndex:0];
@@ -188,6 +203,7 @@
     galleryViewController.headerView = headerView;
     galleryViewController.footerView = footerView;
     
+    galleryViewController.getInitialImageController.showAlertDelegate = self;
     //        galleryViewController.launchedCompletion = { print("LAUNCHED") }
     //        galleryViewController.closedCompletion = { print("CLOSED") }
     //        galleryViewController.swipedToDismissCompletion = { print("SWIPE-DISMISSED") }
@@ -202,6 +218,7 @@
         
         
     };
+    
 }
 
 - (BOOL)prefersStatusBarHidden
@@ -386,6 +403,7 @@
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
         EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:false];
         bounceNode.delegate = self;
+        bounceNode.imageDelegate = self;
         [self FIRDownload:bounceNode post: event];
         
         return bounceNode;
