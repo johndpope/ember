@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 window?.rootViewController = tabBarController
             } else {
               getSchoolName((userCurrent?.uid)!, completion: { (schoolName) in
-                    //FIREBASE_SCHOOL_ROOT = "/\(schoolName)/"
                     NSUserDefaults.standardUserDefaults().setObject(schoolName, forKey: "FIREBASE_SCHOOL_ROOT")
                     let storyBoard: UIStoryboard = UIStoryboard(name:"Main", bundle: NSBundle.mainBundle())
                     let tabBarController: UITabBarController = storyBoard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
