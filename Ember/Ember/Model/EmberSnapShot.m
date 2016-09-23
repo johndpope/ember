@@ -255,8 +255,11 @@
     NSDictionary *postDetails = post[[BounceConstants firebaseHomefeedPostDetails]];
     
     NSArray *values = [postDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
+    NSArray *keys = [postDetails[[BounceConstants firebaseHomefeedMediaInfo]] allKeys];
+//    NSLog(@"keys: %@", keys);
 //            NSLog(@"values: %lu", (unsigned long)values.count);
     NSMutableArray *valuesMutable = [NSMutableArray new];
+    NSMutableArray *keysMutable = [NSMutableArray new];
     
     for(int i = 0; i < values.count; i ++){
         NSDictionary *val = [values objectAtIndex:i];
@@ -264,6 +267,7 @@
         if([val[@"userID"] isEqualToString:uid]){
            
             [valuesMutable addObject:val];
+            [keysMutable addObject:[keys objectAtIndex:i]];
         }
     }
     
@@ -274,9 +278,11 @@
         while (valuesMutable.count > 0) {
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
             NSDictionary *eventDetails = [newSnap getPostDetails];
+//            NSLog(@"eventDetails:%@", [newSnap getMediaInfo]);
             NSArray *replacement = [valuesMutable subarrayWithRange:NSMakeRange(0, MIN( 1 ,valuesMutable.count))];
             [eventDetails setValue:replacement forKeyPath:@"mediaInfo"];
-            [newSnap replaceMediaLinks:replacement];
+            [eventDetails setValue:[keysMutable objectAtIndex:count] forKey:@"mediaInfoKey"];
+            [newSnap replacePostDetails:eventDetails];
             [valuesMutable removeObjectsInRange:NSMakeRange(0, MIN( 1 ,valuesMutable.count))];
             [bounceSnapShots addObject:newSnap];
             count++;
@@ -314,8 +320,11 @@
 }
 
 -(void)replaceMediaLinks:(NSArray*)mediaLinks{
-    
     [_eventDetails setValue:mediaLinks forKeyPath:@"mediaInfo"];
+}
+
+-(void)replacePostDetails:(NSDictionary*)postDetails{
+    [_eventDetails setValue:postDetails forKeyPath:@"postDetails"];
 }
 
 -(NSDictionary*)getPostDetails{
@@ -325,6 +334,13 @@
     }
     return nil;
    
+}
+
+-(NSString*)getMediaInfoKey{
+    if(_eventDetails[@"mediaInfo"] != nil && _eventDetails[@"mediaInfoKey"] != nil){
+        return _eventDetails[@"mediaInfoKey"];
+    }
+    return nil;
 }
 
 -(NSDictionary*)getMediaInfo{

@@ -29,6 +29,7 @@
 
 -(NSInteger)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap;
 -(NSDictionary*)getMediaInfo;
+-(NSString*)getMediaInfoKey;
 
 
 -(FIRDataSnapshot*)getFirebaseSnapShot;
