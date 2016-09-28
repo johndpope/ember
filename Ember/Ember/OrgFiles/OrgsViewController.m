@@ -10,13 +10,14 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "EmberOrgNode.h"
 #import "EmberSnapShot.h"
+#import "FollowNode.h"
 
 #import "Ember-Swift.h"
 
 
 @import Firebase;
 
-@interface OrgsViewController () <ASTableDataSource, ASTableDelegate, FindOrgsImageClickedDelegate>
+@interface OrgsViewController () <ASTableDataSource, ASTableDelegate, FindOrgsImageClickedDelegate, FindOrgsFollowButtonClickedDelegate>
 {
     ASTableNode *_tableNode;
     dispatch_queue_t _previewQueue;
@@ -80,6 +81,10 @@
     _orgs = [[EmberSnapShot alloc] init];
 
     [self fetchData];
+}
+
+-(void)findOrgsFollowButtonClicked:(EmberSnapShot *)snap{
+    
 }
 
 -(void)findOrgsImageClicked:(NSString *)orgId{

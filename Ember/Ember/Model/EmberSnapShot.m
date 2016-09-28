@@ -171,7 +171,7 @@
             [eventDetails setValue:replacement forKeyPath:@"mediaInfo"];
             [newSnap replaceMediaLinks:replacement];
             [valuesMutable removeObjectsInRange:NSMakeRange(0, MIN([BounceConstants maxPhotosInGallery],valuesMutable.count))];
-            [bounceSnapShots insertObject:newSnap atIndex:0];
+            [bounceSnapShots addObject:newSnap];
             
         }
         
@@ -180,12 +180,12 @@
         // No media info; is Poster
         if(values.count == 0){
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-            [bounceSnapShots insertObject:newSnap atIndex:0];
+            [bounceSnapShots addObject:newSnap];
             return;
         }
         if(valuesMutable.count > 0){
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-            [bounceSnapShots insertObject:newSnap atIndex:0];
+            [bounceSnapShots addObject:newSnap];
         }
         
     }

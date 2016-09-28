@@ -14,12 +14,17 @@
 
 @import Firebase;
 
+@protocol FindOrgsFollowButtonClickedDelegate;
 
 @interface FollowNode : ASControlNode
 
+@property (nonatomic, weak) id<FindOrgsFollowButtonClickedDelegate> findOrgsFollowButtonClickedDelegate;
 @property(strong, nonatomic) FIRDatabaseReference *ref;
+
 -(instancetype)initWithSnapShot:(EmberSnapShot*)snapShot;
-
-
-
 @end
+
+@protocol FindOrgsFollowButtonClickedDelegate <NSObject>
+-(void)findOrgsFollowButtonClicked:(EmberSnapShot*)snap;
+@end
+

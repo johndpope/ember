@@ -436,35 +436,42 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
     
     func deletePost(row : Int){
         
-        let post = data.getBounceSnapShotAtIndex(UInt(row) - 1)
-        let key = post.key
-        let mediaInfoKey = post.getMediaInfoKey()
- 
-//        print(dict)
+        //        print(dict)
         
         // Delete from homefeed
         let refHomefeed = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+ 
+        //        print(self.mainSet)
+        
+        let post = data.getBounceSnapShotAtIndex(UInt(row) - 1)
+        let key = post.key
+        
         
         print(key)
-//        print(self.mainSet)
         
-        refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).observeSingleEventOfType(.Value, withBlock: {(snap) in
+        if let mediaInfoKey = post.getMediaInfoKey(){
+            refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).observeSingleEventOfType(.Value, withBlock: {(snap) in
+                
+                //                print("children count: \(snap.childrenCount)")
+                if(snap.childrenCount == 1){
+                    refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).removeValue()
+                }else{
+                    refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).child(mediaInfoKey).removeValue()
+                }
+            })
             
-            //                print("children count: \(snap.childrenCount)")
-            if(snap.childrenCount == 1){
-                refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).removeValue()
-            }else{
-                refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).child(mediaInfoKey!).removeValue()
+            
+            if let user = FIRAuth.auth()?.currentUser {
+                let uid = user.uid;
+                // Delete from user object
+                FIRDatabase.database().reference().child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).child(mediaInfoKey).removeValue()
             }
-        })
-        
-        
-        if let user = FIRAuth.auth()?.currentUser {
-            let uid = user.uid;
-            // Delete from user object
-            FIRDatabase.database().reference().child(BounceConstants.firebaseUsersChild()).child(uid).child("HomeFeedPosts").child(key).child(mediaInfoKey!).removeValue()
+        }else{
+            
+            refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).removeValue()
+            
         }
-        
+ 
         data.removeSnapShotAtIndex(UInt(row) - 1)
         
     }
