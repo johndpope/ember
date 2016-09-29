@@ -77,7 +77,8 @@ class OrgPreferencesViewController: UIViewController {
                 userRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                     self.adminOf = snapshot.value!.objectForKey("adminOf") as! [String]
                     
-                    let orgRef = self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseUsersChild()).child(user.uid).child(BounceConstants.firebaseUsersChildOrgsFollowed()).child(self.orgId)
+                    let orgRef = self.ref.child(BounceConstants.firebaseUsersChild()).child(user.uid).child(BounceConstants.firebaseUsersChildOrgsFollowed()).child(self.orgId)
+                    print(self.orgId)
                     orgRef.setValue(true)
                     self.appendToAdminArray(self.orgId)
                     }, withCancelBlock: { error in
