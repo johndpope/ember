@@ -33,7 +33,6 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
         let image = UIImage(named: "backDown") as UIImage?
         backSplashButton.setImage(image, forState: UIControlState.Normal)
         backSplashButton.titleEdgeInsets.left = 15
-
         // Do any additional setup after loading the view.
     }    
     override func viewDidAppear(animated: Bool) {

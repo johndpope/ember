@@ -787,7 +787,6 @@
 		C76CDDC81D72A657008CEB9A /* Ember */ = {
 			isa = PBXGroup;
 			children = (
-				C728917C1D850F1C0031D788 /* Ember.entitlements */,
 				DDEED2F91D77F085008EE08E /* pexels-photo.jpg */,
 				C7119F311D72B2720047A5CD /* Walkthrough.storyboard */,
 				C7119F2E1D72B1D00047A5CD /* Main.storyboard */,
@@ -814,6 +813,7 @@
 				C76CDDF91D72A689008CEB9A /* Util */,
 				C76CDDD21D72A657008CEB9A /* Assets.xcassets */,
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
+				C728917C1D850F1C0031D788 /* Ember.entitlements */,
 				C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */,
 				C7F7A7941D79BA1D00970438 /* GoogleService-Info.plist */,
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
