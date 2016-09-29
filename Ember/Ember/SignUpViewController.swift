@@ -125,7 +125,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         self.myusername = self.firstName.text!
         
         //Ensure email has the suffix .edu and uses valid characters
-        if (finalEmail.hasSuffix(".edu") && finalEmail.isEmail) {
+        if (finalEmail.hasSuffix(".edu") && finalEmail.isEmail && checkSchoolValidity(self.finalEmail, schoolSelection: self.schoolChoice.text!)) {
+            
             if(!initialSignIn) {
                 FIRAuth.auth()?.createUserWithEmail(self.finalEmail, password: mypassword, completion: {
                     user, error in
@@ -165,7 +166,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             self.accountCreationIndicator.stopAnimating()
             // User needs to use .edu email address before continuing
             let alertController = UIAlertController(title: "Email address",
-                                                    message: "Please use a correct .edu email address only",
+                                                    message: "Please use a matching .edu email address only",
                                                     preferredStyle: UIAlertControllerStyle.Alert
             )
             alertController.addAction(UIAlertAction(title: "Ok",
@@ -220,6 +221,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     }
     @IBAction func signUpButton(sender: AnyObject) {
         //Start Activity Indicator
+        
         self.editBorder()
         self.validator.validate(self)
         
@@ -228,8 +230,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     func logIn(logInEmail:String, logInPassword:String) {
         let myEmail = self.finalEmail
         let mySchool = self.schoolChoice.text!
-        
-        if (checkSchoolValidity(self.finalEmail, schoolSelection: mySchool)) {
         FIRAuth.auth()?.signInWithEmail(logInEmail, password: logInPassword, completion: {
             user,error in
             if error != nil {
@@ -260,18 +260,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             }
             
         })
-        } else {
-            let alertController = UIAlertController(title: "School Verification",
-                                                    message: "Please ensure your school matches your email address.",
-                                                    preferredStyle: UIAlertControllerStyle.Alert
-            )
-            alertController.addAction(UIAlertAction(title: "Ok",
-                style: UIAlertActionStyle.Default, handler: nil)
-            )
-            // Display alert
-            self.presentViewController(alertController, animated: true, completion: nil)
-            
-        }
     }
     
     func startOnboarding() {
