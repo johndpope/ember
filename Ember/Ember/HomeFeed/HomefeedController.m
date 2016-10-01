@@ -295,6 +295,8 @@ FIRDatabaseHandle _refHandle;
         [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //                    NSLog(@"%@  %@", snapShot.key, snapShot.value);
             
+            NSUInteger *prefsCount  = 0;
+            
             for(FIRDataSnapshot* child in snapShot.children){
                 
                 NSDictionary *val = child.value;
@@ -317,7 +319,7 @@ FIRDatabaseHandle _refHandle;
                         }
 
                         if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                            [_data addSnapShot:child user:_user]; // Past Events
+                            [_data addSnapShotToIndex:child user:_user]; // Past Events
                         }else{
                             [_data addSnapShotToEnd:child user: _user];
                         }
@@ -350,7 +352,7 @@ FIRDatabaseHandle _refHandle;
                         
 //                        NSDictionary *prefs = val[@"orgTags"];
                         if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                            [_dataSection2 addSnapShot:child user:_user]; // Upcoming Events
+                            [_dataSection2 addSnapShotToIndex:child user:_user]; // Upcoming Events
                         }else{
                             [_dataSection2 addSnapShotToEnd:child user:_user];
                         }

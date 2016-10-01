@@ -19,8 +19,9 @@
 -(void)addMyEventsSnapShot:(FIRDataSnapshot*)snap key:(NSString*)key;
 
 - (instancetype)init;
--(void)addSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user;
+-(void)addSnapShotToIndex:(FIRDataSnapshot*)snap user:(EmberUser*)user;
 -(void)addSnapShotToEnd:(FIRDataSnapshot *)snap user:(EmberUser*)user;
+-(NSUInteger)getPrefsLastIndex;
 
 -(instancetype)initWithEventsSnapShot:(FIRDataSnapshot*)snapShot;
 

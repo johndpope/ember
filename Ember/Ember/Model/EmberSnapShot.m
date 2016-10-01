@@ -19,6 +19,7 @@
     NSDictionary*_values;
     NSMutableArray<EmberSnapShot *> *bounceSnapShots;
     FIRDataSnapshot *_snap;
+    NSUInteger prefsLastIndex;
     
 }
 
@@ -33,8 +34,8 @@
     _snap = snapShot;
     _values = snapShot.value;
      _eventDetails = _values[[BounceConstants firebaseHomefeedPostDetails]];
-    
     self.key = snapShot.key;
+    prefsLastIndex = 0;
     
     return self;
 }
@@ -136,7 +137,7 @@
  *
  *  @param snap - The Homefeed tree post
  */
--(void)addSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user{
+-(void)addSnapShotToIndex:(FIRDataSnapshot*)snap user:(EmberUser*)user{
     
     NSArray *usersBlocked = user.usersBlocked;
     
@@ -171,7 +172,8 @@
             [eventDetails setValue:replacement forKeyPath:@"mediaInfo"];
             [newSnap replaceMediaLinks:replacement];
             [valuesMutable removeObjectsInRange:NSMakeRange(0, MIN([BounceConstants maxPhotosInGallery],valuesMutable.count))];
-            [bounceSnapShots addObject:newSnap];
+            [bounceSnapShots insertObject:newSnap atIndex:prefsLastIndex];
+            prefsLastIndex++;
             
         }
         
@@ -180,12 +182,14 @@
         // No media info; is Poster
         if(values.count == 0){
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-            [bounceSnapShots addObject:newSnap];
+            [bounceSnapShots insertObject:newSnap atIndex:prefsLastIndex];
+            prefsLastIndex++;
             return;
         }
         if(valuesMutable.count > 0){
             EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithSnapShot:snap];
-            [bounceSnapShots addObject:newSnap];
+            [bounceSnapShots insertObject:newSnap atIndex:prefsLastIndex];
+            prefsLastIndex++;
         }
         
     }
@@ -365,6 +369,9 @@
     bounceSnapShots =  [[[bounceSnapShots reverseObjectEnumerator] allObjects] mutableCopy];
 }
 
+-(NSUInteger)getPrefsLastIndex{
+    return prefsLastIndex;
+}
 
 
 @end
