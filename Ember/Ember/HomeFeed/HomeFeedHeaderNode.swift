@@ -61,7 +61,6 @@ import AsyncDisplayKit
         let horizontalSpacer = ASLayoutSpec()
         horizontalSpacer.flexGrow = true
 
-        
         labelDesc.sizeRange = ASRelativeSizeRangeMakeWithExactRelativeDimensions(
             ASRelativeDimensionMakeWithPercent(1), // Fill parent width
             ASRelativeDimensionMakeWithPoints(50))

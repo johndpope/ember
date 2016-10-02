@@ -458,13 +458,14 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         let post = data.getBounceSnapShotAtIndex(UInt(row) - 1)
         let key = post.key
         
-        
         print(key)
         
         if let mediaInfoKey = post.getMediaInfoKey(){
             refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedMediaInfo()).observeSingleEventOfType(.Value, withBlock: {(snap) in
                 
                 //                print("children count: \(snap.childrenCount)")
+                self.deleteImageOrVideo(snap, mediaInfoKey: mediaInfoKey)
+                
                 if(snap.childrenCount == 1){
                     refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).removeValue()
                 }else{
@@ -480,11 +481,92 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
             }
         }else{
             
+            deletePoster(key)
             refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).removeValue()
             
         }
  
         data.removeSnapShotAtIndex(UInt(row) - 1)
+        
+    }
+    
+    func deleteImageOrVideo(snap:FIRDataSnapshot, mediaInfoKey:String){
+    
+    let mediaLink_2 = (snap.value as! NSDictionary).objectForKey(mediaInfoKey)?.objectForKey("mediaLink") as! NSString
+    if mediaLink_2.containsString("images"){
+    let array = mediaLink_2.componentsSeparatedByString("%2F")
+    let userid = array[1]
+    let imageName = array[2]
+    
+    print("userid: \(userid)")
+    print("imagename : \(imageName.componentsSeparatedByString("?")[0])")
+    
+    let storageRef = FIRStorage.storage().referenceForURL(FIREBASE_STORAGE_URL)
+    
+    let imageRef = storageRef.child("images").child(userid).child(imageName)
+    
+    // Delete the file
+    imageRef.deleteWithCompletion { (error) -> Void in
+    if (error != nil) {
+    print(error)
+    } else {
+    print("Successfully deleted")
+    }
+    }
+    
+    }else{ // is Video
+        
+        let array = mediaLink_2.componentsSeparatedByString("%2F")
+        let userid = array[1]
+        let videoName = array[2]
+        
+        print("userid: \(userid)")
+        print("videoName : \(videoName.componentsSeparatedByString("?")[0])")
+        
+        let storageRef = FIRStorage.storage().referenceForURL(FIREBASE_STORAGE_URL)
+        
+        let videoRef = storageRef.child("videos").child(userid).child(videoName)
+        
+        // Delete the file
+        videoRef.deleteWithCompletion { (error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                print("Successfully deleted video")
+            }
+        }
+        
+        }
+    }
+    
+    func deletePoster(key:String){
+        
+        let refHomefeed = FIRDatabase.database().referenceWithPath(BounceConstants.firebaseSchoolRoot())
+        
+        refHomefeed.child(BounceConstants.firebaseHomefeed()).child(key).child(BounceConstants.firebaseHomefeedPostDetails()).child(BounceConstants.firebaseHomefeedEventPosterLink()).observeSingleEventOfType(.Value, withBlock: { (snap) in
+            
+            let array = snap.value!.componentsSeparatedByString("%2F")
+            let userid = array[1]
+            let posterName = array[2]
+            
+            print("userid: \(userid)")
+            print("event poster link : \(posterName.componentsSeparatedByString("?")[0])")
+            
+            let storageRef = FIRStorage.storage().referenceForURL(FIREBASE_STORAGE_URL)
+            
+            let posterRef = storageRef.child("posters").child(userid).child(posterName)
+            
+            // Delete the file
+            posterRef.deleteWithCompletion { (error) -> Void in
+                if (error != nil) {
+                    print(error)
+                } else {
+                    print("Successfully deleted poster")
+                    
+                }
+            }
+            
+        })
         
     }
     
