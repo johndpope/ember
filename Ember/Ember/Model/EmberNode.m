@@ -140,7 +140,7 @@
         if([_url containsString:@"mp4"]  || [_url containsString:@"mov"]){
             _videoNode = [[EmberVideoNode alloc] initWithEvent:snapShot];
             
-//            [self addSubnode:_videoNode];
+            [self addSubnode:_videoNode];
             
         }else{
             _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
