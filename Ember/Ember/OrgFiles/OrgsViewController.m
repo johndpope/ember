@@ -22,7 +22,6 @@
     ASTableNode *_tableNode;
     dispatch_queue_t _previewQueue;
     FIRDataSnapshot *_snapShot;
-    BOOL _dataSourceLocked;
     EmberSnapShot*_orgs;
     EmberUser *_user;
     UIActivityIndicatorView *_activityIndicatorView;
@@ -85,7 +84,22 @@
 
 -(void)findOrgsFollowButtonClicked:(EmberSnapShot *)snap{
     
+    NSUInteger count = 0;
+    
+    for(NSUInteger i = 0; i < _orgs.getNoOfBounceSnapShots; i++){
+        if([snap isEqual:[_orgs getBounceSnapShotAtIndex:i]]){
+            
+            [_tableNode.view beginUpdates];
+            [_orgs removeSnapShotAtIndex:count];
+            NSIndexPath *path = [NSIndexPath indexPathForRow:count inSection:0];
+            [_tableNode.view deleteRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
+            [_tableNode.view endUpdates];
+            return;
+        }
+        count++;
+    }
 }
+
 
 -(void)findOrgsImageClicked:(NSString *)orgId{
 //    NSLog(@"clicked");
@@ -107,25 +121,45 @@
             _user.orgsFollowed = [completion[@"orgsFollowed"] allKeys];
         }
         
-        FIRDatabaseQuery *recentPostsQuery = [[self.ref child:[BounceConstants firebaseOrgsChild]] queryLimitedToFirst:100];
-        [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        FIRDatabaseQuery *orgsQuery = [self.ref child:[BounceConstants firebaseOrgsChild]];
+        [[orgsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+            
+            NSDictionary *val = snapShot.value;
             
             NSInteger count = 0;
+            
+            NSUInteger prefsCount = 0;
+            
             for(FIRDataSnapshot* child in snapShot.children){
                 
-                
-                if([_orgs addOrgsSnapShot:child user:_user]){
+                if([_orgs shouldAddOrgsSnapShot:child user:_user]){
                     
                     [_activityIndicatorView stopAnimating];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [_tableNode.view beginUpdates];
-                        [_tableNode.view insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:count inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-                        [_tableNode.view endUpdates];
-                    });
+                    
+                    if(val[@"preferences"]){
+                        //                    NSLog(@"past: %@", val[@"preferences"]);
+                        NSArray *prefs = [val[@"preferences"] allKeys];
+                        
+                        if([_user matchesUserPreferences:prefs]){ // Add orgs that match prefs at top of list
+                            
+                            [self updateTableAtIndex:prefsCount count:count snap:child];
+                            prefsCount++;
+ 
+                            
+                        }else{
+                            [self updateTable:count snap:child];
+                            
+                        }
+                        
+                       
+                    }else{
+                        [self updateTable:count snap:child];
+                       
+                    }
                     
                     count++;
                 }
-                
+ 
                 
             }
             
@@ -140,6 +174,25 @@
     
 }
 
+-(void)updateTableAtIndex:(NSUInteger)index count:(NSUInteger)count snap:(FIRDataSnapshot*)child{
+    
+    [_tableNode.view beginUpdates];
+    [_orgs addOrgToIndex:child index:index];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:count inSection:0];
+    [_tableNode.view insertRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
+    [_tableNode.view endUpdates];
+}
+
+-(void)updateTable:(NSUInteger)count snap:(FIRDataSnapshot*)child{
+    
+    [_tableNode.view beginUpdates];
+    [_orgs addOrgSnap:child];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:count inSection:0];
+    [_tableNode.view insertRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
+    [_tableNode.view endUpdates];
+    
+}
+
 
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -147,6 +200,7 @@
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
         EmberOrgNode *bounceOrgNode = [[EmberOrgNode alloc] initWithOrg:snapShot];
         bounceOrgNode.findOrgsImageClickedDelegate = self;
+        bounceOrgNode.getFollowNode.findOrgsFollowButtonClickedDelegate = self;
         return bounceOrgNode;
     };
     
@@ -160,7 +214,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(_orgs.getNoOfBounceSnapShots != 0){
-        NSLog(@"count: %lu", _orgs.getNoOfBounceSnapShots);
+//        NSLog(@"count: %lu", _orgs.getNoOfBounceSnapShots);
 //        NSLog(@"count_2: %lu", [_orgs objectAtIndex:0].childrenCount);
         return _orgs.getNoOfBounceSnapShots;
     }
@@ -175,15 +229,6 @@
 - (BOOL)shouldBatchFetchForTableView:(UITableView *)tableView
 {
     return false;
-}
-- (void)tableViewLockDataSource:(ASTableView *)tableView
-{
-    self.dataSourceLocked = YES;
-}
-
-- (void)tableViewUnlockDataSource:(ASTableView *)tableView
-{
-    self.dataSourceLocked = NO;
 }
 
 @end

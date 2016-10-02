@@ -82,40 +82,28 @@
     return self;
 }
 
--(BOOL)addOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user{
-    
-    EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithOrgsSnapShot:snap];
-    
-    NSDictionary *val = snap.value;
+-(BOOL)shouldAddOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user{
+
     NSString *orgID = snap.key;
     
     if(![user userFollowsOrg:orgID]){
-        
-        if(val[@"preferences"]){
-            //                    NSLog(@"past: %@", val[@"preferences"]);
-            NSArray *prefs = [val[@"preferences"] allKeys];
- 
-            if([user matchesUserPreferences:prefs]){ // Add orgs that match prefs at top of list
-                
-                [bounceSnapShots insertObject:newSnap atIndex:0];
-                
-                
-            }else{
-                [bounceSnapShots addObject:newSnap];
-            }
-            
-            return YES;
-        }else{
-            
-            [bounceSnapShots addObject:newSnap];
-            return YES;
-        }
-        
+        return YES;
     }
     
     return NO;
+
+}
+
+-(void)addOrgSnap:(FIRDataSnapshot*)snap{
     
-  
+    EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithOrgsSnapShot:snap];
+    
+    [bounceSnapShots addObject:newSnap];
+}
+
+-(void)addOrgToIndex:(FIRDataSnapshot*) snap index:(NSUInteger)index{
+    EmberSnapShot *newSnap = [[EmberSnapShot alloc] initWithOrgsSnapShot:snap];
+    [bounceSnapShots insertObject:newSnap atIndex:index];
 }
 
 -(void)addMyEventsSnapShot:(FIRDataSnapshot*)snap key:(NSString*)key{
@@ -372,6 +360,8 @@
 -(NSUInteger)getPrefsLastIndex{
     return prefsLastIndex;
 }
-
+-(void)resetPrefsLastIndex{
+    prefsLastIndex = 0;
+}
 
 @end

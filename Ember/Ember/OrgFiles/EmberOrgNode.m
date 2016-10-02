@@ -25,7 +25,7 @@ static const CGFloat kInnerPadding = 10.0f;
     
     ASTextNode *_textNode;
     UIImage *_placeholderImage;
-    FIRDataSnapshot*_snapShot;
+    EmberSnapShot*_snapShot;
     ASDisplayNode *background;
     ASNetworkImageNode *_imageNode;
     FollowNode *_followNode;
@@ -35,6 +35,10 @@ static const CGFloat kInnerPadding = 10.0f;
 @end
 
 @implementation EmberOrgNode
+
+-(FollowNode*)getFollowNode{
+    return _followNode;
+}
 
 -(instancetype)initWithOrg: (EmberSnapShot*) snapShot{
     if (!(self = [super init]))

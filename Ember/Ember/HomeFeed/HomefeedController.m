@@ -269,6 +269,9 @@ FIRDatabaseHandle _refHandle;
     if([_refreshControl isRefreshing]){
         [_data removeAllSnapShots];
         [_dataSection2 removeAllSnapShots];
+        [_data resetPrefsLastIndex];
+        [_dataSection2 resetPrefsLastIndex];
+        
     }
 
     

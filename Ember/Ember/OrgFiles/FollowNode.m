@@ -111,7 +111,7 @@
         [_followButton setSelected:YES];
         
         id<FindOrgsFollowButtonClickedDelegate> strongDelegate = self.findOrgsFollowButtonClickedDelegate;
-        if ([strongDelegate respondsToSelector:@selector(findOrgsFollowButtonClickedDelegate)]) {
+        if ([strongDelegate respondsToSelector:@selector(findOrgsFollowButtonClicked:)]) {
             [strongDelegate findOrgsFollowButtonClicked:_snapShot];
         }
         

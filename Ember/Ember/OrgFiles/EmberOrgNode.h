@@ -12,6 +12,7 @@
 #import <UIKit/UIKit.h>
 
 #import "EmberSnapShot.h"
+#import "FollowNode.h"
 
 @import Firebase;
 
@@ -21,6 +22,7 @@
 
 @property (nonatomic, weak) id<FindOrgsImageClickedDelegate> findOrgsImageClickedDelegate;
 -(instancetype)initWithOrg: (EmberSnapShot*) snapShot;
+-(FollowNode*)getFollowNode;
 @end
 
 @protocol FindOrgsImageClickedDelegate <NSObject>

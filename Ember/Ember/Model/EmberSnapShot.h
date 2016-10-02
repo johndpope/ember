@@ -26,7 +26,9 @@
 -(instancetype)initWithEventsSnapShot:(FIRDataSnapshot*)snapShot;
 
 -(instancetype)initWithOrgsSnapShot:(FIRDataSnapshot*)snapShot;
--(BOOL)addOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user;
+-(BOOL)shouldAddOrgsSnapShot:(FIRDataSnapshot*)snap user:(EmberUser*)user;
+-(void)addOrgSnap:(FIRDataSnapshot*)snap;
+-(void)addOrgToIndex:(FIRDataSnapshot*) snap index:(NSUInteger)index;
 
 -(NSInteger)addIndividualProfileSnapShot:(FIRDataSnapshot*)snap;
 -(NSDictionary*)getMediaInfo;
@@ -44,5 +46,6 @@
 -(NSDictionary*)getData;
 
 -(void)reverseBounceSnapShots;
+-(void)resetPrefsLastIndex;
 
 @end
