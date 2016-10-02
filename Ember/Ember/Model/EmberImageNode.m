@@ -153,33 +153,14 @@
 
 }
 
--(void)scalingTemplate{
-    
-
-//    float widthRatioText = screenWidth / _textNode.calculatedSize.width;
-//    float heightRatioText = _textNode.calculatedSize.height;
-//    float scaleText = MIN(widthRatioText, heightRatioText);
-//    float imageWidthText = scaleText * _textNode.calculatedSize.width;
-//    float imageHeightText = scaleText * _textNode.calculatedSize.height;
-    
-}
-
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
-//    CGFloat kInsetHorizontal = 16.0;
-//    CGFloat kInsetTop = 6.0;
-//    CGFloat kInsetBottom = 6.0;
-    
-//    CGFloat kOuterPadding = 10.0f;
-    
-    
-//    NSLog(@"screen width: %f", screenWidth);
     _imageNode.contentMode = UIViewContentModeScaleAspectFill;
     _imageNode.preferredFrameSize = CGSizeMake(screenWidth, screenWidth * 0.8);
     _emberDetailsNode.flexShrink = YES;
     _emberDetailsNode.preferredFrameSize = CGSizeMake(screenWidth, constrainedSize.min.height);
     
-    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
+    ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;
     ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
     

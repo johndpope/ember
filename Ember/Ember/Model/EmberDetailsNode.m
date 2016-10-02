@@ -212,7 +212,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     NSString *eventName = eventDetails[[BounceConstants firebaseEventsChildEventName]];
     
-    //    eventName = [self truncateEventName:eventName];
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventName
                                                                  attributes:[self textStyle]];
     
@@ -226,7 +225,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _textNode.maximumNumberOfLines = 2;
     _textNode.truncationMode = NSLineBreakByTruncatingTail;
     
-    _userName = [[ASTextNode alloc] init];
+    _userName = [ASTextNode new];
     _caption = [ASTextNode new];
     
     
@@ -287,8 +286,8 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             
         }
         
-        // Using 0.845 since that's the best width to allow some space for text with number of gallery images
-        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height * 2)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.845, _caption.attributedString.size.height * 2)));
+        // Using 0.820 since that's the best width to allow some space for text with number of gallery images
+        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.820, _caption.attributedString.size.height * 2)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth * 0.820, _caption.attributedString.size.height * 2)));
         
         _userName.attributedString = [[NSAttributedString alloc] initWithString:@" "
                                                                      attributes:[self textStyleUsername]];
@@ -796,13 +795,17 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     //    NSLog(@"screen width: %f", screenWidth);
     
-    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
+    ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;
     
     ASStaticLayoutSpec *captionStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_caption]];
-    
+//    ASStaticLayoutSpec *numberImagesStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_noImages]];
+     ASInsetLayoutSpec *specNumberImages = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 20) child:_noImages];
+ 
     ASStackLayoutSpec *captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,_noImages]];
+                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,specNumberImages]];
+    
+    
 
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
@@ -853,7 +856,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
             
             infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                             justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionRegion, userNameStatic, infoStack_2]];
+                                                             justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionRegion, userNameStatic, infoStack_2]];
         }
         
     }else{
