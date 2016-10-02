@@ -28,8 +28,8 @@
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 static const CGFloat kInnerPadding = 10.0f;
-static const CGFloat kOrgPhotoWidth = 75.0f;
-static const CGFloat kOrgPhotoHeight = 75.0f;
+static const CGFloat kOrgPhotoWidth = 50.0f;
+static const CGFloat kOrgPhotoHeight = 50.0f;
 
 
 @interface EmberDetailsNode () <UIGestureRecognizerDelegate> {
@@ -877,11 +877,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //        spec_2.flexGrow = YES;
 
     
-    ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
-    lastSpecs.insets = UIEdgeInsetsMake(0, 0, kInnerPadding, 0);
-    lastSpecs.child = spec_2;
-    
-    return lastSpecs;
+    return spec_2;
 }
 
 

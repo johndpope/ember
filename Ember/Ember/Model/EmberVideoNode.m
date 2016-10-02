@@ -23,8 +23,8 @@
 //static const CGFloat kImageSize = 80.0f;
 //static const CGFloat kOuterPadding = 16.0f;
 //static const CGFloat kInnerPadding = 10.0f;
-static const CGFloat kOrgPhotoWidth = 75.0f;
-static const CGFloat kOrgPhotoHeight = 75.0f;
+static const CGFloat kOrgPhotoWidth = 50.0f;
+static const CGFloat kOrgPhotoHeight = 50.0f;
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -306,7 +306,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 -(void)orgPhotoClicked{
-    NSLog(@"video clicked");
+
     NSDictionary *eventDetails = [_snapShot getPostDetails];
     NSString* orgId = eventDetails[[BounceConstants firebaseEventsChildOrgId]];
     id<OrgImageInVideoNodeClickedDelegate> strongDelegate = self.delegate;
