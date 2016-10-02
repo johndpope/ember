@@ -231,10 +231,6 @@ FIRDatabaseHandle _refHandle;
     
 }
 
--(void)showAlert:(NSInteger)index{
-    NSLog(@"index: %lu", index);
-}
-
 -(void)deleteDefaults{
     
     NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];

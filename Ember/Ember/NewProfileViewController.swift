@@ -24,7 +24,7 @@ import FirebaseAuth
 }
 
 
-class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSource, OpenMyOrgsDelegate, OpenDiscoverPageDelegate, ImageClickedDelegate, OpenCalendarPageDelegate {
+class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSource, OpenMyOrgsDelegate, OpenDiscoverPageDelegate, ImageClickedDelegate, OpenCalendarPageDelegate,OrgImageClickedDelegate, OrgImageInVideoNodeClickedDelegate {
     
     var tableNode : ASTableNode{
         return node as! ASTableNode
@@ -121,6 +121,18 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         let backButton = UIBarButtonItem(image: UIImage(named: "deleteIcon"), style: .Plain, target: navigationController, action: #selector(NewProfileViewController.gearIconClicked(_:)))
         navigationItem.leftBarButtonItem = backButton
         
+    }
+    
+    func orgClicked(orgId: String!) {
+        let controller = OrgProfileViewController()
+        controller.orgId = orgId
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func bounceVideoOrgImageClicked(orgId: String!) {
+        let controller = OrgProfileViewController()
+        controller.orgId = orgId
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func childNode(childImage: EmberNode!, didClickImage image: UIImage!, withLinks array: [AnyObject]!, withHomeFeedID homefeedID: String!) {
@@ -526,6 +538,13 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                 
                 let node = EmberNode(event: snap, past: false)
                 node.delegate = self
+                
+                if let val = node.getSuperImageNode(){
+                    val.getDetailsNode().delegate = self
+                }else{
+                    node.getSuperVideoNode().delegate = self
+                }
+        
                 self.FIRDownload(node, postDetails: snap.getPostDetails())
                 return node
             }
