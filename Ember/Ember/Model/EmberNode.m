@@ -231,9 +231,7 @@
 
 -(void)buttonTapped{
     
-    
     id<ImageClickedDelegate> strongDelegate = self.delegate;
-    
     if ([strongDelegate respondsToSelector:@selector(childNode:didClickImage:withLinks:withHomeFeedID:)]) {
         [strongDelegate childNode:self didClickImage:_imageNode.getImageNode.image withLinks:values withHomeFeedID: _snapShot.key];
     }

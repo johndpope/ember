@@ -289,9 +289,8 @@ FIRDatabaseHandle _refHandle;
         
         NSNumber *numNowInMillis = [NSNumber numberWithDouble:[nowInMillis doubleValue]];
         NSNumber *numOneDayAgoInMillis = [NSNumber numberWithDouble:-[oneDayInMillis doubleValue]];
-
         
-        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"postDetails/eventDateObject"] queryEndingAtValue:numOneDayAgoInMillis];
+        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"timeStamp"] queryEndingAtValue:numOneDayAgoInMillis];
         [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //                    NSLog(@"%@  %@", snapShot.key, snapShot.value);
             
