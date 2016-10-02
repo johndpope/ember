@@ -36,6 +36,7 @@ class EventPreferencesViewController: UIViewController {
     var segOrgName = ""
     var segProfileImage = ""
     var segEventDateObject = NSDate()
+    var segEndEventDateObject = NSDate()
     
     var segPosterImage:UIImage!
     
@@ -133,7 +134,7 @@ class EventPreferencesViewController: UIViewController {
             // Create a reference to the file I want to save
             let posterRef = storageRef.child(self.imagesegLink)
             
-            //fertch full poster URL
+            //fetch full poster URL
             posterRef.downloadURLWithCompletion { (URL, error) -> Void in
                 if (error != nil) {
                     // Handle any errors
@@ -145,6 +146,10 @@ class EventPreferencesViewController: UIViewController {
                     
                     //get eventDateObject
                     let eventDateObject = -(self.segEventDateObject.timeIntervalSince1970)
+                    
+                    //get endeventDateObject
+                    let endEventDateObject = -(self.segEndEventDateObject.timeIntervalSince1970)
+
                     
                     //Ref to events followed
                     let eventsFollowedRefChild = self.ref.child("users").child(userID!).child("eventsFollowed")
@@ -158,9 +163,9 @@ class EventPreferencesViewController: UIViewController {
                     //Get homefeedMedia key
                     let homeFeedMediaKey = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").childByAutoId().key
                     
-                    let homefeedItem = ["eventDate":self.eventsegDate,"eventID": eventsTreekey, "eventName": self.eventsegName,"eventPosterLink":(URL?.absoluteString)!,"eventTime":self.eventsegTime,"eventDateObject":eventDateObject,"orgID":self.eventsegOrgID,"orgProfileImage":self.segProfileImage,"eventTags":evTags]
+                    let homefeedItem = ["eventDate":self.eventsegDate,"eventID": eventsTreekey, "eventName": self.eventsegName,"eventPosterLink":(URL?.absoluteString)!,"eventTime":self.eventsegTime,"eventDateObject":eventDateObject,"endEventDateObject":endEventDateObject,"orgID":self.eventsegOrgID,"orgProfileImage":self.segProfileImage,"eventTags":evTags]
                     
-                    let eventItem = ["eventDate":self.eventsegDate,"eventName": self.eventsegName, "eventDesc": self.eventSegDesc,"eventLocation":self.eventsegLocation,"eventTime":self.eventsegTime,"orgID":self.eventsegOrgID,"orgName":self.eventsegOrgName,"eventImageLink":(URL?.absoluteString)!, "eventTags":evTags,"orgProfileImage":self.segProfileImage,"homeFeedMediaKey":homeFeedMediaKey,"homefeedPostKey":homeFeedEntryKey,"timeStamp":timeStamp,"eventDateObject":eventDateObject]
+                    let eventItem = ["eventDate":self.eventsegDate,"eventName": self.eventsegName, "eventDesc": self.eventSegDesc,"eventLocation":self.eventsegLocation,"eventTime":self.eventsegTime,"orgID":self.eventsegOrgID,"orgName":self.eventsegOrgName,"eventImageLink":(URL?.absoluteString)!, "eventTags":evTags,"orgProfileImage":self.segProfileImage,"homeFeedMediaKey":homeFeedMediaKey,"homefeedPostKey":homeFeedEntryKey,"timeStamp":timeStamp,"eventDateObject":eventDateObject,"endEventDateObject":endEventDateObject]
                     
                     //Upload Poster
                     //self.uploadImage(self.segPosterImage)
@@ -169,8 +174,7 @@ class EventPreferencesViewController: UIViewController {
                     //post to Firebase
                     eventsRefChild.child(eventsTreekey).setValue(eventItem)
                     homeFeedRefChild.child(homeFeedEntryKey).child("postDetails").setValue(homefeedItem)
-                    homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["fireCount":1])
-                    homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["timeStamp":timeStamp])
+                    homeFeedRefChild.child(homeFeedEntryKey).updateChildValues(["fireCount":1,"interestCount":1,"timeStamp":timeStamp])
                     
                     //Add to events Followed
                     eventsFollowedRefChild.updateChildValues([homeFeedEntryKey:true])

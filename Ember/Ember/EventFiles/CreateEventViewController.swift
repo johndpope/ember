@@ -17,6 +17,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var saveImage:UIImage?
     var eventImageLink:String = ""
     var eventDateObject = NSDate()
+    var endEventDateObject  = NSDate()
     var validator:Validator!
     
     
@@ -35,6 +36,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var segOrgName = ""
     var segProfileImage = ""
     var segEventDateObject = NSDate()
+    var segEndEventDateObject = NSDate()
     var segPosterImage:UIImage!
     
     
@@ -60,11 +62,14 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBOutlet weak var locationText: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     
+    @IBOutlet weak var endDateField: UITextField!
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
         eventName.delegate = self
         locationText.delegate = self
+        endDateField.delegate = self
         
         //.Done 
         eventName.returnKeyType = UIReturnKeyType.Done
@@ -72,6 +77,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
 
         
         imagePicker.delegate = self
+        
+        //startDate Toolbar
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
         toolBar.barStyle = UIBarStyle.Default
@@ -99,6 +106,20 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         toolBar.setItems([todayBtn,flexSpace,textBtn,flexSpace,okBarBtn], animated: true)
         
         dateTextField.inputAccessoryView = toolBar
+        
+        //endDate Toolbar 
+        let endtoolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
+        endtoolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        endtoolBar.barStyle = UIBarStyle.Default
+        
+        endtoolBar.tintColor = PRIMARY_APP_COLOR
+        
+        endtoolBar.backgroundColor = UIColor.whiteColor()
+        
+        
+        endDateField.inputAccessoryView = toolBar
+        endDateField.addTarget(self, action: #selector(CreateEventViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
+
         
         // Do any additional setup after loading the view, typically from a nib.
         let image = UIImage(named: "picture") as UIImage?
@@ -133,9 +154,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         dismissViewControllerAnimated(true, completion: nil)
     }
     
- 
-    
-    
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -158,10 +176,40 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         
         datePickerView.addTarget(self, action: #selector(CreateEventViewController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
     }
+    
+    func textFieldDidChange(textField: UITextField) {
+        
+        let datePickerView: UIDatePicker = UIDatePicker()
+        datePickerView.timeZone = NSTimeZone.localTimeZone()
+        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        datePickerView.date = self.eventDateObject
+        
+        
+        textField.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(CreateEventViewController.endDatePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    
+    func endDatePickerValueChanged(sender: UIDatePicker) {
+        //
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.calendar = NSCalendar.currentCalendar()
+        
+        endDateField.text = dateFormatter.stringFromDate(sender.date)
+        //Save NSDate object
+        endEventDateObject = (sender.date)
+        
+    }
+    
 
     func donePressed(sender: UIBarButtonItem) {
         
         dateTextField.resignFirstResponder()
+        endDateField.resignFirstResponder()
         
     }
     
@@ -239,6 +287,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 destination.segOrgID = self.segOrgID
                 destination.segOrgName = self.segOrgName
                 destination.segProfileImage = self.segProfileImage
+                destination.segEndEventDateObject = self.segEndEventDateObject
                 destination.segEventDateObject = self.segEventDateObject
                 destination.segPosterImage = self.segPosterImage
             }
@@ -288,6 +337,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 self.segOrgName = self.orgName
                 self.segProfileImage = self.orgProfileImage
                 self.segEventDateObject = self.eventDateObject
+                self.segEndEventDateObject = self.endEventDateObject
                 self.segPosterImage = self.saveImage
                 
                 //Post to events Tree
