@@ -49,6 +49,10 @@ public class EmberUser : NSObject{
                     if let usersblocked = snap.objectForKey("usersBlocked") as? NSDictionary{
                         self.usersBlocked = Array(usersblocked.allKeys)
                     }
+                    
+                    if let orgsFollowed = snap.objectForKey("orgsFollowed") as? NSDictionary{
+                        self.orgsFollowed = Array(orgsFollowed.allKeys)
+                    }
                    
                     //                print(snap)
                     completion(snap)

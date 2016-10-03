@@ -318,8 +318,12 @@ FIRDatabaseHandle _refHandle;
                 
                 if(endTime != nil){
                     
+                    NSLog(@"end time present");
+                    
                     // Happening now
                     if(-[endTime doubleValue] > [numNowInMillis doubleValue] && [numNowInMillis doubleValue] > -[time doubleValue]){
+                        
+                        NSLog(@"happening now passed");
                         
                         if(val[@"orgTags"]){
                             
@@ -332,15 +336,11 @@ FIRDatabaseHandle _refHandle;
                                 
                             }else{ // IS OF TYPE NSARRAY
                                 prefs = [val[@"orgTags"] allKeys];
-                                //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                                
-                                
+                           
                             }
-                            
-                            //                        NSLog(@"%@", prefs);
-                            
-                            //                        NSDictionary *prefs = val[@"orgTags"];
+                          
                             if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                NSLog(@"tests passed");
                                 [_nowSectionPosts addSnapShotToIndex:child user:_user]; // Upcoming Events
                             }else{
                                 [_nowSectionPosts addSnapShotToEnd:child user:_user];
