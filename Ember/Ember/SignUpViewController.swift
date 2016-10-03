@@ -246,7 +246,9 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                         preferredStyle: UIAlertControllerStyle.Alert
                     )
                     alertController.addAction(UIAlertAction(title: "Ok",
-                        style: UIAlertActionStyle.Default, handler: nil)
+                        style: UIAlertActionStyle.Default, handler:{ (UIAlertAction) -> Void in
+                            (self.navigationController!.dismissViewControllerAnimated(true, completion: nil))
+                    })
                     )
                     // Display alert
                     self.presentViewController(alertController, animated: true, completion: nil)
