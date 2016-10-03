@@ -144,6 +144,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                                 // Profile updated.
                             }
                         }
+                        
                         // [START basic_write]
                         let mySchool = self.schoolChoice.text!
                         NSUserDefaults.standardUserDefaults().setObject(mySchool, forKey: "FIREBASE_SCHOOL_ROOT")
@@ -357,6 +358,3 @@ extension String {
         }
     }
 }
-
-
-
