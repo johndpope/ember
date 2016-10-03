@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A322" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cPV-8a-SbK">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cPV-8a-SbK">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3983" y="-346"/>
+            <point key="canvasLocation" x="4044" y="-587"/>
         </scene>
         <!--Notifications Table View Controller-->
         <scene sceneID="ZBB-2y-ag7">
@@ -1108,7 +1108,7 @@
         <!--Navigation Controller-->
         <scene sceneID="8gS-ai-VSv">
             <objects>
-                <navigationController id="fHJ-ke-cty" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="tagNav" id="fHJ-ke-cty" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wla-EZ-Tu6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1384,10 +1384,10 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="CalendarDetailsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailsCell" id="uIB-rE-LpA" customClass="CalendarDetailsTableViewCell" customModule="Ember" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uIB-rE-LpA" id="dz1-cf-XVg">
-                                            <frame key="frameInset" width="1000" height="59.5"/>
+                                            <frame key="frameInset" width="383" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7uR-ak-3YH">
@@ -1617,7 +1617,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="d2t-YR-DUg"/>
-        <segue reference="8je-Bk-Ao3"/>
+        <segue reference="br8-vf-IvQ"/>
         <segue reference="ck8-Dd-TdR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.3411764705882353" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
