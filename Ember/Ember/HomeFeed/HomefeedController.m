@@ -47,6 +47,7 @@
     EmberUser *_user;
     UIRefreshControl *_refreshControl;
     UILabel *_messageLabel;
+    BOOL _reloadCalled;
     
     
 }
@@ -155,6 +156,8 @@ FIRDatabaseHandle _refHandle;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onAppSettingsChanged:) name:@"MyAppSettingsChanged" object:nil];
     
     _headers = [[NSMutableDictionary alloc] init];
+    
+    _reloadCalled = NO;
 
    
     //[self loadMoreContents];
@@ -372,6 +375,7 @@ FIRDatabaseHandle _refHandle;
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [_tableNode.view reloadData];
+                _reloadCalled = YES;
             });
         }withCancelBlock:^(NSError *_Nonnull error){
             NSLog(@"%@", error.localizedDescription);
@@ -722,6 +726,8 @@ FIRDatabaseHandle _refHandle;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
+    UILabel *noNewPostsLabel = nil;
+    
     if(![InternetConnection isConnectedToNetwork] && _data.getNoOfBounceSnapShots == 0 && _dataSection2.getNoOfBounceSnapShots == 0){
         
         if([_activityIndicatorView isAnimating]){
@@ -739,11 +745,36 @@ FIRDatabaseHandle _refHandle;
         
         _tableNode.view.backgroundView = _messageLabel;
         _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }else{
+        
+    }else if(_data.getNoOfBounceSnapShots == 0 && _dataSection2.getNoOfBounceSnapShots == 0 && _reloadCalled){
+        
+        // Display a message when there are no upcoming events or posts for the past week
+        
+        noNewPostsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        noNewPostsLabel.text = @"No new posts for the past week. Go ahead and make a post!";
+        noNewPostsLabel.textColor = [UIColor blackColor];
+        noNewPostsLabel.numberOfLines = 0;
+        noNewPostsLabel.textAlignment = NSTextAlignmentCenter;
+        noNewPostsLabel.font = [UIFont systemFontOfSize:20.0f];
+        [noNewPostsLabel sizeToFit];
+        
+        _tableNode.view.backgroundView = noNewPostsLabel;
+        _tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+    }
+    else{
+        
         if(_messageLabel != nil){
             _tableNode.view.backgroundView = nil;
             [_messageLabel removeFromSuperview];
             _messageLabel = nil;
+        }
+        
+        if(noNewPostsLabel != nil){
+            _tableNode.view.backgroundView = nil;
+            [noNewPostsLabel removeFromSuperview];
+            noNewPostsLabel = nil;
         }
     }
  
