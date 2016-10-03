@@ -43,8 +43,9 @@ public class EmberUser : NSObject{
             ref.child("users").child(userID).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 if let snap = snapshot.value as? NSDictionary{ // making sure org tags list exists
                     
-                    let prefs = snap.objectForKey("preferences") as! NSDictionary
-                     self.userPreferences = Array(prefs.allKeys)
+                    if let prefs = snap.objectForKey("preferences") as? NSDictionary{
+                      self.userPreferences = Array(prefs.allKeys)
+                    }
                     
                     if let usersblocked = snap.objectForKey("usersBlocked") as? NSDictionary{
                         self.usersBlocked = Array(usersblocked.allKeys)
