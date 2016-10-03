@@ -285,35 +285,38 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                 self.refreshControl.endRefreshing()
             }
             
-            if let dict = (snap.value as! NSDictionary).objectForKey("postDetails")?.objectForKey("mediaInfo")?.allKeys{
-                //                            print("dict: \(dict)")
-                
-                for key in dict{
-
-                    if key as! String == mediaInfoKey{
+            // Snap could be nil in the case that the post has been deleted from the homefeed by the org admin
+            if snap.value != nil{
+                if let dict = (snap.value as! NSDictionary).objectForKey("postDetails")?.objectForKey("mediaInfo")?.allKeys{
+                    //                            print("dict: \(dict)")
+                    
+                    for key in dict{
                         
-                        self.indicator.stopAnimating()
-                        
-                        if(self.refreshControl.refreshing){
-                            self.refreshControl.endRefreshing()
+                        if key as! String == mediaInfoKey{
+                            
+                            self.indicator.stopAnimating()
+                            
+                            if(self.refreshControl.refreshing){
+                                self.refreshControl.endRefreshing()
+                            }
+                            
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.reloadCalled = true
+                                
+                                self.tableNode.view.beginUpdates()
+                                self.data.addIndividualProfileSnapShot(snap)
+                                self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
+                                self.tableNode.view.endUpdates()
+                                
+                                return
+                            })
+                            
                         }
                         
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.reloadCalled = true
-                            
-                            self.tableNode.view.beginUpdates()
-                            self.data.addIndividualProfileSnapShot(snap)
-                            self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
-                            self.tableNode.view.endUpdates()
-                          
-                            return
-                        })
                         
                     }
                     
-                    
                 }
-                
             }
             
         })
@@ -333,16 +336,19 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
                 self.refreshControl.endRefreshing()
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.reloadCalled = true
-                
-                self.tableNode.view.beginUpdates()
-                self.data.addIndividualProfileSnapShot(snap)
-                self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
-                self.tableNode.view.endUpdates()
-                
-                
-            })
+            // Snap could be nil in the case that the post has been deleted from the homefeed by the org admin
+            if snap.value != nil{
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reloadCalled = true
+                    
+                    self.tableNode.view.beginUpdates()
+                    self.data.addIndividualProfileSnapShot(snap)
+                    self.tableNode.view.insertRowsAtIndexPaths([NSIndexPath(forRow: Int(self.data.getNoOfBounceSnapShots()), inSection: 0)], withRowAnimation: .Fade)
+                    self.tableNode.view.endUpdates()
+                    
+                    
+                })
+            }
         })
     }
     
@@ -355,24 +361,26 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
         homefeedRef.child(BounceConstants.firebaseHomefeed()).child(homefeedKey).observeSingleEventOfType(.Value, withBlock: {
             (snap) in
             
-            
-            var arr = [NSIndexPath]()
-            dispatch_async(dispatch_get_main_queue(), {
-                self.reloadCalled = true
-                
-                self.tableNode.view.beginUpdates()
-                num = self.data.addIndividualProfileSnapShot(snap) as NSInteger
-                let start = Int(self.data.getNoOfBounceSnapShots()) - num
-                for index in 1...num {
-//                    print("indexpath count: \(count+index-1)")
-                    let indexpath = NSIndexPath(forRow:start + index, inSection: 0)
-                    arr.append(indexpath)
-                }
-                self.tableNode.view.insertRowsAtIndexPaths(arr, withRowAnimation: .Fade)
-                self.tableNode.view.endUpdates()
-              
-                
-            })
+            // Could happen in the case that the post has been deleted from the homefeed by the org admin
+            if snap.value != nil{
+                var arr = [NSIndexPath]()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.reloadCalled = true
+                    
+                    self.tableNode.view.beginUpdates()
+                    num = self.data.addIndividualProfileSnapShot(snap) as NSInteger
+                    let start = Int(self.data.getNoOfBounceSnapShots()) - num
+                    for index in 1...num {
+                        //                    print("indexpath count: \(count+index-1)")
+                        let indexpath = NSIndexPath(forRow:start + index, inSection: 0)
+                        arr.append(indexpath)
+                    }
+                    self.tableNode.view.insertRowsAtIndexPaths(arr, withRowAnimation: .Fade)
+                    self.tableNode.view.endUpdates()
+                    
+                    
+                })
+            }
   
             
         })

@@ -386,28 +386,33 @@
    
 }
 
+// TODO: allow deletion of individual gallery items
 -(void)deletePost:(NSUInteger)row{
     
     NSString *key = _snapShots[row].key;
     NSString *userId = [[[FIRAuth auth] currentUser] uid];
     
     NSDictionary *snap = _snapShots[row].getPostDetails;
+    
+    // If event poster
     if(snap[[BounceConstants firebaseHomefeedEventPosterLink]]){
-        FIRDatabaseQuery *recentPostsQuery = [[[[_ref child:[BounceConstants firebaseHomefeed]] child:key] child:@"postDetails"] child:@"eventID"];
-        [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        
+        // Get event ID for deleting event from Event Tree
+        FIRDatabaseQuery *eventIdQuery = [[[[_ref child:[BounceConstants firebaseHomefeed]] child:key] child:@"postDetails"] child:@"eventID"];
+        [eventIdQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
             //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
             
             
             NSString *eventID = snapShot.value;
-            [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue];
-            [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
-            [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+            [[[_ref child:[BounceConstants firebaseEventsChild]] child:eventID] removeValue]; // delete from Events Tree
+            [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue]; // delete from HomeFeed
+            [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue]; // delete from current user's (admin) eventsFollowed tree
             
         }];
-    }else{
+    }else{ // Is gallery image or video
         
-        [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue];
-        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"eventsFollowed"] child:key] removeValue];
+        [[[_ref child:[BounceConstants firebaseHomefeed]] child:key] removeValue]; // delete entire gallery or video from HomeFeed
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:userId] child:@"HomeFeedPosts"] child:key] removeValue]; // delete from current user's HomeFeedPosts. Only works if user made post
     }
     
     
@@ -420,7 +425,6 @@
     
     if ([_titleNodeIndexPath compare:indexPath] == NSOrderedSame) {
         NSDictionary *orgDetails = [_snapShots[indexPath.row] getData];
-        
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalOrgTitleNode *bounceNode = [[FinalOrgTitleNode alloc] initWithEvent:_snapShots[indexPath.row]];
