@@ -127,11 +127,19 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         //Ensure email has the suffix .edu and uses valid characters
         if (finalEmail.hasSuffix(".edu") && finalEmail.isEmail && checkSchoolValidity(self.finalEmail, schoolSelection: self.schoolChoice.text!)) {
             
-            //if(!initialSignIn) {
                 FIRAuth.auth()?.createUserWithEmail(self.finalEmail, password: mypassword, completion: {
                     user, error in
                     if  error != nil {
-                        print(error!.localizedDescription)
+                        self.accountCreationIndicator.stopAnimating()
+                        // User needs to use .edu email address before continuing
+                        let alertController = UIAlertController(title: "Email address taken",
+                            message: "Email address in use. Please sign up with different email.",
+                            preferredStyle: UIAlertControllerStyle.Alert
+                        )
+                        alertController.addAction(UIAlertAction(title: "Ok",
+                            style: UIAlertActionStyle.Default, handler: nil)                        )
+                        // Display alert
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                     else {
                         let changeRequest = user!.profileChangeRequest()
@@ -163,23 +171,16 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                             )
                             alertController.addAction(UIAlertAction(title: "Ok",
                                 style: UIAlertActionStyle.Default, handler:{ (UIAlertAction) -> Void in
-                                    (self.navigationController!.dismissViewControllerAnimated(true, completion: nil))
+                                    (
+                                        try! FIRAuth.auth()!.signOut(),
+                                        self.navigationController!.dismissViewControllerAnimated(true, completion: nil))
                             })
                             )
                             // Display alert
                             self.presentViewController(alertController, animated: true, completion: nil)
                         }
-                        
-                        //let defaults = NSUserDefaults.standardUserDefaults()
-                        //defaults.setBool(false, forKey: "hasViewedOnBoarding")
-                        //self.logIn(self.finalEmail,logInPassword: self.mypassword)
                     }
                 })
-               // self.initialSignIn = true
-            //}
-            //else {
-                //self.logIn(self.finalEmail,logInPassword: self.mypassword)
-            //}
             
         }
         else {

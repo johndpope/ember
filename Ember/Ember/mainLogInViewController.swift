@@ -87,6 +87,7 @@ class mainLogInViewController: UIViewController, BWWalkthroughViewControllerDele
                     let defaults = NSUserDefaults.standardUserDefaults()
                     let hasViewedOnboarding:Bool = defaults.boolForKey("hasViewedOnboarding")
                     if (!hasViewedOnboarding) {
+                        
                         self.startOnboarding()
                         defaults.setBool(true, forKey: "hasViewedOnboarding")
                     }
