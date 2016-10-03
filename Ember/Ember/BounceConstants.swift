@@ -60,8 +60,8 @@ let LANDING_PAGE_PAGE_THREE_TITLE =  "FIND ORGS";
 
 
 //School Root
-//var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
-var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
+var FIREBASE_SCHOOL_ROOT = NSUserDefaults.standardUserDefaults().stringForKey("FIREBASE_SCHOOL_ROOT")!
+//var FIREBASE_SCHOOL_ROOT = "/Vanderbilt University/"
 
 //Users
 let FIREBASE_USERS_CHILD =  "users";
@@ -71,8 +71,8 @@ let FIREBASE_USERS_CHILD_ORGS_FOLLOWED =  "orgsFollowed";
 let FIREBASE_USERS_CHILD_ORG_ID =  "orgID";
 
 //Storage
-//let FIREBASE_STORAGE_URL = "gs://ember-beaa6.appspot.com" // Production
-let FIREBASE_STORAGE_URL = "gs://bounce-46de5.appspot.com" // Dev
+let FIREBASE_STORAGE_URL = "gs://ember-beaa6.appspot.com" // Production
+//let FIREBASE_STORAGE_URL = "gs://bounce-46de5.appspot.com" // Dev
 
 //Gallery
 let MAX_PHOTOS_IN_GALLERY = 5
