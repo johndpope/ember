@@ -262,11 +262,11 @@ import FirebaseAuth
         let eventsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child(BounceConstants.firebaseEventsChild()).queryLimitedToFirst(100)
         eventsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
             for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                let dateString = rest.childSnapshotForPath("eventDateObject").value as! NSNumber
-                let dateObject = -(dateString.doubleValue)
-                if(self.isWithinAcceptableRange(dateObject)){
-                    self.events.append(rest)
-                    
+                if let endDateString = rest.childSnapshotForPath("endEventDateObject").value as? NSNumber {
+                    let endDateObject = -(endDateString.doubleValue)
+                    if(self.isWithinAcceptableRange(endDateObject)){
+                        self.events.append(rest)
+                    }
                 }
             }
             dispatch_async(dispatch_get_main_queue(),{
@@ -314,19 +314,16 @@ import FirebaseAuth
         
     }
     
-    func isWithinAcceptableRange(dateToCheck:NSNumber) -> Bool {
+    func isWithinAcceptableRange(endDate:NSNumber) -> Bool {
         let date = NSDate()
-        let myDate = NSDate.init(timeIntervalSince1970: dateToCheck.doubleValue)
         
-        let oneWeekAgo = date.dateByAddingTimeInterval(-7*24*60*60)
-        let oneFutureWeek  = date.dateByAddingTimeInterval(7*24*60*60)
+        let myEndDate = NSDate.init(timeIntervalSince1970: endDate.doubleValue)
+        let validPostingPeriodStart  = myEndDate.dateByAddingTimeInterval(-7*24*60*60)
         
-        if ( myDate >= oneWeekAgo && myDate <= oneFutureWeek)
+        if (date >= validPostingPeriodStart && date <= myEndDate)
         {
-            
             return true
         } else {
-            
             return false
         }
         
