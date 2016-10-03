@@ -20,6 +20,7 @@ class OrgPreferencesViewController: UIViewController {
     var isEditingOrg:Bool = false
     var prefTags = [String]()
     var orgInterests = [String:Bool]()
+    
     var orgId:String!
     var orgObject = [String:AnyObject]()
     var mainOrgTagsSet:Set<String> = Set([])
@@ -28,6 +29,9 @@ class OrgPreferencesViewController: UIViewController {
     var saveCoverImage:UIImage?
     var maxTags:Int = 0
     
+    var tagsFromOrgObject = [String]()
+
+    
     var ref:FIRDatabaseReference!
     var userRef:FIRDatabaseReference!
     
@@ -35,6 +39,7 @@ class OrgPreferencesViewController: UIViewController {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference()
         prefTags = []
+        tagsFromOrgObject = []
         orgInterests = [:]
         loadingSpinner.hidesWhenStopped = true
         loadingSpinner.startAnimating()
@@ -158,37 +163,102 @@ class OrgPreferencesViewController: UIViewController {
         newTagListView.layer.borderColor = UIColor.whiteColor().CGColor
         newTagListView.layer.borderWidth = 0.2
         
-        let orgTagsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("orgTags").queryLimitedToFirst(50)
-        
-        orgTagsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
-            for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                self.prefTags.append(rest.value as! String)
+        //Check if org exists already
+        self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.orgId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            if (snapshot.hasChildren()) {
+                //Get Tags from current organization object
+                let tagsFromOrgObjectQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("Organizations").child(self.orgId).child("preferences").queryLimitedToFirst(50)
+                
+                //retrieve them and save them
+                tagsFromOrgObjectQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
+                    for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                        self.tagsFromOrgObject.append(rest.key)
+                    }
+                //Query that retrievs the orgTags from the school object
+                let orgTagsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("orgTags").queryLimitedToFirst(50)
+                
+                //retrieval and adding them to the view
+                orgTagsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
+                    for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                        self.prefTags.append(rest.value as! String)
+                    }
+                
+                //Assign downloaded array of tags from org object into a set
+                let set1:Set<String> = Set(self.prefTags)
+                
+                //Isolate tags that are not selected by user
+                let validTags = set1.subtract(self.tagsFromOrgObject)
+                
+                //Add them to the TagListView
+                for (index,i) in self.tagsFromOrgObject.enumerate()
+                { let color = UIColor.lightGrayColor()
+                        self.mainOrgTagsSet.insert(self.tagsFromOrgObject[index])
+                        self.newTagListView.addTag(i, target: self, tapAction: #selector(DiscoverViewController.tap(_:)),backgroundColor: color,textColor: UIColor.whiteColor())
+                }
+                self.maxTags = self.tagsFromOrgObject.count
+                for (index,i) in validTags.enumerate()
+                {let color:UIColor!
+                    if index%4 == 1
+                    {
+                        color = UIColor(red: 238/255, green: 101/255, blue: 107/255, alpha: 1)
+                    }
+                    else if index%4 == 2
+                    {
+                        color = UIColor(red: 96/255, green: 95/255, blue: 132/255, alpha: 1)
+                    }
+                    else if index%4 == 3
+                    {
+                        color = UIColor(red: 85/255, green: 152/255, blue: 158/255, alpha: 1)
+                    }
+                    else
+                    {
+                        color = UIColor(red: 184/255, green: 205/255, blue: 158/255, alpha: 1)
+                    }
+                    
+                    self.newTagListView.addTag(i, target: self, tapAction: #selector(DiscoverViewController.tap(_:)),backgroundColor: color,textColor: UIColor.whiteColor())
+                }
+             })
+        })
+            } else {
+                //Query that retrievs the orgTags from the school object
+                let orgTagsQuery = self.ref.child(BounceConstants.firebaseSchoolRoot()).child("orgTags").queryLimitedToFirst(50)
+                
+                //retrieval and adding them to the view
+                orgTagsQuery.queryOrderedByKey().observeSingleEventOfType(FIRDataEventType.Value, withBlock: {(snapshot) in
+                    for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                        self.prefTags.append(rest.value as! String)
+                    }
+                    
+                    for (index,i) in self.prefTags.enumerate()
+                    {
+                        let color:UIColor!
+                        
+                        if index%4 == 1
+                        {
+                            color = UIColor(red: 238/255, green: 101/255, blue: 107/255, alpha: 1)
+                        }
+                        else if index%4 == 2
+                        {
+                            color = UIColor(red: 96/255, green: 95/255, blue: 132/255, alpha: 1)
+                        }
+                        else if index%4 == 3
+                        {
+                            color = UIColor(red: 85/255, green: 152/255, blue: 158/255, alpha: 1)
+                        }
+                        else
+                        {
+                            color = UIColor(red: 184/255, green: 205/255, blue: 158/255, alpha: 1)
+                        }
+                        
+                        self.newTagListView.addTag(i, target: self, tapAction: #selector(EventPreferencesViewController.tap(_:)),backgroundColor: color,textColor: UIColor.whiteColor())
+                    }
+                })
+                
             }
             
-            for (index,i) in self.prefTags.enumerate()
-            {
-                let color:UIColor!
-                
-                if index%4 == 1
-                {
-                    color = UIColor(red: 238/255, green: 101/255, blue: 107/255, alpha: 1)
-                }
-                else if index%4 == 2
-                {
-                    color = UIColor(red: 96/255, green: 95/255, blue: 132/255, alpha: 1)
-                }
-                else if index%4 == 3
-                {
-                    color = UIColor(red: 85/255, green: 152/255, blue: 158/255, alpha: 1)
-                }
-                else
-                {
-                    color = UIColor(red: 184/255, green: 205/255, blue: 158/255, alpha: 1)
-                }
-                
-                self.newTagListView.addTag(i, target: self, tapAction: #selector(EventPreferencesViewController.tap(_:)),backgroundColor: color,textColor: UIColor.whiteColor())
-            }
         })
+        
         loadingSpinner.stopAnimating()
         self.extendedLayoutIncludesOpaqueBars = false;
     }
