@@ -284,8 +284,8 @@ FIRDatabaseHandle _refHandle;
 //        NSLog(@"array: %@", completion);
         
         NSDate *now = [NSDate date];
-//        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
-        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
+        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
+//        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
         
         NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
         NSString *oneDayInMillis = [NSString stringWithFormat:@"%f",[oneDayAgo timeIntervalSince1970]];
@@ -325,7 +325,6 @@ FIRDatabaseHandle _refHandle;
                         }else{
                             [_data addSnapShotToEnd:child user: _user];
                         }
-//                        [_data reverseBounceSnapShots];
                     }
                     
                     
@@ -364,19 +363,16 @@ FIRDatabaseHandle _refHandle;
 
             }
 
-            
             [_activityIndicatorView stopAnimating];
             
             if(_refreshControl.isRefreshing){
                 [_refreshControl endRefreshing];
             }
             
-            
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [_tableNode.view reloadData];
                 _reloadCalled = YES;
+                [_tableNode.view reloadData];
+  
             });
         }withCancelBlock:^(NSError *_Nonnull error){
             NSLog(@"%@", error.localizedDescription);
@@ -726,7 +722,7 @@ FIRDatabaseHandle _refHandle;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
+
     UILabel *noNewPostsLabel = nil;
     
     if(![InternetConnection isConnectedToNetwork] && _data.getNoOfBounceSnapShots == 0 && _dataSection2.getNoOfBounceSnapShots == 0){
@@ -753,7 +749,7 @@ FIRDatabaseHandle _refHandle;
         
         noNewPostsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
-        noNewPostsLabel.text = @"No new posts for the past week. Go ahead and make a post!";
+        noNewPostsLabel.text = @"No new posts in the past week. Go ahead and make a post!";
         noNewPostsLabel.textColor = [UIColor blackColor];
         noNewPostsLabel.numberOfLines = 0;
         noNewPostsLabel.textAlignment = NSTextAlignmentCenter;
