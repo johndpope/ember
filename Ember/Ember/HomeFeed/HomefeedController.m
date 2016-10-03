@@ -288,8 +288,8 @@ FIRDatabaseHandle _refHandle;
 //        NSLog(@"array: %@", completion);
         
         NSDate *now = [NSDate date];
-//        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
-        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
+        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
+//        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
         
         NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
         NSString *oneDayInMillis = [NSString stringWithFormat:@"%f",[oneDayAgo timeIntervalSince1970]];
