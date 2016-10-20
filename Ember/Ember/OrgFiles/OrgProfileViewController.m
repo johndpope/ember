@@ -463,13 +463,13 @@
         
         if(-[time doubleValue] < [numNowInMillis doubleValue]){
             
-            bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:true];
+            bounceNode = [[EmberNode alloc] initWithEvent:snapShot];
             bounceNode.delegate = self;
             bounceNode.imageDelegate = self;
             
             
         }else{
-            bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:false];
+            bounceNode = [[EmberNode alloc] initWithEvent:snapShot];
             bounceNode.delegate = self;
             bounceNode.imageDelegate = self;
             

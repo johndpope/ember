@@ -297,14 +297,14 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
         
         [self fetchUserName];
     }else{
-        _userName.hidden = YES;
-        _caption.hidden = YES;
-        
-        NSDictionary *allPostInfo = snapShot.getData;
-        NSString *fireCountString = [NSString stringWithFormat:@"+%@", allPostInfo[@"fireCount"]];
-        NSUInteger fireCountNum = [fireCountString integerValue];
-        _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", fireCountNum]
-                                                                      attributes:[self textStyleInterested]];
+//        _userName.hidden = YES;
+//        _caption.hidden = YES;
+//        
+//        NSDictionary *allPostInfo = snapShot.getData;
+//        NSString *fireCountString = [NSString stringWithFormat:@"+%@", allPostInfo[@"fireCount"]];
+//        NSUInteger fireCountNum = [fireCountString integerValue];
+//        _numberInterested.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%lu", fireCountNum]
+//                                                                      attributes:[self textStyleInterested]];
     }
     
     _fireCount = [[ASTextNode alloc] init];
@@ -809,7 +809,6 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
 
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
-    ASStaticLayoutSpec *dateStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_dateTextNode]];
     
     NSArray *info = @[ eventNameStatic, _dateTextNode];
     NSArray *info_2 = @[ _numberInterested, _followButton];
