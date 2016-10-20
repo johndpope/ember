@@ -15,7 +15,6 @@ class HomeFeedViewController: UIViewController {
     var pageMenu : CAPSPageMenu?
     var controllerArray : [UIViewController] = []
     let controller1  = HomefeedController()
-    let controller2 : MyEventsViewController = MyEventsViewController()
     let controller3 : OrgsViewController = OrgsViewController()
     var noOfTimesControllerCameIntoView = 0
     
@@ -89,8 +88,6 @@ class HomeFeedViewController: UIViewController {
             controllerArray = []
             controller1.title = BounceConstants.landingPagePageOneTitle()
             controllerArray.append(controller1)
-            controller2.title = BounceConstants.landingPagePageTwoTitle()
-            controllerArray.append(controller2)
             controller3.title = BounceConstants.landingPagePageThreeTitle()
             controllerArray.append(controller3)
             
