@@ -282,9 +282,16 @@ import FirebaseAuth
             for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 if let endDateString = rest.childSnapshotForPath("endEventDateObject").value as? NSNumber {
                     let endDateObject = -(endDateString.doubleValue)
-                    if(self.isWithinAcceptableRange(endDateObject)){
-                        self.events.append(rest)
-                    }
+                    let myUser = EmberUser()
+                    let orgID = rest.childSnapshotForPath("orgID").value as? String
+                    myUser.isAdminOf(orgID!, completionHandler: {(isAdmin) in
+                        if(isAdmin){
+                            if(self.isWithinAcceptableRange(endDateObject)){
+                                self.events.append(rest)
+                            }
+                        }
+                        
+                    })
                 }
                 
                 
