@@ -62,7 +62,6 @@ class HomeFeedViewController: UIViewController {
     func openProfile(){
         let viewController = NewProfileViewController()
         let navController = UINavigationController(rootViewController: viewController)
-//        self.navigationController?.pushViewController(viewController, animated: true)
         self.presentViewController(navController, animated: true, completion: nil)
     }
     override func viewDidAppear(animated: Bool) {
