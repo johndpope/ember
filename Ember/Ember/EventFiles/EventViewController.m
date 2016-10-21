@@ -401,7 +401,7 @@
     NSDictionary *event = [snapShot getPostDetails];
     
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-        EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snapShot];
+        EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snapShot upcoming:NO];
         bounceNode.delegate = self;
         bounceNode.imageDelegate = self;
         [self FIRDownload:bounceNode post: event];

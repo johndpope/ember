@@ -311,11 +311,6 @@ FIRDatabaseHandle _refHandle;
                 
                 for(FIRDataSnapshot* child in snapShot.children){
                     
-                    NSDictionary *val = child.value;
-                    
-                    // If not Event Poster, add to Homefeed
-                    if(!val[@"postDetails"][@"eventPosterLink"]){
-                        
                         NSDictionary *val = child.value;
                         NSDictionary *postDetails = val[@"postDetails"];
                         NSNumber *time = postDetails[@"eventDateObject"];
@@ -329,12 +324,8 @@ FIRDatabaseHandle _refHandle;
                         
                         if(endTime != nil){
                             
-                            NSLog(@"end time present");
-                            
                             // Happening now
                             if(-[endTime doubleValue] > [numNowInMillis doubleValue] && [numNowInMillis doubleValue] > -[time doubleValue]){
-                                
-                                NSLog(@"happening now passed");
                                 
                                 if(val[@"orgTags"]){
                                     
@@ -467,10 +458,7 @@ FIRDatabaseHandle _refHandle;
                                 
                             }
                         }
-                        
-                    }
-                    
-                    
+
                     
                 }
                 
@@ -919,7 +907,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:NO];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];
@@ -934,7 +922,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:YES];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];
@@ -950,7 +938,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:NO];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];

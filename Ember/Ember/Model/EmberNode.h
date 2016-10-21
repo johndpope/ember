@@ -21,7 +21,7 @@
 @property (nonatomic, weak) id<BounceImageClickedDelegate> imageDelegate;
 @property (nonatomic, weak) id<LongPressDelegate> longPressDelegate;
 
-- (instancetype)initWithEvent:(EmberSnapShot *)snapShot;
+- (instancetype)initWithEvent:(EmberSnapShot *)snapShot upcoming:(BOOL)upcoming;
 -(ASVideoNode *)getSubVideoNode;
 -(ASNetworkImageNode *)getSubImageNode;
 -(EmberVideoNode *)getSuperVideoNode;

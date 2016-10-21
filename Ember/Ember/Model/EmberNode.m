@@ -82,7 +82,7 @@
     return _snapShot;
 }
 
--(instancetype)initWithEvent:(EmberSnapShot *)snapShot{
+-(instancetype)initWithEvent:(EmberSnapShot *)snapShot upcoming:(BOOL)upcoming{
     if (!(self = [super init]))
         return nil;
     
@@ -97,26 +97,26 @@
     if(_eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]){
         
         _url = _eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
-//        if(_url != nil){
-//            
-//            if([_url containsString:@"mp4"]  || [_url containsString:@"mov"]){
-//                _videoNode = [[EmberVideoNode alloc] initWithEvent:snapShot];
-//                
-//                [self addSubnode:_videoNode];
-//                
-//            }else{
-//                _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
-//                
-//                if(past){
-//                    [_imageNode setFollowButtonHidden];
-//                    [_imageNode showFireCount];
-//                }
-//                
-//                [self addSubnode:_imageNode];
-//                
-//               
-//            }
-//        }
+        if(_url != nil){
+            
+            if([_url containsString:@"mp4"]  || [_url containsString:@"mov"]){
+                _videoNode = [[EmberVideoNode alloc] initWithEvent:snapShot];
+                
+                [self addSubnode:_videoNode];
+                
+            }else{
+                _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
+                
+                if(!upcoming){
+                    [_imageNode setFollowButtonHidden];
+                    [_imageNode showFireCount];
+                }
+                
+                [self addSubnode:_imageNode];
+                
+               
+            }
+        }
         
     }else{
         if([_eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] isKindOfClass:[NSDictionary class]]){
