@@ -436,6 +436,24 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     
 }
 
+- (NSDictionary *)textStyleFireUnselected{
+    
+    UIFont *font  = nil;
+    
+    if(IS_IPHONE_5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.paragraphSpacing = 0.5 * font.lineHeight;
+    style.alignment = NSTextAlignmentCenter;
+    
+    return @{ NSFontAttributeName: font,
+              NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
+}
+
 - (NSDictionary *)textStyleFire{
     
     UIFont *font  = nil;
@@ -455,23 +473,6 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
               NSForegroundColorAttributeName: [UIColor colorWithRed: 213.0/255.0 green: 29.0/255.0 blue: 36.0/255.0 alpha: 1.0], NSParagraphStyleAttributeName: style};
 }
 
-- (NSDictionary *)textStyleFireUnselected{
-    
-    UIFont *font  = nil;
-    
-    if(IS_IPHONE_5){
-        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
-    }else{
-        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
-    }
- 
-    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    style.paragraphSpacing = 0.5 * font.lineHeight;
-    style.alignment = NSTextAlignmentCenter;
-    
-    return @{ NSFontAttributeName: font,
-              NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
-}
 
 -(NSString*)truncateEventName:(NSString*)eventName{
     
@@ -802,11 +803,16 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
 //    ASStaticLayoutSpec *numberImagesStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_noImages]];
      ASInsetLayoutSpec *specNumberImages = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 20) child:_noImages];
  
-    ASStackLayoutSpec *captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,specNumberImages]];
+    ASStackLayoutSpec *captionRegion = nil;
     
+    if(self.isVideo){
+        captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+                                                                            justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic]];
+    }else{
+        captionRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+                                                                            justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[captionStatic, horizontalSpacer,specNumberImages]];
+    }
     
-
     
     ASStaticLayoutSpec *eventNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_textNode]];
     

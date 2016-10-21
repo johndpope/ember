@@ -47,6 +47,11 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     ASTextNode *_caption;
     NSString *uuid;
     FIRDatabaseReference *_usersRef;
+    ASButtonNode *_fire;
+    ASTextNode *_fireCount;
+    EmberDetailsNode* _emberDetailsNode;
+    CGFloat _screenWidth;
+
 }
 
 @end
@@ -141,11 +146,28 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
               NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
 }
 
+-(void)setFollowButtonHidden{
+    [_emberDetailsNode setFollowButtonHidden];
+    
+}
+
+-(void)showFireCount{
+    [_emberDetailsNode showFireCount];
+}
+
+-(void)setIsVideo{
+    _emberDetailsNode.isVideo = YES;
+}
 
 - (instancetype)initWithEvent:(EmberSnapShot *)snapShot{
     if (!(self = [super init]))
         return nil;
   
+    
+    _screenWidth = [UIScreen mainScreen].bounds.size.width;
+    
+    _emberDetailsNode.isVideo = NO;
+
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _usersRef = [[FIRDatabase database] reference];
     
@@ -154,34 +176,36 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     _background.backgroundColor = [UIColor whiteColor];
     _background.flexGrow = YES;
     
+    _emberDetailsNode = [[EmberDetailsNode alloc] initWithEvent:snapShot];
     
-    _orgProfilePhoto = [[ASNetworkImageNode alloc] init];
-    _orgProfilePhoto.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
-    _orgProfilePhoto.preferredFrameSize = CGSizeMake(kOrgPhotoWidth, kOrgPhotoHeight);
-    _orgProfilePhoto.cornerRadius = kOrgPhotoWidth / 2;
-    _orgProfilePhoto.imageModificationBlock = ^UIImage *(UIImage *image) {
-        
-        UIImage *modifiedImage;
-        CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-        
-        UIGraphicsBeginImageContextWithOptions(image.size, false, [[UIScreen mainScreen] scale]);
-        
-        [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:kOrgPhotoWidth] addClip];
-        [image drawInRect:rect];
-        modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-        
-        return modifiedImage;
-        
-    };
     
-    [_orgProfilePhoto addTarget:self action:@selector(orgPhotoClicked) forControlEvents:ASControlNodeEventTouchDown];
-    
-    _snapShot = snapShot;
-    NSDictionary *eventDetails = [snapShot getPostDetails];
-    
-   [self fetchOrgProfilePhotoUrl:eventDetails[[BounceConstants firebaseEventsChildOrgId]]];
+//    _orgProfilePhoto = [[ASNetworkImageNode alloc] init];
+//    _orgProfilePhoto.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
+//    _orgProfilePhoto.preferredFrameSize = CGSizeMake(kOrgPhotoWidth, kOrgPhotoHeight);
+//    _orgProfilePhoto.cornerRadius = kOrgPhotoWidth / 2;
+//    _orgProfilePhoto.imageModificationBlock = ^UIImage *(UIImage *image) {
+//        
+//        UIImage *modifiedImage;
+//        CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+//        
+//        UIGraphicsBeginImageContextWithOptions(image.size, false, [[UIScreen mainScreen] scale]);
+//        
+//        [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:kOrgPhotoWidth] addClip];
+//        [image drawInRect:rect];
+//        modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+//        
+//        UIGraphicsEndImageContext();
+//        
+//        return modifiedImage;
+//        
+//    };
+//    
+//    [_orgProfilePhoto addTarget:self action:@selector(orgPhotoClicked) forControlEvents:ASControlNodeEventTouchDown];
+//    
+//    _snapShot = snapShot;
+//    NSDictionary *eventDetails = [snapShot getPostDetails];
+//    
+//   [self fetchOrgProfilePhotoUrl:eventDetails[[BounceConstants firebaseEventsChildOrgId]]];
     
      _videoNode = [[Video alloc] init];
     _videoNode.delegate = self;
@@ -189,83 +213,104 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     _videoNode.shouldAutorepeat = YES;
 //    _videoNode.shouldAutoplay = YES;
     
-    _userName = [[ASTextNode alloc] init];
-    _caption = [ASTextNode new];
-    
-    uuid = nil;
-
-    
-    if(!eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]){
-        if([eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] isKindOfClass:[NSDictionary class]]){
-            NSArray *values = [eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
-            if ([values count] != 0){
-                NSDictionary *first = [values objectAtIndex:0];
-                uuid = first[@"userID"];
-                
-                if(![first[@"mediaCaption"] isEqualToString:@"(null)"]){
-                    _caption.attributedString = [[NSAttributedString alloc] initWithString:first[@"mediaCaption"]
-                                                                                attributes:[self textStyleLeft]];
-                }
-                
-            }
-            
-        }else{
-            NSArray *values = eventDetails[[BounceConstants firebaseHomefeedMediaInfo]];
-            NSDictionary *first = [values objectAtIndex:0];
-            uuid = first[@"userID"];
-            if(![first[@"mediaCaption"] isEqualToString:@"(null)"]){
-                _caption.attributedString = [[NSAttributedString alloc] initWithString:first[@"mediaCaption"]
-                                                                            attributes:[self textStyleLeft]];
-            }
-            
-        }
-        
-        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        
-        
-        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)));
-        
-        
-        _userName.attributedString = [[NSAttributedString alloc] initWithString:@" "
-                                                                     attributes:[self textStyleLeft]];
-        
-        _userName.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)));
-        
-        [self fetchUserName];
-        
-    }else{
-        _userName.hidden = YES;
-        _caption.hidden = YES;
-    }
-    
-    
-    _userName.maximumNumberOfLines = 1;
-    _userName.truncationMode = NSLineBreakByTruncatingTail;
-    
-    _caption.maximumNumberOfLines = 2;
-    _caption.truncationMode = NSLineBreakByTruncatingTail;
-    
-    _textNode = [[ASTextNode alloc] init];
-    _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[[BounceConstants firebaseEventsChildEventName]]
-                                                                              attributes:[self textStyleEventName]];
-    _textNode.maximumNumberOfLines = 1;
-    _textNode.truncationMode = NSLineBreakByTruncatingTail;
-    
-    _dateTextNode = [[ASTextNode alloc] init];
-    _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
-                                                                     attributes:[self textStyleItalic]];
-    
-    _dateTextNode.maximumNumberOfLines = 1;
-    _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
+//    _userName = [[ASTextNode alloc] init];
+//    _caption = [ASTextNode new];
+//    
+//    uuid = nil;
+//
+//    
+//    if(!eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]){
+//        if([eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] isKindOfClass:[NSDictionary class]]){
+//            NSArray *values = [eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] allValues];
+//            if ([values count] != 0){
+//                NSDictionary *first = [values objectAtIndex:0];
+//                uuid = first[@"userID"];
+//                
+//                if(![first[@"mediaCaption"] isEqualToString:@"(null)"]){
+//                    _caption.attributedString = [[NSAttributedString alloc] initWithString:first[@"mediaCaption"]
+//                                                                                attributes:[self textStyleLeft]];
+//                }
+//                
+//            }
+//            
+//        }else{
+//            NSArray *values = eventDetails[[BounceConstants firebaseHomefeedMediaInfo]];
+//            NSDictionary *first = [values objectAtIndex:0];
+//            uuid = first[@"userID"];
+//            if(![first[@"mediaCaption"] isEqualToString:@"(null)"]){
+//                _caption.attributedString = [[NSAttributedString alloc] initWithString:first[@"mediaCaption"]
+//                                                                            attributes:[self textStyleLeft]];
+//            }
+//            
+//        }
+//        
+//        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+//        
+//        
+//        _caption.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _caption.attributedString.size.height)));
+//        
+//        
+//        _userName.attributedString = [[NSAttributedString alloc] initWithString:@" "
+//                                                                     attributes:[self textStyleLeft]];
+//        
+//        _userName.sizeRange = ASRelativeSizeRangeMake(ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)), ASRelativeSizeMakeWithCGSize(CGSizeMake(screenWidth, _userName.attributedString.size.height)));
+//        
+//        [self fetchUserName];
+//        
+//    }else{
+//        _userName.hidden = YES;
+//        _caption.hidden = YES;
+//    }
+//    
+//    _fire = [[ASButtonNode alloc] init];
+//    [_fire setImage:[UIImage imageNamed:@"homeFeedFireUnselected"] forState:ASControlStateNormal];
+//    [_fire setImage:[UIImage imageNamed:@"homeFeedFireSelected"] forState:ASControlStateSelected];
+//    
+//    [_fire addTarget:self
+//              action:@selector(fireButtonTapped)
+//    forControlEvents:ASControlNodeEventTouchDown];
+//    
+//    _fireCount = [[ASTextNode alloc] init];
+//    
+//    if(![([snapShot getData][@"fireCount"]) isEqual:[NSNull null]]){
+//        
+//        NSString *fireCountString = [NSString stringWithFormat:@"+%@", [snapShot getData][@"fireCount"]];
+//        NSUInteger fireCountNum = [fireCountString integerValue];
+//        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", fireCountNum]
+//                                                                      attributes:[self textStyleFireUnselected]];
+//    }
+//    
+//    
+//    _userName.maximumNumberOfLines = 1;
+//    _userName.truncationMode = NSLineBreakByTruncatingTail;
+//    
+//    _caption.maximumNumberOfLines = 2;
+//    _caption.truncationMode = NSLineBreakByTruncatingTail;
+//    
+//    _textNode = [[ASTextNode alloc] init];
+//    _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[[BounceConstants firebaseEventsChildEventName]]
+//                                                                              attributes:[self textStyleEventName]];
+//    _textNode.maximumNumberOfLines = 1;
+//    _textNode.truncationMode = NSLineBreakByTruncatingTail;
+//    
+//    _dateTextNode = [[ASTextNode alloc] init];
+//    _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
+//                                                                     attributes:[self textStyleItalic]];
+//    
+//    _dateTextNode.maximumNumberOfLines = 1;
+//    _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
     
     [self addSubnode:_background];
     [self addSubnode:_videoNode];
-    [self addSubnode:_userName];
-    [self addSubnode:_textNode];
-    [self addSubnode:_caption];
-    [self addSubnode:_orgProfilePhoto];
-    [self addSubnode:_dateTextNode];
+    [self addSubnode:_emberDetailsNode];
+//    [self addSubnode:_userName];
+//    [self addSubnode:_textNode];
+//    [self addSubnode:_caption];
+//    [self addSubnode:_orgProfilePhoto];
+//    [self addSubnode:_dateTextNode];
+//    [self addSubnode:_fire];
+//    [self addSubnode:_fireCount];
     
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;;
     // hairline cell separator
@@ -305,6 +350,43 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     }
 }
 
+
+-(void)fireButtonTapped{
+    
+    NSString *uid = [FIRAuth auth].currentUser.uid;
+    
+    if(_fire.selected){
+        
+        
+        NSUInteger count = [[[_fireCount attributedString] string] integerValue];
+        count--;
+        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
+                                                                      attributes:[self textStyleFireUnselected]];
+        
+        //        [[NSUserDefaults standardUserDefaults] removeObjectForKey:_snapShot.key];
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uid] child:@"postsFired"] child:_snapShot.key] removeValue];
+        
+        [_fire setSelected:NO];
+        
+        
+        
+    }
+    else{
+        
+        
+        NSUInteger count = [[[_fireCount attributedString] string] integerValue];
+        count++;
+        _fireCount.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"+%lu", count]
+                                                                      attributes:[self textStyleFire]];
+        
+        [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uid] child:@"postsFired"] child:_snapShot.key] setValue:[NSNumber numberWithBool:YES]];
+        [_fire setSelected:YES];
+        
+        
+    }
+    
+}
+
 -(void)orgPhotoClicked{
 
     NSDictionary *eventDetails = [_snapShot getPostDetails];
@@ -315,6 +397,43 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     }
     
     
+}
+
+- (NSDictionary *)textStyleFire{
+    
+    UIFont *font  = nil;
+    
+    if(IS_IPHONE_5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+    
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.paragraphSpacing = 0.5 * font.lineHeight;
+    style.alignment = NSTextAlignmentCenter;
+    
+    return @{ NSFontAttributeName: font,
+              NSForegroundColorAttributeName: [UIColor colorWithRed: 213.0/255.0 green: 29.0/255.0 blue: 36.0/255.0 alpha: 1.0], NSParagraphStyleAttributeName: style};
+}
+
+- (NSDictionary *)textStyleFireUnselected{
+    
+    UIFont *font  = nil;
+    
+    if(IS_IPHONE_5){
+        font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightRegular];
+    }else{
+        font = [UIFont systemFontOfSize:20.0f weight:UIFontWeightRegular];
+    }
+    
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.paragraphSpacing = 0.5 * font.lineHeight;
+    style.alignment = NSTextAlignmentCenter;
+    
+    return @{ NSFontAttributeName: font,
+              NSForegroundColorAttributeName: [UIColor lightGrayColor], NSParagraphStyleAttributeName: style};
 }
 
 - (NSDictionary *)textStyle
@@ -390,53 +509,66 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
 
 //    CGFloat kInsetHorizontal = 16.0;
-    CGFloat kInsetTop = 6.0;
+//    CGFloat kInsetTop = 6.0;
 //    CGFloat kInsetBottom = 6.0;
     
-    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
+//    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
+//    horizontalSpacer.flexGrow = YES;
+//    
+//    NSArray *info = @[_textNode, _dateTextNode];
+//    
+//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+//    _videoNode.preferredFrameSize = CGSizeMake(width, width);
+//    _textNode.flexShrink = YES;
+//    
+//    
+//    ASStaticLayoutSpec *captionStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_caption]];
+//    
+////    UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
+//    
+//    ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
+//                                                                    justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
+//    
+//    ASInsetLayoutSpec *fireInset = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 30) child:_fire];
+//    
+////    infoStack.flexBasis = ASRelativeDimensionMakeWithPoints(300);
+//    
+//    
+//    ASInsetLayoutSpec *spec2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInsetTop, 0, 0, 10) child:_orgProfilePhoto];
+//    
+//    ASStackLayoutSpec *infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+//                                                                      justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[spec2, infoStack, horizontalSpacer, fireInset]];
+//    
+//    ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
+//    	
+//    ASStackLayoutSpec *infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
+//                                                                        justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionStatic,userNameStatic, infoStack_2]];
+//    
+//    UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);
+//    
+//    ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStackVert];
+//    
+//    ASStackLayoutSpec *stackSpec2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
+//                                                                            spacing:0.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_videoNode, spec_2]];
+//    
+//    ASBackgroundLayoutSpec *backSpec = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:stackSpec2 background:_background];
+//    
+//    ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
+//    lastSpecs.insets = UIEdgeInsetsMake(0, 0, 0, 0);
+//    lastSpecs.child = backSpec;
+//    
+//    return lastSpecs;
+    
+//    _videoNode.contentMode = UIViewContentModeScaleAspectFill;
+    _videoNode.preferredFrameSize = CGSizeMake(_screenWidth, _screenWidth);
+    _emberDetailsNode.flexShrink = YES;
+    _emberDetailsNode.preferredFrameSize = CGSizeMake(_screenWidth, constrainedSize.min.height);
+    
+    ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;
+    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_videoNode, _emberDetailsNode]];
     
-    NSArray *info = @[_textNode, _dateTextNode];
-    
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _videoNode.preferredFrameSize = CGSizeMake(width, width);
-    _textNode.flexShrink = YES;
-    
-    
-    ASStaticLayoutSpec *captionStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_caption]];
-    
-//    UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
-    
-    ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                                    justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
-    
-//    infoStack.flexBasis = ASRelativeDimensionMakeWithPoints(300);
-    
-    
-    ASInsetLayoutSpec *spec2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInsetTop, 0, 0, 10) child:_orgProfilePhoto];
-    
-    ASStackLayoutSpec *infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                      justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[spec2, infoStack]];
-    
-    ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
-    	
-    ASStackLayoutSpec *infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                                        justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionStatic,userNameStatic, infoStack_2]];
-    
-    UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);
-    
-    ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStackVert];
-    
-    ASStackLayoutSpec *stackSpec2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
-                                                                            spacing:0.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_videoNode, spec_2]];
-    
-    ASBackgroundLayoutSpec *backSpec = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:stackSpec2 background:_background];
-    
-    ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
-    lastSpecs.insets = UIEdgeInsetsMake(0, 0, 0, 0);
-    lastSpecs.child = backSpec;
-    
-    return lastSpecs;
+    return vert;
 }
 
 - (void)layout

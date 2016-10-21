@@ -18,6 +18,7 @@
 
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
+@property(nonatomic, assign) BOOL isVideo;
 @property (nonatomic, weak) id<OrgImageClickedDelegate> delegate;
 
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
