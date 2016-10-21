@@ -23,10 +23,10 @@ class HomeFeedViewController: UIViewController {
     var temp : UIImageView?
     
     
-    @IBAction func searchClicked(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("OpenSearch", sender:self)
-
-    }
+//    @IBAction func searchClicked(sender: UIBarButtonItem) {
+//        self.performSegueWithIdentifier("OpenSearch", sender:self)
+//
+//    }
     
     @IBAction func notificationsClicked(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("notSegue", sender: self)
@@ -57,7 +57,6 @@ class HomeFeedViewController: UIViewController {
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController") as UIViewController        
         let navController = UINavigationController(rootViewController: viewController)
         self.presentViewController(navController, animated: true, completion: nil)
-            print("received a callback")
     }
     
     func openProfile(){
@@ -65,7 +64,6 @@ class HomeFeedViewController: UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
 //        self.navigationController?.pushViewController(viewController, animated: true)
         self.presentViewController(navController, animated: true, completion: nil)
-        //        print("received a callback")
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -160,13 +158,14 @@ class HomeFeedViewController: UIViewController {
     
 
 }
-// MARK: Tab Bar Delegate
+ //MARK: Tab Bar Delegate
 
 extension HomeFeedViewController: UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         if (viewController is PhotoViewController) {
-            launchCamera()
+            //launchCamera()
+            self.performSegueWithIdentifier("OpenSearch", sender:self)
             return false
         }else if(viewController is NewProfileViewController){
             openProfile()

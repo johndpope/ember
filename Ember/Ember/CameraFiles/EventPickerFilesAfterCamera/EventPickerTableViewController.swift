@@ -280,6 +280,8 @@ import FirebaseAuth
             noDataLabel.text             = "You don't have any events happening now or coming up."
             noDataLabel.textColor        = UIColor.blackColor()
             noDataLabel.textAlignment    = .Center
+            noDataLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            noDataLabel.numberOfLines = 2
             tableView.backgroundView = noDataLabel
             tableView.separatorStyle = .None
         }
