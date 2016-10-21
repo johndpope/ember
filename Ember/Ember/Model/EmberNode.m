@@ -106,6 +106,7 @@
                 
             }else{
                 _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
+                _imageNode.isPoster = YES;
                 
                 if(!upcoming){
                     [_imageNode setFollowButtonHidden];

@@ -84,6 +84,8 @@
     
     _emberDetailsNode = [[EmberDetailsNode alloc] initWithEvent:snapShot];
     
+    self.isPoster = NO;
+    
     _mediaItemsCount = 0;
     
     _user = [FIRAuth auth].currentUser;
@@ -96,8 +98,6 @@
     [self addSubnode: _imageNode];
     [self addSubnode:_emberDetailsNode];
 
-
-    
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
@@ -162,7 +162,15 @@
     
     ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;
-    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
+    
+    ASStackLayoutSpec *vert = nil;
+    
+    if(self.isPoster){
+        vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider, _emberDetailsNode]];
+    }else{
+        vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
+    }
+    
     
     
     return vert;

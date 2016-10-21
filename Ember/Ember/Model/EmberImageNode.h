@@ -19,6 +19,7 @@
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
+@property(nonatomic, assign) BOOL isPoster;
 
 -(ASNetworkImageNode*) getImageNode;
 -(EmberDetailsNode*)getDetailsNode;
