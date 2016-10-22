@@ -37,7 +37,7 @@ class HomeFeedViewController: UIViewController {
         super.viewDidLoad()
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         // Do any additional setup after loading the view, typically from a nib.
-        self.tabBarController?.delegate = self
+        //self.tabBarController?.delegate = self
         self.tabBarController?.tabBar.translucent = false
         
         
@@ -52,7 +52,7 @@ class HomeFeedViewController: UIViewController {
         self.edgesForExtendedLayout = UIRectEdge.None;
            }
 
-    
+    //-------Method To Call
     func launchCamera() {
         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController") as UIViewController        
         let navController = UINavigationController(rootViewController: viewController)
@@ -159,20 +159,20 @@ class HomeFeedViewController: UIViewController {
 }
  //MARK: Tab Bar Delegate
 
-extension HomeFeedViewController: UITabBarControllerDelegate {
-    
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        if (viewController is PhotoViewController) {
-            //launchCamera()
-            self.performSegueWithIdentifier("OpenSearch", sender:self)
-            return false
-        }else if(viewController is NewProfileViewController){
-            openProfile()
-            return false
-        }
-        else {
-            return true
-        }
-    }
-    
-}
+//extension HomeFeedViewController: UITabBarControllerDelegate {
+//    
+//    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+//        if (viewController is PhotoViewController) {
+//            //launchCamera()
+//            self.performSegueWithIdentifier("OpenSearch", sender:self)
+//            return false
+//        }else if(viewController is NewProfileViewController){
+//            openProfile()
+//            return false
+//        }
+//        else {
+//            return true
+//        }
+//    }
+//    
+//}
