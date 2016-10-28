@@ -561,7 +561,7 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     
 //    _videoNode.contentMode = UIViewContentModeScaleAspectFill;
     _videoNode.preferredFrameSize = CGSizeMake(_screenWidth, _screenWidth);
-    _emberDetailsNode.flexShrink = YES;
+    _emberDetailsNode.flexGrow = YES;
     _emberDetailsNode.preferredFrameSize = CGSizeMake(_screenWidth, constrainedSize.min.height);
     
     ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];

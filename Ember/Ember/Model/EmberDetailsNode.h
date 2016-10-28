@@ -27,11 +27,11 @@
 -(ASTextNode *)getDateTextNode;
 -(ASButtonNode *)getButtonNode;
 - (NSDictionary *)textStyle;
--(ASImageNode *)getVideoImageNode;
 -(void)setFollowButtonHidden;
 -(ASNetworkImageNode*)getOrgProfilePhotoNode;
 -(ASTextNode*)getUserNameNode;
 -(void)showFireCount;
+-(void)setIsPoster:(BOOL)isPoster;
 
 
 @end

@@ -47,6 +47,7 @@
     ASButtonNode *_playNode;
     NSUInteger _mediaItemsCount;
     EmberDetailsNode* _emberDetailsNode;
+    BOOL _isPoster;
     
 }
 
@@ -76,6 +77,11 @@
     [_emberDetailsNode showFireCount];
 }
 
+-(void)setIsPoster:(BOOL)isPoster{
+    _isPoster = isPoster;
+    [_emberDetailsNode setIsPoster:isPoster];
+}
+
 - (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
     if (!(self = [super init]))
         return nil;
@@ -84,7 +90,7 @@
     
     _emberDetailsNode = [[EmberDetailsNode alloc] initWithEvent:snapShot];
     
-    self.isPoster = NO;
+    _isPoster = NO;
     
     _mediaItemsCount = 0;
     
@@ -157,7 +163,7 @@
     
     _imageNode.contentMode = UIViewContentModeScaleAspectFill;
     _imageNode.preferredFrameSize = CGSizeMake(screenWidth, screenWidth * 0.8);
-    _emberDetailsNode.flexShrink = YES;
+    _emberDetailsNode.flexGrow = YES;
     _emberDetailsNode.preferredFrameSize = CGSizeMake(screenWidth, constrainedSize.min.height);
     
     ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
@@ -165,12 +171,11 @@
     
     ASStackLayoutSpec *vert = nil;
     
-    if(self.isPoster){
+    if(_isPoster){
         vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider, _emberDetailsNode]];
     }else{
         vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
     }
-    
     
     
     return vert;
