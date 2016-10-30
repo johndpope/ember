@@ -159,8 +159,8 @@
 
 -(void)orgClicked:(NSString *)orgId{
     OrgProfileViewController *_myViewController = [OrgProfileViewController new];
-    //    _myViewController.orgId = orgId;
-    _myViewController.orgId = @"-KKUoplzAOneZ0AqbpxA";
+    _myViewController.orgId = orgId;
+//    _myViewController.orgId = @"-KKUoplzAOneZ0AqbpxA";
     [[self navigationController] pushViewController:_myViewController animated:YES];
     
 }
@@ -367,6 +367,7 @@
 {
     EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:indexPath.row];
     [self myEventsImageClicked:snap];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
