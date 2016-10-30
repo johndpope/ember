@@ -97,10 +97,8 @@
 
     _data = [[EmberSnapShot alloc] init];
     
-    
     _storage = [FIRStorage storage];
     _storageRef = [_storage referenceForURL:[BounceConstants firebaseStorageUrl]];
-    
     
     _previewQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     
@@ -114,8 +112,6 @@
     
     [self fetchData];
   
-    
-    
 }
 
 -(FIRDatabaseReference*)getHomeFeedPostReference:(NSString*)key{
@@ -216,13 +212,6 @@
     }
 }
 
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
- 
-//    [self fetchData];
-}
-
 -(FIRDatabaseReference*)getUsersReference{
     return [_userRef child:[BounceConstants firebaseUsersChild]];
 }
@@ -240,22 +229,26 @@
      observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *firstSnap){
          
 //         NSLog(@"first: %@", firstSnap);
-         FIRDatabaseQuery *query = [[[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key] queryLimitedToFirst:100];
+         FIRDatabaseQuery *query = [[self.ref child:[BounceConstants firebaseHomefeed]] child:firstSnap.key];
          [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
              NSDictionary *val = second.value;
-//             NSLog(@"first: %@", second);
+             NSLog(@"first: %@", second);
              NSDictionary *postDetails = val[@"postDetails"];
              NSNumber *time = postDetails[@"eventDateObject"];
              NSString *orgID = postDetails[@"orgID"];
              
+             NSNumber *endTime  = nil;
+             if(postDetails[@"endEventDateObject"]){
+                 endTime = postDetails[@"endEventDateObject"];
+             }
              // Only adding UPCOMING events
-             if(-[time doubleValue] > [numNowInMillis doubleValue]){
+             if(-[endTime doubleValue] < [numNowInMillis doubleValue]){
                  
                  // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
                  // the fireCount is not obtained due to a transaction update happening on the fireCount child
                  // Therefore, the count is not displayed in MyEvents
-                 //             NSLog(@"second: %@", second);
+                 NSLog(@"second: %@", second);
                  [_data addMyEventsSnapShot:second key:firstSnap.key];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      //                 NSLog(@"reload");
@@ -268,7 +261,7 @@
          
      }];
     
-    // NOTE: Needed since the evnet type above (child added) only fires if a value exists in the tree
+    // NOTE: Needed since the event type above (child added) only fires if a value exists in the tree
     if(_data.getNoOfBounceSnapShots == 0){
         dispatch_async(dispatch_get_main_queue(), ^{
             _reloadCalled = YES;
@@ -368,7 +361,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:indexPath.row];
+    [self myEventsImageClicked:snap];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -424,7 +418,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return false;
+    return YES;
 }
 
 - (void)tableViewLockDataSource:(ASTableView *)tableView

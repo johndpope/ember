@@ -76,8 +76,6 @@ static const CGFloat kInnerPadding = 10.0f;
  
     _myeventsPostDetailsNode = [[MyEventsPostDetailsNode alloc] initWithEvent:snapShot];
    
-    
-
 //    if([event isEqual:[NSNull null]]){
 //        return nil;
 //    }
@@ -95,19 +93,15 @@ static const CGFloat kInnerPadding = 10.0f;
     [_imageNode addTarget:self action:@selector(eventImageClicked) forControlEvents:ASControlNodeEventTouchDown];
     
     
-    
-    [self addSubnode: _imageNode];
-    [self addSubnode:background];
-    
- 
     [self addSubnode:_myeventsPostDetailsNode];
    
-   
-    
-    
+
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
+    _divider.spacingAfter = 5.0f;
+    CGFloat pixelHeight = 1.0f;
+    _divider.preferredFrameSize = CGSizeMake(screenWidth, pixelHeight);
     [self addSubnode:_divider];
     
     return self;
@@ -226,16 +220,10 @@ static const CGFloat kInnerPadding = 10.0f;
     
     ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
     horizontalSpacer.flexGrow = YES;
-  
-
-    // MAKES NODE STRETCH TO FILL AVAILABLE SPACE
-//            spec_2.flexGrow = YES;
     
-    
-    ASBackgroundLayoutSpec *bG = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:_imageNode background:_imageNode];
-    
-    
-    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[bG, _myeventsPostDetailsNode]];
+//    ASBackgroundLayoutSpec *bG = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:_imageNode background:_imageNode];
+//    
+    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_myeventsPostDetailsNode, _divider]];
     
     ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
     lastSpecs.insets = UIEdgeInsetsMake(0, 0, kInnerPadding, 0);
