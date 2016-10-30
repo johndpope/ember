@@ -507,57 +507,6 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
 
 //#if UseAutomaticLayout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
-
-//    CGFloat kInsetHorizontal = 16.0;
-//    CGFloat kInsetTop = 6.0;
-//    CGFloat kInsetBottom = 6.0;
-    
-//    ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
-//    horizontalSpacer.flexGrow = YES;
-//    
-//    NSArray *info = @[_textNode, _dateTextNode];
-//    
-//    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-//    _videoNode.preferredFrameSize = CGSizeMake(width, width);
-//    _textNode.flexShrink = YES;
-//    
-//    
-//    ASStaticLayoutSpec *captionStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_caption]];
-//    
-////    UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
-//    
-//    ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-//                                                                    justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
-//    
-//    ASInsetLayoutSpec *fireInset = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 0, 0, 30) child:_fire];
-//    
-////    infoStack.flexBasis = ASRelativeDimensionMakeWithPoints(300);
-//    
-//    
-//    ASInsetLayoutSpec *spec2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInsetTop, 0, 0, 10) child:_orgProfilePhoto];
-//    
-//    ASStackLayoutSpec *infoStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-//                                                                      justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[spec2, infoStack, horizontalSpacer, fireInset]];
-//    
-//    ASStaticLayoutSpec *userNameStatic = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_userName]];
-//    	
-//    ASStackLayoutSpec *infoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-//                                                                        justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[captionStatic,userNameStatic, infoStack_2]];
-//    
-//    UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);
-//    
-//    ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStackVert];
-//    
-//    ASStackLayoutSpec *stackSpec2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical
-//                                                                            spacing:0.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_videoNode, spec_2]];
-//    
-//    ASBackgroundLayoutSpec *backSpec = [ASBackgroundLayoutSpec backgroundLayoutSpecWithChild:stackSpec2 background:_background];
-//    
-//    ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
-//    lastSpecs.insets = UIEdgeInsetsMake(0, 0, 0, 0);
-//    lastSpecs.child = backSpec;
-//    
-//    return lastSpecs;
     
 //    _videoNode.contentMode = UIViewContentModeScaleAspectFill;
     _videoNode.preferredFrameSize = CGSizeMake(_screenWidth, _screenWidth);
