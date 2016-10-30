@@ -337,17 +337,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
               NSForegroundColorAttributeName: [UIColor blackColor], NSParagraphStyleAttributeName: style};
 }
 
--(void)scalingTemplate{
-    
-    
-    //    float widthRatioText = screenWidth / _textNode.calculatedSize.width;
-    //    float heightRatioText = _textNode.calculatedSize.height;
-    //    float scaleText = MIN(widthRatioText, heightRatioText);
-    //    float imageWidthText = scaleText * _textNode.calculatedSize.width;
-    //    float imageHeightText = scaleText * _textNode.calculatedSize.height;
-    
-}
-
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize {
     
 
