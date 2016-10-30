@@ -25,7 +25,7 @@
 @import Firebase;
 @import FirebaseStorage;
 
-@interface MyEventsViewController () <ASTableDataSource, ASTableDelegate, MyEventsNodeDelegate, MyEventsOrgImageClickedDelegate, MyEventsImageClickedDelegate>
+@interface MyEventsViewController () <ASTableDataSource, ASTableDelegate, MyEventsNodeDelegate, MyEventsOrgImageClickedDelegate, MyEventsImageClickedDelegate, MyEventsCameraClickedDelegate>
 {
     ASTableNode *_tableNode;
     FIRDataSnapshot *_snapShot;
@@ -178,6 +178,10 @@
     [self decreaseFireCount:snapshotKey];
 
     
+}
+
+-(void)openCamera{
+//    NSLog(@"camera clicked");
 }
 
 -(void)unfollowClicked:(NSString *)snapshotKey{
@@ -395,6 +399,7 @@
         bounceNode.getDetailsNode.myEventsNodeDelegate = self;
         bounceNode.getDetailsNode.myEventsOrgImageDelegate = self;
         bounceNode.myEventsImageDelegate = self;
+        bounceNode.getDetailsNode.myEventsCamerClickedDelegate = self;
         
         [self FIRDownload:bounceNode url: eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]];
         

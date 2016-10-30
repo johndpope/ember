@@ -155,7 +155,7 @@
 }
 
 -(void)openOrgProfile:(NSNotification *) notification{
-        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:@"Organizations"] child:_orgID]  queryLimitedToFirst:100];
+        FIRDatabaseQuery *recentPostsQuery = [[self.ref child:@"Organizations"] child:_orgID];
         [[recentPostsQuery queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
             NSDictionary * org = snapShot.value;
             //NSLog(@"this is the name %@", org[@"orgName"]);
