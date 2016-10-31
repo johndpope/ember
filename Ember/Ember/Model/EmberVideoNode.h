@@ -31,6 +31,9 @@
 -(void)setPlaceholderEnabled:(BOOL)placeholderEnabled;
 -(ASTextNode *)getTextNode;
 -(ASTextNode *)getDateTextNode;
+-(void)setFollowButtonHidden;
+-(void)showFireCount;
+-(void)setIsVideo;
 
 
 @end

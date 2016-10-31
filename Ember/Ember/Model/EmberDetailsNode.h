@@ -18,6 +18,7 @@
 
 
 @property(strong, nonatomic) FIRDatabaseReference *ref;
+@property(nonatomic, assign) BOOL isVideo;
 @property (nonatomic, weak) id<OrgImageClickedDelegate> delegate;
 
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
@@ -26,11 +27,11 @@
 -(ASTextNode *)getDateTextNode;
 -(ASButtonNode *)getButtonNode;
 - (NSDictionary *)textStyle;
--(ASImageNode *)getVideoImageNode;
 -(void)setFollowButtonHidden;
 -(ASNetworkImageNode*)getOrgProfilePhotoNode;
 -(ASTextNode*)getUserNameNode;
 -(void)showFireCount;
+-(void)setIsPoster:(BOOL)isPoster;
 
 
 @end
@@ -38,6 +39,7 @@
 @protocol OrgImageClickedDelegate <NSObject>
 
 -(void)orgClicked:(NSString*)orgId;
+
 
 @end
 

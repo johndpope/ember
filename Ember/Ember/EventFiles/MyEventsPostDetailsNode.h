@@ -18,11 +18,14 @@
 
 @protocol MyEventsOrgImageClickedDelegate;
 
+@protocol MyEventsCameraClickedDelegate;
+
 @interface MyEventsPostDetailsNode : ASCellNode <ASNetworkImageNodeDelegate>
 
 
 @property (nonatomic, weak) id<MyEventsNodeDelegate> myEventsNodeDelegate;
 @property (nonatomic, weak) id<MyEventsOrgImageClickedDelegate> myEventsOrgImageDelegate;
+@property (nonatomic, weak) id<MyEventsCameraClickedDelegate> myEventsCamerClickedDelegate;
 @property(strong, nonatomic) FIRDatabaseReference *schoolRootRef;
 - (instancetype)initWithEvent:(EmberSnapShot *)event;
 
@@ -38,6 +41,12 @@
 @protocol MyEventsOrgImageClickedDelegate <NSObject>
 
 -(void)orgClicked:(NSString*)orgId;
+
+@end
+
+@protocol MyEventsCameraClickedDelegate <NSObject>
+
+-(void)openCamera;
 
 @end
 

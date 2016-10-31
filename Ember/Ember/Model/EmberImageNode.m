@@ -47,6 +47,7 @@
     ASButtonNode *_playNode;
     NSUInteger _mediaItemsCount;
     EmberDetailsNode* _emberDetailsNode;
+    BOOL _isPoster;
     
 }
 
@@ -76,6 +77,11 @@
     [_emberDetailsNode showFireCount];
 }
 
+-(void)setIsPoster:(BOOL)isPoster{
+    _isPoster = isPoster;
+    [_emberDetailsNode setIsPoster:isPoster];
+}
+
 - (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
     if (!(self = [super init]))
         return nil;
@@ -83,6 +89,8 @@
      screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     _emberDetailsNode = [[EmberDetailsNode alloc] initWithEvent:snapShot];
+    
+    _isPoster = NO;
     
     _mediaItemsCount = 0;
     
@@ -96,8 +104,6 @@
     [self addSubnode: _imageNode];
     [self addSubnode:_emberDetailsNode];
 
-
-    
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
@@ -157,12 +163,19 @@
     
     _imageNode.contentMode = UIViewContentModeScaleAspectFill;
     _imageNode.preferredFrameSize = CGSizeMake(screenWidth, screenWidth * 0.8);
-    _emberDetailsNode.flexShrink = YES;
+    _emberDetailsNode.flexGrow = YES;
     _emberDetailsNode.preferredFrameSize = CGSizeMake(screenWidth, constrainedSize.min.height);
     
     ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;
-    ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
+    
+    ASStackLayoutSpec *vert = nil;
+    
+    if(_isPoster){
+        vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider, _emberDetailsNode]];
+    }else{
+        vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,_imageNode, _emberDetailsNode]];
+    }
     
     
     return vert;

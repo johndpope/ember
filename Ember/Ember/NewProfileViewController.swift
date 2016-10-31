@@ -627,7 +627,7 @@ class NewProfileViewController: ASViewController, ASTableDelegate, ASTableDataSo
             
             let cellNodeBlock = { () -> ASCellNode in
                 
-                let node = EmberNode(event: snap, past: false)
+                let node = EmberNode(event: snap, upcoming: false)
                 node.delegate = self
                 
                 if let val = node.getSuperImageNode(){

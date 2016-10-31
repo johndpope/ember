@@ -155,7 +155,7 @@
 }
 
 -(void)openOrgProfile:(NSNotification *) notification{
-        FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:@"Organizations"] child:_orgID]  queryLimitedToFirst:100];
+        FIRDatabaseQuery *recentPostsQuery = [[self.ref child:@"Organizations"] child:_orgID];
         [[recentPostsQuery queryOrderedByKey] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
             NSDictionary * org = snapShot.value;
             //NSLog(@"this is the name %@", org[@"orgName"]);
@@ -401,7 +401,7 @@
     NSDictionary *event = [snapShot getPostDetails];
     
     ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-        EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snapShot past:false];
+        EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snapShot upcoming:NO];
         bounceNode.delegate = self;
         bounceNode.imageDelegate = self;
         [self FIRDownload:bounceNode post: event];

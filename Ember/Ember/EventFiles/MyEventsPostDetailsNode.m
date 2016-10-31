@@ -31,7 +31,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     BOOL _swappedTextAndImage;
     UIImage *_placeholderImage;
     BOOL _placeholderEnabled;
-    ASDisplayNode *background;
     EmberSnapShot*_snapShot;
     NSMutableDictionary*_events;
     FIRUser *_user;
@@ -45,6 +44,9 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     ASNetworkImageNode *_orgProfilePhoto;
     ASTextNode *_dateTextNode;
     ASTextNode *_eventLocation;
+    ASButtonNode *_eventPageButton;
+    BOOL isAdminOf;
+    ASButtonNode *_cameraButton;
     
 }
 
@@ -74,6 +76,21 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }];
 }
 
+-(void)checkIsAdmin:(NSString*)orgid{
+    
+    [[[[[self.schoolRootRef child:[BounceConstants firebaseUsersChild]] child:_user.uid]  child:@"adminOf"] child:orgid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+        
+        if(![snapShot.value isEqual:[NSNull null]]){
+            isAdminOf = YES;
+        }else{
+            isAdminOf = NO;
+        }
+        
+        [self setNeedsLayout];
+    }];
+    
+    
+}
 
 
 - (instancetype)initWithEvent:(EmberSnapShot*)snapShot{
@@ -121,6 +138,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedUnselected"] forState:ASControlStateNormal];
     [_followButton setImage:[UIImage imageNamed:@"homeFeedInterestedSelected"] forState:ASControlStateSelected];
     
+    _cameraButton = [[ASButtonNode alloc] init];
+    [_cameraButton setImage:[UIImage imageNamed:@"camera"] forState:ASControlStateNormal];
+//    [_cameraButton setImage:[UIImage imageNamed:@"homeFeedInterestedSelected"] forState:ASControlStateSelected];
+    
+    NSDictionary *postDetails = snapShot.getPostDetails;
+    [self checkIsAdmin:postDetails[@"orgID"]];
+    
     _numberInterested = [[ASTextNode alloc] init];
     
     NSDictionary *allPostInfo = snapShot.getData;
@@ -164,16 +188,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
                       action:@selector(buttonTapped)
             forControlEvents:ASControlNodeEventTouchDown];
     
+    [_cameraButton addTarget:self
+                      action:@selector(cameraTapped)
+            forControlEvents:ASControlNodeEventTouchDown];
+    
     //    if([event isEqual:[NSNull null]]){
     //        return nil;
     //    }
-    
-    background = [[ASDisplayNode alloc] init];
-    background.flexGrow = YES;
-    background.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    background.layerBacked = YES;
-    
-    [self addSubnode:background];
     
     _textNode = [[ASTextNode alloc] init];
     _textNode.layerBacked = YES;
@@ -183,8 +204,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     eventName = [self truncateEventName:eventName];
     _textNode.attributedString = [[NSAttributedString alloc] initWithString:eventName
                                                                  attributes:[self textStyle]];
-    
-    
     _dateTextNode = [[ASTextNode alloc] init];
     _dateTextNode.layerBacked = YES;
     _dateTextNode.attributedString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@, %@", eventDetails[[BounceConstants firebaseEventsChildEventDate]], eventDetails[[BounceConstants firebaseEventsChildEventTime]]]
@@ -192,17 +211,21 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _dateTextNode.maximumNumberOfLines = 1;
     _dateTextNode.truncationMode = NSLineBreakByTruncatingTail;
     
+    _eventPageButton = [ASButtonNode new];
+    
     [self addSubnode:_textNode];
     [self addSubnode:_followButton];
+    [self addSubnode:_cameraButton];
 //    [self addSubnode:_numberInterested];
     [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_dateTextNode];
     
-
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
     _divider.backgroundColor = [UIColor lightGrayColor];
     [self addSubnode:_divider];
+    
+    
     
     return self;
 }
@@ -228,6 +251,15 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
             [strongDelegate unfollowClicked:_snapShot.key];
         }
         
+    }
+    
+}
+
+-(void)cameraTapped{
+    
+    id<MyEventsCameraClickedDelegate> strongDelegate = self.myEventsCamerClickedDelegate;
+    if ([strongDelegate respondsToSelector:@selector(openCamera)]) {
+        [strongDelegate openCamera];
     }
     
 }
@@ -328,11 +360,18 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     //    NSLog(@"screenwidth: %f", screenWidth);
     
     NSArray *info = @[ _textNode, _dateTextNode];
-    NSArray *info_2 = @[ _followButton];
+    
+    NSArray *info_2 = nil;
+    
+    if(!isAdminOf){
+        info_2 = @[ _cameraButton];
+    }else{
+        info_2 = @[ _followButton];
+    }
+    
     
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
-    
     
     ASStackLayoutSpec *followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
                                                                           justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:info_2];
@@ -340,35 +379,23 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, 0, 0, 10);
     
     ASInsetLayoutSpec *orgPhotoInset = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:_orgProfilePhoto];
-    
 
-    
     ASStackLayoutSpec *infoStack_2  = [ASStackLayoutSpec horizontalStackLayoutSpec];
     infoStack_2.direction = ASStackLayoutDirectionHorizontal;
     infoStack_2.alignItems         = ASStackLayoutAlignItemsStretch;
     infoStack_2.justifyContent     = ASStackLayoutJustifyContentCenter;
     infoStack_2.children = @[orgPhotoInset,infoStack, horizontalSpacer,followingRegion];
 
-    
-
     UIEdgeInsets insets_2 = UIEdgeInsetsMake(10, 10, 10, 10);
     
     ASInsetLayoutSpec *spec_2 = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets_2 child:infoStack_2];
-    
-    
-    
-    // MAKES NODE STRETCH TO FILL AVAILABLE SPACE
-    //            spec_2.flexGrow = YES;
-    
-    
+
     ASInsetLayoutSpec *lastSpecs = [[ASInsetLayoutSpec alloc] init];
     lastSpecs.insets = UIEdgeInsetsMake(0, 0, kInnerPadding, 0);
     lastSpecs.child = spec_2;
     
     return lastSpecs;
 }
-
-
 
 @end
 

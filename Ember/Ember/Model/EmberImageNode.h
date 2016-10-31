@@ -26,7 +26,7 @@
 -(ASImageNode *)getVideoImageNode;
 -(void)setFollowButtonHidden;
 -(void)showFireCount;
-
+-(void)setIsPoster:(BOOL)isPoster;
 
 @end
 

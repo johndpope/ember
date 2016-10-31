@@ -245,7 +245,25 @@ import FirebaseAuth
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //return the number of sections
-        return 1
+        var numOfSections: Int = 0
+        if events.count > 0
+        {
+            tableView.separatorStyle = .SingleLine
+            numOfSections                = 1
+            tableView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text             = "You don't have any events happening now or coming up."
+            noDataLabel.textColor        = UIColor.blackColor()
+            noDataLabel.textAlignment    = .Center
+            noDataLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            noDataLabel.numberOfLines = 2
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        }
+        return numOfSections
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -264,9 +282,16 @@ import FirebaseAuth
             for rest in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 if let endDateString = rest.childSnapshotForPath("endEventDateObject").value as? NSNumber {
                     let endDateObject = -(endDateString.doubleValue)
-                    if(self.isWithinAcceptableRange(endDateObject)){
-                        self.events.append(rest)
-                    }
+                    let myUser = EmberUser()
+                    let orgID = rest.childSnapshotForPath("orgID").value as? String
+                    myUser.isAdminOf(orgID!, completionHandler: {(isAdmin) in
+                        if(isAdmin){
+                            if(self.isWithinAcceptableRange(endDateObject)){
+                                self.events.append(rest)
+                            }
+                        }
+                        
+                    })
                 }
             }
             dispatch_async(dispatch_get_main_queue(),{

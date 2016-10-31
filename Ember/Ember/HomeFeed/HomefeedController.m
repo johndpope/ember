@@ -294,8 +294,8 @@ FIRDatabaseHandle _refHandle;
             //        NSLog(@"array: %@", completion);
             
             NSDate *now = [NSDate date];
-            NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
-            //        NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
+//            NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
+                    NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
             
             NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
             NSString *oneDayInMillis = [NSString stringWithFormat:@"%f",[oneDayAgo timeIntervalSince1970]];
@@ -311,157 +311,154 @@ FIRDatabaseHandle _refHandle;
                 
                 for(FIRDataSnapshot* child in snapShot.children){
                     
-                    NSDictionary *val = child.value;
-                    NSDictionary *postDetails = val[@"postDetails"];
-                    NSNumber *time = postDetails[@"eventDateObject"];
-                    
-                    NSNumber *endTime = nil;
-                    if(postDetails[@"endEventDateObject"]){
-                        endTime = postDetails[@"endEventDateObject"];
-                    }
-                    
-                    NSString *orgID = postDetails[@"orgID"];
-                    
-                    if(endTime != nil){
+                        NSDictionary *val = child.value;
+                        NSDictionary *postDetails = val[@"postDetails"];
+                        NSNumber *time = postDetails[@"eventDateObject"];
                         
-                        NSLog(@"end time present");
-                        
-                        // Happening now
-                        if(-[endTime doubleValue] > [numNowInMillis doubleValue] && [numNowInMillis doubleValue] > -[time doubleValue]){
-                            
-                            NSLog(@"happening now passed");
-                            
-                            if(val[@"orgTags"]){
-                                
-                                NSArray *prefs = nil;
-                                
-                                if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                                    
-                                    
-                                }else{ // IS OF TYPE NSARRAY
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    
-                                }
-                                
-                                if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                                    NSLog(@"tests passed");
-                                    [_nowSectionPosts addSnapShotToIndex:child user:_user]; // Upcoming Events
-                                }else{
-                                    [_nowSectionPosts addSnapShotToEnd:child user:_user];
-                                }
-                            }
+                        NSNumber *endTime = nil;
+                        if(postDetails[@"endEventDateObject"]){
+                            endTime = postDetails[@"endEventDateObject"];
                         }
                         
-                        // Upcoming
-                        else if(-[endTime doubleValue] < [numNowInMillis doubleValue]){
+                        NSString *orgID = postDetails[@"orgID"];
+                        
+                        if(endTime != nil){
                             
-                            if(val[@"orgTags"]){
+                            // Happening now
+                            if(-[endTime doubleValue] > [numNowInMillis doubleValue] && [numNowInMillis doubleValue] > -[time doubleValue]){
                                 
-                                NSArray *prefs = nil;
-                                
-                                if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                if(val[@"orgTags"]){
                                     
+                                    NSArray *prefs = nil;
                                     
-                                }else{ // IS OF TYPE NSARRAY
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                    if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                        
+                                        
+                                    }else{ // IS OF TYPE NSARRAY
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        
+                                    }
                                     
-                                    
-                                }
-                                
-                                //                        NSLog(@"%@", prefs);
-                                
-                                //                        NSDictionary *prefs = val[@"orgTags"];
-                                if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                                    [_dataSection2 addSnapShotToIndex:child user:_user]; // Upcoming Events
-                                }else{
-                                    [_dataSection2 addSnapShotToEnd:child user:_user];
+                                    if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                        NSLog(@"tests passed");
+                                        [_nowSectionPosts addSnapShotToIndex:child user:_user]; // Upcoming Events
+                                    }else{
+                                        [_nowSectionPosts addSnapShotToEnd:child user:_user];
+                                    }
                                 }
                             }
                             
+                            // Upcoming
+                            else if(-[endTime doubleValue] < [numNowInMillis doubleValue]){
+                                
+                                if(val[@"orgTags"]){
+                                    
+                                    NSArray *prefs = nil;
+                                    
+                                    if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                        
+                                        
+                                    }else{ // IS OF TYPE NSARRAY
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                        
+                                        
+                                    }
+                                    
+                                    //                        NSLog(@"%@", prefs);
+                                    
+                                    //                        NSDictionary *prefs = val[@"orgTags"];
+                                    if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                        [_dataSection2 addSnapShotToIndex:child user:_user]; // Upcoming Events
+                                    }else{
+                                        [_dataSection2 addSnapShotToEnd:child user:_user];
+                                    }
+                                }
+                                
+                            }else{
+                                // Past events
+                                if(val[@"orgTags"]){
+                                    
+                                    NSArray *prefs = nil;
+                                    
+                                    if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
+                                        prefs = [val[@"orgTags"] allKeys];
+                                    }else{ // IS OF TYPE NSARRAY
+                                        prefs = val[@"orgTags"];
+                                        
+                                    }
+                                    
+                                    if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                        [_data addSnapShotToIndex:child user:_user]; // Past Events
+                                    }else{
+                                        [_data addSnapShotToEnd:child user: _user];
+                                    }
+                                }
+                                
+                            }
                         }else{
-                            // Past events
-                            if(val[@"orgTags"]){
-                                
-                                NSArray *prefs = nil;
-                                
-                                if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
-                                    prefs = [val[@"orgTags"] allKeys];
-                                }else{ // IS OF TYPE NSARRAY
-                                    prefs = val[@"orgTags"];
-                                    
-                                }
-                                
-                                if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                                    [_data addSnapShotToIndex:child user:_user]; // Past Events
-                                }else{
-                                    [_data addSnapShotToEnd:child user: _user];
-                                }
-                            }
                             
+                            if(-[time doubleValue] < [numNowInMillis doubleValue]){
+                                
+                                //                    [_data addSnapShot:child];
+                                
+                                if(val[@"orgTags"]){
+                                    
+                                    NSArray *prefs = nil;
+                                    
+                                    if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
+                                        prefs = [val[@"orgTags"] allKeys];
+                                    }else{ // IS OF TYPE NSARRAY
+                                        prefs = val[@"orgTags"];
+                                        
+                                    }
+                                    
+                                    if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                        [_data addSnapShotToIndex:child user:_user]; // Past Events
+                                    }else{
+                                        [_data addSnapShotToEnd:child user: _user];
+                                    }
+                                }
+                                
+                                
+                            }else{
+                                //                NSLog(@"upcoming: %@", time);
+                                
+                                //                    [_dataSection2 addSnapShot:child];
+                                
+                                if(val[@"orgTags"]){
+                                    
+                                    NSArray *prefs = nil;
+                                    
+                                    if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                        
+                                        
+                                    }else{ // IS OF TYPE NSARRAY
+                                        prefs = [val[@"orgTags"] allKeys];
+                                        //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
+                                        
+                                        
+                                    }
+                                    
+                                    //                        NSLog(@"%@", prefs);
+                                    
+                                    //                        NSDictionary *prefs = val[@"orgTags"];
+                                    if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
+                                        [_dataSection2 addSnapShotToIndex:child user:_user]; // Upcoming Events
+                                    }else{
+                                        [_dataSection2 addSnapShotToEnd:child user:_user];
+                                    }
+                                }
+                                
+                            }
                         }
-                    }else{
-                        
-                        if(-[time doubleValue] < [numNowInMillis doubleValue]){
-                            
-                            //                    [_data addSnapShot:child];
-                            
-                            if(val[@"orgTags"]){
-                                
-                                NSArray *prefs = nil;
-                                
-                                if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
-                                    prefs = [val[@"orgTags"] allKeys];
-                                }else{ // IS OF TYPE NSARRAY
-                                    prefs = val[@"orgTags"];
-                                    
-                                }
-                                
-                                if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                                    [_data addSnapShotToIndex:child user:_user]; // Past Events
-                                }else{
-                                    [_data addSnapShotToEnd:child user: _user];
-                                }
-                            }
-                            
-                            
-                        }else{
-                            //                NSLog(@"upcoming: %@", time);
-                            
-                            //                    [_dataSection2 addSnapShot:child];
-                            
-                            if(val[@"orgTags"]){
-                                
-                                NSArray *prefs = nil;
-                                
-                                if([val[@"orgTags"] isKindOfClass:[NSDictionary class]]){
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                                    
-                                    
-                                }else{ // IS OF TYPE NSARRAY
-                                    prefs = [val[@"orgTags"] allKeys];
-                                    //                            NSLog(@"%@", [val[@"orgTags"] allKeys]);
-                                    
-                                    
-                                }
-                                
-                                //                        NSLog(@"%@", prefs);
-                                
-                                //                        NSDictionary *prefs = val[@"orgTags"];
-                                if([_user matchesUserPreferences:prefs] || [_user userFollowsOrg:orgID] || [_user isUserPost:child]){
-                                    [_dataSection2 addSnapShotToIndex:child user:_user]; // Upcoming Events
-                                }else{
-                                    [_dataSection2 addSnapShotToEnd:child user:_user];
-                                }
-                            }
-                            
-                        }
-                    }
+
                     
                 }
                 
@@ -910,7 +907,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap past:false];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:NO];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];
@@ -925,7 +922,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap past:false];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:YES];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];
@@ -941,7 +938,7 @@ FIRDatabaseHandle _refHandle;
         NSDictionary *eventDetails = [snap getPostDetails];
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
-            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap past:true];
+            EmberNode *bounceNode = [[EmberNode alloc] initWithEvent:snap upcoming:NO];
             
             [self setDelegates:bounceNode];
             [self FIRDownload:bounceNode post: eventDetails];
