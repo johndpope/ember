@@ -151,7 +151,6 @@ import FirebaseAuth
             
             uploadTask.observeStatus(.Success) { snapshot in
                 // Upload completed successfully
-                print("Upload completed successfully")
                 // Fetch the download URL
                 imgRef.downloadURLWithCompletion { (URL, error) -> Void in
                     

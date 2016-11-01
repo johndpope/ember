@@ -294,8 +294,8 @@ FIRDatabaseHandle _refHandle;
             //        NSLog(@"array: %@", completion);
             
             NSDate *now = [NSDate date];
-//            NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
-                    NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
+            //NSDate *oneDayAgo = [now dateByAddingTimeInterval:-[BounceConstants maxNumberPastDays] * 24 * 60 * 60];
+            NSDate *oneDayAgo = [now dateByAddingTimeInterval:-200 * 24 * 60 * 60];
             
             NSString *nowInMillis = [NSString stringWithFormat:@"%f",[now timeIntervalSince1970]];
             NSString *oneDayInMillis = [NSString stringWithFormat:@"%f",[oneDayAgo timeIntervalSince1970]];
@@ -305,12 +305,12 @@ FIRDatabaseHandle _refHandle;
             
             FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:[BounceConstants firebaseHomefeed]] queryOrderedByChild:@"timeStamp"] queryEndingAtValue:numOneDayAgoInMillis];
             [recentPostsQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
-                //                    NSLog(@"%@  %@", snapShot.key, snapShot.value);
+                
+                 //NSLog(@"%lu", snapShot.childrenCount);
                 
                 NSUInteger *prefsCount  = 0;
                 
                 for(FIRDataSnapshot* child in snapShot.children){
-                    
                         NSDictionary *val = child.value;
                         NSDictionary *postDetails = val[@"postDetails"];
                         NSNumber *time = postDetails[@"eventDateObject"];
