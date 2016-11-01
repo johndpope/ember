@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageViewController : UIViewController
-- (instancetype)initWithImage:(UIImage *)image;
+- (instancetype)initWithImage:(UIImage *)image mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject;
 @end

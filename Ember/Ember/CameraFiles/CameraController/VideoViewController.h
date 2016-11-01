@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoViewController : UIViewController
-- (instancetype)initWithVideoUrl:(NSURL *)url;
+- (instancetype)initWithVideoUrl:(NSURL *)url mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject;
 @end

@@ -12,6 +12,7 @@
 #import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
 
+@import Firebase;
 
 @interface ImageViewController ()
 
@@ -21,6 +22,16 @@
 @property (nonatomic, retain) UITextView *captionInput;
 @property (strong, nonatomic) UIButton *captionButton;
 @property (strong, nonatomic) UIButton *acceptButton;
+
+
+//Segue from CameraViewController
+@property (strong, nonatomic) NSString *mEventID;
+@property (strong, nonatomic) NSString *mEventDate;
+@property (strong, nonatomic) NSString *mEventTime;
+@property (strong, nonatomic) NSString *mOrgID;
+@property (strong, nonatomic) NSString *mHomeFeedMediaKey;
+@property (strong, nonatomic) NSString *mOrgProfImage;
+@property (strong, nonatomic) NSNumber *mEventDateObject;
 
 @end
 
@@ -32,12 +43,19 @@
 }
 
 
-- (instancetype)initWithImage:(UIImage *)image {
+- (instancetype)initWithImage:(UIImage *)image mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
     self = [super initWithNibName:nil bundle:nil];
     if(self) {
         _image = [UIImage imageWithCGImage: image.CGImage
                                      scale: image.scale
                                orientation: image.imageOrientation];
+        _mEventID = eventID;
+        _mEventDate = eventDate;
+        _mEventTime = eventTime;
+        _mOrgID = orgID;
+        _mHomeFeedMediaKey = homeFeedMediaKey;
+        _mOrgProfImage = orgProfImage;
+        _mEventDateObject = eventDateObject;
     }
     
     return self;
@@ -88,6 +106,79 @@
     [self.view addGestureRecognizer:tapGesture];
 
 }
+
+- (void) uploadContent:(NSString *) finalAddress secondVal:(NSString *) captionText {
+    
+    //Get current User
+    FIRUser *user = [FIRAuth auth].currentUser;
+    
+    // Get a reference to the storage service, using the default Firebase App
+    FIRStorage *storage = [FIRStorage storage];
+    
+    // Create a storage reference from our storage service
+    FIRStorageReference *storageRef = [storage referenceForURL:[BounceConstants firebaseStorageUrl]];
+    
+    //Create ImageRef
+    FIRStorageReference *imagesRef = [storageRef child: finalAddress];
+
+    
+
+    // Local file you want to upload
+    NSData *localImage = UIImageJPEGRepresentation(_image, 0.9);
+    
+    // Create the file metadata
+    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    metadata.contentType = @"image/jpeg";
+    
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    FIRStorageUploadTask *uploadTask = [storageRef putData:localImage metadata:metadata];
+    
+    // Listen for state changes, errors, and completion of the upload.
+    [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload resumed, also fires when the upload starts
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusPause handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload paused
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload reported progress
+        double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload completed successfully
+    }];
+    
+    // Errors only occur in the "Failure" case
+    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
+        if (snapshot.error != nil) {
+            switch (snapshot.error.code) {
+                case FIRStorageErrorCodeObjectNotFound:
+                    // File doesn't exist
+                    break;
+                    
+                case FIRStorageErrorCodeUnauthorized:
+                    // User doesn't have permission to access file
+                    break;
+                    
+                case FIRStorageErrorCodeCancelled:
+                    // User canceled the upload
+                    break;
+
+                case FIRStorageErrorCodeUnknown:
+                    // Unknown error occurred, inspect the server response
+                    break;
+            }
+        }
+    }];
+    
+    
+}
+
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidLoad];
     if (returnFromEventPage == true) {
@@ -232,6 +323,8 @@
 
     }
 }
+
+
 
 
 - (BOOL)prefersStatusBarHidden {

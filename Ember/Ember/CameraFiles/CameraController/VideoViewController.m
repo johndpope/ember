@@ -13,7 +13,7 @@
 @import AVFoundation;
 @import AssetsLibrary;
 @import MobileCoreServices;
-
+@import Firebase;
 
 
 
@@ -27,13 +27,23 @@
 @property (strong, nonatomic) UIButton *acceptButton;
 @property (nonatomic, retain) UITextView *captionInput;
 @property (strong, nonatomic) UIButton *captionButton;
+
+//Segue from CameraViewController
+@property (strong, nonatomic) NSString *mEventID;
+@property (strong, nonatomic) NSString *mEventDate;
+@property (strong, nonatomic) NSString *mEventTime;
+@property (strong, nonatomic) NSString *mOrgID;
+@property (strong, nonatomic) NSString *mHomeFeedMediaKey;
+@property (strong, nonatomic) NSString *mOrgProfImage;
+@property (strong, nonatomic) NSNumber *mEventDateObject;
+
 @end
 
 
 
 @implementation VideoViewController
 
-- (instancetype)initWithVideoUrl:(NSURL *)url {
+- (instancetype)initWithVideoUrl:(NSURL *)url mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
     self = [super init];
     if(self) {
         _videoUrl = url;
@@ -46,6 +56,13 @@
             if (completion.status == AVAssetExportSessionStatusCompleted) {
             }
         }];
+        _mEventID = eventID;
+        _mEventDate = eventDate;
+        _mEventTime = eventTime;
+        _mOrgID = orgID;
+        _mHomeFeedMediaKey = homeFeedMediaKey;
+        _mOrgProfImage = orgProfImage;
+        _mEventDateObject = eventDateObject;
         
     }
     

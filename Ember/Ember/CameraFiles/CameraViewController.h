@@ -9,5 +9,5 @@
 #import "LLSimpleCamera.h"
 
 @interface CameraViewController : UIViewController
-
+- (instancetype)initWithEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject;
 @end
