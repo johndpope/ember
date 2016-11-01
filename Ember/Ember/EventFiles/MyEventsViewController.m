@@ -180,8 +180,12 @@
     
 }
 
--(void)openCamera{
-//    NSLog(@"camera clicked");
+-(void)openCamera:(NSString *)eventId eventDate:(NSString *)eventDate eventTime:(NSString *)eventTime orgId:(NSString *)orgId homefeedMediaKey:(NSString *)homefeedMediaKey orgProfileImage:(NSString *)orgProfileImage eventDateObject:(NSNumber*)eventDateObject{
+    
+    CameraViewController *cameraViewController = [[CameraViewController alloc] initWithEventID:eventId mEventDate:eventDate mEventTime:eventTime mOrgID:orgId mHomefeedMediaKey:homefeedMediaKey mOrgProfImage:orgProfileImage mEventDateObject:eventDateObject];
+    
+    [[self navigationController] pushViewController:cameraViewController animated:YES];
+    
 }
 
 -(void)unfollowClicked:(NSString *)snapshotKey{

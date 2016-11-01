@@ -46,7 +46,7 @@
 
 @protocol MyEventsCameraClickedDelegate <NSObject>
 
--(void)openCamera;
+-(void)openCamera:(NSString*)eventId eventDate:(NSString*)eventDate eventTime:(NSString*)eventTime orgId:(NSString*)orgId homefeedMediaKey:(NSString*)homefeedMediaKey orgProfileImage:(NSString*)orgProfileImage eventDateObject:(NSNumber*)eventDateObject;
 
 @end
 
