@@ -126,7 +126,7 @@ class YourProfileFirstNode: ASCellNode {
     
     func formatMyOrgsButton(){
         
-        myOrgsButton.setTitle("My Orgs", withFont: font, withColor: UIColor.whiteColor(), forState: .Normal)
+        myOrgsButton.setTitle("Find Orgs", withFont: font, withColor: UIColor.whiteColor(), forState: .Normal)
         myOrgsButton.backgroundColor = PRIMARY_APP_COLOR
         myOrgsButton.cornerRadius = 4
         myOrgsButton.borderWidth = 1.0
