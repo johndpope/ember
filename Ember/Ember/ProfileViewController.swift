@@ -61,7 +61,9 @@ class ProfileViewController: UIViewController, OpenMyOrgsFromSuperDelegate, Open
     }
     
     func openMyOrgsFromSuperViewController() {
-        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MyOrgs") as UIViewController
+        let viewController : OrgsViewController = OrgsViewController()
+        viewController.title = "Find Orgs"
+//         let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MyOrgs") as UIViewController
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     

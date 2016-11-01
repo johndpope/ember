@@ -91,6 +91,7 @@ class MyOrgsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        //tableView.registerNib(UINib(nibName: "YourNibName", bundle: nil), forCellReuseIdentifier: "MyOrgsTableViewCell")
         
         // Table view cells are reused and should be dequeued using a cell identifier.
         let cell = tableView.dequeueReusableCellWithIdentifier("MyOrgsTableViewCell", forIndexPath: indexPath) as! MyOrgsTableViewCell

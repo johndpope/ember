@@ -16,7 +16,7 @@ class HomeFeedViewController: UIViewController {
     var controllerArray : [UIViewController] = []
     let controller1  = HomefeedController()
     let controller2 = MyEventsViewController()
-    let controller3 : OrgsViewController = OrgsViewController()
+    let controller3 : MyOrgsTableViewController = MyOrgsTableViewController()
     var noOfTimesControllerCameIntoView = 0
     
     var fullView : UIImageView?
@@ -46,7 +46,7 @@ class HomeFeedViewController: UIViewController {
         controllerArray.append(controller1)
         let controller2 : MyEventsViewController = MyEventsViewController()
         controllerArray.append(controller2)
-        let controller3 : OrgsViewController = OrgsViewController()
+        let controller3 : MyOrgsTableViewController = MyOrgsTableViewController()
         controllerArray.append(controller3)
         self.extendedLayoutIncludesOpaqueBars = false;
         self.edgesForExtendedLayout = UIRectEdge.None;
