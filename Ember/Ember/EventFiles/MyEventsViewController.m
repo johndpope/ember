@@ -180,11 +180,12 @@
     
 }
 
--(void)openCamera:(NSString *)eventId eventDate:(NSString *)eventDate eventTime:(NSString *)eventTime orgId:(NSString *)orgId homefeedMediaKey:(NSString *)homefeedMediaKey orgProfileImage:(NSString *)orgProfileImage eventDateObject:(NSNumber*)eventDateObject{
+-(void)openCamera:(NSString *)eventId eventDate:(NSString *)eventDate eventTime:(NSString *)eventTime orgId:(NSString *)orgId homefeedMediaKey:(NSString *)homefeedMediaKey orgProfileImage:(NSString *)orgProfileImage eventDateObject:(NSNumber*)eventDateObject eventName:(NSString *)eventName{
     
-    CameraViewController *cameraViewController = [[CameraViewController alloc] initWithEventID:eventId mEventDate:eventDate mEventTime:eventTime mOrgID:orgId mHomefeedMediaKey:homefeedMediaKey mOrgProfImage:orgProfileImage mEventDateObject:eventDateObject];
-    [[self navigationController] presentViewController:cameraViewController animated:YES completion:nil];
-//    [[self navigationController] pushViewController:cameraViewController animated:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CameraViewController *myViewController = [storyboard instantiateViewControllerWithIdentifier:@"CameraViewController"];
+    [myViewController initWithEventID:eventId mEventDate:eventDate mEventName:eventName mEventTime:eventTime mOrgID:orgId mHomefeedMediaKey:homefeedMediaKey mOrgProfImage:orgProfileImage mEventDateObject:eventDateObject];
+    [self presentViewController:myViewController animated:YES completion:nil];
     
 }
 

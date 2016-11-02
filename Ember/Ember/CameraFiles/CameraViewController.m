@@ -47,9 +47,8 @@ const int videoDuration  = 15;
 
 @implementation CameraViewController
 
-- (instancetype)initWithEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventName:(NSString *) eventName mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
-    self = [super initWithNibName:nil bundle:nil];
-    if(self) {
+- (void)initWithEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventName:(NSString *) eventName mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
+   
         _mEventName = eventName;
         _mEventID = eventID;
         _mEventDate = eventDate;
@@ -58,9 +57,7 @@ const int videoDuration  = 15;
         _mHomeFeedMediaKey = homeFeedMediaKey;
         _mOrgProfImage = orgProfImage;
         _mEventDateObject = eventDateObject;
-    }
     
-    return self;
 }
 
 - (void)viewDidLoad
