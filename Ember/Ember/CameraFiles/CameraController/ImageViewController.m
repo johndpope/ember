@@ -128,7 +128,7 @@
     FIRStorageReference *imagesRef = [storageRef child: finalAddress];
 
     //Get NSDateObject
-    double timeStamp = -[[NSDate date] timeIntervalSince1970];
+    NSNumber *timeStamp = [NSNumber numberWithDouble:-[[NSDate date] timeIntervalSince1970]];
 
     // Local file you want to upload
     NSData *localImage = UIImageJPEGRepresentation(_image, 0.9);
@@ -176,9 +176,16 @@
                         [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": @0}];
                         
                         //save mediaLinks
-                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}]
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
                         
+                        //Improved feature saving to personal profile
+                        [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
                         
+                        //save highest level timeStamp
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
+                        
+                         //Get list of tags
+                        //[_ref child:<#(nonnull NSString *)#>]
                         
                         
                         
