@@ -63,7 +63,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId{
     
-    FIRDatabaseQuery *recentPostsQuery = [[[self.schoolRootRef child:[BounceConstants firebaseOrgsChild]] child:orgId]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[self.schoolRootRef child:[BounceConstants firebaseOrgsChild]] child:orgId];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary * event = snapShot.value;
@@ -76,14 +76,22 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     }];
 }
 
+// TODO : use String : Bool pair in Firebase instead of the current array implementation
 -(void)checkIsAdmin:(NSString*)orgid{
     
-    [[[[[self.schoolRootRef child:[BounceConstants firebaseUsersChild]] child:_user.uid]  child:@"adminOf"] child:orgid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
+    [[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid]  child:@"adminOf"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         
-        if(![snapShot.value isEqual:[NSNull null]]){
+//        NSArray  *arr = [snapShot.value allValues];
+//        NSLog(@"arr: %@", snapShot.value);
+//        NSLog(@"orgid: %@", orgid);
+
+        if([snapShot.value containsObject:orgid]){
+//            NSLog(@"found");
             isAdminOf = YES;
+            
         }else{
             isAdminOf = NO;
+            
         }
         
         [self setNeedsLayout];
@@ -159,7 +167,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         
-        NSLog(@"%@  %@", snapShot.key, snapShot.value);
+//        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSLog(@"snapshot key: %@", _snapShot.key);
         if(![snapShot.value isEqual:[NSNull null]]){
             
@@ -362,9 +370,13 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     NSArray *info_2 = nil;
     
-    if(!isAdminOf){
+    if(isAdminOf){
+        _followButton.hidden = YES;
+        _cameraButton.hidden = NO;
         info_2 = @[ _cameraButton];
     }else{
+        _followButton.hidden = NO;
+        _cameraButton.hidden = YES;
         info_2 = @[ _followButton];
     }
     

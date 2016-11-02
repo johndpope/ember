@@ -243,7 +243,7 @@
          [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *second){
              
              NSDictionary *val = second.value;
-             NSLog(@"first: %@", second);
+//             NSLog(@"first: %@", second);
              NSDictionary *postDetails = val[@"postDetails"];
              NSNumber *time = postDetails[@"eventDateObject"];
              NSString *orgID = postDetails[@"orgID"];
@@ -258,7 +258,7 @@
                  // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
                  // the fireCount is not obtained due to a transaction update happening on the fireCount child
                  // Therefore, the count is not displayed in MyEvents
-                 NSLog(@"second: %@", second);
+//                 NSLog(@"second: %@", second);
                  [_data addMyEventsSnapShot:second key:firstSnap.key];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      //                 NSLog(@"reload");
