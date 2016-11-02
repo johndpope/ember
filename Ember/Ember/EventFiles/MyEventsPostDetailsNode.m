@@ -85,7 +85,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 //        NSLog(@"arr: %@", snapShot.value);
 //        NSLog(@"orgid: %@", orgid);
 
-        if([snapShot.value containsObject:orgid]){
+        if(![snapShot.value isEqual:[NSNull null]] && [snapShot.value containsObject:orgid]){
 //            NSLog(@"found");
             isAdminOf = YES;
             
@@ -168,7 +168,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     [[[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:uid] child:@"eventsFollowed"] child:_snapShot.key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
-        NSLog(@"snapshot key: %@", _snapShot.key);
+//        NSLog(@"snapshot key: %@", _snapShot.key);
         if(![snapShot.value isEqual:[NSNull null]]){
             
             if([snapShot.key isEqualToString:_snapShot.key]){
