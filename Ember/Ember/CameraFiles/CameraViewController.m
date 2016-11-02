@@ -33,6 +33,7 @@ const int videoDuration  = 15;
 
 
 //Segue from CameraViewController
+@property (strong, nonatomic) NSString *mEventName;
 @property (strong, nonatomic) NSString *mEventID;
 @property (strong, nonatomic) NSString *mEventDate;
 @property (strong, nonatomic) NSString *mEventTime;
@@ -46,9 +47,10 @@ const int videoDuration  = 15;
 
 @implementation CameraViewController
 
-- (instancetype)initWithEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
+- (instancetype)initWithEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventName:(NSString *) eventName mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
     self = [super initWithNibName:nil bundle:nil];
     if(self) {
+        _mEventName = eventName;
         _mEventID = eventID;
         _mEventDate = eventDate;
         _mEventTime = eventTime;
@@ -190,9 +192,7 @@ const int videoDuration  = 15;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    //[[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
-    
+    [super viewWillDisappear:animated];    
 }
 
 
@@ -227,7 +227,7 @@ const int videoDuration  = 15;
                                  URLByAppendingPathComponent:@"test1"] URLByAppendingPathExtension:@"mov"];
             [self.camera startRecordingWithOutputUrl:outputURL didRecord:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
                 
-                VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:outputFileUrl mEventID:_mEventID mEventDate:_mEventDate mEventTime:_mEventTime mOrgID:_mOrgID mHomefeedMediaKey:_mHomeFeedMediaKey mOrgProfImage:_mOrgProfImage mEventDateObject:_mEventDateObject];
+                VideoViewController *vc = [[VideoViewController alloc] initWithVideoUrl:outputFileUrl mEventID:_mEventID mEventDate:_mEventDate mEventName:_mEventName mEventTime:_mEventTime mOrgID:_mOrgID mHomefeedMediaKey:_mHomeFeedMediaKey mOrgProfImage:_mOrgProfImage mEventDateObject:_mEventDateObject];
                  CATransition* transition = [CATransition animation];
                 transition.duration = 0.5;
                 transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -265,7 +265,7 @@ const int videoDuration  = 15;
     [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
         if(!error) {
             
-            ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image mEventID:_mEventID mEventDate:_mEventDate mEventTime:_mEventTime mOrgID:_mOrgID mHomefeedMediaKey:_mHomeFeedMediaKey mOrgProfImage:_mOrgProfImage mEventDateObject:_mEventDateObject];
+            ImageViewController *imageVC = [[ImageViewController alloc] initWithImage:image mEventID:_mEventID mEventDate:_mEventDate mEventName:_mEventName mEventTime:_mEventTime mOrgID:_mOrgID mHomefeedMediaKey:_mHomeFeedMediaKey mOrgProfImage:_mOrgProfImage mEventDateObject:_mEventDateObject];
             [weakSelf presentViewController:imageVC animated:NO completion:nil];
         }
         else {

@@ -151,6 +151,7 @@ import FirebaseAuth
             
             uploadTask.observeStatus(.Success) { snapshot in
                 // Upload completed successfully
+                print("Upload completed successfully")
                 // Fetch the download URL
                 imgRef.downloadURLWithCompletion { (URL, error) -> Void in
                     
@@ -165,7 +166,7 @@ import FirebaseAuth
                             
                             if (!snapshot.hasChildren()) {
                                 //save to homefeed
-                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"orgID":self.mOrgID,"eventID":self.mEventID,"orgProfileIMage": self.orgProfImage, "eventDateObject":self.eventDateObject])
+                                self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).child("postDetails").updateChildValues(["eventDate":self.mEventDate,"eventName":self.mEventName,"eventTime":self.mEventTime,"orgID":self.mOrgID,"eventID":self.mEventID,"orgProfileImage": self.orgProfImage, "eventDateObject":self.eventDateObject])
                                 
                                 //save fireCount
                                 self.ref.child(BounceConstants.firebaseSchoolRoot()).child("HomeFeed").child(self.homeFeedMediaKey).updateChildValues(["fireCount":0])

@@ -1,7 +1,5 @@
 //
 //  ImageViewController.m
-//  bounceapp
-//
 //  Created by Anthony Wamunyu Maina on 6/26/16.
 //  Copyright © 2016 Anthony Wamunyu Maina. All rights reserved.
 //
@@ -22,9 +20,12 @@
 @property (nonatomic, retain) UITextView *captionInput;
 @property (strong, nonatomic) UIButton *captionButton;
 @property (strong, nonatomic) UIButton *acceptButton;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+
 
 
 //Segue from CameraViewController
+@property (strong, nonatomic) NSString *mEventName;
 @property (strong, nonatomic) NSString *mEventID;
 @property (strong, nonatomic) NSString *mEventDate;
 @property (strong, nonatomic) NSString *mEventTime;
@@ -43,12 +44,13 @@
 }
 
 
-- (instancetype)initWithImage:(UIImage *)image mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
+- (instancetype)initWithImage:(UIImage *)image mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventName:(NSString *) eventName mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
     self = [super initWithNibName:nil bundle:nil];
     if(self) {
         _image = [UIImage imageWithCGImage: image.CGImage
                                      scale: image.scale
                                orientation: image.imageOrientation];
+        _mEventName = eventName;
         _mEventID = eventID;
         _mEventDate = eventDate;
         _mEventTime = eventTime;
@@ -104,6 +106,10 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    
+    //Firebase connection
+    self.ref = [[FIRDatabase database] reference];
 
 }
 
@@ -121,7 +127,8 @@
     //Create ImageRef
     FIRStorageReference *imagesRef = [storageRef child: finalAddress];
 
-    
+    //Get NSDateObject
+    double timeStamp = -[[NSDate date] timeIntervalSince1970];
 
     // Local file you want to upload
     NSData *localImage = UIImageJPEGRepresentation(_image, 0.9);
@@ -149,6 +156,43 @@
     
     [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload completed successfully
+        
+        // Fetch the download URL
+        [imagesRef downloadURLWithCompletion:^(NSURL *URL, NSError *error){
+            
+            NSString *imageKeyForDeletion = [[_ref childByAutoId] key];
+            if (error != nil) {
+                // Handle any errors
+            } else {
+                // Get the download URL for 'image'
+                //check if entry exists
+                [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child: _mHomeFeedMediaKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    // Get user value
+                    if(!snapshot.hasChildren) {
+                    //save to homefeed
+                    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
+                        
+                        //save fireCount
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": @0}];
+                        
+                        //save mediaLinks
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}]
+                        
+                        
+                        
+                        
+                        
+                    }
+                } withCancelBlock:^(NSError * _Nonnull error) {
+                    NSLog(@"%@", error.localizedDescription);
+                }];
+                
+                
+                
+                
+            }
+        }];
+        
     }];
     
     // Errors only occur in the "Failure" case

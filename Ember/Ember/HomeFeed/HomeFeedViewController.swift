@@ -54,7 +54,7 @@ class HomeFeedViewController: UIViewController {
 
     //-------Method To Call
     func launchCamera() {
-        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController") as UIViewController        
+        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CameraViewController") as UIViewController
         let navController = UINavigationController(rootViewController: viewController)
         self.presentViewController(navController, animated: true, completion: nil)
     }

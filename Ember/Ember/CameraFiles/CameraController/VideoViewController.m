@@ -29,6 +29,7 @@
 @property (strong, nonatomic) UIButton *captionButton;
 
 //Segue from CameraViewController
+@property (strong, nonatomic) NSString *mEventName;
 @property (strong, nonatomic) NSString *mEventID;
 @property (strong, nonatomic) NSString *mEventDate;
 @property (strong, nonatomic) NSString *mEventTime;
@@ -43,7 +44,7 @@
 
 @implementation VideoViewController
 
-- (instancetype)initWithVideoUrl:(NSURL *)url mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
+- (instancetype)initWithVideoUrl:(NSURL *)url mEventID:(NSString *) eventID mEventDate:(NSString *) eventDate mEventName:(NSString *) eventName mEventTime:(NSString *) eventTime mOrgID:(NSString *) orgID mHomefeedMediaKey:(NSString *) homeFeedMediaKey mOrgProfImage:(NSString *) orgProfImage mEventDateObject:(NSNumber *) eventDateObject {
     self = [super init];
     if(self) {
         _videoUrl = url;
@@ -56,6 +57,7 @@
             if (completion.status == AVAssetExportSessionStatusCompleted) {
             }
         }];
+        _mEventName = eventName;
         _mEventID = eventID;
         _mEventDate = eventDate;
         _mEventTime = eventTime;
