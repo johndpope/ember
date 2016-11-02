@@ -265,10 +265,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     NSString *homefeedMediaKey = _snapShot.key;
     NSString *orgProfileImage = eventDetails[@"orgProfileIMage"];
     NSNumber *eventDateObject = eventDetails[@"eventDateObject"];
+    NSString *eventName = eventDetails[@"eventName"];
     
     id<MyEventsCameraClickedDelegate> strongDelegate = self.myEventsCamerClickedDelegate;
-    if ([strongDelegate respondsToSelector:@selector(openCamera:eventDate:eventTime:orgId:homefeedMediaKey:orgProfileImage:eventDateObject:)]) {
-        [strongDelegate openCamera:eventId eventDate:eventDate eventTime:eventTime orgId:orgId homefeedMediaKey:homefeedMediaKey orgProfileImage:orgProfileImage eventDateObject:eventDateObject];
+    if ([strongDelegate respondsToSelector:@selector(openCamera:eventDate:eventTime:orgId:homefeedMediaKey:orgProfileImage:eventDateObject:eventName:)]) {
+        [strongDelegate openCamera:eventId eventDate:eventDate eventTime:eventTime orgId:orgId homefeedMediaKey:homefeedMediaKey orgProfileImage:orgProfileImage eventDateObject:eventDateObject eventName:eventName];
     }
     
 }
