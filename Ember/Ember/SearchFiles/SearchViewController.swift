@@ -30,9 +30,6 @@ class SearchViewController : UIViewController{
         self.navigationItem.titleView = searchController.searchBar
         self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(SearchViewController.doneButtonPressed))
-        self.navigationItem.leftBarButtonItem?.tintColor = PRIMARY_APP_COLOR
-        
         
     }
     
