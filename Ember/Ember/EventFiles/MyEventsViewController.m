@@ -185,7 +185,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CameraViewController *myViewController = [storyboard instantiateViewControllerWithIdentifier:@"CameraViewController"];
     [myViewController initWithEventID:eventId mEventDate:eventDate mEventName:eventName mEventTime:eventTime mOrgID:orgId mHomefeedMediaKey:homefeedMediaKey mOrgProfImage:orgProfileImage mEventDateObject:eventDateObject];
-    [self presentViewController:myViewController animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:myViewController];
+    [self presentViewController:nav animated:YES completion:nil];
     
 }
 

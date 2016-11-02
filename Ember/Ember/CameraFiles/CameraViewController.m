@@ -58,6 +58,9 @@ const int videoDuration  = 15;
         _mOrgProfImage = orgProfImage;
         _mEventDateObject = eventDateObject;
     
+        NSLog(@"%@", _mEventName);
+
+    
 }
 
 - (void)viewDidLoad
