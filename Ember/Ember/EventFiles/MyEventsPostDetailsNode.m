@@ -362,7 +362,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     NSArray *info_2 = nil;
     
-    if(!isAdminOf){
+    if(isAdminOf){
         info_2 = @[ _cameraButton];
     }else{
         info_2 = @[ _followButton];
