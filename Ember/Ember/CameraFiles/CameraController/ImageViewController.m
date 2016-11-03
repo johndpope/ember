@@ -79,6 +79,17 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    NSLog(@"%@",_mEventName);
+    NSLog(@"%@",_mEventID);
+    NSLog(@"%@",_mEventTime);
+    NSLog(@"%@",_mOrgID);
+    NSLog(@"%@",_mOrgProfImage);
+    NSLog(@"%@",_mHomeFeedMediaKey);
+    NSLog(@"%@",_mEventDate);
+    NSLog(@"%@",_mEventDateObject);
+
+
 
     returnFromEventPage = false;
     
@@ -185,18 +196,27 @@
                         [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
                         
                          //Get list of tags
-                        //[_ref child:<#(nonnull NSString *)#>]
+                        [[[[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Organizations"] child:_mOrgID] child:@"preferences"] queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                            
+                            for (FIRDataSnapshot *rest in [[snapshot children] allObjects]) {
+                                
+                                [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"orgTags"] updateChildValues:@{[rest key]:@"true"}];
+                            }
+                        }];
+                    }
+                    
+                    else {
+                        //save mediaLinks
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
                         
-                        
+                        //save to personal profile
+                        [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
                         
                     }
+                    
                 } withCancelBlock:^(NSError * _Nonnull error) {
                     NSLog(@"%@", error.localizedDescription);
                 }];
-                
-                
-                
-                
             }
         }];
         
@@ -364,13 +384,16 @@
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
         
-        UINavigationController *Controller = [[UINavigationController alloc] init];
-        [[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
+        
+        [ self uploadContent: randomUniqueFileName secondVal:textValue];
+         
+         //UINavigationController *Controller = [[UINavigationController alloc] init];
+        //[[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
 
-        EventPickerTableViewController *eventTBC = [[EventPickerTableViewController alloc] initWithFinalAddress:randomUniqueFileName myImage:_image myCaption:textValue];
-        Controller.viewControllers = [NSArray arrayWithObject:eventTBC];
-        returnFromEventPage = true;
-        [weakSelf presentViewController:Controller animated:NO completion:nil];
+        //EventPickerTableViewController *eventTBC = [[EventPickerTableViewController alloc] initWithFinalAddress:randomUniqueFileName myImage:_image myCaption:textValue];
+        //Controller.viewControllers = [NSArray arrayWithObject:eventTBC];
+        //returnFromEventPage = true;
+        //[weakSelf presentViewController:Controller animated:NO completion:nil];
 
     }
 }

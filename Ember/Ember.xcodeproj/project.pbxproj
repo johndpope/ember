@@ -101,7 +101,7 @@
 		8ED8A77A1D72C90500F396B0 /* GalleryImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A7781D72C90500F396B0 /* GalleryImageProvider.swift */; };
 		8ED8A77D1D72C95100F396B0 /* TitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A77C1D72C95100F396B0 /* TitleNode.m */; };
 		8EDA06AC1D735503002840AE /* Iphone5Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA06AB1D735503002840AE /* Iphone5Test.m */; };
-		C70065631DA178B900B16E80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C70065621DA178B900B16E80 /* GoogleService-Info.plist */; };
+		C70065631DA178B900B16E80 /* GoogleService-Info(prod).plist in Resources */ = {isa = PBXBuildFile; fileRef = C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */; };
 		C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E591D72A92D0047A5CD /* cell.xib */; };
 		C7119E5F1D72A92D0047A5CD /* last.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E5A1D72A92D0047A5CD /* last.xib */; };
 		C7119E651D72A95D0047A5CD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E631D72A95D0047A5CD /* PhotoViewController.swift */; };
@@ -133,6 +133,7 @@
 		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
 		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
 		C7A337861D7CFA50001F54A9 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */; };
+		C7B8BDF01DCA89D2007CC00C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */; };
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
@@ -300,7 +301,7 @@
 		8EDA06AB1D735503002840AE /* Iphone5Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Iphone5Test.m; sourceTree = "<group>"; };
 		8EDA06AD1D73550D002840AE /* Iphone5Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iphone5Test.h; sourceTree = "<group>"; };
 		972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.debug.xcconfig"; sourceTree = "<group>"; };
-		C70065621DA178B900B16E80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info(prod).plist"; sourceTree = "<group>"; };
 		C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ember-Bridging-Header.h"; sourceTree = "<group>"; };
 		C7119E591D72A92D0047A5CD /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
 		C7119E5A1D72A92D0047A5CD /* last.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = last.xib; sourceTree = "<group>"; };
@@ -344,6 +345,7 @@
 		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
 		C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
+		C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -815,7 +817,8 @@
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
 				C728917C1D850F1C0031D788 /* Ember.entitlements */,
 				C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */,
-				C70065621DA178B900B16E80 /* GoogleService-Info.plist */,
+				C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */,
+				C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */,
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
 			path = Ember;
@@ -992,6 +995,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7B8BDF01DCA89D2007CC00C /* GoogleService-Info.plist in Resources */,
 				C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */,
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
@@ -1002,7 +1006,7 @@
 				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
 				C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */,
 				C7F49D401D870A7F00AF9AAE /* Info.plist in Resources */,
-				C70065631DA178B900B16E80 /* GoogleService-Info.plist in Resources */,
+				C70065631DA178B900B16E80 /* GoogleService-Info(prod).plist in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
 				8ED8A7581D72C6D600F396B0 /* calLanding.png in Resources */,

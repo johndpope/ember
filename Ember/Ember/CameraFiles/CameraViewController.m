@@ -57,8 +57,6 @@ const int videoDuration  = 15;
         _mHomeFeedMediaKey = homeFeedMediaKey;
         _mOrgProfImage = orgProfImage;
         _mEventDateObject = eventDateObject;
-    
-        NSLog(@"%@", _mEventName);
 
     
 }
