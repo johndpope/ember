@@ -271,7 +271,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     NSString *eventTime = eventDetails[@"eventTime"];
     NSString *orgId = eventDetails[@"orgID"];
     NSString *homefeedMediaKey = _snapShot.key;
-    NSString *orgProfileImage = eventDetails[@"orgProfileIMage"];
+    NSString *orgProfileImage = eventDetails[@"orgProfileImage"];
     NSNumber *eventDateObject = eventDetails[@"eventDateObject"];
     NSString *eventName = eventDetails[@"eventName"];
     
