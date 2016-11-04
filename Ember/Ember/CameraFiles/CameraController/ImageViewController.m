@@ -79,15 +79,7 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
-    NSLog(@"%@",_mEventName);
-    NSLog(@"%@",_mEventID);
-    NSLog(@"%@",_mEventTime);
-    NSLog(@"%@",_mOrgID);
-    NSLog(@"%@",_mOrgProfImage);
-    NSLog(@"%@",_mHomeFeedMediaKey);
-    NSLog(@"%@",_mEventDate);
-    NSLog(@"%@",_mEventDateObject);
+ 
 
 
 
@@ -126,6 +118,7 @@
 
 - (void) uploadContent:(NSString *) finalAddress secondVal:(NSString *) captionText {
     
+    
     //Get current User
     FIRUser *user = [FIRAuth auth].currentUser;
     
@@ -144,13 +137,15 @@
     // Local file you want to upload
     NSData *localImage = UIImageJPEGRepresentation(_image, 0.9);
     
+    
     // Create the file metadata
     FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
     metadata.contentType = @"image/jpeg";
     
-    // Upload file and metadata to the object 'images/mountains.jpg'
-    FIRStorageUploadTask *uploadTask = [storageRef putData:localImage metadata:metadata];
     
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    FIRStorageUploadTask *uploadTask = [imagesRef putData:localImage metadata:metadata];
+
     // Listen for state changes, errors, and completion of the upload.
     [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload resumed, also fires when the upload starts
@@ -177,23 +172,24 @@
             } else {
                 // Get the download URL for 'image'
                 //check if entry exists
-                [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child: _mHomeFeedMediaKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child: _mHomeFeedMediaKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    
                     // Get user value
                     if(!snapshot.hasChildren) {
                     //save to homefeed
-                    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
+                    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
                         
                         //save fireCount
-                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": @0}];
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"HomeFeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0]}];
                         
                         //save mediaLinks
-                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0], @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
                         
                         //Improved feature saving to personal profile
                         [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
                         
                         //save highest level timeStamp
-                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
                         
                          //Get list of tags
                         [[[[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Organizations"] child:_mOrgID] child:@"preferences"] queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -204,16 +200,14 @@
                             }
                         }];
                     }
-                    
                     else {
                         //save mediaLinks
-                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0], @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
                         
                         //save to personal profile
                         [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
-                        
                     }
-                    
+                    [self dismissViewControllerAnimated:NO completion:nil];
                 } withCancelBlock:^(NSError * _Nonnull error) {
                     NSLog(@"%@", error.localizedDescription);
                 }];
@@ -244,8 +238,6 @@
             }
         }
     }];
-    
-    
 }
 
 
@@ -383,9 +375,10 @@
         NSString *randomUniqueFileName = [NSString stringWithFormat:@"/%@/%@/%@%@%@",@"images",uid,@"",timeString,@".jpeg"];
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
+        //NSLog(@"%@",randomUniqueFileName);
+        //NSLog(@"%@",textValue);
         
-        
-        [ self uploadContent: randomUniqueFileName secondVal:textValue];
+        [self uploadContent: randomUniqueFileName secondVal:textValue];
          
          //UINavigationController *Controller = [[UINavigationController alloc] init];
         //[[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
