@@ -235,8 +235,6 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     _divider.backgroundColor = [UIColor lightGrayColor];
     [self addSubnode:_divider];
     
-    
-    
     return self;
 }
 
@@ -370,21 +368,20 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     NSArray *info = @[ _textNode, _dateTextNode];
     
-    NSArray *info_2 = nil;
+    NSArray *info_2 = @[ _followButton, _cameraButton];;
     
-//    if(isAdminOf){
-////        _followButton.hidden = YES;
-////        _cameraButton.hidden = NO;
-//        info_2 = @[ _cameraButton];
-//    }else{
-////        _followButton.hidden = NO;
-////        _cameraButton.hidden = YES;
-//        info_2 = @[ _followButton];
-//    }
-    
-    info_2 = @[ _cameraButton];
-    
-    
+
+    if(isAdminOf){
+        _followButton.hidden = YES;
+        _cameraButton.hidden = NO;
+       
+    }else{
+        _followButton.hidden = NO;
+        _cameraButton.hidden = YES;
+
+    }
+
+
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
     
