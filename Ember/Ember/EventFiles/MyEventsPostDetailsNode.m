@@ -153,7 +153,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 //    [_cameraButton setImage:[UIImage imageNamed:@"homeFeedInterestedSelected"] forState:ASControlStateSelected];
     
     NSDictionary *postDetails = snapShot.getPostDetails;
-//    [self checkIsAdmin:postDetails[@"orgID"]];
+    [self checkIsAdmin:postDetails[@"orgID"]];
     
     _numberInterested = [[ASTextNode alloc] init];
     
@@ -381,12 +381,11 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 
     }
 
-
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
     
     ASStackLayoutSpec *followingRegion = followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                                            justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[_cameraButton]];
+                                                                                            justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:info_2];
     
 //    if(isAdminOf){
 //        followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0

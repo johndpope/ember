@@ -10,6 +10,8 @@
 #import "SDAVAssetExportSession.h"
 #import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
+
+
 @import AVFoundation;
 @import AssetsLibrary;
 @import MobileCoreServices;
@@ -27,6 +29,8 @@
 @property (strong, nonatomic) UIButton *acceptButton;
 @property (nonatomic, retain) UITextView *captionInput;
 @property (strong, nonatomic) UIButton *captionButton;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+
 
 //Segue from CameraViewController
 @property (strong, nonatomic) NSString *mEventName;
@@ -137,6 +141,9 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    //Firebase connection
+    self.ref = [[FIRDatabase database] reference];
 
 }
 
@@ -273,21 +280,122 @@
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
         [[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
+        [self uploadContent: randomUniqueFileName secondVal:textValue];
 
-        EventVideoTableViewController *eventTBC = [[EventVideoTableViewController alloc]initWithFinalAddress:randomUniqueFileName myNSURL:localFile myVidCap:textValue];
-        CATransition* transition = [CATransition animation];
-        transition.duration = 0.10;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-        transition.type = kCATransitionFade;
-        //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
-        //transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
-        [self.navigationController.view.layer addAnimation:transition forKey:nil];
-        [self.navigationController pushViewController:eventTBC animated:NO];
-        [self.avPlayer pause];
-        [self.avPlayerLayer removeFromSuperlayer];
-        self.avPlayer = nil;
+//        EventVideoTableViewController *eventTBC = [[EventVideoTableViewController alloc]initWithFinalAddress:randomUniqueFileName myNSURL:localFile myVidCap:textValue];
+//        CATransition* transition = [CATransition animation];
+//        transition.duration = 0.10;
+//        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//        transition.type = kCATransitionFade;
+//        //kCATransitionMoveIn; //, kCATransitionPush, kCATransitionReveal, kCATransitionFade
+//        //transition.subtype = kCATransitionFromTop; //kCATransitionFromLeft, kCATransitionFromRight, kCATransitionFromTop, kCATransitionFromBottom
+//        [self.navigationController.view.layer addAnimation:transition forKey:nil];
+//        [self.navigationController pushViewController:eventTBC animated:NO];
+//        [self.avPlayer pause];
+//        [self.avPlayerLayer removeFromSuperlayer];
+//        self.avPlayer = nil;
     
     }
+}
+- (void) uploadContent:(NSString *) finalAddress secondVal:(NSString *) captionText {
+    
+    
+    //Get current User
+    FIRUser *user = [FIRAuth auth].currentUser;
+    
+    // Get a reference to the storage service, using the default Firebase App
+    FIRStorage *storage = [FIRStorage storage];
+    
+    // Create a storage reference from our storage service
+    FIRStorageReference *storageRef = [storage referenceForURL:[BounceConstants firebaseStorageUrl]];
+    
+    //Create ImageRef
+    FIRStorageReference *vidsRef = [storageRef child: finalAddress];
+    
+    //Get NSDateObject
+    NSNumber *timeStamp = [NSNumber numberWithDouble:-[[NSDate date] timeIntervalSince1970]];
+    
+    //Generate autovidHomefeed
+    NSString *autoVidHomefeed = [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] childByAutoId] key];
+    
+    //save to homefeed
+    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:autoVidHomefeed] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
+    
+    //save fireCount
+    [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"HomeFeed"] child:autoVidHomefeed] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0]}];
+    
+    //save mediaLinks
+    [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:autoVidHomefeed] child:@"postDetails"] child:@"mediaInfo"] childByAutoId] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0], @"mediaLink":[vidsRef fullPath],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
+    
+    
+    //save to personal profile
+    [[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"]  updateChildValues:@{autoVidHomefeed: [vidsRef fullPath]}];
+    
+    //save highest level timeStamp
+    [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:autoVidHomefeed] updateChildValues:@{@"timeStamp":timeStamp}];
+    
+    //Get list of tags
+    [[[[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Organizations"] child:_mOrgID] child:@"preferences"] queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        for (FIRDataSnapshot *rest in [[snapshot children] allObjects]) {
+            
+            [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:autoVidHomefeed] child:@"orgTags"] updateChildValues:@{[rest key]:@"true"}];
+        }
+    }];
+    
+    
+    // Local file you want to upload
+    NSURL *localVid = _uploadUrl;
+    
+    // Create the file metadata
+    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    metadata.contentType = @"video/mp4";
+    
+    
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    FIRStorageUploadTask *uploadTask = [vidsRef putFile:localVid metadata:metadata];
+    
+    // Listen for state changes, errors, and completion of the upload.
+    [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload resumed, also fires when the upload starts
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusPause handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload paused
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload reported progress
+        double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+    }];
+    
+    [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
+        // Upload completed successfully
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    
+    // Errors only occur in the "Failure" case
+    [uploadTask observeStatus:FIRStorageTaskStatusFailure handler:^(FIRStorageTaskSnapshot *snapshot) {
+        if (snapshot.error != nil) {
+            switch (snapshot.error.code) {
+                case FIRStorageErrorCodeObjectNotFound:
+                    // File doesn't exist
+                    break;
+                    
+                case FIRStorageErrorCodeUnauthorized:
+                    // User doesn't have permission to access file
+                    break;
+                    
+                case FIRStorageErrorCodeCancelled:
+                    // User canceled the upload
+                    break;
+                    
+                case FIRStorageErrorCodeUnknown:
+                    // Unknown error occurred, inspect the server response
+                    break;
+            }
+        }
+    }];
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidLoad];
