@@ -9,8 +9,10 @@
 #import "UIImage+Crop.h"
 #import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
+#import "M13ProgressViewSegmentedBar.h"
 
 @import Firebase;
+
 
 @interface ImageViewController ()
 
@@ -22,7 +24,8 @@
 @property (strong, nonatomic) UIButton *acceptButton;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-
+//Progress Bar setup
+@property (nonatomic, retain) M13ProgressViewSegmentedBar *progressView;
 
 //Segue from CameraViewController
 @property (strong, nonatomic) NSString *mEventName;
@@ -113,6 +116,43 @@
     
     //Firebase connection
     self.ref = [[FIRDatabase database] reference];
+    
+    
+    // Create the progress view.
+    _progressView = [[M13ProgressViewSegmentedBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 8.0)];
+    
+    
+    // Configure the progress view here.
+    
+    [_progressView setSegmentShape:M13ProgressViewSegmentedBarSegmentShapeCircle];
+    
+    //    NSArray *foregroundColors = @[[UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1]];
+    
+    
+    _progressView.primaryColor = [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1];
+    _progressView.secondaryColor = [UIColor colorWithRed:0.07 green:0.44 blue:0.14 alpha:0];
+    
+    
+    // Add it to the view.
+    [self.view addSubview: _progressView];
+    
+    
+    
 
 }
 
@@ -158,11 +198,14 @@
     [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload reported progress
         double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+        
+        // Update the progress as needed
+        [_progressView setProgress: percentComplete/100 animated: YES];
+
     }];
     
     [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload completed successfully
-        
         // Fetch the download URL
         [imagesRef downloadURLWithCompletion:^(NSURL *URL, NSError *error){
             
@@ -207,6 +250,7 @@
                         //save to personal profile
                         [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
                     }
+                    [_progressView performAction:M13ProgressViewActionSuccess animated:YES];
                     [self dismissViewControllerAnimated:NO completion:nil];
                 } withCancelBlock:^(NSError * _Nonnull error) {
                     NSLog(@"%@", error.localizedDescription);
@@ -375,8 +419,6 @@
         NSString *randomUniqueFileName = [NSString stringWithFormat:@"/%@/%@/%@%@%@",@"images",uid,@"",timeString,@".jpeg"];
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
-        //NSLog(@"%@",randomUniqueFileName);
-        //NSLog(@"%@",textValue);
         
         [self uploadContent: randomUniqueFileName secondVal:textValue];
          
@@ -409,10 +451,12 @@
     self.cancelButton.left = 5;
     self.cancelButton.bottom = self.view.height - 15.0f;
     
-    
     //caption Button
     self.captionButton.center = self.view.contentCenter;
     self.captionButton.bottom = self.view.height - 15.0f;
+    
+    //Progress View
+    _progressView.bottom = self.view.height - 5.0f;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {

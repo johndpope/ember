@@ -10,6 +10,7 @@
 #import "SDAVAssetExportSession.h"
 #import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
+#import "M13ProgressViewSegmentedBar.h"
 
 
 @import AVFoundation;
@@ -30,6 +31,10 @@
 @property (nonatomic, retain) UITextView *captionInput;
 @property (strong, nonatomic) UIButton *captionButton;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+
+
+//Progress Bar setup
+@property (nonatomic, retain) M13ProgressViewSegmentedBar *progressView;
 
 
 //Segue from CameraViewController
@@ -144,6 +149,44 @@
     
     //Firebase connection
     self.ref = [[FIRDatabase database] reference];
+    
+    
+    // Create the progress view.
+    _progressView = [[M13ProgressViewSegmentedBar alloc] initWithFrame:CGRectMake(0.0, screenRect.size.height * 0.985, self.view.frame.size.width, 8.0)];
+    
+    
+    // Configure the progress view here.
+    
+    [_progressView setSegmentShape:M13ProgressViewSegmentedBarSegmentShapeCircle];
+    
+//    NSArray *foregroundColors = @[[UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+//                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1]];
+
+    
+    _progressView.primaryColor = [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1];
+    _progressView.secondaryColor = [UIColor colorWithRed:0.07 green:0.44 blue:0.14 alpha:0];
+    
+    
+    // Add it to the view.
+    [self.view addSubview: _progressView];
+    
+    
+    
+
 
 }
 
@@ -279,9 +322,9 @@
          NSURL *localFile = _uploadUrl;
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
-        [[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
         [self uploadContent: randomUniqueFileName secondVal:textValue];
-
+        
+        //[[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
 //        EventVideoTableViewController *eventTBC = [[EventVideoTableViewController alloc]initWithFinalAddress:randomUniqueFileName myNSURL:localFile myVidCap:textValue];
 //        CATransition* transition = [CATransition animation];
 //        transition.duration = 0.10;
@@ -367,10 +410,13 @@
     [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload reported progress
         double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+        // Update the progress as needed
+        [_progressView setProgress: percentComplete/100 animated: YES];
     }];
     
     [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload completed successfully
+        [_progressView performAction:M13ProgressViewActionSuccess animated:YES];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     

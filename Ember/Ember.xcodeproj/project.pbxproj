@@ -101,7 +101,7 @@
 		8ED8A77A1D72C90500F396B0 /* GalleryImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A7781D72C90500F396B0 /* GalleryImageProvider.swift */; };
 		8ED8A77D1D72C95100F396B0 /* TitleNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8A77C1D72C95100F396B0 /* TitleNode.m */; };
 		8EDA06AC1D735503002840AE /* Iphone5Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EDA06AB1D735503002840AE /* Iphone5Test.m */; };
-		C70065631DA178B900B16E80 /* GoogleService-Info(prod).plist in Resources */ = {isa = PBXBuildFile; fileRef = C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */; };
+		C70065631DA178B900B16E80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C70065621DA178B900B16E80 /* GoogleService-Info.plist */; };
 		C7119E5E1D72A92D0047A5CD /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E591D72A92D0047A5CD /* cell.xib */; };
 		C7119E5F1D72A92D0047A5CD /* last.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7119E5A1D72A92D0047A5CD /* last.xib */; };
 		C7119E651D72A95D0047A5CD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119E631D72A95D0047A5CD /* PhotoViewController.swift */; };
@@ -125,6 +125,9 @@
 		C7119F1D1D72AE900047A5CD /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */; };
 		C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F2E1D72B1D00047A5CD /* Main.storyboard */; };
 		C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7119F311D72B2720047A5CD /* Walkthrough.storyboard */; };
+		C719D2061DCE931000B88F9B /* UIApplication+M13ProgressSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = C719D2051DCE931000B88F9B /* UIApplication+M13ProgressSuite.m */; };
+		C719D2091DCE932000B88F9B /* M13ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C719D2081DCE932000B88F9B /* M13ProgressView.m */; };
+		C719D20D1DCE941100B88F9B /* M13ProgressViewSegmentedBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C719D20C1DCE941100B88F9B /* M13ProgressViewSegmentedBar.m */; };
 		C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */ = {isa = PBXBuildFile; fileRef = C71B6DBF1D7D3E4000F50B8C /* mainLand.png */; };
 		C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDC91D72A657008CEB9A /* AppDelegate.swift */; };
 		C76CDDD31D72A657008CEB9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDD21D72A657008CEB9A /* Assets.xcassets */; };
@@ -133,7 +136,6 @@
 		C76CDDEC1D72A657008CEB9A /* EmberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CDDEB1D72A657008CEB9A /* EmberUITests.swift */; };
 		C76CDDFA1D72A689008CEB9A /* Util in Resources */ = {isa = PBXBuildFile; fileRef = C76CDDF91D72A689008CEB9A /* Util */; };
 		C7A337861D7CFA50001F54A9 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */; };
-		C7B8BDF01DCA89D2007CC00C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */; };
 		C7CDC2B71D73074C00B62B48 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */; };
 		C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */; };
 		C7CDC2B91D73074C00B62B48 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */; };
@@ -301,7 +303,7 @@
 		8EDA06AB1D735503002840AE /* Iphone5Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Iphone5Test.m; sourceTree = "<group>"; };
 		8EDA06AD1D73550D002840AE /* Iphone5Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iphone5Test.h; sourceTree = "<group>"; };
 		972C95733408B3921AEA84AC /* Pods-Ember.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.debug.xcconfig"; sourceTree = "<group>"; };
-		C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info(prod).plist"; sourceTree = "<group>"; };
+		C70065621DA178B900B16E80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ember-Bridging-Header.h"; sourceTree = "<group>"; };
 		C7119E591D72A92D0047A5CD /* cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
 		C7119E5A1D72A92D0047A5CD /* last.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = last.xib; sourceTree = "<group>"; };
@@ -330,6 +332,12 @@
 		C7119F1C1D72AE900047A5CD /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		C7119F2F1D72B1D00047A5CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C7119F311D72B2720047A5CD /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
+		C719D2041DCE931000B88F9B /* UIApplication+M13ProgressSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+M13ProgressSuite.h"; sourceTree = "<group>"; };
+		C719D2051DCE931000B88F9B /* UIApplication+M13ProgressSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+M13ProgressSuite.m"; sourceTree = "<group>"; };
+		C719D2071DCE932000B88F9B /* M13ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressView.h; sourceTree = "<group>"; };
+		C719D2081DCE932000B88F9B /* M13ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressView.m; sourceTree = "<group>"; };
+		C719D20B1DCE941100B88F9B /* M13ProgressViewSegmentedBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M13ProgressViewSegmentedBar.h; sourceTree = "<group>"; };
+		C719D20C1DCE941100B88F9B /* M13ProgressViewSegmentedBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M13ProgressViewSegmentedBar.m; sourceTree = "<group>"; };
 		C71B6DBF1D7D3E4000F50B8C /* mainLand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainLand.png; sourceTree = "<group>"; };
 		C728917C1D850F1C0031D788 /* Ember.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ember.entitlements; sourceTree = "<group>"; };
 		C76CDDC61D72A657008CEB9A /* Ember.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ember.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,7 +353,6 @@
 		C76CDDED1D72A657008CEB9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76CDDF91D72A689008CEB9A /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
 		C7A337851D7CFA50001F54A9 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+FSExtension.m"; path = "FSCalendar/UIView+FSExtension.m"; sourceTree = "<group>"; };
-		C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7CDC2B41D73074C00B62B48 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B51D73074C00B62B48 /* mainLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainLogInViewController.swift; sourceTree = "<group>"; };
 		C7CDC2B61D73074C00B62B48 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
@@ -764,6 +771,34 @@
 			name = Transitions;
 			sourceTree = "<group>";
 		};
+		C719D2021DCE92C500B88F9B /* M13ProgressApplication */ = {
+			isa = PBXGroup;
+			children = (
+				C719D2041DCE931000B88F9B /* UIApplication+M13ProgressSuite.h */,
+				C719D2051DCE931000B88F9B /* UIApplication+M13ProgressSuite.m */,
+			);
+			name = M13ProgressApplication;
+			sourceTree = "<group>";
+		};
+		C719D2031DCE92E600B88F9B /* ProgressViews */ = {
+			isa = PBXGroup;
+			children = (
+				C719D20A1DCE93FC00B88F9B /* Segmented Bar */,
+				C719D2071DCE932000B88F9B /* M13ProgressView.h */,
+				C719D2081DCE932000B88F9B /* M13ProgressView.m */,
+			);
+			name = ProgressViews;
+			sourceTree = "<group>";
+		};
+		C719D20A1DCE93FC00B88F9B /* Segmented Bar */ = {
+			isa = PBXGroup;
+			children = (
+				C719D20B1DCE941100B88F9B /* M13ProgressViewSegmentedBar.h */,
+				C719D20C1DCE941100B88F9B /* M13ProgressViewSegmentedBar.m */,
+			);
+			name = "Segmented Bar";
+			sourceTree = "<group>";
+		};
 		C76CDDBD1D72A657008CEB9A = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +843,8 @@
 				C7119EF41D72AC870047A5CD /* CalendarFiles */,
 				C7119E661D72A9650047A5CD /* CameraFiles */,
 				C7119E601D72A9340047A5CD /* Search */,
+				C719D2031DCE92E600B88F9B /* ProgressViews */,
+				C719D2021DCE92C500B88F9B /* M13ProgressApplication */,
 				C7119E551D72A9110047A5CD /* EventFiles */,
 				C7119E461D72A8E80047A5CD /* PreferencePageFiles */,
 				C7119E3B1D72A8BA0047A5CD /* MyEventsFiles */,
@@ -817,8 +854,7 @@
 				C76CDDD71D72A657008CEB9A /* Info.plist */,
 				C728917C1D850F1C0031D788 /* Ember.entitlements */,
 				C7F7A7961D79DBE400970438 /* EmberApp-b7538e821b5e.json */,
-				C70065621DA178B900B16E80 /* GoogleService-Info(prod).plist */,
-				C7B8BDEF1DCA89D2007CC00C /* GoogleService-Info.plist */,
+				C70065621DA178B900B16E80 /* GoogleService-Info.plist */,
 				C7119E311D72A8980047A5CD /* Ember-Bridging-Header.h */,
 			);
 			path = Ember;
@@ -995,7 +1031,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7B8BDF01DCA89D2007CC00C /* GoogleService-Info.plist in Resources */,
 				C7119F321D72B2720047A5CD /* Walkthrough.storyboard in Resources */,
 				8ED8A7591D72C6D600F396B0 /* orgsLanding.png in Resources */,
 				8ED8A7511D72C5F800F396B0 /* eventsLanding.png in Resources */,
@@ -1006,7 +1041,7 @@
 				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
 				C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */,
 				C7F49D401D870A7F00AF9AAE /* Info.plist in Resources */,
-				C70065631DA178B900B16E80 /* GoogleService-Info(prod).plist in Resources */,
+				C70065631DA178B900B16E80 /* GoogleService-Info.plist in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
 				C76CDDFA1D72A689008CEB9A /* Util in Resources */,
 				8ED8A7581D72C6D600F396B0 /* calLanding.png in Resources */,
@@ -1169,11 +1204,14 @@
 				8E852C091D72BB5B002FFB90 /* FSCalendar+IBExtension.m in Sources */,
 				8ED8A77D1D72C95100F396B0 /* TitleNode.m in Sources */,
 				C76CDDCA1D72A657008CEB9A /* AppDelegate.swift in Sources */,
+				C719D20D1DCE941100B88F9B /* M13ProgressViewSegmentedBar.m in Sources */,
 				8ED8A6DD1D72C1C900F396B0 /* EmberSnapShot.m in Sources */,
 				8E852C131D72BB5B002FFB90 /* FSCalendarStickyHeader.m in Sources */,
 				C7CDC2B81D73074C00B62B48 /* mainLogInViewController.swift in Sources */,
 				8ED8A72A1D72C41900F396B0 /* VideoViewController.m in Sources */,
 				8ED8A6EE1D72C2DF00F396B0 /* GalleryCloseTransition.swift in Sources */,
+				C719D2061DCE931000B88F9B /* UIApplication+M13ProgressSuite.m in Sources */,
+				C719D2091DCE932000B88F9B /* M13ProgressView.m in Sources */,
 				8ED8A7131D72C35C00F396B0 /* EmberOrgNode.m in Sources */,
 				8ED8A77A1D72C90500F396B0 /* GalleryImageProvider.swift in Sources */,
 				C7119F0E1D72ADF00047A5CD /* UIViewController.swift in Sources */,

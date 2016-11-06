@@ -14,7 +14,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var imagePicker = UIImagePickerController()
     var finalEventDateFormat: String = ""
     var finalEventStartTimeFormat: String = ""
-    var saveImage:UIImage?
     var eventImageLink:String = ""
     var eventDateObject = NSDate()
     var endEventDateObject  = NSDate()
@@ -31,17 +30,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     var eventsegLocation = ""
     var eventsegOrgID = ""
     var eventsegOrgName = ""
-    var imagesegLink  = ""
     var segOrgID = ""
     var segOrgName = ""
     var segProfileImage = ""
     var segEventDateObject = NSDate()
     var segEndEventDateObject = NSDate()
-    var segPosterImage:UIImage!
-    
-    
-    
-    
     
     //---------------To be initialized at declaration
     var orgID: String = ""
@@ -55,9 +48,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     let eventNameLimitLength = 30
 
     @IBOutlet weak var createEventLabel: UILabel!
-    @IBOutlet weak var previewImage: UIImageView!
     @IBOutlet weak var eventDesc: UITextView!
-    @IBOutlet weak var posterButton: UIButton!
    
     @IBOutlet weak var locationText: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -75,9 +66,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         eventName.returnKeyType = UIReturnKeyType.Done
         locationText.returnKeyType = UIReturnKeyType.Done
 
-        
-        imagePicker.delegate = self
-        
         //startDate Toolbar
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -121,10 +109,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         endDateField.addTarget(self, action: #selector(CreateEventViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingDidBegin)
 
         
-        // Do any additional setup after loading the view, typically from a nib.
-        let image = UIImage(named: "picture") as UIImage?
-        posterButton.setImage(image, forState: UIControlState.Normal)
-        posterButton.titleEdgeInsets.left = 15
     }
     
     //Return to dismiss first repsonder
@@ -137,26 +121,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
     @IBAction func saveEvent(sender: AnyObject) {
         editBorder()
         self.validator.validate(self)
-    }
-    
-    @IBAction func posterAdd(sender: AnyObject) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        self.navigationController!.presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            previewImage.contentMode = .ScaleAspectFit
-            previewImage.image = pickedImage
-            self.saveImage = pickedImage
-        }
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -283,13 +247,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 destination.eventsegLocation = self.eventsegLocation
                 destination.eventsegOrgID = self.eventsegOrgID
                 destination.eventsegOrgName = self.eventsegOrgName
-                destination.imagesegLink  = self.imagesegLink
                 destination.segOrgID = self.segOrgID
                 destination.segOrgName = self.segOrgName
                 destination.segProfileImage = self.segProfileImage
                 destination.segEndEventDateObject = self.segEndEventDateObject
                 destination.segEventDateObject = self.segEventDateObject
-                destination.segPosterImage = self.segPosterImage
             }
         }
     }
@@ -313,7 +275,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
         // submit the form
         
         
-        if ((self.saveImage) != nil) {
             let desc = eventDesc.text
             let name = eventName.text
             let location = locationText.text
@@ -332,13 +293,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 self.eventsegOrgID = self.orgID
                 self.eventsegOrgName = self.orgName
                 self.eventSegDesc = desc
-                self.imagesegLink  = self.eventImageLink
                 self.segOrgID = self.orgID
                 self.segOrgName = self.orgName
                 self.segProfileImage = self.orgProfileImage
                 self.segEventDateObject = self.eventDateObject
                 self.segEndEventDateObject = self.endEventDateObject
-                self.segPosterImage = self.saveImage
                 
                 //Post to events Tree
                 let eventsTreekey = ref.childByAutoId().key
@@ -356,13 +315,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate,UIImagePi
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
-        } else {
-            let alertController = UIAlertController(title: "Hi :)", message:
-                "Please upload a poster or image for your event.", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-
     }
     
     func validationFailed(errors:[(Validatable ,ValidationError)]) {
