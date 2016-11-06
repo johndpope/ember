@@ -9,8 +9,10 @@
 #import "UIImage+Crop.h"
 #import "Ember-Swift.h"
 #import <QuartzCore/QuartzCore.h>
+#import "M13ProgressViewSegmentedBar.h"
 
 @import Firebase;
+
 
 @interface ImageViewController ()
 
@@ -22,7 +24,8 @@
 @property (strong, nonatomic) UIButton *acceptButton;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-
+//Progress Bar setup
+@property (nonatomic, retain) M13ProgressViewSegmentedBar *progressView;
 
 //Segue from CameraViewController
 @property (strong, nonatomic) NSString *mEventName;
@@ -79,6 +82,9 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+ 
+
+
 
     returnFromEventPage = false;
     
@@ -110,10 +116,48 @@
     
     //Firebase connection
     self.ref = [[FIRDatabase database] reference];
+    
+    
+    // Create the progress view.
+    _progressView = [[M13ProgressViewSegmentedBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 8.0)];
+    
+    
+    // Configure the progress view here.
+    
+    [_progressView setSegmentShape:M13ProgressViewSegmentedBarSegmentShapeCircle];
+    
+    //    NSArray *foregroundColors = @[[UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.96 blue:0.32 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1],
+    //                                  [UIColor colorWithRed:1 green:0.12 blue:0.12 alpha:1]];
+    
+    
+    _progressView.primaryColor = [UIColor colorWithRed:0.12 green:0.98 blue:0.33 alpha:1];
+    _progressView.secondaryColor = [UIColor colorWithRed:0.07 green:0.44 blue:0.14 alpha:0];
+    
+    
+    // Add it to the view.
+    [self.view addSubview: _progressView];
+    
+    
+    
 
 }
 
 - (void) uploadContent:(NSString *) finalAddress secondVal:(NSString *) captionText {
+    
     
     //Get current User
     FIRUser *user = [FIRAuth auth].currentUser;
@@ -133,13 +177,15 @@
     // Local file you want to upload
     NSData *localImage = UIImageJPEGRepresentation(_image, 0.9);
     
+    
     // Create the file metadata
     FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
     metadata.contentType = @"image/jpeg";
     
-    // Upload file and metadata to the object 'images/mountains.jpg'
-    FIRStorageUploadTask *uploadTask = [storageRef putData:localImage metadata:metadata];
     
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    FIRStorageUploadTask *uploadTask = [imagesRef putData:localImage metadata:metadata];
+
     // Listen for state changes, errors, and completion of the upload.
     [uploadTask observeStatus:FIRStorageTaskStatusResume handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload resumed, also fires when the upload starts
@@ -152,11 +198,14 @@
     [uploadTask observeStatus:FIRStorageTaskStatusProgress handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload reported progress
         double percentComplete = 100.0 * (snapshot.progress.completedUnitCount) / (snapshot.progress.totalUnitCount);
+        
+        // Update the progress as needed
+        [_progressView setProgress: percentComplete/100 animated: YES];
+
     }];
     
     [uploadTask observeStatus:FIRStorageTaskStatusSuccess handler:^(FIRStorageTaskSnapshot *snapshot) {
         // Upload completed successfully
-        
         // Fetch the download URL
         [imagesRef downloadURLWithCompletion:^(NSURL *URL, NSError *error){
             
@@ -166,37 +215,46 @@
             } else {
                 // Get the download URL for 'image'
                 //check if entry exists
-                [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child: _mHomeFeedMediaKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child: _mHomeFeedMediaKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    
                     // Get user value
                     if(!snapshot.hasChildren) {
                     //save to homefeed
-                    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
+                    [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] updateChildValues:@{@"eventDate" :_mEventDate,@"eventName":self.mEventName,@"eventTime":self.mEventTime,@"orgID":self.mOrgID,@"eventID":self.mEventID,@"orgProfileImage": self.mOrgProfImage, @"eventDateObject":self.mEventDateObject}];
                         
                         //save fireCount
-                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": @0}];
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"HomeFeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0]}];
                         
                         //save mediaLinks
-                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": @0, @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0], @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
                         
                         //Improved feature saving to personal profile
                         [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
                         
                         //save highest level timeStamp
-                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"Homefeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
+                        [[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] updateChildValues:@{@"timeStamp":timeStamp}];
                         
                          //Get list of tags
-                        //[_ref child:<#(nonnull NSString *)#>]
-                        
-                        
-                        
+                        [[[[[[_ref child:[BounceConstants firebaseSchoolRoot]]child:@"Organizations"] child:_mOrgID] child:@"preferences"] queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                            
+                            for (FIRDataSnapshot *rest in [[snapshot children] allObjects]) {
+                                
+                                [[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"orgTags"] updateChildValues:@{[rest key]:@"true"}];
+                            }
+                        }];
                     }
+                    else {
+                        //save mediaLinks
+                        [[[[[[[_ref child:[BounceConstants firebaseSchoolRoot]] child:@"HomeFeed"] child:_mHomeFeedMediaKey] child:@"postDetails"] child:@"mediaInfo"] child: imageKeyForDeletion] updateChildValues:@{@"fireCount": [NSNumber numberWithInt:0], @"mediaLink":[URL absoluteString],@"userID": [user uid], @"mediaCaption":captionText, @"timeStamp": timeStamp}];
+                        
+                        //save to personal profile
+                        [[[[[_ref child:@"users"] child:[user uid] ]child:@"HomeFeedPosts"] child: _mHomeFeedMediaKey] updateChildValues:@{imageKeyForDeletion: [URL absoluteString]}];
+                    }
+                    [_progressView performAction:M13ProgressViewActionSuccess animated:YES];
+                    [self dismissViewControllerAnimated:NO completion:nil];
                 } withCancelBlock:^(NSError * _Nonnull error) {
                     NSLog(@"%@", error.localizedDescription);
                 }];
-                
-                
-                
-                
             }
         }];
         
@@ -224,8 +282,6 @@
             }
         }
     }];
-    
-    
 }
 
 
@@ -364,13 +420,15 @@
         //Caption Info
         NSString *textValue = [NSString stringWithFormat:@"%@", _captionInput.text];
         
-        UINavigationController *Controller = [[UINavigationController alloc] init];
-        [[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
+        [self uploadContent: randomUniqueFileName secondVal:textValue];
+         
+         //UINavigationController *Controller = [[UINavigationController alloc] init];
+        //[[[UIApplication sharedApplication] delegate] window].windowLevel = UIWindowLevelNormal;
 
-        EventPickerTableViewController *eventTBC = [[EventPickerTableViewController alloc] initWithFinalAddress:randomUniqueFileName myImage:_image myCaption:textValue];
-        Controller.viewControllers = [NSArray arrayWithObject:eventTBC];
-        returnFromEventPage = true;
-        [weakSelf presentViewController:Controller animated:NO completion:nil];
+        //EventPickerTableViewController *eventTBC = [[EventPickerTableViewController alloc] initWithFinalAddress:randomUniqueFileName myImage:_image myCaption:textValue];
+        //Controller.viewControllers = [NSArray arrayWithObject:eventTBC];
+        //returnFromEventPage = true;
+        //[weakSelf presentViewController:Controller animated:NO completion:nil];
 
     }
 }
@@ -393,10 +451,12 @@
     self.cancelButton.left = 5;
     self.cancelButton.bottom = self.view.height - 15.0f;
     
-    
     //caption Button
     self.captionButton.center = self.view.contentCenter;
     self.captionButton.bottom = self.view.height - 15.0f;
+    
+    //Progress View
+    _progressView.bottom = self.view.height - 5.0f;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {

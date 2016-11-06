@@ -77,19 +77,21 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
 }
 
 // TODO : use String : Bool pair in Firebase instead of the current array implementation
--(void)checkIsAdmin:(NSString*)orgid{
+-(void)checkIsAdmin:(NSString*)orgid {
     
     [[[[_usersRef child:[BounceConstants firebaseUsersChild]] child:_user.uid]  child:@"adminOf"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
         
-//        NSArray  *arr = [snapShot.value allValues];
-//        NSLog(@"arr: %@", snapShot.value);
-//        NSLog(@"orgid: %@", orgid);
-
         if(![snapShot.value isEqual:[NSNull null]] && [snapShot.value containsObject:orgid]){
 //            NSLog(@"found");
             isAdminOf = YES;
+////            _followButton.hidden = YES;
+//            _followButton.tintColor = [UIColor whiteColor];
+//            _cameraButton.hidden = NO;
             
         }else{
+//            _followButton.hidden = NO;
+//            _cameraButton.tintColor = [UIColor whiteColor];
+////            _cameraButton.hidden = YES;
             isAdminOf = NO;
             
         }
@@ -368,6 +370,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     NSArray *info_2 = @[ _followButton, _cameraButton];;
     
+
     if(isAdminOf){
         _followButton.hidden = YES;
         _cameraButton.hidden = NO;
@@ -377,13 +380,24 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
         _cameraButton.hidden = YES;
 
     }
-    
-    
+
     ASStackLayoutSpec *infoStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
                                                                     justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStart children:info];
     
-    ASStackLayoutSpec *followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
-                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:info_2];
+    ASStackLayoutSpec *followingRegion = followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+                                                                                            justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:info_2];
+    
+//    if(isAdminOf){
+//        followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+//                                                                              justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[_cameraButton]];
+//    }else{
+//        followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+//                                                                              justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[_followButton]];
+//    }
+    
+    
+//    ASStackLayoutSpec *followingRegion = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:1.0
+//                                                                          justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:info_2];
     
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, 0, 0, 10);
     
