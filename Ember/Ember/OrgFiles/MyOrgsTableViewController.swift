@@ -26,6 +26,8 @@ class MyOrgsTableViewController: UITableViewController {
            downLoadState
         })
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
+        self.tableView.registerClass(MyOrgsTableViewCell.self, forCellReuseIdentifier: "MyOrgsTableViewCell")
+
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -116,6 +118,10 @@ class MyOrgsTableViewController: UITableViewController {
         let myUser = EmberUser()
         let orgID = item.key
         
+        if cell.adminLabel == nil{
+            print("cell adminLabel nil")
+        }
+        
         myUser.isAdminOf(orgID, completionHandler: {(isAdmin) in
             if(isAdmin){
                 // user is admin
@@ -125,6 +131,8 @@ class MyOrgsTableViewController: UITableViewController {
             }
             
         })
+        
+        
         let url = NSURL(string: item.childSnapshotForPath("smallImageLink").value as! String)
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
