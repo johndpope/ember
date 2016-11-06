@@ -12,6 +12,11 @@ class MyOrgsTableViewCell: UITableViewCell {
     
     //MARK:Properties
     
+//    @IBOutlet weak var profImage: UIImageView!
+//    @IBOutlet weak var orgNameLabel: UILabel!
+//    @IBOutlet weak var followerCountLabel: UILabel!
+//    @IBOutlet weak var adminLabel: UILabel!
+    
     @IBOutlet weak var profImage: UIImageView!
     @IBOutlet weak var orgNameLabel: UILabel!
     @IBOutlet weak var followerCountLabel: UILabel!

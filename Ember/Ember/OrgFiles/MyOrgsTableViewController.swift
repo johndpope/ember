@@ -26,7 +26,8 @@ class MyOrgsTableViewController: UITableViewController {
            downLoadState
         })
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: PRIMARY_APP_COLOR,NSFontAttributeName: UIFont.systemFontOfSize(25, weight: UIFontWeightThin)]
-        self.tableView.registerClass(MyOrgsTableViewCell.self, forCellReuseIdentifier: "MyOrgsTableViewCell")
+        self.tableView.registerNib(UINib(nibName: "OrgCell", bundle: nil), forCellReuseIdentifier: "MyOrgsTableViewCell")
+//        self.tableView.registerClass(MyOrgsTableViewCell.self, forCellReuseIdentifier: "MyOrgsTableViewCell")
 
     }
     override func viewDidAppear(animated: Bool) {

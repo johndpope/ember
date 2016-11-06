@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E2EC2261D74AA6200086FF7 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2EC2251D74AA6200086FF7 /* FirebaseUtil.swift */; };
+		8E3A50841DCECC6F00E6CAAA /* OrgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3A50831DCECC6F00E6CAAA /* OrgCell.xib */; };
 		8E852C051D72BB5B002FFB90 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE61D72BB5B002FFB90 /* CALayer+FSExtension.m */; };
 		8E852C061D72BB5B002FFB90 /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE81D72BB5B002FFB90 /* FSCalendar.m */; };
 		8E852C071D72BB5B002FFB90 /* FSCalendar+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E852BE91D72BB5B002FFB90 /* FSCalendar+DateTools.m */; };
@@ -165,6 +166,7 @@
 /* Begin PBXFileReference section */
 		1154A642E99EE4254717054F /* Pods-Ember.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ember.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ember/Pods-Ember.release.xcconfig"; sourceTree = "<group>"; };
 		8E2EC2251D74AA6200086FF7 /* FirebaseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
+		8E3A50831DCECC6F00E6CAAA /* OrgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrgCell.xib; sourceTree = "<group>"; };
 		8E852BE51D72BB5B002FFB90 /* CALayer+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+FSExtension.h"; path = "FSCalendar/CALayer+FSExtension.h"; sourceTree = "<group>"; };
 		8E852BE61D72BB5B002FFB90 /* CALayer+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+FSExtension.m"; path = "FSCalendar/CALayer+FSExtension.m"; sourceTree = "<group>"; };
 		8E852BE71D72BB5B002FFB90 /* FSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCalendar.h; path = FSCalendar/FSCalendar.h; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				8ED8A70F1D72C35C00F396B0 /* OrgsViewController.m */,
 				8ED8A7101D72C35C00F396B0 /* SubOrgTitleNode.m */,
 				C7119E9E1D72AA6F0047A5CD /* SubOrgTitleNode.h */,
+				8E3A50831DCECC6F00E6CAAA /* OrgCell.xib */,
 			);
 			name = OrgFiles;
 			sourceTree = "<group>";
@@ -1040,6 +1043,7 @@
 				8ED8A74E1D72C5F800F396B0 /* BackgroundVideo.mp4 in Resources */,
 				C7F7A7971D79DBE400970438 /* EmberApp-b7538e821b5e.json in Resources */,
 				C71B6DC01D7D3E4000F50B8C /* mainLand.png in Resources */,
+				8E3A50841DCECC6F00E6CAAA /* OrgCell.xib in Resources */,
 				C7F49D401D870A7F00AF9AAE /* Info.plist in Resources */,
 				C70065631DA178B900B16E80 /* GoogleService-Info.plist in Resources */,
 				C7119F301D72B1D00047A5CD /* Main.storyboard in Resources */,
