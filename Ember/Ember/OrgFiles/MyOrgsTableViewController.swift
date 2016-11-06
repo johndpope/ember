@@ -154,6 +154,11 @@ class MyOrgsTableViewController: UITableViewController {
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 90.0;//Choose your custom row height
+    }
+    
 //    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
 //        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
 //            cell.accessoryType = .None
