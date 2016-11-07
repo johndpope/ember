@@ -248,12 +248,12 @@
              NSNumber *time = postDetails[@"eventDateObject"];
              NSString *orgID = postDetails[@"orgID"];
              
-             NSNumber *endTime  = nil;
-             if(postDetails[@"endEventDateObject"]){
-                 endTime = postDetails[@"endEventDateObject"];
+             NSNumber *startTime  = nil;
+             if(postDetails[@"eventDateObject"]){
+                 startTime = postDetails[@"eventDateObject"];
              }
              // Only adding UPCOMING events
-             if(-[endTime doubleValue] < [numNowInMillis doubleValue]){
+             if(-[startTime doubleValue] > [numNowInMillis doubleValue]){
                  
                  // NOTE: If one selects, deselects and reselects an event in the homefeed, the below NSLog shows that
                  // the fireCount is not obtained due to a transaction update happening on the fireCount child
