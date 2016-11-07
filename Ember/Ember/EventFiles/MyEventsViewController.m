@@ -372,8 +372,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmberSnapShot *snap = [_data getBounceSnapShotAtIndex:indexPath.row];
-    [self myEventsImageClicked:snap];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self myEventsImageClicked:snap];
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

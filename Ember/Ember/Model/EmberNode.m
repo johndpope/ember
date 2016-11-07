@@ -91,32 +91,18 @@
     
 
     _eventDetails = [snapShot getPostDetails];
-//    NSLog(@"eventDetails: %@", _eventDetails);
-
     
-    if(_eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]){
+    if(snapShot.getFirebaseSnapShot.value[@"interestCount"] || _eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]]){
         
-        _url = _eventDetails[[BounceConstants firebaseHomefeedEventPosterLink]];
-        if(_url != nil){
-            
-            if([_url containsString:@"mp4"]  || [_url containsString:@"mov"]){
-                _videoNode = [[EmberVideoNode alloc] initWithEvent:snapShot];
-                [self addSubnode:_videoNode];
-                
-            }else{
-                _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
-                [_imageNode setIsPoster:YES];
-                
-                if(!upcoming){
-                    [_imageNode setFollowButtonHidden];
-                    [_imageNode showFireCount];
-                }
-                
-                [self addSubnode:_imageNode];
-                
-               
-            }
+        _imageNode = [[EmberImageNode alloc] initWithEvent:snapShot];
+        [_imageNode setIsPoster:YES];
+        
+        if(!upcoming){
+            [_imageNode setFollowButtonHidden];
+            [_imageNode showFireCount];
         }
+        
+        [self addSubnode:_imageNode];
         
     }else{
         if([_eventDetails[[BounceConstants firebaseHomefeedMediaInfo]] isKindOfClass:[NSDictionary class]]){
@@ -284,19 +270,13 @@
     ASStackLayoutSpec *stackSpec = nil;
     
     
-    if(_url != nil){
-        
-        if([_url containsString:@"mp4"] || [_url containsString:@"mov"]){
-                stackSpec = [[ASStackLayoutSpec alloc] init];
-                [stackSpec setChildren:@[_videoNode]];
-        }else{
-            ASOverlayLayoutSpec *bG = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:spec];
-            stackSpec = [[ASStackLayoutSpec alloc] init];
-            [stackSpec setChildren:@[bG]];
-            }
-    }else{
+    if([_url containsString:@"mp4"] || [_url containsString:@"mov"]){
         stackSpec = [[ASStackLayoutSpec alloc] init];
         [stackSpec setChildren:@[_videoNode]];
+    }else{
+        ASOverlayLayoutSpec *bG = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:spec];
+        stackSpec = [[ASStackLayoutSpec alloc] init];
+        [stackSpec setChildren:@[bG]];
     }
     
     return stackSpec;
