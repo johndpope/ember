@@ -80,6 +80,16 @@
     _orgs = [[EmberSnapShot alloc] init];
 
     [self fetchData];
+    
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Create" style: UIBarButtonItemStylePlain target:self action:@selector(openCreateOrgViewController)];
+    
+    self.navigationItem.rightBarButtonItem = btn;
+}
+
+-(void)openCreateOrgViewController
+{
+    CreateOrgViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"createOrg"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)findOrgsFollowButtonClicked:(EmberSnapShot *)snap{
@@ -102,7 +112,6 @@
 
 
 -(void)findOrgsImageClicked:(NSString *)orgId{
-//    NSLog(@"clicked");
     OrgProfileViewController *_myViewController = [OrgProfileViewController new];
     _myViewController.orgId = orgId;
     [[self navigationController] pushViewController:_myViewController animated:YES];
