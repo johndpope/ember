@@ -17,7 +17,6 @@
 #import <Foundation/Foundation.h>
 #import "EventTitleNode.h"
 #import "Video.h"
-#import "OrgNode.h"
 
 #import "Ember-Swift.h"
 
@@ -34,7 +33,6 @@ static const CGFloat kInnerPadding = 10.0f;
 
 @interface EventTitleNode (){
     
-    ASNetworkImageNode *_imageNode;
     ASDisplayNode *_divider;
     ASDisplayNode *_divider2;
     BOOL _swappedTextAndImage;
@@ -46,7 +44,6 @@ static const CGFloat kInnerPadding = 10.0f;
     FIRUser *_user;
     FIRDatabaseReference *_ref;
     ASTextNode *_orgName;
-    OrgNode *_orgNode;
     ASTextNode *_seeWhatsHappening;
     ASTextNode *_eventTags;
     NSMutableArray *_tagsArray;
@@ -59,18 +56,13 @@ static const CGFloat kInnerPadding = 10.0f;
 @implementation EventTitleNode
 
 
--(ASNetworkImageNode *)getImageNode{
-    return _imageNode;
-}
-
-
 -(ASTextNode *)getOrgNameNode{
     return _orgName;
 }
 
--(ASTextNode *)getFireCount{
-   return _orgNode.getFireCount;
-}
+//-(ASTextNode *)getFireCount{
+//   return _orgNode.getFireCount;
+//}
 
 
 - (instancetype)initWithEvent:(EmberSnapShot*)snapShot mediaCount:(NSUInteger)mediaCount{
@@ -85,17 +77,10 @@ static const CGFloat kInnerPadding = 10.0f;
     NSDictionary *eventDetails = [snapShot getPostDetails];
     
     _tagsArray = [NSMutableArray new];
-    
-    _imageNode = [[ASNetworkImageNode alloc] init];
-    _imageNode.layerBacked = YES;
+
     
     _backGround.backgroundColor = [BounceConstants primaryAppColor];
     
-    _orgNode = [[OrgNode alloc] initWithBounceSnapShot:snapShot mediaCount:mediaCount];
-    
-    [self addSubnode: _imageNode];
-    
-
     _orgName = [[ASTextNode alloc] init];
     _orgName.layerBacked = YES;
     
@@ -185,8 +170,6 @@ static const CGFloat kInnerPadding = 10.0f;
    
     
     [self addSubnode:_orgName];
- 
-    [self addSubnode:_orgNode];
     
     // hairline cell separator
     _divider = [[ASDisplayNode alloc] init];
@@ -325,22 +308,14 @@ static const CGFloat kInnerPadding = 10.0f;
     
     _backGround.flexGrow = YES;
     
+//    UIEdgeInsets insetsName = UIEdgeInsetsMake(0, 0, 0, 20);
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    _imageNode.preferredFrameSize = CGSizeMake(width, width);
+//    ASInsetLayoutSpec *specName = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insetsName child:_orgName];
+//    
+//    ASStackLayoutSpec *orgPhotoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
+//                                                                        justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[horizontalSpacer, specName]];
     
-    
-    UIEdgeInsets insetsName = UIEdgeInsetsMake(0, 0, 0, 20);
-    
-    ASInsetLayoutSpec *specName = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insetsName child:_orgName];
-    
-    ASStackLayoutSpec *orgPhotoStackVert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0
-                                                                        justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[horizontalSpacer, specName]];
-    
-    ASOverlayLayoutSpec *overlay = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:orgPhotoStackVert];
-    
-    ASInsetLayoutSpec *specOrgNode = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInnerPadding, 10, kInnerPadding, 10) child:_orgNode];
-    
+
     ASInsetLayoutSpec *specSeeWhatsHappening = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(kInnerPadding, 10, kInnerPadding, 10) child:_seeWhatsHappening];
     
     ASStackLayoutSpec *textStack_2 = nil;
@@ -348,7 +323,7 @@ static const CGFloat kInnerPadding = 10.0f;
     if(_tagsArray.count > 0){
         
         NSMutableArray *arr = [NSMutableArray new];
-        [arr addObject:specOrgNode];
+//        [arr addObject:specOrgNode];
         [arr addObjectsFromArray:_tagsArray];
         [arr addObject:_divider];
         [arr addObject:specSeeWhatsHappening];
@@ -356,11 +331,10 @@ static const CGFloat kInnerPadding = 10.0f;
       
         textStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:arr];
     }else{
-        textStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[specOrgNode,_divider,specSeeWhatsHappening, _divider2]];
+        textStack_2 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_divider,specSeeWhatsHappening, _divider2]];
     }
     
-    
-    ASStackLayoutSpec *textStack_3 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[overlay, textStack_2]];
+    ASStackLayoutSpec *textStack_3 = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[textStack_2]];
     
     
     return textStack_3;

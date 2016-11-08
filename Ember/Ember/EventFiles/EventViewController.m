@@ -261,7 +261,7 @@
      
         dispatch_async(dispatch_get_main_queue(), ^{
             node.getTitleNode.getOrgNameNode.attributedString = [[NSAttributedString alloc] initWithString:event[@"orgName"] attributes:[self textStyle]];
-            node.getLocalNode.URL = [NSURL URLWithString:event[@"smallImageLink"]];
+            node.getOrgNode.getLocalNode.URL = [NSURL URLWithString:event[@"smallImageLink"]];
             
             
         });
@@ -283,20 +283,19 @@
                 // Get the download URL
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    node.getTitleNode.getImageNode.URL = URL;
-//                    node.getLocalNode.URL = [NSURL URLWithString:url];
+//                    node.getTitleNode.getImageNode.URL = URL;
+                    node.getOrgNode.getLocalNode.URL = [NSURL URLWithString:url];
                 });
                 
             }
         }];
     }else{
         
-        node.getTitleNode.getImageNode.URL = [NSURL URLWithString:url];
-//        node.getLocalNode.URL = [NSURL URLWithString:url];
+//        node.getTitleNode.getImageNode.URL = [NSURL URLWithString:url];
+        node.getOrgNode.getLocalNode.URL = [NSURL URLWithString:url];
     }
     
     [self fetchOrgProfilePhotoUrl:orgId node:node];
-    
     
 }
 
@@ -384,7 +383,6 @@
         EmberSnapShot* snapShot = _snapShots[indexPath.row];
         
         NSDictionary *eventDetails = [snapShot getPostDetails];
-        
         
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot mediaCount: _mediaCount];

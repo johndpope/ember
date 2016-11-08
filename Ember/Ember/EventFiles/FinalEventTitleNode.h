@@ -20,6 +20,6 @@
 @property(strong, nonatomic) FIRDatabaseReference *ref;
 - (instancetype)initWithEvent:(EmberSnapShot*)event mediaCount: (NSUInteger)mediaCount;
 -(EventTitleNode *)getTitleNode;
--(ASNetworkImageNode *)getLocalNode;
+-(OrgNode *)getOrgNode;
 
 @end

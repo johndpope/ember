@@ -21,4 +21,5 @@
 
 - (NSDictionary *)textStyle;
 -(ASTextNode*)getFireCount;
+-(ASNetworkImageNode *)getLocalNode;
 @end

@@ -20,6 +20,9 @@
 
 @import Firebase;
 
+static const CGFloat kOrgPhotoWidth = 75.0f;
+static const CGFloat kOrgPhotoHeight = 75.0f;
+
 @interface OrgNode (){
     
     ASDisplayNode *_divider;
@@ -38,8 +41,7 @@
     ASTextNode *_noInterestedBelow;
     NSString *_uid;
     ASTextNode *_eventLocation;
-    
-    
+    ASNetworkImageNode *_orgProfilePhoto;
     
 }
 
@@ -51,6 +53,11 @@
     return  _fireCount;
 }
 
+-(ASNetworkImageNode *)getLocalNode{
+    return _orgProfilePhoto;
+}
+
+
 - (instancetype)initWithBounceSnapShot:(EmberSnapShot *)snap mediaCount:(NSUInteger)mediaCount{
     if (!(self = [super init]))
         return nil;
@@ -60,6 +67,32 @@
     _user = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] referenceWithPath:[BounceConstants firebaseSchoolRoot]];
     _userRef = [[FIRDatabase database] reference];
+    
+    NSDictionary *eventDetails = snap.getPostDetails;
+    
+    _orgProfilePhoto = [[ASNetworkImageNode alloc] init];
+    _orgProfilePhoto.backgroundColor = ASDisplayNodeDefaultPlaceholderColor();
+    _orgProfilePhoto.preferredFrameSize = CGSizeMake(kOrgPhotoWidth, kOrgPhotoHeight);
+    _orgProfilePhoto.cornerRadius = kOrgPhotoWidth / 2;
+    _orgProfilePhoto.imageModificationBlock = ^UIImage *(UIImage *image) {
+        
+        UIImage *modifiedImage;
+        CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, false, [[UIScreen mainScreen] scale]);
+        
+        [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:kOrgPhotoWidth] addClip];
+        [image drawInRect:rect];
+        modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIGraphicsEndImageContext();
+        
+        return modifiedImage;
+    };
+    
+    _orgProfilePhoto.URL = [NSURL URLWithString:eventDetails[@"smallImageLink"]];
+    [_orgProfilePhoto setBorderWidth:3];
+    [_orgProfilePhoto setBorderColor:[[UIColor whiteColor] CGColor]];
 
     _noInterested = [[ASTextNode alloc] init];
     _noInterestedBelow = [ASTextNode new];
@@ -93,7 +126,7 @@
     
     _noInterestedBelow.attributedString = [[NSAttributedString alloc] initWithString:@"Interested" attributes:[self textStyle]];
     
-    NSDictionary *eventDetails = snap.getPostDetails;
+    
     
     if(eventDetails[@"eventName"]){
         _eventName.attributedString = [[NSAttributedString alloc] initWithString:eventDetails[@"eventName"] attributes:[self textStyleLeft]];
@@ -179,7 +212,7 @@
         
     }];
     
-    
+    [self addSubnode:_orgProfilePhoto];
     [self addSubnode:_fire];
     [self addSubnode:_noInterested];
     [self addSubnode:_line];
@@ -427,20 +460,22 @@
     CGFloat kInsetTop = 6.0;
     CGFloat kInsetBottom = 6.0;
     
+    _orgProfilePhoto.preferredFrameSize = CGSizeMake(kOrgPhotoWidth, kOrgPhotoHeight);
+    
     ASLayoutSpec *horizontalSpacer =[[ASLayoutSpec alloc] init];
     horizontalSpacer.flexGrow = YES;
 
     UIEdgeInsets insets = UIEdgeInsetsMake(kInsetTop, kInsetHorizontal, kInsetBottom, kInsetHorizontal);
     
-    ASStackLayoutSpec *vertInterested = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_noInterested, _noInterestedBelow]];
-    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, 50, 0, 0) child:vertInterested];
+    ASStackLayoutSpec *vertInterested = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[_noInterested, _noInterestedBelow]];
+    ASInsetLayoutSpec *newSpec = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 50, 0, 0) child:vertInterested];
     
     
     ASStackLayoutSpec *vert = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:1.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[newSpec,horizontalSpacer]];
     
     ASStackLayoutSpec *fireStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[ _fire,_fireCount]];
     
-    ASStackLayoutSpec *followingStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[ horizontalSpacer,vert,horizontalSpacer, _line,horizontalSpacer,fireStack, horizontalSpacer]];
+    ASStackLayoutSpec *followingStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_orgProfilePhoto, horizontalSpacer,vert,horizontalSpacer, _line,horizontalSpacer,fireStack, horizontalSpacer]];
 
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
