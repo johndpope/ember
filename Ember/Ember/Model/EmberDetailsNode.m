@@ -773,9 +773,6 @@ static const CGFloat kOrgPhotoHeight = 50.0f;
     CGFloat kInsetTop = 6.0;
     CGFloat kInsetHorizontalNotPoster = 25.0;
     
-    //    CGFloat kOuterPadding = 10.0f;
-    
-    //    NSLog(@"screen width: %f", screenWidth);
     
     ASLayoutSpec *horizontalSpacer =[ASLayoutSpec new];
     horizontalSpacer.flexGrow = YES;

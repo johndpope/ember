@@ -253,7 +253,7 @@
 
 -(void)fetchOrgProfilePhotoUrl:(NSString*) orgId node:(FinalEventTitleNode*) node{
     
-    FIRDatabaseQuery *recentPostsQuery = [[[self.ref child:@"Organizations"] child:orgId]  queryLimitedToFirst:100];
+    FIRDatabaseQuery *recentPostsQuery = [[self.ref child:@"Organizations"] child:orgId];
     [[recentPostsQuery queryOrderedByKey] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapShot){
 //        NSLog(@"%@  %@", snapShot.key, snapShot.value);
         NSDictionary * event = snapShot.value;
@@ -371,12 +371,6 @@
 #pragma mark ASTableView.
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-}
-
 - (ASCellNodeBlock)tableView:(ASTableView *)tableView nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if ([_titleNodeIndexPath compare:indexPath] == NSOrderedSame) {
@@ -387,7 +381,7 @@
         ASCellNode *(^cellNodeBlock)() = ^ASCellNode *() {
             FinalEventTitleNode *bounceNode = [[FinalEventTitleNode alloc] initWithEvent:snapShot mediaCount: _mediaCount];
             _orgID = eventDetails[@"orgID"];
-            [self FIRTitleDownload:bounceNode url: eventDetails[@"eventPosterLink"] orgId: eventDetails[@"orgID"] event:eventDetails];
+            [self fetchOrgProfilePhotoUrl:eventDetails[@"orgID"] node:bounceNode];
             
             return bounceNode;
         };

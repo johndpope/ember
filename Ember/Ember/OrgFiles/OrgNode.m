@@ -179,7 +179,7 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     _line = [[ASDisplayNode alloc] init];
     _line.backgroundColor  = [UIColor lightGrayColor];
-    _line.preferredFrameSize = CGSizeMake(2, 30);
+    _line.preferredFrameSize = CGSizeMake(1.5, 40);
     
     
     _fire = [[ASButtonNode alloc] init];
@@ -475,7 +475,10 @@ static const CGFloat kOrgPhotoHeight = 75.0f;
     
     ASStackLayoutSpec *fireStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsCenter children:@[ _fire,_fireCount]];
     
-    ASStackLayoutSpec *followingStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_orgProfilePhoto, horizontalSpacer,vert,horizontalSpacer, _line,horizontalSpacer,fireStack, horizontalSpacer]];
+    ASStaticLayoutSpec *staticLine = [ASStaticLayoutSpec staticLayoutSpecWithChildren:@[_line]];
+    [staticLine setAlignSelf:ASStackLayoutAlignSelfCenter];
+    
+    ASStackLayoutSpec *followingStack = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5.0 justifyContent:ASStackLayoutJustifyContentCenter alignItems:ASStackLayoutAlignItemsStretch children:@[_orgProfilePhoto, horizontalSpacer,vert,horizontalSpacer, staticLine,horizontalSpacer,fireStack, horizontalSpacer]];
 
     
     ASInsetLayoutSpec *followingSpecs = [ASInsetLayoutSpec insetLayoutSpecWithInsets:insets child:followingStack];
