@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "314ACB3F8FA3E30719671957C5DDED0D2C66B0F3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "314ACB3F8FA3E30719671957C5DDED0D2C66B0F3" : 9223372036854775807,
+    "2610506E4BEB439F5A6738C1BD1353373EC55E62" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A81E43C0-57E4-4B35-BDC2-03BC48A572BA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "314ACB3F8FA3E30719671957C5DDED0D2C66B0F3" : "ember\/",
+    "2610506E4BEB439F5A6738C1BD1353373EC55E62" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Ember",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Ember\/Ember.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/umentam\/narrojobs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2610506E4BEB439F5A6738C1BD1353373EC55E62"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/mainaaw\/ember.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "314ACB3F8FA3E30719671957C5DDED0D2C66B0F3"
+    }
+  ]
+}
